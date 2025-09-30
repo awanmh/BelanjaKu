@@ -145,51 +145,38 @@ produk secara dinamis.
 
 #### 1. Skenario A: Peluncuran Produk Baru {#skenario-a-peluncuran-produk-baru}
 
-- **Tujuan**: Mendorong adopsi awal untuk produk baru tanpa riwayat
-  > penjualan.
+- **Tujuan**: Mendorong adopsi awal untuk produk baru tanpa riwayat penjualan.
 
 - **Strategi**: Memanfaatkan tumpukan promosi yang agresif.
 
-- **Konfigurasi API**: rating.count = 0, sales.sold = 0, recency.status
-  > = \'terbaru\', promotions diisi dengan diskon peluncuran, voucher,
-  > dan gratis ongkir.
+- **Konfigurasi API**: rating.count = 0, sales.sold = 0, recency.status = \'terbaru\', promotions diisi dengan diskon peluncuran, voucher, dan gratis ongkir.
 
 #### 2. Skenario B: Produk Terlaris (Best-Seller) {#skenario-b-produk-terlaris-best-seller}
 
-- **Tujuan**: Menampilkan produk pemimpin pasar dengan bukti sosial yang
-  > luar biasa.
+- **Tujuan**: Menampilkan produk pemimpin pasar dengan bukti sosial yang luar biasa.
 
-- **Strategi**: Menekankan pada rating tinggi dan volume penjualan,
-  > dengan promosi minimal.
+- **Strategi**: Menekankan pada rating tinggi dan volume penjualan, dengan promosi minimal.
 
-- **Konfigurasi API**: rating.count \> 10000, sales.sold \> 50000,
-  > sales.status = \'terlaris\', promosi minimal (misal: diskon kecil).
+- **Konfigurasi API**: rating.count \> 10000, sales.sold \> 50000, sales.status = \'terlaris\', promosi minimal (misal: diskon kecil).
 
 #### 3. Skenario C: Urgensi Flash Sale {#skenario-c-urgensi-flash-sale}
 
-- **Tujuan**: Menciptakan urgensi yang kuat melalui promosi berbatas
-  > waktu.
+- **Tujuan**: Menciptakan urgensi yang kuat melalui promosi berbatas waktu.
 
-- **Strategi**: Menggabungkan diskon besar dengan kelangkaan stok dan
-  > penghitung waktu mundur.
+- **Strategi**: Menggabungkan diskon besar dengan kelangkaan stok dan penghitung waktu mundur.
 
-- **Konfigurasi API**: promotions berisi type: \'flash_sale\' dengan
-  > end_time, dan ditambah data inventory.stock yang rendah.
+- **Konfigurasi API**: promotions berisi type: \'flash_sale\' dengan end_time, dan ditambah data inventory.stock yang rendah.
 
 ## Pemanfaatan Strategis Lintas Tim
 
 Arsitektur ini dirancang untuk menjadi **\"sumber kebenaran tunggal\"**
 yang menyelaraskan tim Desain, Produk, dan Rekayasa.
 
-- **Untuk Desain UX/UI**: Memungkinkan desainer mengisi mockup dengan
-  > data yang realistis dan melakukan *stress testing* pada komponen UI.
+- **Untuk Desain UX/UI**: Memungkinkan desainer mengisi mockup dengan data yang realistis dan melakukan *stress testing* pada komponen UI.
 
-- **Untuk Manajemen Produk**: Menjadi alat untuk validasi hipotesis dan
-  > merancang pengujian A/B yang terkontrol.
+- **Untuk Manajemen Produk**: Menjadi alat untuk validasi hipotesis dan merancang pengujian A/B yang terkontrol.
 
-- **Untuk Rekayasa (Engineering)**: Berfungsi sebagai spesifikasi yang
-  > jelas untuk definisi *endpoint* API dan memodelkan logika bisnis di
-  > server.
+- **Untuk Rekayasa (Engineering)**: Berfungsi sebagai spesifikasi yang jelas untuk definisi *endpoint* API dan memodelkan logika bisnis di server.
 
 ## Setup & Instalasi {#setup-instalasi}
 
