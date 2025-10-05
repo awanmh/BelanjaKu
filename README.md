@@ -9,7 +9,7 @@ Redis yang berjalan di Docker.
 ## Struktur Proyek
 
 Berikut adalah gambaran umum struktur direktori dalam monorepo ini:
-
+```
 belanjaKu/  
 ├── 📂 apps/  
 │ ├── 📂 frontend/ \# Proyek Next.js  
@@ -57,7 +57,7 @@ belanjaKu/
 ├── package.json \# Konfigurasi monorepo & script utama  
 ├── pnpm-workspace.yaml \# Mendefinisikan workspaces  
 └── tsconfig.base.json \# Konfigurasi TypeScript dasar
-
+`````
 ## Panduan Setup Proyek
 
 Ikuti langkah-langkah berikut untuk menyiapkan dan menjalankan proyek di
@@ -77,72 +77,70 @@ Pastikan perangkat lunak berikut sudah terinstal di sistem Anda:
 
 ### Langkah 1: Inisialisasi Monorepo
 
-1.  Buat package.json di root  
-    > Buka terminal di direktori root proyek (belanjaKu/) dan
-    > jalankan:  
-    > pnpm init
+#### 1.  Buat package.json di root. Buka terminal di direktori root proyek (belanjaKu/) dan jalankan:
+    
+    ````
+    pnpm init
+    ````
 
-2.  Konfigurasi package.json  
-    > Edit file package.json yang baru dibuat. Tambahkan scripts untuk
-    > menjalankan dan membangun semua aplikasi.  
-    > {  
-    > \"name\": \"belanjaku-monorepo\",  
-    > \"private\": true,  
-    > \"version\": \"1.0.0\",  
-    > \"description\": \"Proyek E-commerce BelanjaKu\",  
-    > \"scripts\": {  
-    > \"dev\": \"pnpm \--parallel \--stream dev\",  
-    > \"build\": \"pnpm \--filter \\./apps/\*\\ build\"  
-    > },  
-    > \"devDependencies\": {  
-    > \"turbo\": \"\^1.10.16\"  
-    > }  
-    > }  
-    > **Catatan:** turbo bersifat opsional tetapi sangat
-    > direkomendasikan untuk mempercepat proses build dan development di
-    > monorepo.
+#### 2.  Konfigurasi package.json
+       ````package.json
+        {
+           "name": "belanjaku-monorepo",
+           "private": true,
+           "version": "1.0.0",
+           "description": "Proyek E-commerce BelanjaKu",
+           "scripts": {
+           "dev": "pnpm --parallel --stream dev",
+           "build": "pnpm --filter \"./apps/*\" build"
+           },
+           "devDependencies": {
+           "turbo": "^1.10.16" # Opsional, untuk build & dev yang lebih cepat
+           }
+        }
 
-3.  Definisikan Workspace  
-    > Buat file pnpm-workspace.yaml di direktori root untuk memberitahu
-    > pnpm di mana aplikasi dan package kita berada.  
-    > packages:  
-    > - \'apps/\*\'  
-    > - \'packages/\*\'
-
+#### 3.  Definisikan Workspace. Buat file `pnpm-workspace.yaml` di direktori root untuk memberitahu
+pnpm di mana aplikasi dan package kita berada.  
+    ````
+    packages:  
+     - \'apps/\*\'  
+     - \'packages/\*\'
+    ````
 ### Langkah 2: Setup Database & Cache dengan Docker {#langkah-2-setup-database-cache-dengan-docker}
 
 Kita akan menggunakan Docker untuk menjalankan PostgreSQL dan Redis agar
 tidak perlu menginstalnya secara manual.
 
 1.  **Buat file docker-compose.yml** di direktori root.  
-    > version: \'3.8\'  
-    > services:  
-    > postgres-db:  
-    > image: postgres:15-alpine  
-    > container_name: belanjaku_db  
-    > restart: always  
-    > environment:  
-    > POSTGRES_USER: admin  
-    > POSTGRES_PASSWORD: password123  
-    > POSTGRES_DB: belanjaku_dev  
-    > ports:  
-    > - \"5432:5432\"  
-    > volumes:  
-    > - postgres_data:/var/lib/postgresql/data  
-    >   
-    > redis-cache:  
-    > image: redis:7-alpine  
-    > container_name: belanjaku_cache  
-    > restart: always  
-    > ports:  
-    > - \"6379:6379\"  
-    > volumes:  
-    > - redis_data:/data  
-    >   
-    > volumes:  
-    > postgres_data:  
-    > redis_data:
-
+        ````
+        version: '3.8'
+        services:
+          postgres-db:
+            image: postgres:15-alpine
+            container_name: belanjaku_db
+            restart: always
+            environment:
+                POSTGRES_USER: admin
+                POSTGRES_PASSWORD: password123
+                POSTGRES_DB: belanjaku_dev
+            ports:
+                - "5432:5432"
+            volumes:
+                - postgres_data:/var/lib/postgresql/data
+        
+          redis-cache:
+            image: redis:7-alpine
+            container_name: belanjaku_cache
+            restart: always
+            ports:
+            - "6379:6379"
+            volumes:
+            - redis_data:/data
+        
+        volumes:
+          postgres_data:
+          redis_data:
+        ````
 2.  Jalankan Container  
     > Buka terminal di root proyek dan jalankan:  
     > docker-compose up -d  

@@ -65,3 +65,175 @@ belanjaKu/
 ├── package.json            # Konfigurasi monorepo & script utama
 ├── pnpm-workspace.yaml     # Mendefinisikan workspaces
 └── tsconfig.base.json      # Konfigurasi TypeScript dasar
+
+backend
+📂 backend/
+├── 📂 src/
+│   │
+│   ├── 📂 api/                   # Layer untuk routing, controller, dan validasi
+│   │   └── 📂 v1/
+│   │       ├── 📜 index.ts       # Menggabungkan semua router v1
+│   │       │
+│   │       ├── 📂 auth/
+│   │       │   ├── 📜 auth.controller.ts
+│   │       │   ├── 📜 auth.routes.ts
+│   │       │   └── 📜 auth.validator.ts
+│   │       │
+│   │       ├── 📂 users/
+│   │       │   ├── 📜 user.controller.ts
+│   │       │   ├── 📜 user.routes.ts
+│   │       │   └── 📜 user.validator.ts
+│   │       │
+│   │       ├── 📂 products/
+│   │       │   ├── 📜 product.controller.ts
+│   │       │   ├── 📜 product.routes.ts
+│   │       │   └── 📜 product.validator.ts
+│   │       │
+│   │       ├── 📂 categories/
+│   │       │   ├── 📜 category.controller.ts
+│   │       │   ├── 📜 category.routes.ts
+│   │       │   └── 📜 category.validator.ts
+│   │       │
+│   │       ├── 📂 orders/
+│   │       │   ├── 📜 order.controller.ts
+│   │       │   ├── 📜 order.routes.ts
+│   │       │   └── 📜 order.validator.ts
+│   │       │
+│   │       └── 📂 reviews/
+│   │           ├── 📜 review.controller.ts
+│   │           ├── 📜 review.routes.ts
+│   │           └── 📜 review.validator.ts
+│   │
+│   ├── 📂 config/                # Konfigurasi aplikasi
+│   │   ├── 📜 database.config.ts # Konfigurasi untuk Sequelize CLI
+│   │   └── 📜 env.config.ts      # Memuat variabel dari .env
+│   │
+│   ├── 📂 database/              # Semua yang berhubungan dengan database
+│   │   ├── 📂 models/            # Definisi tabel dan relasi (Sequelize)
+│   │   │   ├── 📜 index.ts       # Inisialisasi Sequelize dan asosiasi model
+│   │   │   ├── 📜 user.model.ts
+│   │   │   ├── 📜 seller.model.ts
+│   │   │   ├── 📜 product.model.ts
+│   │   │   ├── 📜 category.model.ts
+│   │   │   ├── 📜 order.model.ts
+│   │   │   ├── 📜 orderItem.model.ts
+│   │   │   ├── 📜 review.model.ts
+│   │   │   ├── 📜 promotion.model.ts
+│   │   │   └── 📜 shippingOption.model.ts
+│   │   │
+│   │   ├── 📂 migrations/        # File migrasi untuk mengubah skema DB
+│   │   │   └── 📜 2025100601-create-users.js
+│   │   │
+│   │   └── 📂 seeders/           # File untuk mengisi data awal (seeding)
+│   │       └── 📜 2025100602-demo-products.js
+│   │
+│   ├── 📂 middlewares/           # Fungsi perantara untuk request
+│   │   ├── 📜 auth.middleware.ts # Proteksi rute dengan JWT
+│   │   ├── 📜 error.middleware.ts# Penanganan error global
+│   │   ├── 📜 upload.middleware.ts # Untuk handle upload file (gambar produk)
+│   │   └── 📜 validator.middleware.ts # Menjalankan hasil validasi
+│   │
+│   ├── 📂 services/              # Tempat logika bisnis
+│   │   ├── 📜 auth.service.ts
+│   │   ├── 📜 user.service.ts
+│   │   ├── 📜 product.service.ts
+│   │   └── 📜 order.service.ts
+│   │
+│   ├── 📂 utils/                 # Fungsi bantuan (helpers)
+│   │   ├── 📜 apiFeatures.util.ts  # Class untuk sorting, filter, pagination
+│   │   ├── 📜 http-exception.ts    # Custom error class
+│   │   ├── 📜 jwt.util.ts          # Fungsi untuk generate & verifikasi token
+│   │   └── 📜 logger.util.ts      # Konfigurasi logging (Winston, dll)
+│   │
+│   └── 📜 server.ts               # Entry point utama aplikasi
+│
+├── 📜 .env.example               # Contoh variabel lingkungan
+├── 📜 .gitignore
+├── 📜 .sequelizerc               # Konfigurasi path untuk Sequelize CLI
+├── 📜 package.json
+└── 📜 tsconfig.json
+
+Frontend
+
+📂 frontend/
+├── 📂 app/                      # Direktori utama untuk routing, halaman, dan layout
+│   │
+│   ├── 📂 (auth)/              # Grup rute untuk halaman autentikasi (tanpa navbar utama)
+│   │   ├── 📂 login/
+│   │   │   └── 📜 page.tsx
+│   │   ├── 📂 register/
+│   │   │   └── 📜 page.tsx
+│   │   └── 📜 layout.tsx       # Layout simpel khusus untuk halaman auth
+│   │
+│   ├── 📂 (main)/              # Grup rute untuk halaman utama aplikasi (dengan navbar & footer)
+│   │   ├── 📂 (home)/          # Menggunakan (home) agar bisa punya layout khusus jika perlu
+│   │   │   └── 📜 page.tsx     # Halaman Beranda (Homepage)
+│   │   ├── 📂 cart/
+│   │   │   └── 📜 page.tsx
+│   │   ├── 📂 checkout/
+│   │   │   └── 📜 page.tsx
+│   │   ├── 📂 products/
+│   │   │   └── 📂 [slug]/      # Halaman Detail Produk Dinamis
+│   │   │       ├── 📜 error.tsx    # Halaman error khusus untuk produk
+│   │   │       ├── 📜 loading.tsx  # Tampilan loading (skeleton UI)
+│   │   │       └── 📜 page.tsx
+│   │   └── 📂 profile/
+│   │       └── 📜 page.tsx
+│   │       └── 📜 layout.tsx      # Layout utama dengan Navbar, Footer, dll.
+│   │
+│   ├── 📂 api/                   # Route Handlers (jika perlu backend-for-frontend)
+│   │   └── ...
+│   │
+│   ├── 📜 globals.css          # CSS global
+│   ├── 📜 layout.tsx           # Layout root utama (<html> dan <body>)
+│   └── 📜 providers.tsx        # File untuk membungkus provider (Zustand, React-Query, dll)
+│
+├── 📂 components/               # Komponen UI yang bisa digunakan kembali
+│   ├── 📂 cart/
+│   │   ├── 📜 CartItem.tsx
+│   │   └── 📜 CartSummary.tsx
+│   ├── 📂 common/              # Komponen umum yang digunakan di banyak fitur
+│   │   ├── 📜 Alert.tsx
+│   │   ├── 📜 Modal.tsx
+│   │   └── 📜 Spinner.tsx
+│   ├── 📂 layout/
+│   │   ├── 📜 Footer.tsx
+│   │   └── 📜 Navbar.tsx
+│   ├── 📂 product/
+│   │   ├── 📜 ActionZone.tsx
+│   │   ├── 📜 DiscoveryZone.tsx
+│   │   ├── 📜 InfoZone.tsx
+│   │   ├── 📜 ProductCard.tsx   # Kartu produk untuk ditampilkan di list
+│   │   └── 📜 TrustZone.tsx
+│   └── 📂 ui/                    # Komponen UI dasar yang sangat generik (primitif)
+│       ├── 📜 Button.tsx
+│       ├── 📜 Card.tsx
+│       └── 📜 Input.tsx
+│
+├── 📂 hooks/                    # Custom React Hooks
+│   ├── 📜 useAuth.ts           # Hook untuk info & status otentikasi user
+│   ├── 📜 useDebounce.ts       # Hook untuk menunda eksekusi fungsi (misal: search)
+│   └── 📜 useMediaQuery.ts     # Hook untuk deteksi ukuran layar (responsif)
+│
+├── 📂 lib/                      # Logika, tipe data, dan fungsi bantuan
+│   ├── 📜 api.ts               # Konfigurasi instance Axios untuk koneksi ke backend
+│   ├── 📜 constants.ts         # Nilai konstan (misal: URL, kunci localStorage)
+│   ├── 📜 types.ts             # Definisi interface TypeScript (Product, User, dll.)
+│   └── 📜 utils.ts             # Fungsi helper umum (format tanggal, format mata uang)
+│
+├── 📂 public/                   # Aset statis
+│   ├── 📂 fonts/
+│   ├── 📂 icons/
+│   └── 📂 images/
+│
+├── 📂 store/                    # State management global (Zustand)
+│   ├── 📜 cart.store.ts
+│   └── 📜 user.store.ts
+│
+├── 📜 .env.local                # Variabel lingkungan khusus lokal
+├── 📜 .gitignore
+├── 📜 next.config.mjs           # Konfigurasi Next.js
+├── 📜 package.json
+├── 📜 postcss.config.js         # Konfigurasi untuk PostCSS (digunakan oleh Tailwind)
+├── 📜 tailwind.config.ts       # Konfigurasi Tailwind CSS
+└── 📜 tsconfig.json            # Konfigurasi TypeScript
