@@ -1,0 +1,67 @@
+belanjaKu/
+├── 📂 apps/
+│   ├── 📂 frontend/        # Proyek Next.js
+│   │   ├── 📂 app/
+│   │   │   ├── 📂 (main)/      # Grup route utama dengan layout
+│   │   │   │   ├── 📂 products/
+│   │   │   │   │   └── 📂 [slug]/
+│   │   │   │   │       └── page.tsx      # Halaman Detail Produk Dinamis
+│   │   │   │   ├── 📂 cart/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   ├── 📂 checkout/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   ├── 📂 profile/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── layout.tsx            # Layout utama (Navbar, Footer)
+│   │   │   ├── page.tsx                  # Halaman Beranda (Homepage)
+│   │   │   └── layout.tsx                # Layout root
+│   │   ├── 📂 components/
+│   │   │   ├── 📂 ui/                    # Komponen UI generik (Button, Card, Input)
+│   │   │   ├── 📂 product/               # Komponen spesifik untuk Halaman Produk
+│   │   │   │   ├── TrustZone.tsx         # Rating, Terjual, Info Penjual
+│   │   │   │   ├── InfoZone.tsx          # Galeri gambar/video, Deskripsi
+│   │   │   │   ├── ActionZone.tsx        # Harga, Promo, Opsi Logistik, Add to Cart
+│   │   │   │   └── DiscoveryZone.tsx     # Rekomendasi produk
+│   │   │   └── 📂 layout/
+│   │   │       ├── Navbar.tsx
+│   │   │       └── Footer.tsx
+│   │   ├── 📂 lib/                       # Helpers, utils, koneksi API client
+│   │   ├── 📂 store/                     # State management (Zustand)
+│   │   ├── next.config.mjs
+│   │   ├── tailwind.config.ts
+│   │   └── tsconfig.json
+│   │
+│   └── 📂 backend/         # Proyek Node.js (Express/NestJS)
+│       ├── 📂 src/
+│       │   ├── 📂 api/                   # Router & Controllers (berdasarkan Class Diagram)
+│       │   │   ├── 📂 v1/
+│       │   │   │   ├── auth.routes.ts
+│       │   │   │   ├── user.routes.ts
+│       │   │   │   ├── product.routes.ts
+│       │   │   │   ├── order.routes.ts
+│       │   │   │   └── seller.routes.ts
+│       │   ├── 📂 config/                # Konfigurasi (database, env)
+│       │   ├── 📂 database/
+│       │   │   ├── 📂 models/            # Model (berdasarkan Class Diagram)
+│       │   │   │   ├── user.model.ts
+│       │   │   │   ├── product.model.ts
+│       │   │   │   ├── order.model.ts
+│       │   │   │   ├── review.model.ts
+│       │   │   │   └── ...
+│       │   │   ├── 📂 migrations/
+│       │   │   └── 📂 seeders/
+│       │   ├── 📂 middlewares/           # Middleware (auth JWT, error handling)
+│       │   ├── 📂 services/              # Logika bisnis
+│       │   ├── 📂 utils/                 # Fungsi helper
+│       │   └── server.ts                 # Entry point server
+│       ├── .env.example
+│       └── tsconfig.json
+│
+├── 📂 packages/
+│   └── 📂 ui/              # (Opsional) Komponen UI bersama
+│
+├── docker-compose.yml      # Konfigurasi Docker untuk Postgres & Redis
+├── .gitignore
+├── package.json            # Konfigurasi monorepo & script utama
+├── pnpm-workspace.yaml     # Mendefinisikan workspaces
+└── tsconfig.base.json      # Konfigurasi TypeScript dasar
