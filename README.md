@@ -1,139 +1,257 @@
-# **Backend E-commerce Modern (TypeScript, Express, Sequelize)**
+# Proyek E-commerce BelanjaKu (Monorepo)
 
-Ini adalah backend lengkap untuk aplikasi e-commerce modern yang dibangun dengan tumpukan teknologi yang kuat dan skalabel, mengikuti prinsip-prinsip Clean Architecture.
+Selamat datang di BelanjaKu, sebuah proyek e-commerce lengkap yang
+dibangun dengan arsitektur monorepo menggunakan PNPM Workspaces. Proyek
+ini mencakup aplikasi frontend yang dibuat dengan Next.js (App Router)
+dan backend dengan Node.js (Express), serta didukung oleh PostgreSQL dan
+Redis yang berjalan di Docker.
 
-## **Fitur Utama**
+## Struktur Proyek
 
-* **Autentikasi & Otorisasi:** Sistem berbasis JWT (Access & Refresh Token) dengan peran pengguna (user, seller, admin).  
-* **Manajemen Produk:** Operasi CRUD penuh untuk produk.  
-* **Manajemen Kategori:** Operasi CRUD penuh untuk kategori produk.  
-* **Sistem Pesanan:** Logika checkout transaksional untuk membuat pesanan dan mengelola item pesanan.  
-* **Ulasan Produk:** Pengguna hanya dapat memberikan ulasan untuk produk yang telah mereka beli.  
-* **Arsitektur Modular:** Kode diorganisir berdasarkan fitur (Auth, Products, Orders, dll.) dengan pemisahan yang jelas antara *controller*, *service*, *validator*, dan *model*.  
-* **Validasi Input:** Menggunakan express-validator untuk memastikan data yang masuk ke API valid.  
-* **Penanganan Error Terpusat:** Middleware error global untuk respons yang konsisten.  
-* **Database:** Menggunakan Sequelize ORM dengan PostgreSQL, lengkap dengan migrasi dan seeder.
+Berikut adalah gambaran umum struktur direktori dalam monorepo ini:
+```
+belanjaKu/  
+├── 📂 apps/  
+│ ├── 📂 frontend/ \# Proyek Next.js  
+│ │ ├── 📂 app/  
+│ │ │ ├── 📂 (main)/ \# Grup route utama dengan layout  
+│ │ │ │ ├── 📂 products/  
+│ │ │ │ │ └── 📂 \[slug\]/  
+│ │ │ │ │ └── page.tsx \# Halaman Detail Produk Dinamis  
+│ │ │ │ ├── 📂 cart/  
+│ │ │ │ │ └── page.tsx  
+│ │ │ │ ├── 📂 checkout/  
+│ │ │ │ │ └── page.tsx  
+│ │ │ │ ├── 📂 profile/  
+│ │ │ │ │ └── page.tsx  
+│ │ │ │ └── layout.tsx \# Layout utama (Navbar, Footer)  
+│ │ │ ├── page.tsx \# Halaman Beranda (Homepage)  
+│ │ │ └── layout.tsx \# Layout root  
+│ │ ├── 📂 components/  
+│ │ │ ├── 📂 ui/ \# Komponen UI generik (Button, Card, Input)  
+│ │ │ ├── 📂 product/ \# Komponen spesifik untuk Halaman Produk  
+│ │ │ └── 📂 layout/  
+│ │ │ ├── Navbar.tsx  
+│ │ │ └── Footer.tsx  
+│ │ ├── 📂 lib/ \# Helpers, utils, koneksi API client  
+│ │ └── 📂 store/ \# State management (Zustand)  
+│ │  
+│ └── 📂 backend/ \# Proyek Node.js (Express)  
+│ ├── 📂 src/  
+│ │ ├── 📂 api/ \# Router & Controllers  
+│ │ ├── 📂 config/ \# Konfigurasi (database, env)  
+│ │ ├── 📂 database/  
+│ │ │ ├── 📂 models/ \# Model database  
+│ │ │ ├── 📂 migrations/  
+│ │ │ └── 📂 seeders/  
+│ │ ├── 📂 middlewares/ \# Middleware (auth JWT, error handling)  
+│ │ ├── 📂 services/ \# Logika bisnis  
+│ │ ├── 📂 utils/ \# Fungsi helper  
+│ │ └── server.ts \# Entry point server  
+│ └── .env.example  
+│  
+├── 📂 packages/  
+│ └── 📂 ui/ \# (Opsional) Komponen UI bersama  
+│  
+├── docker-compose.yml \# Konfigurasi Docker untuk Postgres & Redis  
+├── package.json \# Konfigurasi monorepo & script utama  
+├── pnpm-workspace.yaml \# Mendefinisikan workspaces  
+└── tsconfig.base.json \# Konfigurasi TypeScript dasar
+```
+## Panduan Setup Proyek
 
-## **Struktur Proyek**
+Ikuti langkah-langkah berikut untuk menyiapkan dan menjalankan proyek di
+lingkungan lokal Anda.
 
-📂 backend/  
-├── 📂 src/  
-│   ├── 📂 api/         \# Layer untuk routing, controller, dan validasi  
-│   ├── 📂 config/      \# Konfigurasi aplikasi (env, database)  
-│   ├── 📂 database/    \# Model Sequelize, migrasi, dan seeder  
-│   ├── 📂 middlewares/ \# Middleware Express (auth, error, validator)  
-│   ├── 📂 services/    \# Tempat logika bisnis  
-│   ├── 📂 utils/       \# Fungsi bantuan (helpers)  
-│   └── 📜 server.ts    \# Entry point utama aplikasi  
-├── 📜 .env.example  
-├── 📜 .sequelizerc  
-├── 📜 package.json  
-└── 📜 tsconfig.json
+### Prasyarat
 
-## **Progress Proyek**
+Pastikan perangkat lunak berikut sudah terinstal di sistem Anda:
 
-* **Status:** **Fungsionalitas Inti Selesai**  
-* **Modul yang Sudah Selesai (100%):**  
-  * \[x\] **Autentikasi** (Register, Login, Proteksi Rute)  
-  * \[x\] **Produk** (CRUD)  
-  * \[x\] **Kategori** (CRUD)  
-  * \[x\] **Pesanan / Orders** (Checkout, Lihat Riwayat)  
-  * \[x\] **Ulasan / Reviews** (Membuat dan Melihat Ulasan)  
-* Backend saat ini sudah memiliki semua fitur esensial yang dibutuhkan untuk sebuah platform e-commerce dan siap untuk diintegrasikan dengan frontend.
+1.  **Node.js** (v18 atau lebih baru)
 
-## **Rencana Pengembangan (To-Do)**
+2.  **pnpm** (npm install -g pnpm)
 
-Berikut adalah daftar fitur dan perbaikan yang dapat dikerjakan selanjutnya untuk meningkatkan fungsionalitas aplikasi.
+3.  **Docker** dan **Docker Compose**
 
-#### **1\. Manajemen User (Untuk Admin)**
+4.  **Git**
 
-* **Files:** user.service.ts, api/v1/users/\*  
-* **Tugas:** Membangun endpoint CRUD (GET, PUT, DELETE) yang memungkinkan admin untuk mengelola data semua pengguna di sistem.
+### Langkah 1: Inisialisasi Monorepo
 
-#### **2\. Fitur Upload Gambar**
+#### 1.  Buat package.json di root. Buka terminal di direktori root proyek (belanjaKu/) dan jalankan:
+    
+    
+    pnpm init
+    
 
-* **File:** upload.middleware.ts  
-* **Tugas:** Mengimplementasikan upload gambar produk menggunakan **Multer**. Bisa dikembangkan lebih lanjut untuk menyimpan file ke layanan cloud seperti **Cloudinary**.
+#### 2.  Konfigurasi package.json
+       
+        {
+           "name": "belanjaku-monorepo",
+           "private": true,
+           "version": "1.0.0",
+           "description": "Proyek E-commerce BelanjaKu",
+           "scripts": {
+           "dev": "pnpm --parallel --stream dev",
+           "build": "pnpm --filter \"./apps/*\" build"
+           },
+           "devDependencies": {
+           "turbo": "^1.10.16" # Opsional, untuk build & dev yang lebih cepat
+           }
+        }
 
-#### **3\. Peningkatan Fitur API (Query Lanjutan)**
+#### 3.  Definisikan Workspace. Buat file `pnpm-workspace.yaml` di direktori root untuk memberitahu
+pnpm di mana aplikasi dan package kita berada.  
+    ````
+    packages:
+      - 'apps/*'
+      - 'packages/*'
+    ````
+### Langkah 2: Setup Database & Cache dengan Docker {#langkah-2-setup-database-cache-dengan-docker}
 
-* **File:** apiFeatures.util.ts  
-* **Tugas:** Membuat kelas *helper* untuk menambahkan fungsionalitas **pencarian, filter, dan sorting** yang lebih canggih pada endpoint GET /api/v1/products.
+Kita akan menggunakan Docker untuk menjalankan PostgreSQL dan Redis agar
+tidak perlu menginstalnya secara manual.
 
-#### **4\. Model & Fitur Tambahan**
+1.  **Buat file docker-compose.yml** di direktori root.  
+        
+        version: '3.8'
+        services:
+          postgres-db:
+            image: postgres:15-alpine
+            container_name: belanjaku_db
+            restart: always
+            environment:
+                POSTGRES_USER: admin
+                POSTGRES_PASSWORD: password123
+                POSTGRES_DB: belanjaku_dev
+            ports:
+                - "5432:5432"
+            volumes:
+                - postgres_data:/var/lib/postgresql/data
+        
+          redis-cache:
+            image: redis:7-alpine
+            container_name: belanjaku_cache
+            restart: always
+            ports:
+            - "6379:6379"
+            volumes:
+            - redis_data:/data
+        
+        volumes:
+          postgres_data:
+          redis_data:
+        
+2.  Jalankan Container  
+    - Buka terminal di root proyek dan jalankan
+        ```
+      docker-compose up -d     
+        ```
+    - Database dan cache Anda sekarang sudah berjalan di background.
 
-* **Files:** seller.model.ts, promotion.model.ts, shippingOption.model.ts  
-* **Tugas:**  
-  * Memisahkan data spesifik penjual (info toko, rating, dll.) ke dalam Seller model.  
-  * Membangun sistem untuk manajemen promosi atau diskon produk.  
-  * Menambahkan dukungan untuk berbagai opsi pengiriman beserta biayanya.
+### Langkah 3: Setup Backend (Node.js & Express) {#langkah-3-setup-backend-node.js-express}
 
-#### **5\. Infrastruktur & Logging**
+1.  Inisialisasi Proyek Backend. Dari direktori root (belanjaKu/), jalankan perintah berikut:
+    ```
+    # Inisialisasi proyek Node.js  
+    pnpm init  
+       
+    # Install dependencies utama  
+    pnpm add express cors dotenv jsonwebtoken pg redis  
+       
+    # Install dev dependencies  
+    pnpm add -D typescript ts-node nodemon @types/express @types/node @types/pg
+    ```
+3.  Konfigurasi TypeScript. Buat file `tsconfig.json` di dalam `apps/backend/`.  
+    ```
+    {
+      "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true
+      },
+      "include": ["src/**/*"]
+    }
+    ```
 
-* **File:** logger.util.ts  
-* **Tugas:** Mengkonfigurasi **Winston** untuk *logging* aplikasi yang lebih terstruktur. Ini sangat penting untuk *debugging* di lingkungan produksi.
+4.  Variabel Lingkungan. Buat file `.env.example` di `apps/backend/`. Salin file ini menjadi `.env` untuk penggunaan lokal.  
+    ```
+    # Server
+    PORT=5000
+    
+    # Database (sesuai docker-compose.yml)
+    DB_HOST=localhost
+    DB_USER=admin
+    DB_PASSWORD=password123
+    DB_NAME=belanjaku_dev
+    DB_PORT=5432
+    
+    # Redis (sesuai docker-compose.yml)
+    REDIS_URL=redis://localhost:6379
+    
+    # JWT
+    JWT_SECRET=rahasia-banget-jangan-disebar
+    ```
+6.  Tambahkan Scripts. Tambahkan scripts ke `apps/backend/package.json`.
+    ```  
+      "scripts": {
+        "dev": "nodemon src/server.ts",
+        "build": "tsc",
+        "start": "node dist/server.js"
+      }
+    ``` 
+   Setelah ini, Anda bisa mulai mengisi direktori src/ sesuai struktur di atas.
 
-## **Panduan Instalasi dan Menjalankan Proyek**
+### Langkah 4: Setup Frontend (Next.js) {#langkah-4-setup-frontend-next.js}
 
-Ikuti langkah-langkah ini untuk menjalankan proyek secara lokal.
+1.  Buat Proyek Next.js. Kembali ke direktori root (belanjaKu/), lalu jalankan:  
+    ```
+    # Gunakan pnpm untuk membuat aplikasi Next.js  
+    pnpm create next-app apps/frontend  
+    ```   
+     Saat proses instalasi, pilih opsi berikut:
 
-### **1\. Prasyarat**
+    - ✔ Would you like to use TypeScript? **Yes**
 
-* [Node.js](https://nodejs.org/) (v18 atau lebih baru)  
-* [PostgreSQL](https://www.postgresql.org/download/)  
-* NPM atau Yarn
+    - ✔ Would you like to use ESLint? **Yes**
 
-### **2\. Setup Awal**
+    - ✔ Would you like to use Tailwind CSS? **Yes**
 
-**a. Clone Repository**
+    - ✔ Would you like to use src/ directory? **No**
 
-git clone \<URL\_REPOSITORY\_ANDA\>  
-cd backend
+    - ✔ Would you like to use App Router? **Yes**
 
-**b. Instal Dependencies**
+    - ✔ Would you like to customize the default import alias? **No**
 
-npm install
+3.  Variabel Lingkungan. Buat file .env.local di apps/frontend/ dengan isi berikut:  
+    ```
+    NEXT_PUBLIC_API_URL=http://localhost:5000/api/v1
+    ```
+5.  Update Scripts (Opsional). Pastikan script di `apps/frontend/package.json` sudah sesuai. Biasanya sudah benar secara default.  
+    ```
+    "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+      "lint": "next lint"
+    }
+    ```
+### Langkah 5: Menjalankan Keseluruhan Proyek 🚀 {#langkah-5-menjalankan-keseluruhan-proyek}
 
-### **3\. Konfigurasi Database**
+Setelah semua setup selesai, Anda bisa menjalankan kedua aplikasi secara
+bersamaan.
 
-a. Buat Database PostgreSQL  
-Buka tool database Anda (misalnya pgAdmin) dan buat database baru. Contoh: ecommerce\_db.  
-b. Konfigurasi Environment  
-Salin file .env.example menjadi .env:  
-cp .env.example .env
+1.  **Kembali ke direktori root** proyek belanjaKu/.
 
-Buka file .env dan isi variabel koneksi database sesuai dengan konfigurasi PostgreSQL Anda:
-
-DB\_HOST=localhost  
-DB\_PORT=5432  
-DB\_USER=postgres  
-DB\_PASS=password\_anda  
-DB\_NAME=ecommerce\_db
-
-### **4\. Migrasi dan Seeding**
-
-a. Jalankan Migrasi  
-Perintah ini akan membuat semua tabel yang dibutuhkan di database Anda.  
-npm run db:migrate
-
-b. Jalankan Seeder (Opsional)  
-Perintah ini akan mengisi database dengan data awal (contoh: user admin, produk, kategori) untuk mempermudah pengujian.  
-npm run db:seed:all
-
-### **5\. Jalankan Aplikasi**
-
-Jalankan server pengembangan. Aplikasi akan berjalan di http://localhost:5000.
-
-npm run dev
-
-Server Anda sekarang sudah aktif dan siap menerima permintaan API\!
-
-## **Endpoint API Utama**
-
-* **Auth:** POST /api/v1/auth/register, POST /api/v1/auth/login  
-* **Products:** GET /api/v1/products, POST /api/v1/products (Seller/Admin)  
-* **Categories:** GET /api/v1/categories, POST /api/v1/categories (Admin)  
-* **Orders:** GET /api/v1/orders, POST /api/v1/orders (User)  
-* **Reviews:** GET /api/v1/reviews/product/:productId, POST /api/v1/reviews (User)
-
-Gunakan *tool* seperti Postman untuk menguji endpoint di atas. Untuk rute yang terproteksi, jangan lupa menyertakan *Access Token* di *header* Authorization dengan format Bearer \<TOKEN\>.
+2.  **Instal semua dependencies** untuk seluruh workspace.  
+    ```
+    pnpm install
+    ```
+4.  **Jalankan server pengembangan** untuk backend dan frontend.  
+    ```
+    pnpm dev
+    ```    
+    Terminal akan menampilkan log dari kedua aplikasi. Frontend akan berjalan di `http://localhost:3000` dan backend di `http://localhost:5000`. Selamat! Proyek Anda sudah siap untuk dikembangkan.
