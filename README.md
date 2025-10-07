@@ -130,10 +130,10 @@ Server Anda sekarang sudah aktif dan siap menerima permintaan API\!
 
 ## **Endpoint API Utama**
 
-* **Auth:** POST /api/v1/auth/register, POST /api/v1/auth/login  
-* **Products:** GET /api/v1/products, POST /api/v1/products (Seller/Admin)  
-* **Categories:** GET /api/v1/categories, POST /api/v1/categories (Admin)  
-* **Orders:** GET /api/v1/orders, POST /api/v1/orders (User)  
-* **Reviews:** GET /api/v1/reviews/product/:productId, POST /api/v1/reviews (User)
+* **Auth:** `POST /api/v1/auth/register`, `POST /api/v1/auth/login`  
+* **Products:** `GET /api/v1/products`, `POST /api/v1/products` (Seller/Admin)  
+* **Categories:** `GET /api/v1/categories`, `POST /api/v1/categories` (Admin)  
+* **Orders:** `GET /api/v1/orders`, `POST /api/v1/orders` (User)  
+* **Reviews:** `GET /api/v1/reviews/product/:productId`, `POST /api/v1/reviews` (User)
 
 Gunakan *tool* seperti Postman untuk menguji endpoint di atas. Untuk rute yang terproteksi, jangan lupa menyertakan *Access Token* di *header* Authorization dengan format Bearer \<TOKEN\>.
