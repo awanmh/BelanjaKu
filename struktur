@@ -135,8 +135,10 @@ backend
 │   │
 │   ├── 📂 services/              # Tempat logika bisnis
 │   │   ├── 📜 auth.service.ts
+│   │   ├── 📜 category.service.ts
 │   │   ├── 📜 user.service.ts
 │   │   ├── 📜 product.service.ts
+│   │   ├── 📜 review.service.ts
 │   │   └── 📜 order.service.ts
 │   │
 │   ├── 📂 utils/                 # Fungsi bantuan (helpers)
