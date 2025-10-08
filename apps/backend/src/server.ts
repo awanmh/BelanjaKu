@@ -4,11 +4,12 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import { StatusCodes } from 'http-status-codes';
 
-import { config as env } from './config/env.config'; // FIX: Menggunakan named import dengan alias
-import db from './database/models'; // FIX: Menggunakan default import
+import { config as env } from './config/env.config';
+import db from './database/models';
 import HttpException from './utils/http-exception.util';
-import { errorMiddleware as globalErrorHandler } from './middlewares/error.middleware'; // FIX: Menggunakan named import dengan alias
+import { errorMiddleware as globalErrorHandler } from './middlewares/error.middleware';
 import v1Router from './api/v1';
+import logger from './utils/logger.util'; // 1. Impor logger
 
 const app: Application = express();
 const PORT = env.PORT;
@@ -16,7 +17,8 @@ const PORT = env.PORT;
 // Middlewares
 app.use(cors());
 app.use(helmet());
-app.use(morgan('dev'));
+// Gunakan logger untuk mencatat request HTTP
+app.use(morgan('combined', { stream: { write: (message) => logger.http(message.trim()) } }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -41,19 +43,13 @@ app.use(globalErrorHandler);
 const startServer = async () => {
   try {
     await db.sequelize.authenticate();
-    console.log('✅ Database connection has been established successfully.');
-
-    // Sinkronisasi model (hanya di development)
-    if (env.NODE_ENV === 'development') {
-      // await db.sequelize.sync({ alter: true }); // Uncomment if you want to sync models on startup
-      console.log('✅ All models were synchronized successfully.');
-    }
+    logger.info('Database connection has been established successfully.');
 
     app.listen(PORT, () => {
-      console.log(`🚀 Server is running on port ${PORT}`);
+      logger.info(`Server is running on port ${PORT}`);
     });
   } catch (error) {
-    console.error('❌ Unable to connect to the database:', error);
+    logger.error('Unable to connect to the database:', error);
     process.exit(1);
   }
 };
@@ -61,4 +57,3 @@ const startServer = async () => {
 startServer();
 
 export default app;
-

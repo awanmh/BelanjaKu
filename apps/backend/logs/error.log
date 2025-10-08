@@ -1,0 +1,1 @@
+2025-10-08 14:47:22:4722 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m

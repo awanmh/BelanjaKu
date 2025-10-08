@@ -1,17 +1,19 @@
+import { StatusCodes } from 'http-status-codes';
 import db from '../database/models';
 import { ProductAttributes } from '../database/models/product.model';
 import HttpException from '../utils/http-exception.util';
-import { StatusCodes } from 'http-status-codes';
+import APIFeatures from '../utils/apiFeatures.util';
+import { ParsedQs } from 'qs';
+import { Model } from 'sequelize';
 
 // Mengambil model dari objek db
 const Product = db.Product;
 const User = db.User;
 
-// Tipe data untuk input saat membuat produk baru
-// sellerId akan diambil dari token JWT, bukan dari input user
-export type CreateProductInput = Omit<ProductAttributes, 'id' | 'sellerId' | 'createdAt' | 'updatedAt'>;
+// Tipe data untuk input pembuatan produk, sekarang termasuk imageUrl
+export type CreateProductInput = Pick<ProductAttributes, 'name' | 'description' | 'price' | 'stock' | 'categoryId' | 'imageUrl'>;
 
-// Tipe data untuk input saat memperbarui produk (semua opsional)
+// Tipe data untuk input pembaruan produk
 export type UpdateProductInput = Partial<CreateProductInput>;
 
 /**
@@ -20,107 +22,94 @@ export type UpdateProductInput = Partial<CreateProductInput>;
 class ProductService {
   /**
    * Membuat produk baru.
-   * @param productData Data produk yang akan dibuat.
-   * @param sellerId ID dari pengguna (penjual) yang membuat produk.
+   * @param productData Data untuk produk baru.
+   * @param sellerId ID pengguna (penjual) yang membuat produk.
    * @returns Produk yang baru dibuat.
    */
   public async createProduct(productData: CreateProductInput, sellerId: string): Promise<ProductAttributes> {
-    // Cek apakah penjual ada
-    const seller = await User.findByPk(sellerId);
-    if (!seller) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'Seller not found');
-    }
-
-    // Gabungkan data produk dengan sellerId
-    const fullProductData = { ...productData, sellerId };
-
-    const newProduct = await Product.create(fullProductData);
+    const newProduct = await Product.create({
+      ...productData,
+      sellerId,
+    });
     return newProduct.toJSON();
   }
 
   /**
-   * Mengambil semua produk dengan paginasi.
-   * @returns Daftar produk.
+   * Mengambil semua produk dari database dengan fitur query lanjutan.
+   * @param queryString Query string dari URL request.
+   * @returns Array berisi semua produk beserta data penjualnya.
    */
-  public async getAllProducts() {
-    // Di sini nanti bisa ditambahkan logika untuk paginasi, filter, dan sorting
-    const products = await Product.findAll({
-      include: [
-        {
-          model: User,
-          as: 'seller',
-          attributes: ['id', 'fullName', 'email'], // Hanya ambil data seller yang relevan
-        },
-      ],
-    });
-    return products;
+  public async getAllProducts(queryString: ParsedQs): Promise<ProductAttributes[]> {
+    // FIX: Lakukan type casting pada model 'Product' untuk mengatasi masalah tipe kompleks
+    const features = new APIFeatures(Product as any, queryString)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
+
+    // Tambahkan include untuk data penjual secara manual ke queryOptions
+    features.queryOptions.include = [{ model: User, as: 'seller', attributes: ['id', 'fullName'] }];
+
+    // Eksekusi query yang sudah dibangun
+    const products = await Product.findAll(features.queryOptions);
+    
+    return products.map((product) => product.toJSON());
   }
 
   /**
    * Mengambil satu produk berdasarkan ID.
-   * @param productId ID produk yang akan dicari.
-   * @returns Detail produk atau null jika tidak ditemukan.
+   * @param productId ID produk.
+   * @returns Objek produk.
    */
-  public async getProductById(productId: string): Promise<ProductAttributes | null> {
+  public async getProductById(productId: string): Promise<ProductAttributes> {
     const product = await Product.findByPk(productId, {
-      include: [
-        {
-          model: User,
-          as: 'seller',
-          attributes: ['id', 'fullName', 'email'],
-        },
-      ],
+      include: [{ model: User, as: 'seller', attributes: ['id', 'fullName'] }],
     });
-
     if (!product) {
-        throw new HttpException(StatusCodes.NOT_FOUND, 'Product not found');
+      throw new HttpException(StatusCodes.NOT_FOUND, 'Product not found');
     }
-    
     return product.toJSON();
   }
 
   /**
-   * Memperbarui produk.
-   * @param productId ID produk yang akan diperbarui.
-   * @param productData Data baru untuk produk.
-   * @param userId ID pengguna yang melakukan pembaruan (untuk verifikasi kepemilikan).
+   * Memperbarui produk berdasarkan ID.
+   * Memastikan hanya penjual asli yang dapat memperbarui produknya.
+   * @param productId ID produk.
+   * @param productData Data pembaruan.
+   * @param userId ID pengguna yang mencoba memperbarui.
    * @returns Produk yang sudah diperbarui.
    */
   public async updateProduct(productId: string, productData: UpdateProductInput, userId: string): Promise<ProductAttributes> {
     const product = await Product.findByPk(productId);
-
     if (!product) {
       throw new HttpException(StatusCodes.NOT_FOUND, 'Product not found');
     }
-
-    // Verifikasi bahwa pengguna adalah pemilik produk
     if (product.sellerId !== userId) {
-        throw new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to update this product');
+      throw new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to update this product');
     }
 
-    const updatedProduct = await product.update(productData);
-    return updatedProduct.toJSON();
+    await product.update(productData);
+    return product.toJSON();
   }
 
   /**
-   * Menghapus produk.
-   * @param productId ID produk yang akan dihapus.
-   * @param userId ID pengguna yang melakukan penghapusan (untuk verifikasi kepemilikan).
+   * Menghapus produk berdasarkan ID.
+   * Memastikan hanya penjual asli yang dapat menghapus produknya.
+   * @param productId ID produk.
+   * @param userId ID pengguna yang mencoba menghapus.
    */
   public async deleteProduct(productId: string, userId: string): Promise<void> {
     const product = await Product.findByPk(productId);
-
     if (!product) {
       throw new HttpException(StatusCodes.NOT_FOUND, 'Product not found');
     }
-
-    // Verifikasi bahwa pengguna adalah pemilik produk
     if (product.sellerId !== userId) {
-        throw new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to delete this product');
+      throw new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to delete this product');
     }
-
     await product.destroy();
   }
 }
 
+// Ekspor sebagai singleton instance
 export default new ProductService();
+

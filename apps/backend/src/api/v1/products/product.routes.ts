@@ -3,27 +3,31 @@ import ProductController from './product.controller';
 import { createProductValidator, updateProductValidator } from './product.validator';
 import { validate } from '../../../middlewares/validator.middleware';
 import { protect, authorize } from '../../../middlewares/auth.middleware';
+import upload from '../../../middlewares/upload.middleware'; // 1. Impor middleware upload
 
+// Membuat instance router baru
 const productRouter = Router();
 
-// Rute Publik (tidak memerlukan autentikasi)
+// Rute Publik
 productRouter.get('/', ProductController.getAllProducts);
 productRouter.get('/:id', ProductController.getProductById);
 
-// Rute Terproteksi (memerlukan autentikasi dan otorisasi)
+// Rute Terproteksi (hanya untuk seller dan admin)
 productRouter.post(
   '/',
-  protect, // 1. Pastikan pengguna sudah login
-  authorize('seller', 'admin'), // 2. Pastikan peran adalah 'seller' atau 'admin'
-  createProductValidator, // 3. Jalankan aturan validasi
-  validate, // 4. Proses hasil validasi
-  ProductController.createProduct // 5. Jalankan controller
+  protect,
+  authorize('seller', 'admin'),
+  upload.single('productImage'), // 2. Tambahkan middleware di sini
+  createProductValidator,
+  validate,
+  ProductController.createProduct
 );
 
 productRouter.put(
   '/:id',
   protect,
   authorize('seller', 'admin'),
+  upload.single('productImage'), // 2. Tambahkan middleware di sini juga
   updateProductValidator,
   validate,
   ProductController.updateProduct

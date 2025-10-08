@@ -1,4 +1,5 @@
 import { DataTypes, Model, Sequelize, Optional } from 'sequelize';
+import bcrypt from 'bcryptjs';
 
 // Atribut yang wajib ada saat membuat user baru
 export interface UserAttributes {
@@ -15,7 +16,8 @@ export interface UserAttributes {
 // Atribut yang bisa diisi saat membuat user (id bersifat opsional)
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
 
-class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+// FIX: Memperbaiki kesalahan ketik dari UserCreation-Attributes menjadi UserCreationAttributes
+export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
   public id!: string;
   public fullName!: string;
   public email!: string;
@@ -25,9 +27,23 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
-  // Asosiasi bisa didefinisikan di sini jika diperlukan
+  // Method untuk membandingkan password
+  public async comparePassword(password: string): Promise<boolean> {
+    return bcrypt.compare(password, this.password);
+  }
+
+  // Method untuk asosiasi (relasi)
   public static associate(models: any) {
-    // contoh: User.hasMany(models.Product);
+    // Seorang User memiliki satu profil Seller
+    User.hasOne(models.Seller, {
+      foreignKey: 'userId',
+      as: 'sellerProfile',
+    });
+    // Seorang User memiliki banyak Produk (sebagai penjual)
+    User.hasMany(models.Product, {
+      foreignKey: 'sellerId',
+      as: 'products',
+    });
   }
 }
 
@@ -66,10 +82,22 @@ export default function (sequelize: Sequelize): typeof User {
     {
       sequelize,
       tableName: 'users',
-      // timestamps: true, // sudah default
+      hooks: {
+        beforeCreate: async (user: User) => {
+          if (user.password) {
+            const salt = await bcrypt.genSalt(10);
+            user.password = await bcrypt.hash(user.password, salt);
+          }
+        },
+        beforeUpdate: async (user: User) => {
+          if (user.changed('password')) {
+            const salt = await bcrypt.genSalt(10);
+            user.password = await bcrypt.hash(user.password, salt);
+          }
+        },
+      },
     }
   );
 
   return User;
 }
-

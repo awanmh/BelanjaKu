@@ -7,7 +7,11 @@ import ProductModel from './product.model';
 import CategoryModel from './category.model';
 import OrderModel from './order.model';
 import OrderItemModel from './orderItem.model';
-import ReviewModel from './review.model'; // 1. Impor model Review
+import ReviewModel from './review.model';
+import SellerModel from './seller.model';
+import PromotionModel from './promotion.model';
+import ShippingOptionModel from './shippingOption.model';
+import PaymentModel from './payment.model'; // 1. Impor model Payment
 
 // Tentukan environment (default: development)
 const env = process.env.NODE_ENV || 'development';
@@ -32,7 +36,11 @@ const Product = ProductModel(sequelize);
 const Category = CategoryModel(sequelize);
 const Order = OrderModel(sequelize);
 const OrderItem = OrderItemModel(sequelize);
-const Review = ReviewModel(sequelize); // 2. Inisialisasi model Review
+const Review = ReviewModel(sequelize);
+const Seller = SellerModel(sequelize);
+const Promotion = PromotionModel(sequelize);
+const ShippingOption = ShippingOptionModel(sequelize);
+const Payment = PaymentModel(sequelize); // 2. Inisialisasi model Payment
 
 // Kumpulan model dan instance Sequelize
 const db = {
@@ -43,7 +51,11 @@ const db = {
   Category,
   Order,
   OrderItem,
-  Review, // 3. Tambahkan model Review ke objek db
+  Review,
+  Seller,
+  Promotion,
+  ShippingOption,
+  Payment, // 3. Tambahkan model Payment ke objek db
 };
 
 // Definisikan asosiasi antar model

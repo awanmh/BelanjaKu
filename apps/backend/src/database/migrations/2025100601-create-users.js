@@ -3,33 +3,77 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    // 1. Buat tabel 'users'
-    await queryInterface.createTable('users', {
+    // 1. Buat tabel 'sellers'
+    await queryInterface.createTable('sellers', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
       },
-      fullName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      email: {
-        type: Sequelize.STRING,
+      userId: {
+        type: Sequelize.UUID,
         allowNull: false,
         unique: true,
+        references: { model: 'users', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
-      password: {
+      storeName: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      role: {
-        type: Sequelize.ENUM('user', 'seller', 'admin'),
-        defaultValue: 'user',
+      storeAddress: {
+        type: Sequelize.TEXT,
+        allowNull: true,
       },
-      isVerified: {
+      storePhoneNumber: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    });
+
+    // 2. Buat tabel 'promotions'
+    await queryInterface.createTable('promotions', {
+      id: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        primaryKey: true,
+      },
+      productId: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: { model: 'products', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      code: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        unique: true,
+      },
+      discountPercentage: {
+        type: Sequelize.DECIMAL(5, 2),
+        allowNull: false,
+      },
+      startDate: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      endDate: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      isActive: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false,
+        defaultValue: true,
       },
       createdAt: {
         allowNull: false,
@@ -41,8 +85,8 @@ module.exports = {
       },
     });
 
-    // 2. Buat tabel 'categories'
-    await queryInterface.createTable('categories', {
+    // 3. Buat tabel 'shipping_options'
+    await queryInterface.createTable('shipping_options', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -52,27 +96,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-    });
-
-    // 3. Buat tabel 'products'
-    await queryInterface.createTable('products', {
-      id: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        primaryKey: true,
-      },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false,
       },
       description: {
         type: Sequelize.TEXT,
@@ -82,28 +105,13 @@ module.exports = {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
       },
-      stock: {
+      estimatedDays: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: 0,
       },
-      imageUrl: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      sellerId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: { model: 'users', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
-      categoryId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: { model: 'categories', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
+      isActive: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
       },
       createdAt: {
         allowNull: false,
@@ -115,44 +123,8 @@ module.exports = {
       },
     });
 
-    // 4. Buat tabel 'orders'
-    await queryInterface.createTable('orders', {
-      id: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        primaryKey: true,
-      },
-      userId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: { model: 'users', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
-      totalAmount: {
-        type: Sequelize.DECIMAL(10, 2),
-        allowNull: false,
-      },
-      shippingAddress: {
-        type: Sequelize.TEXT,
-        allowNull: false,
-      },
-      status: {
-        type: Sequelize.ENUM('pending', 'processing', 'shipped', 'completed', 'cancelled'),
-        defaultValue: 'pending',
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-    });
-
-    // 5. Buat tabel 'order_items'
-    await queryInterface.createTable('order_items', {
+    // 4. Buat tabel 'payments'
+    await queryInterface.createTable('payments', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -165,59 +137,30 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      productId: {
-        type: Sequelize.UUID,
-        allowNull: true, // Bisa jadi null jika produk dihapus
-        references: { model: 'products', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
+      transactionId: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
       },
-      quantity: {
-        type: Sequelize.INTEGER,
+      paymentGateway: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
-      price: {
+      amount: {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-    });
-
-    // 6. Buat tabel 'reviews'
-    await queryInterface.createTable('reviews', {
-      id: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        primaryKey: true,
-      },
-      userId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: { model: 'users', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
-      productId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: { model: 'products', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
-      rating: {
-        type: Sequelize.INTEGER,
+      method: {
+        type: Sequelize.ENUM('cod', 'credit_card', 'debit_card', 'e_wallet', 'qris', 'bank_transfer'),
         allowNull: false,
       },
-      comment: {
-        type: Sequelize.TEXT,
-        allowNull: false,
+      status: {
+        type: Sequelize.ENUM('pending', 'success', 'failed', 'expired'),
+        defaultValue: 'pending',
+      },
+      paymentUrl: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,
@@ -227,22 +170,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-    });
-
-    // Tambahkan index unik untuk reviews
-    await queryInterface.addIndex('reviews', ['userId', 'productId'], {
-      unique: true,
-      name: 'reviews_user_product_unique',
     });
   },
 
   async down(queryInterface, Sequelize) {
-    // Hapus tabel dalam urutan terbalik karena adanya foreign key constraints
-    await queryInterface.dropTable('reviews');
-    await queryInterface.dropTable('order_items');
-    await queryInterface.dropTable('orders');
-    await queryInterface.dropTable('products');
-    await queryInterface.dropTable('categories');
-    await queryInterface.dropTable('users');
+    // Hapus tabel dalam urutan terbalik
+    await queryInterface.dropTable('payments');
+    await queryInterface.dropTable('shipping_options');
+    await queryInterface.dropTable('promotions');
+    await queryInterface.dropTable('sellers');
   },
 };

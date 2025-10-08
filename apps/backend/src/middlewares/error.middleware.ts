@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import HttpException from '../utils/http-exception.util';
+import logger from '../utils/logger.util'; // 1. Impor logger
 
 export const errorMiddleware = (
   error: HttpException,
@@ -9,14 +10,14 @@ export const errorMiddleware = (
   next: NextFunction
 ): void => {
   const status = error.status || StatusCodes.INTERNAL_SERVER_ERROR;
-  const message = error.message || 'Something went wrong';
+  const message = error.message || 'Something went wrong on the server.';
 
-  // Logging error bisa ditambahkan di sini (misal: pakai Winston)
-  console.error(`[${req.method}] ${req.path} >> StatusCode:: ${status}, Message:: ${message}`);
+  // 2. Gunakan logger untuk mencatat detail error
+  logger.error(`[${req.method}] ${req.path} >> StatusCode:: ${status}, Message:: ${message}`);
   
   res.status(status).json({
     status: 'error',
     statusCode: status,
-    message: message
+    message: message,
   });
 };

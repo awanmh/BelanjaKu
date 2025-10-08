@@ -3,12 +3,13 @@ import { StatusCodes } from 'http-status-codes';
 import ProductService, { CreateProductInput, UpdateProductInput } from '../../../services/product.service';
 import HttpException from '../../../utils/http-exception.util';
 
-// Interface untuk memperluas objek Request Express dengan properti 'user'
+// Interface untuk memperluas objek Request Express dengan properti 'user' dan 'file'
 interface AuthenticatedRequest extends Request {
   user?: {
     id: string;
     role: 'user' | 'seller' | 'admin';
   };
+  file?: Express.Multer.File;
 }
 
 /**
@@ -20,13 +21,17 @@ class ProductController {
    */
   public async createProduct(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      // Pastikan pengguna sudah terautentikasi dan memiliki ID
       if (!req.user) {
         throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
+      }
+      if (!req.file) {
+        throw new HttpException(StatusCodes.BAD_REQUEST, 'Product image is required');
       }
       
       const sellerId = req.user.id;
       const productData: CreateProductInput = req.body;
+
+      productData.imageUrl = req.file.path;
 
       const newProduct = await ProductService.createProduct(productData, sellerId);
 
@@ -45,7 +50,8 @@ class ProductController {
    */
   public async getAllProducts(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const products = await ProductService.getAllProducts();
+      // FIX: Teruskan req.query ke service untuk fitur filtering, sorting, dll.
+      const products = await ProductService.getAllProducts(req.query);
       res.status(StatusCodes.OK).json({
         success: true,
         message: 'Products retrieved successfully',
@@ -86,6 +92,10 @@ class ProductController {
       const userId = req.user.id;
       const productData: UpdateProductInput = req.body;
 
+      if (req.file) {
+        productData.imageUrl = req.file.path;
+      }
+
       const updatedProduct = await ProductService.updateProduct(productId, productData, userId);
 
       res.status(StatusCodes.OK).json({
@@ -123,3 +133,4 @@ class ProductController {
 }
 
 export default new ProductController();
+

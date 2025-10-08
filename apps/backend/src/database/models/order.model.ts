@@ -5,13 +5,14 @@ export interface OrderAttributes {
   id: string;
   userId: string; // Foreign key untuk User
   totalAmount: number;
-  status: 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
-  shippingAddress: string; // Bisa juga berupa JSON jika lebih kompleks
+  shippingAddress: string;
+  // FIX: Tambahkan 'processing' ke daftar status yang valid
+  status: 'pending' | 'processing' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-// Atribut yang opsional saat pembuatan (misal: id)
+// Atribut yang opsional saat pembuatan
 interface OrderCreationAttributes extends Optional<OrderAttributes, 'id'> {}
 
 // Definisikan class Model untuk Order
@@ -19,8 +20,8 @@ export class Order extends Model<OrderAttributes, OrderCreationAttributes> imple
   public id!: string;
   public userId!: string;
   public totalAmount!: number;
-  public status!: 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
   public shippingAddress!: string;
+  public status!: 'pending' | 'processing' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -30,13 +31,13 @@ export class Order extends Model<OrderAttributes, OrderCreationAttributes> imple
     // Sebuah pesanan dimiliki oleh satu User
     Order.belongsTo(models.User, {
       foreignKey: 'userId',
-      as: 'customer',
+      as: 'user',
     });
 
     // Sebuah pesanan memiliki banyak OrderItem
     Order.hasMany(models.OrderItem, {
-        foreignKey: 'orderId',
-        as: 'items'
+      foreignKey: 'orderId',
+      as: 'items',
     });
   }
 }
@@ -64,14 +65,13 @@ export default function (sequelize: Sequelize): typeof Order {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
       },
-      status: {
-        type: DataTypes.ENUM('pending', 'paid', 'shipped', 'delivered', 'cancelled'),
-        defaultValue: 'pending',
-        allowNull: false,
-      },
       shippingAddress: {
         type: DataTypes.TEXT,
         allowNull: false,
+      },
+      status: {
+        type: DataTypes.ENUM('pending', 'processing', 'paid', 'shipped', 'delivered', 'cancelled'),
+        defaultValue: 'pending',
       },
     },
     {

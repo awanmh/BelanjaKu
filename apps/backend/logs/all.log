@@ -1,0 +1,6 @@
+2025-10-08 14:31:57:3157 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-10-08 14:31:57:3157 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-10-08 14:39:01:391 [35mhttp[39m: [35m::1 - - [08/Oct/2025:07:39:01 +0000] "POST /api/v1/auth/register HTTP/1.1" 422 117 "-" "PostmanRuntime/7.46.1"[39m
+2025-10-08 14:41:38:4138 [35mhttp[39m: [35m::1 - - [08/Oct/2025:07:41:38 +0000] "POST /api/v1/auth/register HTTP/1.1" 201 282 "-" "PostmanRuntime/7.46.1"[39m
+2025-10-08 14:47:22:4722 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-10-08 14:47:22:4722 [35mhttp[39m: [35m::1 - - [08/Oct/2025:07:47:22 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "-" "PostmanRuntime/7.46.1"[39m
