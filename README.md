@@ -1,257 +1,154 @@
-# Proyek E-commerce BelanjaKu (Monorepo)
+# **Backend E-commerce Modern \- BelanjaKu API**
 
-Selamat datang di BelanjaKu, sebuah proyek e-commerce lengkap yang
-dibangun dengan arsitektur monorepo menggunakan PNPM Workspaces. Proyek
-ini mencakup aplikasi frontend yang dibuat dengan Next.js (App Router)
-dan backend dengan Node.js (Express), serta didukung oleh PostgreSQL dan
-Redis yang berjalan di Docker.
+Selamat datang di repositori Backend E-commerce BelanjaKu. Proyek ini adalah backend yang kokoh, modular, dan dapat diskalakan yang dibangun dengan tumpukan teknologi modern, dirancang untuk mendukung platform e-commerce dengan berbagai fitur.
 
-## Struktur Proyek
+Arsitekturnya mengikuti prinsip-prinsip **Clean Architecture**, memisahkan logika bisnis (*services*), penanganan permintaan (*controllers*), dan akses data (*models*) untuk kemudahan pemeliharaan dan pengujian.
 
-Berikut adalah gambaran umum struktur direktori dalam monorepo ini:
-```
-belanjaKu/  
-├── 📂 apps/  
-│ ├── 📂 frontend/ \# Proyek Next.js  
-│ │ ├── 📂 app/  
-│ │ │ ├── 📂 (main)/ \# Grup route utama dengan layout  
-│ │ │ │ ├── 📂 products/  
-│ │ │ │ │ └── 📂 \[slug\]/  
-│ │ │ │ │ └── page.tsx \# Halaman Detail Produk Dinamis  
-│ │ │ │ ├── 📂 cart/  
-│ │ │ │ │ └── page.tsx  
-│ │ │ │ ├── 📂 checkout/  
-│ │ │ │ │ └── page.tsx  
-│ │ │ │ ├── 📂 profile/  
-│ │ │ │ │ └── page.tsx  
-│ │ │ │ └── layout.tsx \# Layout utama (Navbar, Footer)  
-│ │ │ ├── page.tsx \# Halaman Beranda (Homepage)  
-│ │ │ └── layout.tsx \# Layout root  
-│ │ ├── 📂 components/  
-│ │ │ ├── 📂 ui/ \# Komponen UI generik (Button, Card, Input)  
-│ │ │ ├── 📂 product/ \# Komponen spesifik untuk Halaman Produk  
-│ │ │ └── 📂 layout/  
-│ │ │ ├── Navbar.tsx  
-│ │ │ └── Footer.tsx  
-│ │ ├── 📂 lib/ \# Helpers, utils, koneksi API client  
-│ │ └── 📂 store/ \# State management (Zustand)  
-│ │  
-│ └── 📂 backend/ \# Proyek Node.js (Express)  
-│ ├── 📂 src/  
-│ │ ├── 📂 api/ \# Router & Controllers  
-│ │ ├── 📂 config/ \# Konfigurasi (database, env)  
-│ │ ├── 📂 database/  
-│ │ │ ├── 📂 models/ \# Model database  
-│ │ │ ├── 📂 migrations/  
-│ │ │ └── 📂 seeders/  
-│ │ ├── 📂 middlewares/ \# Middleware (auth JWT, error handling)  
-│ │ ├── 📂 services/ \# Logika bisnis  
-│ │ ├── 📂 utils/ \# Fungsi helper  
-│ │ └── server.ts \# Entry point server  
-│ └── .env.example  
-│  
-├── 📂 packages/  
-│ └── 📂 ui/ \# (Opsional) Komponen UI bersama  
-│  
-├── docker-compose.yml \# Konfigurasi Docker untuk Postgres & Redis  
-├── package.json \# Konfigurasi monorepo & script utama  
-├── pnpm-workspace.yaml \# Mendefinisikan workspaces  
-└── tsconfig.base.json \# Konfigurasi TypeScript dasar
-```
-## Panduan Setup Proyek
+## **PROGRESS PROYEK (Oktober 2025\)**
 
-Ikuti langkah-langkah berikut untuk menyiapkan dan menjalankan proyek di
-lingkungan lokal Anda.
+Saat ini, seluruh fondasi dan fitur inti dari backend telah **berhasil dibangun** dan siap untuk diintegrasikan dengan aplikasi frontend.
 
-### Prasyarat
+* **✅ Fondasi Proyek:** Konfigurasi TypeScript, Express, Sequelize, dan penanganan error global telah selesai.  
+* **✅ Modul Inti:**  
+  * **Autentikasi:** Fungsionalitas registrasi, login, dan proteksi rute dengan JWT sudah lengkap.  
+  * **Manajemen Produk & Kategori:** Operasi CRUD untuk produk dan kategori telah selesai, termasuk unggah gambar.  
+  * **Sistem Pesanan:** Alur kerja untuk membuat pesanan (*checkout*) dan melihat riwayat pesanan sudah berfungsi.  
+  * **Ulasan & Rating:** Pengguna dapat memberikan ulasan untuk produk yang telah mereka beli.  
+* **✅ Fitur Admin:**  
+  * **Manajemen Pengguna:** Admin dapat mengelola semua data pengguna (CRUD).  
+  * **Manajemen Kategori:** Admin dapat mengelola kategori produk (CRUD).  
+  * **Manajemen Opsi Pengiriman:** Admin dapat mengelola metode pengiriman (CRUD).  
+* **✅ Fitur Penjual (Seller):**  
+  * **Manajemen Produk:** Penjual dapat mengelola produk mereka sendiri (CRUD).  
+  * **Manajemen Profil Toko:** Penjual dapat membuat dan memperbarui profil toko mereka.  
+* **✅ Infrastruktur:**  
+  * **Database:** Migrasi dan *seeder* untuk semua tabel telah dibuat.  
+  * **Query Lanjutan:** Utilitas APIFeatures untuk *sorting*, *filtering*, dan paginasi telah diimplementasikan pada modul produk.  
+  * **Logging:** Sistem *logging* terstruktur menggunakan Winston telah diintegrasikan.  
+* **✅ Fondasi Pembayaran:** Kerangka kerja untuk simulasi pembayaran dan penanganan *webhook* telah dibuat.
 
-Pastikan perangkat lunak berikut sudah terinstal di sistem Anda:
+## **Fitur Utama**
 
-1.  **Node.js** (v18 atau lebih baru)
+* **Autentikasi & Otorisasi Berbasis JWT**: Sistem aman dengan *access token* dan *refresh token*.  
+* **Manajemen Pengguna Berbasis Peran**: Peran yang jelas (user, seller, admin) dengan hak akses yang berbeda.  
+* **CRUD Penuh**: Operasi *Create, Read, Update, Delete* untuk semua modul utama (Produk, Kategori, Pesanan, dll.).  
+* **Unggah Gambar Produk**: Penanganan unggah file menggunakan Multer.  
+* **Query API Lanjutan**: Dukungan untuk *filtering*, *sorting*, paginasi, dan pemilihan *field* pada *endpoint* produk.  
+* **Sistem Pesanan Transaksional**: Memastikan konsistensi data saat membuat pesanan dan mengurangi stok produk.  
+* **Logging Terstruktur**: Pencatatan log yang rapi untuk *development* dan *production* menggunakan Winston.  
+* **Arsitektur Modular**: Mudah untuk diperluas dengan fitur-fitur baru di masa depan.
 
-2.  **pnpm** (npm install -g pnpm)
+## **Tumpukan Teknologi**
 
-3.  **Docker** dan **Docker Compose**
+* **Runtime**: Node.js  
+* **Framework**: Express.js  
+* **Bahasa**: TypeScript  
+* **Database**: PostgreSQL  
+* **ORM**: Sequelize  
+* **Autentikasi**: JSON Web Token (JWT)  
+* **Validasi**: express-validator  
+* **Unggah File**: multer  
+* **Logging**: winston & morgan  
+* **Lingkungan**: dotenv
 
-4.  **Git**
+## **Panduan Instalasi & Penggunaan**
 
-### Langkah 1: Inisialisasi Monorepo
+### **1\. Prasyarat**
 
-#### 1.  Buat package.json di root. Buka terminal di direktori root proyek (belanjaKu/) dan jalankan:
-    
-    
-    pnpm init
-    
+* Node.js (v18 atau lebih baru)  
+* NPM atau Yarn  
+* PostgreSQL terinstal dan berjalan di mesin Anda.
 
-#### 2.  Konfigurasi package.json
-       
-        {
-           "name": "belanjaku-monorepo",
-           "private": true,
-           "version": "1.0.0",
-           "description": "Proyek E-commerce BelanjaKu",
-           "scripts": {
-           "dev": "pnpm --parallel --stream dev",
-           "build": "pnpm --filter \"./apps/*\" build"
-           },
-           "devDependencies": {
-           "turbo": "^1.10.16" # Opsional, untuk build & dev yang lebih cepat
-           }
-        }
+### **2\. Kloning Repositori**
 
-#### 3.  Definisikan Workspace. Buat file `pnpm-workspace.yaml` di direktori root untuk memberitahu
-pnpm di mana aplikasi dan package kita berada.  
-    ````
-    packages:
-      - 'apps/*'
-      - 'packages/*'
-    ````
-### Langkah 2: Setup Database & Cache dengan Docker {#langkah-2-setup-database-cache-dengan-docker}
+git clone \<URL\_REPOSITORI\_ANDA\>  
+cd backend
 
-Kita akan menggunakan Docker untuk menjalankan PostgreSQL dan Redis agar
-tidak perlu menginstalnya secara manual.
+### **3\. Instal Dependensi**
 
-1.  **Buat file docker-compose.yml** di direktori root.  
-        
-        version: '3.8'
-        services:
-          postgres-db:
-            image: postgres:15-alpine
-            container_name: belanjaku_db
-            restart: always
-            environment:
-                POSTGRES_USER: admin
-                POSTGRES_PASSWORD: password123
-                POSTGRES_DB: belanjaku_dev
-            ports:
-                - "5432:5432"
-            volumes:
-                - postgres_data:/var/lib/postgresql/data
-        
-          redis-cache:
-            image: redis:7-alpine
-            container_name: belanjaku_cache
-            restart: always
-            ports:
-            - "6379:6379"
-            volumes:
-            - redis_data:/data
-        
-        volumes:
-          postgres_data:
-          redis_data:
-        
-2.  Jalankan Container  
-    - Buka terminal di root proyek dan jalankan
-        ```
-      docker-compose up -d     
-        ```
-    - Database dan cache Anda sekarang sudah berjalan di background.
+npm install
 
-### Langkah 3: Setup Backend (Node.js & Express) {#langkah-3-setup-backend-node.js-express}
+### **4\. Konfigurasi Lingkungan**
 
-1.  Inisialisasi Proyek Backend. Dari direktori root (belanjaKu/), jalankan perintah berikut:
-    ```
-    # Inisialisasi proyek Node.js  
-    pnpm init  
-       
-    # Install dependencies utama  
-    pnpm add express cors dotenv jsonwebtoken pg redis  
-       
-    # Install dev dependencies  
-    pnpm add -D typescript ts-node nodemon @types/express @types/node @types/pg
-    ```
-3.  Konfigurasi TypeScript. Buat file `tsconfig.json` di dalam `apps/backend/`.  
-    ```
-    {
-      "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "outDir": "./dist",
-        "rootDir": "./src",
-        "strict": true,
-        "esModuleInterop": true,
-        "skipLibCheck": true
-      },
-      "include": ["src/**/*"]
-    }
-    ```
+1. Buat salinan dari file .env.example dan beri nama .env.  
+   \# Windows  
+   copy .env.example .env  
+   \# macOS / Linux  
+   cp .env.example .env
 
-4.  Variabel Lingkungan. Buat file `.env.example` di `apps/backend/`. Salin file ini menjadi `.env` untuk penggunaan lokal.  
-    ```
-    # Server
-    PORT=5000
-    
-    # Database (sesuai docker-compose.yml)
-    DB_HOST=localhost
-    DB_USER=admin
-    DB_PASSWORD=password123
-    DB_NAME=belanjaku_dev
-    DB_PORT=5432
-    
-    # Redis (sesuai docker-compose.yml)
-    REDIS_URL=redis://localhost:6379
-    
-    # JWT
-    JWT_SECRET=rahasia-banget-jangan-disebar
-    ```
-6.  Tambahkan Scripts. Tambahkan scripts ke `apps/backend/package.json`.
-    ```  
-      "scripts": {
-        "dev": "nodemon src/server.ts",
-        "build": "tsc",
-        "start": "node dist/server.js"
-      }
-    ``` 
-   Setelah ini, Anda bisa mulai mengisi direktori src/ sesuai struktur di atas.
+2. Buka file .env dan isi dengan konfigurasi Anda, terutama detail koneksi database:  
+   DB\_HOST=localhost  
+   DB\_PORT=5432  
+   DB\_USER=postgres  
+   DB\_PASS=password\_anda  
+   DB\_NAME=ecommerce\_db  
+   JWT\_SECRET=rahasia\_yang\_sangat\_aman
 
-### Langkah 4: Setup Frontend (Next.js) {#langkah-4-setup-frontend-next.js}
+### **5\. Pengaturan Database**
 
-1.  Buat Proyek Next.js. Kembali ke direktori root (belanjaKu/), lalu jalankan:  
-    ```
-    # Gunakan pnpm untuk membuat aplikasi Next.js  
-    pnpm create next-app apps/frontend  
-    ```   
-     Saat proses instalasi, pilih opsi berikut:
+1. Pastikan server PostgreSQL Anda berjalan.  
+2. Buat database baru dengan nama yang sama seperti yang Anda tulis di DB\_NAME (misalnya, ecommerce\_db).  
+3. Jalankan migrasi untuk membuat semua tabel di database Anda:  
+   npm run db:migrate
 
-    - ✔ Would you like to use TypeScript? **Yes**
+4. (Opsional) Isi database dengan data awal (admin, seller, produk, dll.):  
+   npm run db:seed:all
 
-    - ✔ Would you like to use ESLint? **Yes**
+### **6\. Jalankan Aplikasi**
 
-    - ✔ Would you like to use Tailwind CSS? **Yes**
+npm run dev
 
-    - ✔ Would you like to use src/ directory? **No**
+Server akan berjalan di http://localhost:5000 (atau port yang Anda tentukan di .env).
 
-    - ✔ Would you like to use App Router? **Yes**
+## **Dokumentasi API**
 
-    - ✔ Would you like to customize the default import alias? **No**
+Lihat file postman\_testing\_guide.md untuk panduan pengujian lengkap dan detail setiap *endpoint*.
 
-3.  Variabel Lingkungan. Buat file .env.local di apps/frontend/ dengan isi berikut:  
-    ```
-    NEXT_PUBLIC_API_URL=http://localhost:5000/api/v1
-    ```
-5.  Update Scripts (Opsional). Pastikan script di `apps/frontend/package.json` sudah sesuai. Biasanya sudah benar secara default.  
-    ```
-    "scripts": {
-      "dev": "next dev",
-      "build": "next build",
-      "start": "next start",
-      "lint": "next lint"
-    }
-    ```
-### Langkah 5: Menjalankan Keseluruhan Proyek 🚀 {#langkah-5-menjalankan-keseluruhan-proyek}
+## **Rencana Pengembangan (To-Do) untuk Programmer Selanjutnya**
 
-Setelah semua setup selesai, Anda bisa menjalankan kedua aplikasi secara
-bersamaan.
+Proyek ini memiliki fondasi yang kuat, tetapi masih banyak ruang untuk pengembangan lebih lanjut. Berikut adalah beberapa tugas yang bisa dikerjakan selanjutnya:
 
-1.  **Kembali ke direktori root** proyek belanjaKu/.
+### **1\. Implementasi Penuh Sistem Pembayaran**
 
-2.  **Instal semua dependencies** untuk seluruh workspace.  
-    ```
-    pnpm install
-    ```
-4.  **Jalankan server pengembangan** untuk backend dan frontend.  
-    ```
-    pnpm dev
-    ```    
-    Terminal akan menampilkan log dari kedua aplikasi. Frontend akan berjalan di `http://localhost:3000` dan backend di `http://localhost:5000`. Selamat! Proyek Anda sudah siap untuk dikembangkan.
+* **Tugas:** Integrasikan backend dengan *payment gateway* nyata seperti **Midtrans**, **Xendit**, atau **Stripe**.  
+* **Langkah:**  
+  * Buat *request* ke *payment gateway* di dalam payment.service.ts saat createPayment dipanggil.  
+  * Implementasikan validasi *signature* di dalam *endpoint* /webhook untuk mengamankan notifikasi pembayaran.  
+  * Tambahkan *endpoint* untuk pengguna bisa memeriksa status pembayaran sebuah pesanan.
+
+### **2\. Peningkatan Fitur Penjual (Seller)**
+
+* **Tugas:** Buat dasbor khusus untuk penjual.  
+* **Langkah:**  
+  * Buat *endpoint* bagi penjual untuk melihat daftar semua produk yang mereka jual.  
+  * Buat *endpoint* bagi penjual untuk melihat pesanan yang masuk untuk produk mereka.  
+  * Implementasikan fungsionalitas bagi penjual untuk memperbarui status pesanan (misalnya, dari processing menjadi shipped).
+
+### **3\. Manajemen Inventaris Lanjutan**
+
+* **Tugas:** Tingkatkan sistem stok produk.  
+* **Langkah:**  
+  * Tambahkan *hook* atau *event* untuk memberikan notifikasi jika stok produk menipis.  
+  * Buat riwayat pergerakan stok (masuk/keluar) untuk setiap produk.
+
+### **4\. Optimalisasi & Peningkatan Performa**
+
+* **Tugas:** Terapkan strategi *caching* dan optimalkan *query* database.  
+* **Langkah:**  
+  * Gunakan **Redis** untuk melakukan *caching* pada data yang sering diakses (misalnya, daftar produk atau kategori).  
+  * Analisis *query* yang lambat menggunakan EXPLAIN ANALYZE dan tambahkan *index* pada kolom-kolom yang sering di-filter atau di-sort.
+
+### **5\. Pengujian (Testing)**
+
+* **Tugas:** Buat *unit test* dan *integration test* untuk memastikan keandalan kode.  
+* **Langkah:**  
+  * Gunakan *framework* seperti **Jest** dan **Supertest**.  
+  * Buat *test case* untuk setiap *service* (unit test) dan setiap *endpoint* API (integration test).  
+  * Konfigurasikan database terpisah khusus untuk pengujian.
+
+### **6\. Fitur Pengiriman Lanjutan**
+
+* **Tugas:** Integrasikan dengan API pihak ketiga untuk ongkos kirim (misalnya, RajaOngkir).  
+* **Langkah:**  
+  * Tambahkan *endpoint* bagi pengguna untuk memeriksa ongkos kirim berdasarkan alamat tujuan.  
+  * Hubungkan biaya pengiriman yang dipilih ke dalam total biaya pesanan saat *checkout*.
