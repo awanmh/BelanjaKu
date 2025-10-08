@@ -61,9 +61,10 @@ Saat ini, seluruh fondasi dan fitur inti dari backend telah **berhasil dibangun*
 
 ### **2\. Kloning Repositori**
 
+```
 git clone https://github.com/awanmh/BelanjaKu.git 
 cd backend
-
+```
 ### **3\. Instal Dependensi**
 
 npm install
@@ -71,19 +72,21 @@ npm install
 ### **4\. Konfigurasi Lingkungan**
 
 1. Buat salinan dari file .env.example dan beri nama .env.  
-   \# Windows  
+   ```
+   # Windows  
    copy .env.example .env  
-   \# macOS / Linux  
+   # macOS / Linux  
    cp .env.example .env
-
-2. Buka file .env dan isi dengan konfigurasi Anda, terutama detail koneksi database:  
-   DB\_HOST=localhost  
-   DB\_PORT=5432  
-   DB\_USER=postgres  
-   DB\_PASS=password\_anda  
-   DB\_NAME=ecommerce\_db  
-   JWT\_SECRET=rahasia\_yang\_sangat\_aman
-
+   ```
+3. Buka file .env dan isi dengan konfigurasi Anda, terutama detail koneksi database:
+   ``` 
+   DB_HOST=localhost  
+   DB_PORT=5432  
+   DB_USER=postgres  
+   DB_PASS=password_anda  
+   DB_NAME=ecommerce_db  
+   JWT_SECRET=rahasia_yang_sangat_aman
+   ```
 ### **5\. Pengaturan Database**
 
 1. Pastikan server PostgreSQL Anda berjalan.  
@@ -95,9 +98,9 @@ npm install
    npm run db:seed:all
 
 ### **6\. Jalankan Aplikasi**
-
+```
 npm run dev
-
+```
 Server akan berjalan di http://localhost:5000 (atau port yang Anda tentukan di .env).
 
 ## **Dokumentasi API**
