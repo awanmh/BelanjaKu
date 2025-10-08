@@ -61,7 +61,7 @@ Saat ini, seluruh fondasi dan fitur inti dari backend telah **berhasil dibangun*
 
 ### **2\. Kloning Repositori**
 
-git clone \<URL\_REPOSITORI\_ANDA\>  
+git clone https://github.com/awanmh/BelanjaKu.git 
 cd backend
 
 ### **3\. Instal Dependensi**
