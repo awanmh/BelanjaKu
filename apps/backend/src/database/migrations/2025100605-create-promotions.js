@@ -2,32 +2,39 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('promotions', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
       },
-      fullName: {
-        type: Sequelize.STRING,
+      productId: {
+        type: Sequelize.UUID,
         allowNull: false,
+        references: { model: 'products', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
-      email: {
+      code: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
         unique: true,
       },
-      password: {
-        type: Sequelize.STRING,
+      discountPercentage: {
+        type: Sequelize.DECIMAL(5, 2),
         allowNull: false,
       },
-      role: {
-        type: Sequelize.ENUM('user', 'seller', 'admin'),
-        defaultValue: 'user',
+      startDate: {
+        type: Sequelize.DATE,
+        allowNull: false,
       },
-      isVerified: {
+      endDate: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      isActive: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false,
+        defaultValue: true,
       },
       createdAt: {
         allowNull: false,
@@ -40,6 +47,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('promotions');
   },
 };

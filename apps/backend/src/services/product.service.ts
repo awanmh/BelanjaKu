@@ -4,10 +4,12 @@ import { ProductAttributes } from '../database/models/product.model';
 import HttpException from '../utils/http-exception.util';
 import APIFeatures from '../utils/apiFeatures.util';
 import { ParsedQs } from 'qs';
-import { Model } from 'sequelize';
 
-// Mengambil model dari objek db
-const Product = db.Product;
+// Definisikan tipe untuk instance Product agar casting lebih bersih
+type ProductInstance = InstanceType<typeof db.Product>;
+
+// Mengambil model dari objek db dan menerapkan type casting yang benar
+const Product = db.Product as (new () => ProductInstance) & typeof db.Product;
 const User = db.User;
 
 // Tipe data untuk input pembuatan produk, sekarang termasuk imageUrl
@@ -22,9 +24,6 @@ export type UpdateProductInput = Partial<CreateProductInput>;
 class ProductService {
   /**
    * Membuat produk baru.
-   * @param productData Data untuk produk baru.
-   * @param sellerId ID pengguna (penjual) yang membuat produk.
-   * @returns Produk yang baru dibuat.
    */
   public async createProduct(productData: CreateProductInput, sellerId: string): Promise<ProductAttributes> {
     const newProduct = await Product.create({
@@ -36,30 +35,43 @@ class ProductService {
 
   /**
    * Mengambil semua produk dari database dengan fitur query lanjutan.
-   * @param queryString Query string dari URL request.
-   * @returns Array berisi semua produk beserta data penjualnya.
    */
   public async getAllProducts(queryString: ParsedQs): Promise<ProductAttributes[]> {
-    // FIX: Lakukan type casting pada model 'Product' untuk mengatasi masalah tipe kompleks
-    const features = new APIFeatures(Product as any, queryString)
+    const features = new APIFeatures(Product, queryString)
       .filter()
       .sort()
       .limitFields()
       .paginate();
 
-    // Tambahkan include untuk data penjual secara manual ke queryOptions
     features.queryOptions.include = [{ model: User, as: 'seller', attributes: ['id', 'fullName'] }];
 
-    // Eksekusi query yang sudah dibangun
     const products = await Product.findAll(features.queryOptions);
     
     return products.map((product) => product.toJSON());
   }
 
   /**
+   * Mengambil semua produk milik seorang penjual.
+   * @param sellerId ID penjual.
+   * @param queryString Query string dari URL request.
+   * @returns Daftar produk milik penjual.
+   */
+  public async getProductsBySeller(sellerId: string, queryString: ParsedQs): Promise<ProductAttributes[]> {
+    const features = new APIFeatures(Product, queryString)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
+
+    // Pastikan filter utama adalah untuk sellerId
+    features.queryOptions.where = { ...features.queryOptions.where, sellerId };
+
+    const products = await Product.findAll(features.queryOptions);
+    return products.map(p => p.toJSON());
+  }
+
+  /**
    * Mengambil satu produk berdasarkan ID.
-   * @param productId ID produk.
-   * @returns Objek produk.
    */
   public async getProductById(productId: string): Promise<ProductAttributes> {
     const product = await Product.findByPk(productId, {
@@ -73,11 +85,6 @@ class ProductService {
 
   /**
    * Memperbarui produk berdasarkan ID.
-   * Memastikan hanya penjual asli yang dapat memperbarui produknya.
-   * @param productId ID produk.
-   * @param productData Data pembaruan.
-   * @param userId ID pengguna yang mencoba memperbarui.
-   * @returns Produk yang sudah diperbarui.
    */
   public async updateProduct(productId: string, productData: UpdateProductInput, userId: string): Promise<ProductAttributes> {
     const product = await Product.findByPk(productId);
@@ -94,9 +101,6 @@ class ProductService {
 
   /**
    * Menghapus produk berdasarkan ID.
-   * Memastikan hanya penjual asli yang dapat menghapus produknya.
-   * @param productId ID produk.
-   * @param userId ID pengguna yang mencoba menghapus.
    */
   public async deleteProduct(productId: string, userId: string): Promise<void> {
     const product = await Product.findByPk(productId);
@@ -112,4 +116,3 @@ class ProductService {
 
 // Ekspor sebagai singleton instance
 export default new ProductService();
-

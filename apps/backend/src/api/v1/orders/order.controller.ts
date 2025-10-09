@@ -8,12 +8,13 @@ import { AuthenticatedRequest } from '../../../middlewares/auth.middleware';
  * Controller untuk menangani semua request yang berhubungan dengan pesanan.
  */
 class OrderController {
+  // --- Metode untuk Pembeli (User) ---
+
   /**
    * Menangani permintaan untuk membuat pesanan baru (checkout).
    */
   public async createOrder(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      // Pastikan pengguna sudah terautentikasi dan memiliki ID
       if (!req.user) {
         throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication is required to place an order');
       }
@@ -72,6 +73,59 @@ class OrderController {
         success: true,
         message: 'Order details retrieved successfully',
         data: order,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  // --- Metode untuk Penjual (Seller) ---
+
+  /**
+   * Menangani permintaan dari penjual untuk mendapatkan semua pesanan yang masuk ke tokonya.
+   */
+  public async getSellerOrders(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+    try {
+      if (!req.user) {
+        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
+      }
+      
+      const sellerId = req.user.id;
+      const orders = await OrderService.getOrdersForSeller(sellerId);
+
+      res.status(StatusCodes.OK).json({
+        success: true,
+        message: 'Incoming orders retrieved successfully',
+        data: orders,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /**
+   * Menangani permintaan dari penjual untuk memperbarui status sebuah pesanan.
+   */
+  public async updateOrderStatus(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+    try {
+      if (!req.user) {
+        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
+      }
+      
+      const sellerId = req.user.id;
+      const { id: orderId } = req.params;
+      const { status } = req.body; // status: 'processing' | 'shipped'
+
+      if (!status || (status !== 'processing' && status !== 'shipped')) {
+        throw new HttpException(StatusCodes.BAD_REQUEST, 'Invalid status provided');
+      }
+
+      const updatedOrder = await OrderService.updateOrderStatusBySeller(orderId, sellerId, status);
+
+      res.status(StatusCodes.OK).json({
+        success: true,
+        message: 'Order status updated successfully',
+        data: updatedOrder,
       });
     } catch (error) {
       next(error);

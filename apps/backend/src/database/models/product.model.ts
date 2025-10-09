@@ -10,11 +10,12 @@ export interface ProductAttributes {
   imageUrl: string;
   sellerId: string; // Foreign key untuk User (seller)
   categoryId: string; // Foreign key untuk Category
+  lowStockThreshold?: number; // Kolom baru untuk ambang batas stok rendah
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-// Beberapa atribut bersifat opsional saat pembuatan (misal: id, createdAt)
+// Beberapa atribut bersifat opsional saat pembuatan
 interface ProductCreationAttributes extends Optional<ProductAttributes, 'id'> {}
 
 // Definisikan class Model untuk Product
@@ -27,19 +28,25 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
   public imageUrl!: string;
   public sellerId!: string;
   public categoryId!: string;
+  public lowStockThreshold!: number;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
   // Method untuk asosiasi (relasi)
   public static associate(models: any) {
-    // Sebuah produk dimiliki oleh satu User (Penjual)
     Product.belongsTo(models.User, {
       foreignKey: 'sellerId',
       as: 'seller',
     });
-    // Sebuah produk termasuk dalam satu Category
-    // Product.belongsTo(models.Category, { foreignKey: 'categoryId', as: 'category' });
+    Product.belongsTo(models.Category, {
+      foreignKey: 'categoryId',
+      as: 'category',
+    });
+    Product.hasMany(models.Promotion, {
+        foreignKey: 'productId',
+        as: 'promotions'
+    });
   }
 }
 
@@ -77,7 +84,7 @@ export default function (sequelize: Sequelize): typeof Product {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'users', // Nama tabel users
+          model: 'users',
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -86,16 +93,22 @@ export default function (sequelize: Sequelize): typeof Product {
       categoryId: {
         type: DataTypes.UUID,
         allowNull: false,
-        // references: { model: 'categories', key: 'id' }, // Akan diaktifkan nanti
+        references: { model: 'categories', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+      },
+      lowStockThreshold: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 5, // Default ambang batas adalah 5
       },
     },
     {
       sequelize,
       tableName: 'products',
-      timestamps: true, // Otomatis menambahkan createdAt dan updatedAt
+      timestamps: true,
     }
   );
 
   return Product;
 }
-

@@ -46,15 +46,36 @@ class ProductController {
   }
 
   /**
-   * Menangani permintaan untuk mendapatkan semua produk.
+   * Menangani permintaan untuk mendapatkan semua produk (publik).
    */
   public async getAllProducts(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      // FIX: Teruskan req.query ke service untuk fitur filtering, sorting, dll.
       const products = await ProductService.getAllProducts(req.query);
       res.status(StatusCodes.OK).json({
         success: true,
         message: 'Products retrieved successfully',
+        data: products,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /**
+   * Menangani permintaan untuk mendapatkan semua produk milik penjual yang sedang login.
+   */
+  public async getMyProducts(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+    try {
+      if (!req.user) {
+        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
+      }
+      
+      const sellerId = req.user.id;
+      const products = await ProductService.getProductsBySeller(sellerId, req.query);
+
+      res.status(StatusCodes.OK).json({
+        success: true,
+        message: 'Your products retrieved successfully',
         data: products,
       });
     } catch (error) {
@@ -133,4 +154,3 @@ class ProductController {
 }
 
 export default new ProductController();
-

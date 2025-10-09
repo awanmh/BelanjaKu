@@ -2,52 +2,111 @@ import { StatusCodes } from 'http-status-codes';
 import db from '../database/models';
 import { SellerAttributes } from '../database/models/seller.model';
 import HttpException from '../utils/http-exception.util';
+import { Op } from 'sequelize'; // Impor operator Sequelize
 
+// Mengambil model dari objek db
 const Seller = db.Seller;
+const OrderItem = db.OrderItem;
+const Product = db.Product;
 
-// Tipe data untuk input pembuatan/pembaruan profil seller
-export type UpsertSellerProfileInput = Pick<SellerAttributes, 'storeName' | 'storeAddress' | 'storePhoneNumber'>;
+// Tipe data untuk input
+export type CreateSellerProfileInput = Pick<SellerAttributes, 'storeName' | 'storeAddress' | 'storePhoneNumber'>;
+export type UpdateSellerProfileInput = Partial<CreateSellerProfileInput>;
+
+// Interface untuk mendefinisikan bentuk hasil query agregasi
+interface SalesData {
+  totalRevenue: string | null;
+  totalProductsSold: string | null;
+}
 
 /**
- * Service untuk menangani logika bisnis terkait profil penjual.
+ * Service untuk menangani semua logika bisnis yang terkait dengan profil penjual.
  */
 class SellerService {
   /**
-   * Mengambil profil penjual berdasarkan ID pengguna.
-   * @param userId ID pengguna yang profilnya akan dicari.
-   * @returns Profil penjual.
+   * Membuat atau memperbarui profil seorang penjual.
    */
-  public async getSellerProfile(userId: string): Promise<SellerAttributes> {
-    const sellerProfile = await Seller.findOne({ where: { userId } });
-    if (!sellerProfile) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'Seller profile not found. Please create one.');
+  public async upsertProfile(userId: string, data: CreateSellerProfileInput): Promise<SellerAttributes> {
+    const user = await db.User.findByPk(userId);
+    if (!user || user.role !== 'seller') {
+      throw new HttpException(StatusCodes.FORBIDDEN, 'User is not a seller');
     }
-    return sellerProfile.toJSON();
+
+    const [profile, created] = await Seller.findOrCreate({
+      where: { userId },
+      defaults: { ...data, userId },
+    });
+
+    if (!created) {
+      await profile.update(data);
+    }
+
+    return profile.toJSON();
   }
 
   /**
-   * Membuat atau memperbarui profil penjual (upsert).
-   * @param userId ID pengguna yang profilnya akan diperbarui/dibuat.
-   * @param profileData Data baru untuk profil.
-   * @returns Profil penjual yang telah diperbarui/dibuat.
+   * Mengambil profil seorang penjual.
    */
-  public async upsertSellerProfile(userId: string, profileData: UpsertSellerProfileInput): Promise<SellerAttributes> {
-    // Cari profil yang sudah ada
-    let sellerProfile = await Seller.findOne({ where: { userId } });
-
-    if (sellerProfile) {
-      // Jika ada, perbarui
-      await sellerProfile.update(profileData);
-    } else {
-      // Jika tidak ada, buat baru
-      sellerProfile = await Seller.create({
-        userId,
-        ...profileData,
-      });
+  public async getProfile(userId: string): Promise<SellerAttributes> {
+    const profile = await Seller.findOne({ where: { userId } });
+    if (!profile) {
+      throw new HttpException(StatusCodes.NOT_FOUND, 'Seller profile not found. Please create one.');
     }
+    return profile.toJSON();
+  }
 
-    return sellerProfile.toJSON();
+  /**
+   * Mengambil statistik dasbor untuk seorang penjual.
+   */
+  public async getDashboardStats(sellerId: string) {
+    const salesData = (await OrderItem.findAll({
+      attributes: [
+        [db.sequelize.fn('SUM', db.sequelize.literal('price * quantity')), 'totalRevenue'],
+        [db.sequelize.fn('SUM', db.sequelize.col('quantity')), 'totalProductsSold'],
+      ],
+      include: [{ model: Product, as: 'product', where: { sellerId }, attributes: [] }],
+      raw: true,
+    })) as unknown as SalesData[];
+
+    const totalOrders = await db.Order.count({
+      distinct: true,
+      col: 'id',
+      include: [{
+        model: OrderItem,
+        as: 'items',
+        required: true,
+        include: [{ model: Product, as: 'product', where: { sellerId }, required: true }],
+      }],
+    });
+
+    const stats = {
+      totalRevenue: parseFloat(salesData[0]?.totalRevenue || '0') || 0,
+      totalProductsSold: parseInt(salesData[0]?.totalProductsSold || '0', 10) || 0,
+      totalOrders: totalOrders || 0,
+    };
+    
+    return stats;
+  }
+
+  /**
+   * Mengambil daftar produk milik penjual yang stoknya menipis.
+   * @param sellerId ID penjual.
+   * @returns Daftar produk dengan stok rendah.
+   */
+  public async getLowStockProducts(sellerId: string) {
+    const lowStockProducts = await Product.findAll({
+      where: {
+        sellerId,
+        stock: {
+          [Op.lte]: db.sequelize.col('lowStockThreshold'), // dimana stock <= lowStockThreshold
+        },
+      },
+      order: [['stock', 'ASC']], // Urutkan dari yang paling sedikit stoknya
+    });
+
+    return lowStockProducts.map(p => p.toJSON());
   }
 }
 
+// Ekspor sebagai singleton instance
 export default new SellerService();

@@ -1,13 +1,36 @@
 import { Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import SellerService, { UpsertSellerProfileInput } from '../../../services/seller.service';
-import HttpException from '../../../utils/http-exception.util';
+import SellerService, { CreateSellerProfileInput } from '../../../services/seller.service';
 import { AuthenticatedRequest } from '../../../middlewares/auth.middleware';
+import HttpException from '../../../utils/http-exception.util';
 
 /**
- * Controller untuk menangani request yang berhubungan dengan profil penjual.
+ * Controller untuk menangani semua request yang berhubungan dengan profil penjual.
  */
 class SellerController {
+  /**
+   * Menangani permintaan untuk membuat atau memperbarui profil penjual.
+   */
+  public async upsertProfile(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+    try {
+      if (!req.user) {
+        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
+      }
+      const userId = req.user.id;
+      const data: CreateSellerProfileInput = req.body;
+
+      const profile = await SellerService.upsertProfile(userId, data);
+
+      res.status(StatusCodes.OK).json({
+        success: true,
+        message: 'Seller profile saved successfully',
+        data: profile,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   /**
    * Menangani permintaan untuk mendapatkan profil penjual yang sedang login.
    */
@@ -16,11 +39,13 @@ class SellerController {
       if (!req.user) {
         throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
       }
-      const sellerProfile = await SellerService.getSellerProfile(req.user.id);
+      const userId = req.user.id;
+      const profile = await SellerService.getProfile(userId);
+
       res.status(StatusCodes.OK).json({
         success: true,
         message: 'Seller profile retrieved successfully',
-        data: sellerProfile,
+        data: profile,
       });
     } catch (error) {
       next(error);
@@ -28,19 +53,43 @@ class SellerController {
   }
 
   /**
-   * Menangani permintaan untuk membuat atau memperbarui profil penjual.
+   * Menangani permintaan untuk mendapatkan statistik dasbor penjual.
    */
-  public async upsertMyProfile(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+  public async getDashboardStats(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       if (!req.user) {
         throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
       }
-      const profileData: UpsertSellerProfileInput = req.body;
-      const updatedProfile = await SellerService.upsertSellerProfile(req.user.id, profileData);
+      
+      const sellerId = req.user.id;
+      const stats = await SellerService.getDashboardStats(sellerId);
+
       res.status(StatusCodes.OK).json({
         success: true,
-        message: 'Seller profile updated successfully',
-        data: updatedProfile,
+        message: 'Dashboard statistics retrieved successfully',
+        data: stats,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /**
+   * Menangani permintaan untuk mendapatkan produk dengan stok menipis.
+   */
+  public async getLowStockProducts(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+    try {
+      if (!req.user) {
+        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
+      }
+      
+      const sellerId = req.user.id;
+      const products = await SellerService.getLowStockProducts(sellerId);
+
+      res.status(StatusCodes.OK).json({
+        success: true,
+        message: 'Low stock products retrieved successfully',
+        data: products,
       });
     } catch (error) {
       next(error);
@@ -48,4 +97,5 @@ class SellerController {
   }
 }
 
+// Ekspor sebagai singleton instance
 export default new SellerController();

@@ -3,11 +3,13 @@ import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 // Interface untuk atribut-atribut Order
 export interface OrderAttributes {
   id: string;
-  userId: string; // Foreign key untuk User
+  userId: string;
   totalAmount: number;
   shippingAddress: string;
-  // FIX: Tambahkan 'processing' ke daftar status yang valid
   status: 'pending' | 'processing' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
+  // FIX: Izinkan null agar sesuai dengan definisi class
+  promotionId?: string | null;
+  discountAmount?: number | null;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -22,22 +24,26 @@ export class Order extends Model<OrderAttributes, OrderCreationAttributes> imple
   public totalAmount!: number;
   public shippingAddress!: string;
   public status!: 'pending' | 'processing' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
+  public promotionId!: string | null;
+  public discountAmount!: number | null;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
   // Method untuk asosiasi (relasi)
   public static associate(models: any) {
-    // Sebuah pesanan dimiliki oleh satu User
     Order.belongsTo(models.User, {
       foreignKey: 'userId',
       as: 'user',
     });
-
-    // Sebuah pesanan memiliki banyak OrderItem
     Order.hasMany(models.OrderItem, {
       foreignKey: 'orderId',
       as: 'items',
+    });
+    // Sebuah pesanan bisa memiliki satu promosi
+    Order.belongsTo(models.Promotion, {
+        foreignKey: 'promotionId',
+        as: 'promotion'
     });
   }
 }
@@ -54,10 +60,7 @@ export default function (sequelize: Sequelize): typeof Order {
       userId: {
         type: DataTypes.UUID,
         allowNull: false,
-        references: {
-          model: 'users',
-          key: 'id',
-        },
+        references: { model: 'users', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
@@ -72,6 +75,18 @@ export default function (sequelize: Sequelize): typeof Order {
       status: {
         type: DataTypes.ENUM('pending', 'processing', 'paid', 'shipped', 'delivered', 'cancelled'),
         defaultValue: 'pending',
+      },
+      promotionId: {
+        type: DataTypes.UUID,
+        allowNull: true,
+        references: { model: 'promotions', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+      },
+      discountAmount: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: true,
+        defaultValue: 0,
       },
     },
     {

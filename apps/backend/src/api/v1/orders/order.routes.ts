@@ -2,38 +2,53 @@ import { Router } from 'express';
 import OrderController from './order.controller';
 import { createOrderValidator } from './order.validator';
 import { validate } from '../../../middlewares/validator.middleware';
-import { protect } from '../../../middlewares/auth.middleware';
+import { protect, authorize } from '../../../middlewares/auth.middleware';
+import { body } from 'express-validator';
 
 // Membuat instance router baru
 const orderRouter = Router();
 
-// Semua rute di bawah ini memerlukan autentikasi, jadi kita gunakan middleware 'protect' di awal
-orderRouter.use(protect);
-
-/**
- * @route   POST /api/v1/orders
- * @desc    Membuat pesanan baru (checkout)
- * @access  Private (hanya untuk pengguna yang login)
- */
+// --- Rute untuk Pembeli (User) ---
 orderRouter.post(
   '/',
-  createOrderValidator, // 1. Jalankan aturan validasi
-  validate,             // 2. Tangani hasil validasi
-  OrderController.createOrder // 3. Jika valid, teruskan ke controller
+  protect,
+  createOrderValidator,
+  validate,
+  OrderController.createOrder
+);
+orderRouter.get('/my-orders', protect, OrderController.getMyOrders);
+orderRouter.get('/:id', protect, OrderController.getOrderById);
+
+
+// --- Rute untuk Penjual (Seller) ---
+
+/**
+ * @route   GET /api/v1/orders/seller/my-orders
+ * @desc    Mendapatkan semua pesanan yang masuk untuk penjual yang sedang login
+ * @access  Private (Hanya Seller & Admin)
+ */
+orderRouter.get(
+    '/seller/my-orders',
+    protect,
+    authorize('seller', 'admin'),
+    OrderController.getSellerOrders
 );
 
 /**
- * @route   GET /api/v1/orders
- * @desc    Mendapatkan riwayat pesanan pengguna yang sedang login
- * @access  Private
+ * @route   PUT /api/v1/orders/seller/update-status/:id
+ * @desc    Memperbarui status pesanan oleh penjual
+ * @access  Private (Hanya Seller & Admin)
  */
-orderRouter.get('/', OrderController.getMyOrders);
+orderRouter.put(
+    '/seller/update-status/:id',
+    protect,
+    authorize('seller', 'admin'),
+    [ // Validasi sederhana untuk status
+        body('status').isIn(['processing', 'shipped']).withMessage('Invalid status provided')
+    ],
+    validate,
+    OrderController.updateOrderStatus
+);
 
-/**
- * @route   GET /api/v1/orders/:id
- * @desc    Mendapatkan detail satu pesanan
- * @access  Private
- */
-orderRouter.get('/:id', OrderController.getOrderById);
 
 export default orderRouter;

@@ -2,6 +2,11 @@ import { StatusCodes } from 'http-status-codes';
 import db from '../database/models';
 import HttpException from '../utils/http-exception.util';
 
+// Definisikan tipe instance model untuk type safety yang lebih baik saat menggunakan relasi
+type OrderInstance = InstanceType<typeof db.Order>;
+type OrderItemInstance = InstanceType<typeof db.OrderItem>;
+type ProductInstance = InstanceType<typeof db.Product>;
+
 // Mengambil model dari objek db
 const Order = db.Order;
 const OrderItem = db.OrderItem;
@@ -26,22 +31,15 @@ export interface CreateOrderInput {
 class OrderService {
   /**
    * Membuat pesanan baru berdasarkan item di keranjang.
-   * Menggunakan transaksi untuk memastikan integritas data.
-   * @param orderData Data pesanan dari klien.
-   * @param userId ID pengguna yang melakukan pemesanan.
-   * @returns Pesanan yang baru dibuat.
    */
   public async createOrder(orderData: CreateOrderInput, userId: string) {
     const { items, shippingAddress } = orderData;
-
-    // Memulai transaksi database
     const transaction = await sequelize.transaction();
 
     try {
       let totalAmount = 0;
       const orderItemsData = [];
 
-      // 1. Validasi setiap item dan hitung total harga
       for (const item of items) {
         const product = await Product.findByPk(item.productId, { transaction });
 
@@ -55,19 +53,16 @@ class OrderService {
         const itemPrice = product.price * item.quantity;
         totalAmount += itemPrice;
 
-        // Siapkan data untuk OrderItem
         orderItemsData.push({
           productId: item.productId,
           quantity: item.quantity,
-          price: product.price, // Simpan harga saat ini
+          price: product.price,
         });
 
-        // 2. Kurangi stok produk
         product.stock -= item.quantity;
         await product.save({ transaction });
       }
 
-      // 3. Buat entri di tabel 'orders'
       const newOrder = await Order.create(
         {
           userId,
@@ -78,16 +73,13 @@ class OrderService {
         { transaction }
       );
 
-      // 4. Buat entri di tabel 'order_items' untuk setiap produk
       await OrderItem.bulkCreate(
         orderItemsData.map((item) => ({ ...item, orderId: newOrder.id })),
         { transaction }
       );
 
-      // Jika semua berhasil, commit transaksi
       await transaction.commit();
 
-      // 5. Kembalikan pesanan lengkap dengan item-itemnya
       const fullOrder = await Order.findByPk(newOrder.id, {
         include: [{ model: OrderItem, as: 'items' }],
       });
@@ -95,17 +87,13 @@ class OrderService {
       return fullOrder;
 
     } catch (error) {
-      // Jika ada kesalahan, batalkan semua perubahan (rollback)
       await transaction.rollback();
-      // Lempar kembali error asli untuk ditangani oleh error handler global
       throw error;
     }
   }
 
   /**
    * Mengambil semua pesanan milik seorang pengguna.
-   * @param userId ID pengguna.
-   * @returns Daftar pesanan pengguna.
    */
   public async getOrdersByUser(userId: string) {
     const orders = await Order.findAll({
@@ -118,9 +106,6 @@ class OrderService {
 
   /**
    * Mengambil detail satu pesanan berdasarkan ID.
-   * @param orderId ID pesanan.
-   * @param userId ID pengguna (untuk verifikasi kepemilikan).
-   * @returns Detail pesanan.
    */
   public async getOrderById(orderId: string, userId: string) {
     const order = await Order.findOne({
@@ -132,6 +117,77 @@ class OrderService {
       throw new HttpException(StatusCodes.NOT_FOUND, 'Order not found or you do not have permission to view it');
     }
 
+    return order;
+  }
+
+  /**
+   * Mengambil semua pesanan yang berisi produk dari seorang penjual.
+   */
+  public async getOrdersForSeller(sellerId: string) {
+    const orders = await Order.findAll({
+      include: [
+        {
+          model: OrderItem,
+          as: 'items',
+          required: true,
+          include: [
+            {
+              model: Product,
+              as: 'product',
+              where: { sellerId }, // Filter utama: hanya produk milik seller ini
+              required: true,
+            },
+          ],
+        },
+        {
+          model: db.User, // Sertakan data pembeli
+          as: 'user',
+          attributes: ['id', 'fullName', 'email'],
+        },
+      ],
+      order: [['createdAt', 'DESC']],
+    });
+    return orders;
+  }
+
+  /**
+   * Memperbarui status pesanan oleh seorang penjual.
+   */
+  public async updateOrderStatusBySeller(orderId: string, sellerId: string, status: 'processing' | 'shipped') {
+    // Definisikan tipe yang lebih spesifik untuk objek pesanan yang menyertakan relasi
+    interface OrderWithItems extends OrderInstance {
+      items: (OrderItemInstance & {
+        product?: ProductInstance;
+      })[];
+    }
+    
+    const order = await Order.findByPk(orderId, {
+      include: [{ model: OrderItem, as: 'items', include: [{ model: Product, as: 'product' }] }],
+    });
+
+    if (!order) {
+      throw new HttpException(StatusCodes.NOT_FOUND, 'Order not found');
+    }
+
+    // Terapkan tipe yang lebih spesifik ke objek pesanan
+    const orderWithItems = order as OrderWithItems;
+
+    // Verifikasi bahwa setidaknya satu item dalam pesanan ini milik si penjual
+    const isSellerProductInOrder = orderWithItems.items.some(
+      (item) => item.product?.sellerId === sellerId
+    );
+
+    if (!isSellerProductInOrder) {
+      throw new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to update this order');
+    }
+
+    // Hanya izinkan perubahan status yang logis
+    if (order.status !== 'processing' && status === 'shipped') {
+        throw new HttpException(StatusCodes.BAD_REQUEST, 'Order must be processed before it can be shipped');
+    }
+    
+    order.status = status;
+    await order.save();
     return order;
   }
 }

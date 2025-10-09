@@ -2,32 +2,32 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('shipping_options', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
       },
-      fullName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      email: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
       },
-      password: {
-        type: Sequelize.STRING,
+      description: {
+        type: Sequelize.TEXT,
         allowNull: false,
       },
-      role: {
-        type: Sequelize.ENUM('user', 'seller', 'admin'),
-        defaultValue: 'user',
+      price: {
+        type: Sequelize.DECIMAL(10, 2),
+        allowNull: false,
       },
-      isVerified: {
+      estimatedDays: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      isActive: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false,
+        defaultValue: true,
       },
       createdAt: {
         allowNull: false,
@@ -40,6 +40,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('shipping_options');
   },
 };
