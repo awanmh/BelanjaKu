@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.98% </span>
+                <span class="strong">92.24% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>91/111</span>
+                <span class='fraction'>107/116</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">26.31% </span>
+                <span class="strong">45.45% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/19</span>
+                <span class='fraction'>5/11</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.98% </span>
+                <span class="strong">92.24% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>91/111</span>
+                <span class='fraction'>107/116</span>
             </div>
         
             
@@ -173,8 +173,14 @@
 <a name='L108'></a><a href='#L108'>108</a>
 <a name='L109'></a><a href='#L109'>109</a>
 <a name='L110'></a><a href='#L110'>110</a>
-<a name='L111'></a><a href='#L111'>111</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -242,20 +248,32 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -278,21 +296,16 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { StatusCodes } from 'http-status-codes';
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { StatusCodes } from 'http-status-codes';
 import db from '../database/models';
 import { SellerAttributes } from '../database/models/seller.model';
 import HttpException from '../utils/http-exception.util';
 import { Op } from 'sequelize';
+import logger from '../utils/logger.util';
 &nbsp;
 // Mengambil model dari objek db
-const Seller = db.Seller;
-const OrderItem = db.OrderItem;
-const Product = db.Product;
+const { User, Seller, OrderItem, Product, Order } = db;
 &nbsp;
 // Tipe data untuk input
 export type CreateSellerProfileInput = Pick&lt;SellerAttributes, 'storeName' | 'storeAddress' | 'storePhoneNumber'&gt;;
@@ -312,7 +325,7 @@ class SellerService {
    * Membuat atau memperbarui profil seorang penjual.
    */
   public async upsertProfile(userId: string, data: CreateSellerProfileInput): Promise&lt;SellerAttributes&gt; {
-    const user = await db.User.findByPk(userId);
+    const user = await User.findByPk(userId);
     if (!user || user.role !== 'seller') <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >      throw new HttpException(StatusCodes.FORBIDDEN, 'User is not a seller');</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
@@ -344,34 +357,40 @@ class SellerService {
    * Mengambil statistik dasbor untuk seorang penjual.
    */
   public async getDashboardStats(sellerId: string) {
-    const salesData = (await OrderItem.findAll({
-      attributes: [
-        [db.sequelize.fn('SUM', db.sequelize.literal('price * quantity')), 'totalRevenue'],
-        [db.sequelize.fn('SUM', db.sequelize.col('quantity')), 'totalProductsSold'],
-      ],
-      include: [{ model: Product, as: 'product', where: { sellerId }, attributes: [] }],
-      raw: true,
-    })<span class="branch-0 cbranch-no" title="branch not covered" >) as unknown as SalesData[];</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    const totalOrders = await db.Order.count({</span>
-<span class="cstat-no" title="statement not covered" >      distinct: true,</span>
-<span class="cstat-no" title="statement not covered" >      col: 'id',</span>
-<span class="cstat-no" title="statement not covered" >      include: [{</span>
-<span class="cstat-no" title="statement not covered" >        model: OrderItem,</span>
-<span class="cstat-no" title="statement not covered" >        as: 'items',</span>
-<span class="cstat-no" title="statement not covered" >        required: true,</span>
-<span class="cstat-no" title="statement not covered" >        include: [{ model: Product, as: 'product', where: { sellerId }, required: true }],</span>
-<span class="cstat-no" title="statement not covered" >      }],</span>
-<span class="cstat-no" title="statement not covered" >    });</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    // FIX: Tangani kasus di mana tidak ada data penjualan (salesData[0] bisa undefined)</span>
-<span class="cstat-no" title="statement not covered" >    const stats = {</span>
-      totalRevenue: parseFloat(salesData[0]<span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >?.t</span>otalRevenue<span class="branch-0 cbranch-no" title="branch not covered" > </span>|| '0')<span class="branch-0 cbranch-no" title="branch not covered" ></span> || 0,</span>
-      totalProductsSold: parseInt(salesData[0]<span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >?.t</span></span>otalProductsSold<span class="branch-0 cbranch-no" title="branch not covered" > </span>|| '0',</span> 10)<span class="branch-0 cbranch-no" title="branch not covered" > || 0,</span>
-      totalOrders: totalOrders<span class="branch-0 cbranch-no" title="branch not covered" > || 0,</span>
-    };
-    
-    return stats;
+    try {
+      const salesData = (await OrderItem.findAll({
+        attributes: [
+          // FIX: Tentukan nama tabel secara eksplisit untuk kolom yang ambigu
+          [db.sequelize.fn('SUM', db.sequelize.literal('"OrderItem"."price" * "OrderItem"."quantity"')), 'totalRevenue'],
+          [db.sequelize.fn('SUM', db.sequelize.col('quantity')), 'totalProductsSold'],
+        ],
+        include: [{ model: Product, as: 'product', where: { sellerId }, attributes: [] }],
+        raw: true,
+      })) as unknown as SalesData[];
+&nbsp;
+      const totalOrders = await OrderItem.count({
+        distinct: true,
+        col: 'orderId',
+        include: [{
+            model: Product,
+            as: 'product',
+            where: { sellerId },
+            attributes: [],
+            required: true,
+        }],
+      });
+&nbsp;
+      const stats = {
+        totalRevenue: parseFloat(salesData[0]<span class="branch-0 cbranch-no" title="branch not covered" >?.t</span>otalRevenue || '0') || 0,
+        totalProductsSold: parseInt(salesData[0]<span class="branch-0 cbranch-no" title="branch not covered" >?.t</span>otalProductsSold || '0', 10) || 0,
+        totalOrders: totalOrders || 0,
+      };
+      
+      return stats;
+    } <span class="branch-0 cbranch-no" title="branch not covered" >catch (error: any) {</span>
+<span class="cstat-no" title="statement not covered" >      logger.error(`Failed to fetch dashboard stats for seller ${sellerId}: ${error.message}`);</span>
+<span class="cstat-no" title="statement not covered" >      throw new HttpException(StatusCodes.INTERNAL_SERVER_ERROR, 'Failed to fetch seller dashboard stats');</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
   }
 &nbsp;
   /**
@@ -388,19 +407,21 @@ class SellerService {
       order: [['stock', 'ASC']],
     });
 &nbsp;
-    return lowStockProducts.map(p =&gt; p.toJSON());
+    return lowStockProducts.map((p: any) =&gt; p.toJSON());
   }
 }
 &nbsp;
 // Ekspor sebagai singleton instance
-export default new SellerService();</pre></td></tr></table></pre>
+export default new SellerService();
+&nbsp;
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-12T08:15:08.703Z
+                at 2025-10-15T18:51:17.475Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

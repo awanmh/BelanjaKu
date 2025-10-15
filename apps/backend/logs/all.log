@@ -189,3 +189,232 @@
 2025-10-12 15:15:04:154 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
 2025-10-12 15:15:04:154 error: [PUT] /api/v1/products/b677b08f-0ea5-47d6-8b4a-3077975b2fa9 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
 2025-10-12 15:15:05:155 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 00:43:23:4323 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: column reference "price" is ambiguous
+2025-10-16 00:43:24:4324 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 00:43:25:4325 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 00:43:26:4326 error: [PUT] /api/v1/products/149b16ef-ddd5-4247-ae84-1dcd66c125e5 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 00:43:27:4327 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 00:43:27:4327 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:43:27:4327 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:43:27:4327 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:43:27:4327 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:43:27:4327 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:43:27:4327 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:43:44:4344 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: column reference "price" is ambiguous
+2025-10-16 00:43:45:4345 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 00:43:46:4346 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 00:43:47:4347 error: [PUT] /api/v1/products/1d1d799b-7e13-4d65-8fbb-12f722803022 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 00:43:48:4348 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 00:43:48:4348 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:43:48:4348 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:43:48:4348 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:43:48:4348 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:43:48:4348 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:43:48:4348 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:21:4421 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: column reference "price" is ambiguous
+2025-10-16 00:44:22:4422 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 00:44:22:4422 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:22:4422 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:22:4422 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:22:4422 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:22:4422 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:22:4422 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:23:4423 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 00:44:24:4424 error: [PUT] /api/v1/products/01d08fc3-1b50-4f21-9e0e-67b0e6374adb >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 00:44:25:4425 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 00:44:37:4437 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: column reference "price" is ambiguous
+2025-10-16 00:44:38:4438 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 00:44:38:4438 error: [PUT] /api/v1/products/853fee14-b3f7-46de-9b4e-d12fa4fa1c22 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 00:44:39:4439 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 00:44:39:4439 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:39:4439 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:39:4439 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:39:4439 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:39:4439 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:39:4439 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:41:4441 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 00:44:51:4451 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: column reference "price" is ambiguous
+2025-10-16 00:44:52:4452 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 00:44:52:4452 error: [PUT] /api/v1/products/cb34a1e0-6554-4dfd-9817-e9853ef6f0e5 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 00:44:53:4453 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 00:44:53:4453 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:53:4453 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:53:4453 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:53:4453 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:53:4453 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:53:4453 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:44:55:4455 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 00:49:33:4933 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: column reference "price" is ambiguous
+2025-10-16 00:49:37:4937 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 00:49:38:4938 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:49:38:4938 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:49:38:4938 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:49:38:4938 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:49:38:4938 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:49:38:4938 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:49:39:4939 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 00:49:39:4939 error: [PUT] /api/v1/products/65e346f2-31f9-4fb8-b185-efd2f26497bc >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 00:49:40:4940 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 00:58:27:5827 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: column reference "price" is ambiguous
+2025-10-16 00:58:29:5829 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 00:58:29:5829 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:58:29:5829 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:58:29:5829 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:58:29:5829 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:58:29:5829 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:58:29:5829 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 00:58:31:5831 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 00:58:31:5831 error: [PUT] /api/v1/products/618dc609-8c6b-47ac-b885-a956b6dbe6cb >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 00:58:32:5832 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 01:05:48:548 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: column reference "price" is ambiguous
+2025-10-16 01:05:50:550 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 01:05:50:550 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:05:50:550 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:05:50:550 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:05:50:550 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:05:50:550 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:05:50:550 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:05:51:551 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 01:05:51:551 error: [PUT] /api/v1/products/01343215-6536-4aac-a6e2-313d1f5f6014 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 01:05:53:553 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 01:06:21:621 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: column reference "price" is ambiguous
+2025-10-16 01:06:22:622 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 01:06:22:622 error: [PUT] /api/v1/products/1bc2dd57-502a-495f-9626-dc163b59fda9 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 01:06:23:623 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 01:06:23:623 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:06:23:623 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:06:23:623 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:06:23:623 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:06:23:623 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:06:23:623 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:06:25:625 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 01:06:33:633 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: column reference "price" is ambiguous
+2025-10-16 01:06:34:634 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 01:06:34:634 error: [PUT] /api/v1/products/a44f3979-c3d8-4c43-a99e-8888b1e58580 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 01:06:35:635 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 01:06:35:635 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:06:35:635 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:06:35:635 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:06:35:635 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:06:35:635 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:06:35:635 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:06:36:636 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 01:14:29:1429 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: column reference "price" is ambiguous
+2025-10-16 01:14:30:1430 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 01:14:30:1430 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:14:30:1430 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:14:30:1430 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:14:30:1430 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:14:30:1430 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:14:30:1430 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:14:32:1432 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 01:14:32:1432 error: [PUT] /api/v1/products/56cc280e-d9a5-41b3-9106-727ec9e63608 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 01:14:34:1434 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 01:14:54:1454 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: column reference "price" is ambiguous
+2025-10-16 01:14:55:1455 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 01:14:55:1455 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:14:55:1455 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:14:55:1455 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:14:55:1455 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:14:55:1455 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:14:55:1455 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:14:56:1456 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 01:14:56:1456 error: [PUT] /api/v1/products/a7bdaa6a-0f36-4c77-8847-499e7888a56b >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 01:14:57:1457 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 01:15:25:1525 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: column reference "price" is ambiguous
+2025-10-16 01:15:25:1525 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 01:15:25:1525 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:15:26:1526 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:15:26:1526 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:15:26:1526 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:15:26:1526 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:15:26:1526 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:15:27:1527 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 01:15:27:1527 error: [PUT] /api/v1/products/577df8f2-f33e-474b-ac30-22565790d710 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 01:15:28:1528 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 01:28:21:2821 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: Failed to fetch seller dashboard stats
+2025-10-16 01:28:24:2824 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 01:28:24:2824 error: [PUT] /api/v1/products/84bc1ff0-cf72-4439-97cf-1ec9b259593d >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 01:28:25:2825 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 01:28:25:2825 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:28:25:2825 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:28:25:2825 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:28:25:2825 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:28:25:2825 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:28:25:2825 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:28:27:2827 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 01:28:49:2849 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: Failed to fetch seller dashboard stats
+2025-10-16 01:28:50:2850 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 01:28:52:2852 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 01:28:53:2853 error: [PUT] /api/v1/products/985a7c99-f43a-483a-a0b2-c46c651c7086 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 01:28:55:2855 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 01:28:55:2855 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:28:55:2855 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:28:55:2855 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:28:55:2855 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:28:55:2855 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:28:55:2855 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:32:51:3251 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: Failed to fetch seller dashboard stats
+2025-10-16 01:32:53:3253 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 01:32:53:3253 error: [PUT] /api/v1/products/3c73d5b5-5255-4d0d-b14d-15aa25a16751 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 01:32:56:3256 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 01:32:57:3257 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 01:32:57:3257 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:32:57:3257 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:32:57:3257 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:32:57:3257 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:32:57:3257 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:32:57:3257 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:36:31:3631 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-10-16 01:36:31:3631 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-10-16 01:39:39:3939 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-10-16 01:39:39:3939 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-10-16 01:41:52:4152 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: Failed to fetch seller dashboard stats
+2025-10-16 01:41:54:4154 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 01:41:56:4156 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 01:41:56:4156 error: [PUT] /api/v1/products/f385191a-b305-4cd4-b59e-6fde5cbb1293 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 01:41:57:4157 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 01:41:57:4157 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:41:57:4157 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:41:57:4157 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:41:57:4157 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:41:57:4157 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:41:57:4157 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:42:54:4254 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-10-16 01:42:54:4254 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-10-16 01:44:17:4417 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: Failed to fetch seller dashboard stats
+2025-10-16 01:44:20:4420 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 01:44:21:4421 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 01:44:21:4421 error: [PUT] /api/v1/products/130fc665-58fe-469d-a453-2a0bea7f6306 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 01:44:23:4423 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 01:44:24:4424 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:44:24:4424 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:44:24:4424 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:44:24:4424 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:44:24:4424 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:44:24:4424 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:46:31:4631 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: Failed to fetch seller dashboard stats
+2025-10-16 01:47:45:4745 error: [GET] /api/v1/sellers/dashboard/stats >> StatusCode:: 500, Message:: Failed to fetch seller dashboard stats
+2025-10-16 01:50:44:5044 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-10-16 01:50:44:5044 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-10-16 01:51:12:5112 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 01:51:12:5112 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:51:12:5112 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:51:12:5112 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:51:12:5112 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:51:12:5112 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:51:12:5112 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:51:13:5113 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 01:51:13:5113 error: [PUT] /api/v1/products/83b4dc22-6de0-4734-9167-7c51e1cab4b3 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 01:51:14:5114 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-16 01:53:48:5348 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-10-16 01:53:48:5348 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-10-16 01:57:53:5753 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-16 01:57:53:5753 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:57:53:5753 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:57:53:5753 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:57:53:5753 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:57:53:5753 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:57:53:5753 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-16 01:57:55:5755 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-16 01:57:55:5755 error: [PUT] /api/v1/products/4517d4d5-5b18-45f8-897d-2702d8a18a4e >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route

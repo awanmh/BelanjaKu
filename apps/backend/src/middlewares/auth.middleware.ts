@@ -51,7 +51,7 @@ export const protect = async (req: AuthenticatedRequest, res: Response, next: Ne
   }
 
   if (!token) {
-    next(new HttpException(StatusCodes.UNAUTHORIZED, 'Not authorized, no token provided'));
+    return next(new HttpException(StatusCodes.UNAUTHORIZED, 'Not authorized, no token provided'));
   }
 };
 

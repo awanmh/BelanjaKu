@@ -1,16 +1,18 @@
-import { StatusCodes } from 'http-status-codes';
-import db from '../database/models';
-import { SellerAttributes } from '../database/models/seller.model';
-import HttpException from '../utils/http-exception.util';
-import { Op } from 'sequelize';
+import { StatusCodes } from "http-status-codes";
+import db from "../database/models";
+import { SellerAttributes } from "../database/models/seller.model";
+import HttpException from "../utils/http-exception.util";
+import { Op } from "sequelize";
+import logger from "../utils/logger.util";
 
 // Mengambil model dari objek db
-const Seller = db.Seller;
-const OrderItem = db.OrderItem;
-const Product = db.Product;
+const { User, Seller, OrderItem, Product, Order } = db;
 
 // Tipe data untuk input
-export type CreateSellerProfileInput = Pick<SellerAttributes, 'storeName' | 'storeAddress' | 'storePhoneNumber'>;
+export type CreateSellerProfileInput = Pick<
+  SellerAttributes,
+  "storeName" | "storeAddress" | "storePhoneNumber"
+>;
 export type UpdateSellerProfileInput = Partial<CreateSellerProfileInput>;
 
 // Interface untuk mendefinisikan bentuk hasil query agregasi
@@ -26,10 +28,13 @@ class SellerService {
   /**
    * Membuat atau memperbarui profil seorang penjual.
    */
-  public async upsertProfile(userId: string, data: CreateSellerProfileInput): Promise<SellerAttributes> {
-    const user = await db.User.findByPk(userId);
-    if (!user || user.role !== 'seller') {
-      throw new HttpException(StatusCodes.FORBIDDEN, 'User is not a seller');
+  public async upsertProfile(
+    userId: string,
+    data: CreateSellerProfileInput
+  ): Promise<SellerAttributes> {
+    const user = await User.findByPk(userId);
+    if (!user || user.role !== "seller") {
+      throw new HttpException(StatusCodes.FORBIDDEN, "User is not a seller");
     }
 
     const [profile, created] = await Seller.findOrCreate({
@@ -50,7 +55,10 @@ class SellerService {
   public async getProfile(userId: string): Promise<SellerAttributes> {
     const profile = await Seller.findOne({ where: { userId } });
     if (!profile) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'Seller profile not found. Please create one.');
+      throw new HttpException(
+        StatusCodes.NOT_FOUND,
+        "Seller profile not found. Please create one."
+      );
     }
     return profile.toJSON();
   }
@@ -59,34 +67,66 @@ class SellerService {
    * Mengambil statistik dasbor untuk seorang penjual.
    */
   public async getDashboardStats(sellerId: string) {
-    const salesData = (await OrderItem.findAll({
-      attributes: [
-        [db.sequelize.fn('SUM', db.sequelize.literal('price * quantity')), 'totalRevenue'],
-        [db.sequelize.fn('SUM', db.sequelize.col('quantity')), 'totalProductsSold'],
-      ],
-      include: [{ model: Product, as: 'product', where: { sellerId }, attributes: [] }],
-      raw: true,
-    })) as unknown as SalesData[];
+    try {
+      const salesData = (await OrderItem.findAll({
+        attributes: [
+          // FIX: Tentukan nama tabel secara eksplisit untuk kolom yang ambigu
+          [
+            db.sequelize.fn(
+              "SUM",
+              db.sequelize.literal(
+                '"OrderItem"."price" * "OrderItem"."quantity"'
+              )
+            ),
+            "totalRevenue",
+          ],
+          [
+            db.sequelize.fn("SUM", db.sequelize.col("quantity")),
+            "totalProductsSold",
+          ],
+        ],
+        include: [
+          {
+            model: Product,
+            as: "product",
+            where: { sellerId },
+            attributes: [],
+          },
+        ],
+        raw: true,
+      })) as unknown as SalesData[];
 
-    const totalOrders = await db.Order.count({
-      distinct: true,
-      col: 'id',
-      include: [{
-        model: OrderItem,
-        as: 'items',
-        required: true,
-        include: [{ model: Product, as: 'product', where: { sellerId }, required: true }],
-      }],
-    });
+      const totalOrders = await OrderItem.count({
+        distinct: true,
+        col: "orderId",
+        include: [
+          {
+            model: Product,
+            as: "product",
+            where: { sellerId },
+            attributes: [],
+            required: true,
+          },
+        ],
+      });
 
-    // FIX: Tangani kasus di mana tidak ada data penjualan (salesData[0] bisa undefined)
-    const stats = {
-      totalRevenue: parseFloat(salesData[0]?.totalRevenue || '0') || 0,
-      totalProductsSold: parseInt(salesData[0]?.totalProductsSold || '0', 10) || 0,
-      totalOrders: totalOrders || 0,
-    };
-    
-    return stats;
+      const stats = {
+        totalRevenue: parseFloat(salesData[0]?.totalRevenue || "0") || 0,
+        totalProductsSold:
+          parseInt(salesData[0]?.totalProductsSold || "0", 10) || 0,
+        totalOrders: totalOrders || 0,
+      };
+
+      return stats;
+    } catch (error: any) {
+      logger.error(
+        `Failed to fetch dashboard stats for seller ${sellerId}: ${error.message}`
+      );
+      throw new HttpException(
+        StatusCodes.INTERNAL_SERVER_ERROR,
+        "Failed to fetch seller dashboard stats"
+      );
+    }
   }
 
   /**
@@ -97,13 +137,13 @@ class SellerService {
       where: {
         sellerId,
         stock: {
-          [Op.lte]: db.sequelize.col('lowStockThreshold'),
+          [Op.lte]: db.sequelize.col("lowStockThreshold"),
         },
       },
-      order: [['stock', 'ASC']],
+      order: [["stock", "ASC"]],
     });
 
-    return lowStockProducts.map(p => p.toJSON());
+    return lowStockProducts.map((p: any) => p.toJSON());
   }
 }
 

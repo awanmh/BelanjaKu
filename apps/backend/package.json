@@ -4,15 +4,15 @@
   "description": "Modern E-commerce Backend with TypeScript, Express, and Sequelize",
   "main": "dist/server.js",
   "scripts": {
-    "dev": "nodemon src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js",
-    "lint": "eslint . --ext .ts",
-    "db:migrate": "npx sequelize-cli db:migrate",
-    "db:seed:all": "npx sequelize-cli db:seed:all",
-    "db:migrate:undo": "npx sequelize-cli db:migrate:undo",
-    "test": "jest --config jest.config.js --runInBand"
-  },
+  "dev": "nodemon src/server.ts",
+  "build": "tsc",
+  "start": "node dist/server.js",
+  "lint": "eslint . --ext .ts",
+  "db:migrate": "npx sequelize-cli db:migrate",
+  "db:seed:all": "npx sequelize-cli db:seed:all",
+  "db:migrate:undo": "npx sequelize-cli db:migrate:undo",
+  "test": "jest --config jest.config.js --runInBand"
+},
   "keywords": [
     "ecommerce",
     "backend",

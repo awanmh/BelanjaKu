@@ -6,17 +6,16 @@ import { StatusCodes } from 'http-status-codes';
 // Mock dependensi eksternal
 jest.mock('../../database/models', () => {
     const mockSequelize = {
-        fn: jest.fn(),
-        literal: jest.fn(),
-        col: jest.fn(),
+        fn: jest.fn((fn, col) => `${fn}(${col})`),
+        literal: jest.fn(val => val),
+        col: jest.fn(col => col),
     };
     return {
         sequelize: mockSequelize,
         User: { findByPk: jest.fn() },
         Seller: { findOrCreate: jest.fn(), findOne: jest.fn() },
-        OrderItem: { findAll: jest.fn() },
+        OrderItem: { findAll: jest.fn(), count: jest.fn() }, // Tambahkan mock untuk 'count'
         Product: { findAll: jest.fn() },
-        Order: { count: jest.fn() },
     };
 });
 
@@ -24,7 +23,6 @@ const mockUser = db.User as jest.Mocked<typeof db.User>;
 const mockSeller = db.Seller as jest.Mocked<typeof db.Seller>;
 const mockOrderItem = db.OrderItem as jest.Mocked<typeof db.OrderItem>;
 const mockProduct = db.Product as jest.Mocked<typeof db.Product>;
-const mockOrder = db.Order as jest.Mocked<typeof db.Order>;
 
 describe('SellerService', () => {
     afterEach(() => {
@@ -33,7 +31,6 @@ describe('SellerService', () => {
 
     const sellerId = 'seller-uuid';
 
-    // --- Pengujian untuk Metode `upsertProfile` ---
     describe('upsertProfile', () => {
         it('should create a profile for a seller user', async () => {
             const profileData = { storeName: 'Toko Baru' };
@@ -56,19 +53,36 @@ describe('SellerService', () => {
             );
         });
     });
+    
+    describe('getProfile', () => {
+        it('should get a profile if it exists', async () => {
+            const mockProfile = { storeName: 'My Store', toJSON: () => ({ storeName: 'My Store'})};
+            mockSeller.findOne.mockResolvedValue(mockProfile as any);
+            const result = await SellerService.getProfile(sellerId);
+            expect(mockSeller.findOne).toHaveBeenCalledWith({ where: { userId: sellerId } });
+            expect(result.storeName).toBe('My Store');
+        });
 
-    // --- Pengujian untuk Metode `getDashboardStats` ---
+        it('should throw NOT_FOUND if profile does not exist', async () => {
+            mockSeller.findOne.mockResolvedValue(null);
+            await expect(SellerService.getProfile(sellerId)).rejects.toThrow(
+                new HttpException(StatusCodes.NOT_FOUND, 'Seller profile not found. Please create one.')
+            );
+        });
+    });
+
     describe('getDashboardStats', () => {
         it('should return correct dashboard statistics', async () => {
-            // Simulasikan hasil dari query agregasi
             const mockSalesData = [{ totalRevenue: '500000', totalProductsSold: '5' }];
+            
+            // Perbarui mock agar sesuai dengan logika baru
             mockOrderItem.findAll.mockResolvedValue(mockSalesData as any);
-            mockOrder.count.mockResolvedValue(2);
+            mockOrderItem.count.mockResolvedValue(2);
 
             const stats = await SellerService.getDashboardStats(sellerId);
 
-            expect(mockOrderItem.findAll).toHaveBeenCalled();
-            expect(mockOrder.count).toHaveBeenCalled();
+            expect(mockOrderItem.findAll).toHaveBeenCalledTimes(1);
+            expect(mockOrderItem.count).toHaveBeenCalledTimes(1);
             expect(stats).toEqual({
                 totalRevenue: 500000,
                 totalProductsSold: 5,
@@ -77,7 +91,6 @@ describe('SellerService', () => {
         });
     });
 
-    // --- Pengujian untuk Metode `getLowStockProducts` ---
     describe('getLowStockProducts', () => {
         it('should return a list of products with low stock', async () => {
             const mockLowStockProducts = [
