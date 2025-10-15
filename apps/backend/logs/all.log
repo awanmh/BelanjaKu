@@ -418,3 +418,4 @@
 2025-10-16 01:57:53:5753 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
 2025-10-16 01:57:55:5755 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
 2025-10-16 01:57:55:5755 error: [PUT] /api/v1/products/4517d4d5-5b18-45f8-897d-2702d8a18a4e >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-16 01:57:58:5758 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
