@@ -2,7 +2,7 @@ import { StatusCodes } from 'http-status-codes';
 import db from '../database/models';
 import { SellerAttributes } from '../database/models/seller.model';
 import HttpException from '../utils/http-exception.util';
-import { Op } from 'sequelize'; // Impor operator Sequelize
+import { Op } from 'sequelize';
 
 // Mengambil model dari objek db
 const Seller = db.Seller;
@@ -79,6 +79,7 @@ class SellerService {
       }],
     });
 
+    // FIX: Tangani kasus di mana tidak ada data penjualan (salesData[0] bisa undefined)
     const stats = {
       totalRevenue: parseFloat(salesData[0]?.totalRevenue || '0') || 0,
       totalProductsSold: parseInt(salesData[0]?.totalProductsSold || '0', 10) || 0,
@@ -90,18 +91,16 @@ class SellerService {
 
   /**
    * Mengambil daftar produk milik penjual yang stoknya menipis.
-   * @param sellerId ID penjual.
-   * @returns Daftar produk dengan stok rendah.
    */
   public async getLowStockProducts(sellerId: string) {
     const lowStockProducts = await Product.findAll({
       where: {
         sellerId,
         stock: {
-          [Op.lte]: db.sequelize.col('lowStockThreshold'), // dimana stock <= lowStockThreshold
+          [Op.lte]: db.sequelize.col('lowStockThreshold'),
         },
       },
-      order: [['stock', 'ASC']], // Urutkan dari yang paling sedikit stoknya
+      order: [['stock', 'ASC']],
     });
 
     return lowStockProducts.map(p => p.toJSON());

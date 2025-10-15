@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import AuthController from './auth.controller';
 import { registerValidator, loginValidator } from './auth.validator';
-// FIX: Menggunakan named import karena validator.middleware tidak memiliki default export
 import { validate } from '../../../middlewares/validator.middleware';
+import { authLimiter } from '../../../middlewares/rateLimit.middleware'; // 1. Impor rate limiter
 
 // Membuat instance router baru
 const authRouter = Router();
@@ -14,9 +14,10 @@ const authRouter = Router();
  */
 authRouter.post(
   '/register',
-  registerValidator, // 1. Jalankan aturan validasi untuk registrasi
-  validate,          // 2. Middleware untuk menangani hasil validasi
-  AuthController.register // 3. Jika valid, teruskan ke metode controller
+  authLimiter, // 2. Terapkan rate limiter di sini
+  registerValidator,
+  validate,
+  AuthController.register
 );
 
 /**
@@ -26,10 +27,10 @@ authRouter.post(
  */
 authRouter.post(
   '/login',
-  loginValidator, // 1. Jalankan aturan validasi untuk login
-  validate,       // 2. Middleware untuk menangani hasil validasi
-  AuthController.login // 3. Jika valid, teruskan ke metode controller
+  authLimiter, // 2. Terapkan rate limiter di sini juga
+  loginValidator,
+  validate,
+  AuthController.login
 );
 
 export default authRouter;
-

@@ -3,27 +3,27 @@ import { StatusCodes } from 'http-status-codes';
 import PaymentService from '../../../services/payment.service';
 import HttpException from '../../../utils/http-exception.util';
 import { AuthenticatedRequest } from '../../../middlewares/auth.middleware';
-import { PaymentMethod } from '../../../database/models/payment.model';
 import logger from '../../../utils/logger.util';
 
+/**
+ * Controller untuk menangani request yang berhubungan dengan pembayaran.
+ */
 class PaymentController {
   /**
-   * Memulai proses pembayaran untuk sebuah pesanan.
+   * Menangani permintaan untuk memulai proses pembayaran.
    */
   public async initiatePayment(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       if (!req.user) {
         throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
       }
-      const { orderId, method } = req.body as { orderId: string, method: PaymentMethod };
-      if (!orderId || !method) {
-        throw new HttpException(StatusCodes.BAD_REQUEST, 'orderId and method are required');
-      }
+      const { orderId, method } = req.body;
+      const userId = req.user.id;
 
-      const paymentInfo = await PaymentService.createPayment(orderId, req.user.id, method);
+      const paymentInfo = await PaymentService.createPayment(orderId, userId, method);
       res.status(StatusCodes.OK).json({
         success: true,
-        message: 'Payment initiated',
+        message: 'Payment initiated successfully',
         data: paymentInfo,
       });
     } catch (error) {
@@ -32,25 +32,35 @@ class PaymentController {
   }
 
   /**
-   * Menerima notifikasi dari payment gateway.
-   * Endpoint ini tidak diproteksi karena dipanggil oleh server eksternal.
+   * Menangani notifikasi webhook dari payment gateway.
    */
   public async handleWebhook(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      // DI DUNIA NYATA: Validasi signature/token dari payment gateway di sini.
       const payload = req.body;
-      logger.info('Webhook received:', payload);
-      
-      await PaymentService.handleWebhook(payload);
+      // Ambil signature dari header (nama header tergantung payment gateway, misal: 'x-signature')
+      const signature = req.headers['x-signature'] as string;
 
-      // Kirim respons 200 OK agar gateway tahu notifikasi diterima.
-      res.status(StatusCodes.OK).json({ success: true, message: 'Webhook received' });
+      if (!signature) {
+        logger.warn('Webhook received without signature.');
+        // Di produksi, Anda mungkin ingin langsung melempar error di sini
+        // throw new HttpException(StatusCodes.BAD_REQUEST, 'Signature is missing');
+      }
+
+      // FIX: Teruskan payload dan signature ke service
+      await PaymentService.handleWebhook(payload, signature || '');
+
+      // Kirim respons 200 OK untuk memberitahu payment gateway bahwa notifikasi sudah diterima
+      res.status(StatusCodes.OK).json({ received: true });
     } catch (error) {
-      // Jangan kirim detail error ke gateway, cukup log di server kita.
-      logger.error('Webhook handling failed:', error);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, message: 'Internal Server Error' });
+      // Jangan teruskan error ke 'next(error)' karena ini akan mengirim respons error ke payment gateway.
+      // Cukup log error-nya saja. Payment gateway biasanya hanya peduli dengan status 200 OK.
+      logger.error('Webhook processing failed:', error);
+      // Kirim respons error dengan format yang mungkin diharapkan gateway, atau cukup 500.
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Internal server error' });
     }
   }
 }
 
+// Ekspor sebagai singleton instance
 export default new PaymentController();
+

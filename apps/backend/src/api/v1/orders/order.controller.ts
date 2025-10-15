@@ -20,6 +20,7 @@ class OrderController {
       }
 
       const userId = req.user.id;
+      // Sekarang data mencakup promotionCode yang opsional
       const orderData: CreateOrderInput = req.body;
 
       const newOrder = await OrderService.createOrder(orderData, userId);

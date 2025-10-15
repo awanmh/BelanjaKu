@@ -1,8 +1,9 @@
 import { StatusCodes } from 'http-status-codes';
 import db from '../database/models';
 import HttpException from '../utils/http-exception.util';
+import { Op } from 'sequelize';
 
-// Definisikan tipe instance model untuk type safety yang lebih baik saat menggunakan relasi
+// Definisikan tipe instance model
 type OrderInstance = InstanceType<typeof db.Order>;
 type OrderItemInstance = InstanceType<typeof db.OrderItem>;
 type ProductInstance = InstanceType<typeof db.Product>;
@@ -11,6 +12,7 @@ type ProductInstance = InstanceType<typeof db.Product>;
 const Order = db.Order;
 const OrderItem = db.OrderItem;
 const Product = db.Product;
+const Promotion = db.Promotion;
 const sequelize = db.sequelize;
 
 // Tipe data untuk item dalam keranjang belanja
@@ -19,10 +21,11 @@ interface CartItem {
   quantity: number;
 }
 
-// Tipe data untuk input pembuatan pesanan
+// Tipe data untuk input pembuatan pesanan, sekarang dengan promotionCode
 export interface CreateOrderInput {
   items: CartItem[];
   shippingAddress: string;
+  promotionCode?: string; // Kolom opsional untuk kode promosi
 }
 
 /**
@@ -33,13 +36,16 @@ class OrderService {
    * Membuat pesanan baru berdasarkan item di keranjang.
    */
   public async createOrder(orderData: CreateOrderInput, userId: string) {
-    const { items, shippingAddress } = orderData;
+    const { items, shippingAddress, promotionCode } = orderData;
     const transaction = await sequelize.transaction();
 
     try {
       let totalAmount = 0;
+      let discountAmount = 0;
+      let promotionId: string | null = null;
       const orderItemsData = [];
 
+      // 1. Validasi setiap item dan hitung total harga awal
       for (const item of items) {
         const product = await Product.findByPk(item.productId, { transaction });
 
@@ -50,25 +56,65 @@ class OrderService {
           throw new HttpException(StatusCodes.BAD_REQUEST, `Not enough stock for ${product.name}`);
         }
 
-        const itemPrice = product.price * item.quantity;
-        totalAmount += itemPrice;
+        totalAmount += product.price * item.quantity;
 
         orderItemsData.push({
           productId: item.productId,
           quantity: item.quantity,
           price: product.price,
         });
-
-        product.stock -= item.quantity;
-        await product.save({ transaction });
       }
 
+      // 2. Jika ada kode promosi, validasi dan terapkan diskon
+      if (promotionCode) {
+        const promo = await Promotion.findOne({
+          where: {
+            code: promotionCode,
+            isActive: true,
+            startDate: { [Op.lte]: new Date() },
+            endDate: { [Op.gte]: new Date() },
+          },
+          transaction,
+        });
+
+        if (!promo) {
+          throw new HttpException(StatusCodes.BAD_REQUEST, 'Invalid or expired promotion code');
+        }
+
+        // Pastikan promosi berlaku untuk salah satu produk di keranjang
+        const isApplicable = items.some(item => item.productId === promo.productId);
+        if (!isApplicable) {
+            throw new HttpException(StatusCodes.BAD_REQUEST, 'This promotion code is not valid for the items in your cart.');
+        }
+
+        // Hitung diskon (hanya pada produk yang dipromosikan)
+        const promoProductInCart = items.find(item => item.productId === promo.productId);
+        const productForPromo = await Product.findByPk(promo.productId, { transaction });
+        
+        if (promoProductInCart && productForPromo) {
+            const priceOfPromoProduct = productForPromo.price * promoProductInCart.quantity;
+            discountAmount = priceOfPromoProduct * (promo.discountPercentage / 100);
+            totalAmount -= discountAmount;
+            promotionId = promo.id;
+        }
+      }
+
+      // 3. Kurangi stok produk
+      for (const item of items) {
+        const product = await Product.findByPk(item.productId, { transaction });
+        product!.stock -= item.quantity;
+        await product!.save({ transaction });
+      }
+
+      // 4. Buat entri di tabel 'orders'
       const newOrder = await Order.create(
         {
           userId,
           totalAmount,
           shippingAddress,
           status: 'pending',
+          promotionId,
+          discountAmount,
         },
         { transaction }
       );
@@ -92,6 +138,7 @@ class OrderService {
     }
   }
 
+  // ... metode lainnya ...
   /**
    * Mengambil semua pesanan milik seorang pengguna.
    */
@@ -154,7 +201,6 @@ class OrderService {
    * Memperbarui status pesanan oleh seorang penjual.
    */
   public async updateOrderStatusBySeller(orderId: string, sellerId: string, status: 'processing' | 'shipped') {
-    // Definisikan tipe yang lebih spesifik untuk objek pesanan yang menyertakan relasi
     interface OrderWithItems extends OrderInstance {
       items: (OrderItemInstance & {
         product?: ProductInstance;
@@ -169,10 +215,8 @@ class OrderService {
       throw new HttpException(StatusCodes.NOT_FOUND, 'Order not found');
     }
 
-    // Terapkan tipe yang lebih spesifik ke objek pesanan
     const orderWithItems = order as OrderWithItems;
 
-    // Verifikasi bahwa setidaknya satu item dalam pesanan ini milik si penjual
     const isSellerProductInOrder = orderWithItems.items.some(
       (item) => item.product?.sellerId === sellerId
     );
@@ -181,7 +225,6 @@ class OrderService {
       throw new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to update this order');
     }
 
-    // Hanya izinkan perubahan status yang logis
     if (order.status !== 'processing' && status === 'shipped') {
         throw new HttpException(StatusCodes.BAD_REQUEST, 'Order must be processed before it can be shipped');
     }

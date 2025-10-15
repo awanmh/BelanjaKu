@@ -98,6 +98,18 @@ backend
 │   │       │   ├── 📜 order.controller.ts
 │   │       │   ├── 📜 order.routes.ts
 │   │       │   └── 📜 order.validator.ts
+│   │       ├── 📂 payments/
+│   │       │   ├── 📜 payment.controller.ts
+│   │       │   ├── 📜 payment.routes.ts
+│   │       │   └── 📜 payment.validator.ts
+│   │       ├── 📂 sellers/
+│   │       │   ├── 📜 seller.controller.ts
+│   │       │   ├── 📜 seller.routes.ts
+│   │       │   └── 📜 seller.validator.ts
+│   │       ├── 📂 shipping/
+│   │       │   ├── 📜 shipping.controller.ts
+│   │       │   ├── 📜 shipping.routes.ts
+│   │       │   └── 📜 shipping.validator.ts
 │   │       │
 │   │       └── 📂 reviews/
 │   │           ├── 📜 review.controller.ts
@@ -110,19 +122,29 @@ backend
 │   │
 │   ├── 📂 database/              # Semua yang berhubungan dengan database
 │   │   ├── 📂 models/            # Definisi tabel dan relasi (Sequelize)
-│   │   │   ├── 📜 index.ts       # Inisialisasi Sequelize dan asosiasi model
-│   │   │   ├── 📜 user.model.ts
-│   │   │   ├── 📜 seller.model.ts
-│   │   │   ├── 📜 product.model.ts
-│   │   │   ├── 📜 category.model.ts
+│   │   │   ├── 📜 index.ts category.model.ts       
+│   │   │   ├── 📜 index.ts # Inisialisasi Sequelize dan asosiasi model
 │   │   │   ├── 📜 order.model.ts
 │   │   │   ├── 📜 orderItem.model.ts
-│   │   │   ├── 📜 review.model.ts
+│   │   │   ├── 📜 payment.model.ts
+│   │   │   ├── 📜 product.model.ts
 │   │   │   ├── 📜 promotion.model.ts
-│   │   │   └── 📜 shippingOption.model.ts
+│   │   │   ├── 📜 review.model.ts
+│   │   │   ├── 📜 seller.model.ts
+│   │   │   ├── 📜 shippingOption.model.ts
+│   │   │   └── 📜 user.model.ts
 │   │   │
 │   │   ├── 📂 migrations/        # File migrasi untuk mengubah skema DB
-│   │   │   └── 📜 2025100601-create-users.js
+│   │   │   ├── 📜 2025100601-create-users.js
+│   │   │   ├── 📜 2025100602-create-categories.js
+│   │   │   ├── 📜 2025100603-create-products.js
+│   │   │   ├── 📜 2025100604-create-sellers.js
+│   │   │   ├── 📜 2025100605-create-orders.js
+│   │   │   ├── 📜 2025100606-create-order-items.js
+│   │   │   ├── 📜 2025100607-create-reviews.js
+│   │   │   ├── 📜 2025100608-create-promotions.js
+│   │   │   ├── 📜 2025100609-create-shipping.js
+│   │   │   └── 📜 2025100610-create-payments.js
 │   │   │
 │   │   └── 📂 seeders/           # File untuk mengisi data awal (seeding)
 │   │       └── 📜 2025100602-demo-products.js
@@ -130,15 +152,29 @@ backend
 │   ├── 📂 middlewares/           # Fungsi perantara untuk request
 │   │   ├── 📜 auth.middleware.ts # Proteksi rute dengan JWT
 │   │   ├── 📜 error.middleware.ts# Penanganan error global
+│   │   ├── 📜 rateLimit.middleware.ts# Keamanan
 │   │   ├── 📜 upload.middleware.ts # Untuk handle upload file (gambar produk)
 │   │   └── 📜 validator.middleware.ts # Menjalankan hasil validasi
 │   │
 │   ├── 📂 services/              # Tempat logika bisnis
+│   │   ├── 📂 __tests__/ 
+│   │   │   ├── 📜 auth.routes.tests.ts
+│   │   │   ├── 📜 auth.service.tests.ts
+│   │   │   ├── 📜 payment.service.ts
+│   │   │   ├── 📜 payment.service.ts
+│   │   │   ├── 📜 payment.service.ts
+│   │   │   ├── 📜 payment.service.ts
+│   │   │   ├── 📜 payment.service.ts
+│   │   │   └── 📜 order.service.ts
 │   │   ├── 📜 auth.service.ts
 │   │   ├── 📜 category.service.ts
 │   │   ├── 📜 user.service.ts
 │   │   ├── 📜 product.service.ts
+│   │   ├── 📜 promotion.service.ts
 │   │   ├── 📜 review.service.ts
+│   │   ├── 📜 seller.service.ts
+│   │   ├── 📜 shipping.service.ts
+│   │   ├── 📜 payment.service.ts
 │   │   └── 📜 order.service.ts
 │   │
 │   ├── 📂 utils/                 # Fungsi bantuan (helpers)
@@ -152,6 +188,7 @@ backend
 ├── 📜 .env.example               # Contoh variabel lingkungan
 ├── 📜 .gitignore
 ├── 📜 .sequelizerc               # Konfigurasi path untuk Sequelize CLI
+├── 📜 jest.config.js
 ├── 📜 package.json
 └── 📜 tsconfig.json
 
