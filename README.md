@@ -1,74 +1,82 @@
-# **Backend E-commerce Modern \- BelanjaKu API**
+# **Backend E-commerce Modern \- BelanjaKu**
 
-Selamat datang di repositori Backend E-commerce BelanjaKu. Proyek ini dibangun menggunakan arsitektur modern berbasis TypeScript, Express.js, dan Sequelize (PostgreSQL) dengan mengikuti prinsip-prinsip Clean Architecture. Tujuannya adalah untuk menyediakan fondasi API yang modular, dapat diskalakan, aman, dan siap untuk dikembangkan lebih lanjut.
+Selamat datang di repositori backend untuk proyek E-commerce **BelanjaKu**. Proyek ini dibangun dengan TypeScript, Express.js, dan Sequelize (PostgreSQL) menggunakan prinsip-prinsip Clean Architecture untuk memastikan kode yang dihasilkan modular, dapat diskalakan, dan mudah dikelola.
 
-## **PROGRESS PROYEK (Diperbarui: 10 Oktober 2025\)**
+### **🚀 Status Proyek & Kemajuan Hari Ini (15 Oktober 2025\)**
 
-### **✅ Pencapaian Utama Hari Ini:**
+**Status: Fondasi Backend Lengkap dan Teruji.**
 
-Hari ini, kita berhasil menyelesaikan beberapa fitur penting yang meningkatkan fungsionalitas dan kualitas proyek secara signifikan:
+Hari ini kita telah mencapai tonggak pencapaian yang signifikan. Seluruh arsitektur backend, modul-modul fungsional inti, dan infrastruktur pengujian telah berhasil diimplementasikan dan diverifikasi.
 
-1. **Dasbor Penjual (Seller Dashboard) Ditingkatkan:**  
-   * **Notifikasi Stok Menipis:** Mengimplementasikan *endpoint* GET /api/v1/sellers/dashboard/low-stock yang memungkinkan penjual untuk secara proaktif melihat produk mana saja yang stoknya berada di bawah ambang batas yang telah ditentukan.  
-   * **Logika Bisnis:** Menambahkan metode getLowStockProducts di SellerService yang berisi *query* cerdas untuk memfilter produk berdasarkan stok.  
-2. **Fitur Promosi & Diskon Diintegrasikan:**  
-   * **Struktur Database Diperbarui:** Memperbarui model Order dan membuat migrasi baru untuk menambahkan kolom promotionId dan discountAmount. Ini memastikan setiap pesanan yang menggunakan diskon tercatat dengan benar.  
-   * **Persiapan Logika Checkout:** Dengan adanya kolom ini, OrderService sekarang siap untuk dimodifikasi lebih lanjut untuk menerapkan logika kalkulasi diskon saat proses *checkout*.  
-3. **Struktur Database Disempurnakan:**  
-   * **Migrasi Terpisah:** Merombak file migrasi tunggal menjadi **satu file migrasi per tabel**. Ini adalah praktik terbaik yang sangat meningkatkan keterbacaan, pelacakan versi, dan kolaborasi tim.  
-   * **Reset & Re-Migrate:** Berhasil menyelesaikan proses reset database dan menjalankan ulang semua migrasi secara berurutan, memastikan skema database sekarang bersih dan terorganisir.  
-4. **Fondasi Pengujian (Testing) Disiapkan:**  
-   * **Konfigurasi Jest:** Membuat file jest.config.js yang mengkonfigurasi *framework* pengujian Jest untuk proyek TypeScript kita, lengkap dengan pengaturan untuk ts-jest, *test environment*, dan laporan cakupan kode (*code coverage*).
+**Pencapaian Utama:**
 
-### **🏆 Status Proyek Saat Ini:**
+1. **Implementasi Modul Fungsional Lengkap:**  
+   * ✅ **Autentikasi & Keamanan:** Sistem registrasi dan login berbasis JWT dengan *rate limiting* untuk mencegah serangan *brute-force*.  
+   * ✅ **Manajemen Produk & Penjual:** Penjual dapat melakukan operasi CRUD pada produk mereka, termasuk unggah gambar melalui multer.  
+   * ✅ **Manajemen Pesanan:** Pengguna dapat membuat pesanan (*checkout*), dan penjual dapat melihat serta memperbarui status pesanan yang masuk ke toko mereka.  
+   * ✅ **Fitur Promosi & Diskon:** Penjual/Admin dapat membuat promosi, dan logika untuk menerapkan diskon pada saat *checkout* telah diimplementasikan di OrderService.  
+   * ✅ **Dasbor Penjual:** *Endpoint* untuk manajemen profil toko, statistik penjualan (pendapatan, jumlah pesanan), dan notifikasi produk dengan stok menipis telah dibuat.  
+   * ✅ **Manajemen Admin:** Admin memiliki akses penuh untuk mengelola pengguna, kategori, dan opsi pengiriman.  
+   * ✅ **Sistem Ulasan:** Pengguna dapat memberikan ulasan hanya untuk produk yang telah mereka beli.  
+   * ✅ **Fondasi Pembayaran:** Kerangka kerja untuk simulasi pembayaran dan penanganan *webhook* telah dibangun.  
+2. **Infrastruktur Pengujian yang Solid:**  
+   * ✅ **Konfigurasi Jest & ts-jest:** Lingkungan pengujian telah disiapkan untuk bekerja dengan TypeScript.  
+   * ✅ **Database Terisolasi:** Pengujian berjalan pada database terpisah (ecommerce\_db\_test) yang dibuat ulang setiap kali tes dijalankan, memastikan tidak ada konflik data.  
+   * ✅ **Unit Testing:** Telah ditulis *unit test* yang komprehensif untuk *service* paling krusial (AuthService, ProductService, UserService, CategoryService, dll.) dengan cakupan kode yang tinggi.  
+   * ✅ **Integration Testing:** Telah ditulis *integration test* menggunakan Supertest untuk memverifikasi alur API secara *end-to-end*, termasuk registrasi, login, pembuatan produk (dengan unggah file), dan skenario keamanan.
 
-**Backend ini sekarang Feature-Complete untuk versi awal.** Semua modul fungsional inti (Autentikasi, Produk, Kategori, Pesanan, Ulasan, Profil Penjual, Pembayaran, dan Pengiriman) telah berhasil dibangun, terhubung, dan siap untuk tahap pengujian serta deployment.
+**Dengan kata lain, backend ini sekarang berada dalam kondisi yang sangat stabil dan terverifikasi.**
 
-## **🚀 Rencana Pengembangan (To-Do) untuk Programmer Selanjutnya**
+### **🛠️ Rencana Kerja & To-Do untuk Kolaborasi Malam Ini**
 
-Berikut adalah langkah-langkah logis berikutnya untuk melanjutkan pengembangan proyek ini:
+Berikut adalah daftar tugas yang perlu kita selesaikan untuk menyempurnakan proyek ini. Mari kita kerjakan sesuai urutan prioritas.
 
-### **1\. Implementasi Pengujian (Testing) secara Menyeluruh**
+#### **Prioritas \#1: Selesaikan Cakupan Pengujian (Testing)**
 
-* **Tugas:** Menulis *unit test* dan *integration test* menggunakan Jest untuk semua *service* dan *endpoint* API.  
-* **Prioritas:** **Sangat Tinggi.** Ini adalah langkah krusial untuk memastikan keandalan kode sebelum *deployment*.  
-* **Memulai Dari Mana:** Buat folder \_\_tests\_\_ di dalam setiap modul (misalnya, src/services/\_\_tests\_\_/auth.service.test.ts) dan mulailah dengan menguji logika bisnis di dalam *service* terlebih dahulu.
+Tujuan kita adalah memastikan setiap logika bisnis terlindungi oleh tes. Ini akan memberikan kepercayaan diri untuk melakukan *refactoring* atau menambahkan fitur baru di masa depan.
 
-### **2\. Implementasi Penuh Sistem Pembayaran**
+* **\[ \] Tulis *Unit Test* untuk *Service* yang Tersisa:**  
+  * shipping.service.ts  
+  * promotion.service.ts  
+  * payment.service.ts (fokus pada logika simulasi)  
+  * Tingkatkan cakupan untuk order.service.ts untuk mencakup semua kasus (termasuk kegagalan transaksi).  
+  * **Target:** Mencapai cakupan kode \>90% untuk semua file di dalam direktori src/services/.  
+* **\[ \] Tulis *Integration Test* untuk *Endpoint* yang Belum Teruji:**  
+  * **User/Admin:** GET /users, PUT /users/:id, DELETE /users/:id.  
+  * **Categories:** GET /categories, POST /categories, DELETE /categories/:id.  
+  * **Reviews:** POST /reviews, GET /reviews/product/:productId.  
+  * **Seller Dashboard:** POST /sellers/profile, GET /sellers/profile/me.
 
-* **Tugas:** Mengganti simulasi pembayaran dengan integrasi nyata ke salah satu *payment gateway* (misalnya, Midtrans, Xendit, Stripe).  
-* **Langkah-langkah:**  
-  1. Daftar di *sandbox* *payment gateway* pilihan untuk mendapatkan *API key*.  
-  2. Instal SDK yang relevan (misalnya, midtrans-client).  
-  3. Lengkapi logika di PaymentService untuk membuat transaksi nyata.  
-  4. Implementasikan validasi *signature webhook* yang sesungguhnya untuk mengamankan notifikasi pembayaran.
+#### **Prioritas \#2: Refactor & Peningkatan Kualitas Kode**
 
-### **3\. Deployment ke Lingkungan Produksi**
+Setelah semua logika teruji, kita bisa merapikan kode tanpa takut merusaknya.
 
-* **Tugas:** Mempublikasikan aplikasi backend ini ke layanan *hosting cloud*.  
-* **Rekomendasi Platform:** **Render** atau **Railway** (keduanya memiliki dukungan yang baik untuk aplikasi Node.js \+ PostgreSQL).  
-* **Langkah-langkah:**  
-  1. Buat database PostgreSQL di layanan *hosting*.  
-  2. Atur semua variabel lingkungan (*environment variables*), terutama DATABASE\_URL dan JWT\_SECRET, di dasbor *hosting*.  
-  3. Atur perintah *build* (npm run build) dan perintah *start* (npm run start).  
-  4. Pastikan migrasi database dijalankan secara otomatis saat proses *deployment*.
+* **\[ \] Implementasi APIFeatures pada *Endpoint* Lain:**  
+  * Terapkan kelas APIFeatures pada *endpoint* GET lainnya (misalnya, GET /users oleh admin) untuk menambahkan fungsionalitas *filter*, *sort*, dan paginasi.  
+* **\[ \] Refactor *Controller*:**  
+  * Identifikasi logika yang berulang di dalam *controller* (seperti if (\!req.user) ...) dan pertimbangkan untuk mengekstraknya ke dalam *middleware* atau fungsi *helper* khusus untuk membuat *controller* lebih ramping.  
+* **\[ \] Perkuat Tipe Data:**  
+  * Lakukan peninjauan di seluruh proyek untuk mengganti penggunaan tipe any dengan *interface* atau tipe yang lebih spesifik.
 
-### **4\. Refresh Token & Manajemen Sesi**
+#### **Prioritas \#3: Fitur Tambahan (Jika Waktu Memungkinkan)**
 
-* **Tugas:** Membuat *endpoint* POST /api/v1/auth/refresh yang menerima *refresh token* dan mengembalikan *access token* baru.  
-* **Tujuan:** Meningkatkan keamanan dan pengalaman pengguna dengan memungkinkan sesi login bertahan lebih lama tanpa harus login ulang.
+Jika kita berhasil menyelesaikan prioritas di atas, kita bisa mulai mengerjakan fitur baru.
 
-### **5\. Fitur Pencarian Produk (Search)**
+* **\[ \] Implementasi *Soft Deletes*:**  
+  * Modifikasi model-model penting (seperti Product dan User) untuk menggunakan fitur paranoid dari Sequelize. Ini akan "mengarsipkan" data saat dihapus, bukan menghapusnya secara permanen.  
+  * Buat *endpoint* baru untuk admin (misalnya, GET /users/archived) untuk melihat atau memulihkan data yang telah diarsipkan.  
+* **\[ \] Tambahkan Respon Paginasi:**  
+  * Saat ini, *endpoint* GET yang menggunakan paginasi hanya mengembalikan data. Perbarui responsnya agar menyertakan metadata paginasi seperti currentPage, totalPages, dan totalItems.
 
-* **Tugas:** Mengimplementasikan fungsionalitas pencarian teks pada *endpoint* GET /api/v1/products.  
-* **Cara Implementasi:** Tambahkan logika di dalam metode filter() pada kelas APIFeatures untuk menangani *query parameter* seperti ?search=laptop dan menerjemahkannya menjadi *query* Sequelize menggunakan \[Op.iLike\].
+### **⚙️ Panduan Setup & Instalasi (Pengingat)**
 
-## **📋 Daftar Isi**
+1. **Prasyarat:** Node.js (v18+), PostgreSQL.  
+2. **Instalasi:** Jalankan npm install.  
+3. **Konfigurasi .env:** Salin .env.example menjadi .env dan isi detail database Anda.  
+4. **Setup Database:** Buat dua database kosong di PostgreSQL: ecommerce\_db (untuk pengembangan) dan ecommerce\_db\_test (untuk pengujian).  
+5. **Migrasi:** Jalankan npm run db:migrate untuk membuat semua tabel di ecommerce\_db.  
+6. **Seeding:** Jalankan npm run db:seed:all untuk mengisi data awal.  
+7. **Menjalankan Server:** npm run dev.  
+8. **Menjalankan Tes:** npm test.
 
-1. [Fitur Utama](https://www.google.com/search?q=%23-fitur-utama)  
-2. [Teknologi yang Digunakan](https://www.google.com/search?q=%23-teknologi-yang-digunakan)  
-3. [Struktur Proyek](https://www.google.com/search?q=%23-struktur-proyek)  
-4. [Panduan Instalasi & Setup](https://www.google.com/search?q=%23-panduan-instalasi--setup)  
-5. [Dokumentasi API](https://www.google.com/search?q=%23-dokumentasi-api)
-
-*Bagian selanjutnya dari README (Fitur, Teknologi, Instalasi, dll.) tetap sama seperti versi sebelumnya untuk kelengkapan.*
+Mari kita mulai dari **Prioritas \#1** dan pastikan fondasi pengujian kita benar-benar solid\!
