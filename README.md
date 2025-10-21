@@ -100,41 +100,69 @@ Respons API untuk halaman produk akan mengikuti struktur modular ini,
 memastikan konsistensi antara backend dan frontend.
 
 ```api
-{  
-\"user_context\": {  
-\"location\": \"Jakarta Barat\"  
-},  
-\"product\": {  
-\"name\": \"Kemeja Flanel Pria Lengan Panjang\",  
-\"category\": \"Fashion Pria \> Kemeja\",  
-\"sku\": \"KFP-001-RED-L\"  
-},  
-\"seller\": {  
-\"name\": \"Toko Resmi Flanelku\",  
-\"location\": \"Jakarta Utara\",  
-\"type\": \"Official Store\"  
-},  
-\"social_proof\": {  
-\"rating\": { \"score\": 4.9, \"count\": 32150 },  
-\"sales\": { \"sold\": 75000, \"status\": \"terlaris\" },  
-\"recency\": { \"status\": null }  
-},  
-\"commercial\": {  
-\"pricing\": { \"base\": 200000, \"discount_percentage\": 5, \"final\":
-190000 },  
-\"promotions\": \[  
-{ \"type\": \"cashback\", \"value\": \"5%\" },  
-{ \"type\": \"shipping\", \"value\": \"Gratis Ongkir Min. Belanja
-Rp50rb\" }  
-\]  
-},  
-\"logistics\": {  
-\"options\": \[  
-{ \"type\": \"Instan\", \"cost\": 25000, \"eta\": \"1-2 jam\" },  
-{ \"type\": \"Reguler\", \"cost\": 9000, \"eta\": \"1-2 hari\" },  
-{ \"type\": \"COD\", \"cost\": 12000, \"eta\": \"2-3 hari\" }  
-\]  
-}  
+{
+  "user_context": {
+    "location": "Jakarta Barat"
+  },
+  "product": {
+    "name": "Kemeja Flanel Pria Lengan Panjang",
+    "category": "Fashion Pria > Kemeja",
+    "sku": "KFP-001-RED-L"
+  },
+  "seller": {
+    "name": "Toko Resmi Flanelku",
+    "location": "Jakarta Utara",
+    "type": "Official Store"
+  },
+  "social_proof": {
+    "rating": {
+      "score": 4.9,
+      "count": 32150
+    },
+    "sales": {
+      "sold": 75000,
+      "status": "terlaris"
+    },
+    "recency": {
+      "status": null
+    }
+  },
+  "commercial": {
+    "pricing": {
+      "base": 200000,
+      "discount_percentage": 5,
+      "final": 190000
+    },
+    "promotions": [
+      {
+        "type": "cashback",
+        "value": "5%"
+      },
+      {
+        "type": "shipping",
+        "value": "Gratis Ongkir Min. Belanja Rp50rb"
+      }
+    ]
+  },
+  "logistics": {
+    "options": [
+      {
+        "type": "Instan",
+        "cost": 25000,
+        "eta": "1-2 jam"
+      },
+      {
+        "type": "Reguler",
+        "cost": 9000,
+        "eta": "1-2 hari"
+      },
+      {
+        "type": "COD",
+        "cost": 12000,
+        "eta": "2-3 hari"
+      }
+    ]
+  }
 }
 ```
 
@@ -183,21 +211,23 @@ yang menyelaraskan tim Desain, Produk, dan Rekayasa.
 *(Bagian ini akan berisi instruksi tentang cara menjalankan proyek
 secara lokal, termasuk prasyarat, instalasi dependensi, dan perintah
 untuk menjalankan server pengembangan.)*
-```clone
-\# Clone repositori ini  
+
+### Clone repositori ini  
+```bash
 git clone https://github.com/awanmh/BelanjaKu.git  
-  
-\# Masuk ke direktori proyek  
+```
+ 
+### Masuk ke direktori proyek  
+```bash
 cd belanjaku  
+```
   
-\# Instal dependensi  
+### Instal dependensi  
+```bash
 npm install  
+```
   
-\# Jalankan server pengembangan  
+### Jalankan server pengembangan  
+```bash
 npm run dev
 ```
-
-## Cara Berkontribusi
-
-Kami menyambut kontribusi dari komunitas. Silakan lihat CONTRIBUTING.md
-untuk panduan lebih lanjut tentang cara berkontribusi pada proyek ini.
