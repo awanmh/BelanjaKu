@@ -13,10 +13,8 @@ class SellerController {
    */
   public async upsertProfile(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (!req.user) {
-        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
-      }
-      const userId = req.user.id;
+      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
+      const userId = req.user!.id;
       const data: CreateSellerProfileInput = req.body;
 
       const profile = await SellerService.upsertProfile(userId, data);
@@ -36,10 +34,8 @@ class SellerController {
    */
   public async getMyProfile(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (!req.user) {
-        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
-      }
-      const userId = req.user.id;
+      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
+      const userId = req.user!.id;
       const profile = await SellerService.getProfile(userId);
 
       res.status(StatusCodes.OK).json({
@@ -57,11 +53,8 @@ class SellerController {
    */
   public async getDashboardStats(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (!req.user) {
-        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
-      }
-      
-      const sellerId = req.user.id;
+      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
+      const sellerId = req.user!.id;
       const stats = await SellerService.getDashboardStats(sellerId);
 
       res.status(StatusCodes.OK).json({
@@ -79,11 +72,8 @@ class SellerController {
    */
   public async getLowStockProducts(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (!req.user) {
-        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
-      }
-      
-      const sellerId = req.user.id;
+      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
+      const sellerId = req.user!.id;
       const products = await SellerService.getLowStockProducts(sellerId);
 
       res.status(StatusCodes.OK).json({

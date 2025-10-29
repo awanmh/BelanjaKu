@@ -2,92 +2,137 @@ import { StatusCodes } from 'http-status-codes';
 import db from '../database/models';
 import { ProductAttributes } from '../database/models/product.model';
 import HttpException from '../utils/http-exception.util';
-import APIFeatures from '../utils/apiFeatures.util';
-import { ParsedQs } from 'qs';
+import APIFeatures from '../utils/apiFeatures.util'; // 1. Impor APIFeatures
+import { ParsedQs } from 'qs'; // Tipe untuk query string
+import { Model, Op } from 'sequelize'; // 2. Impor Model untuk casting
 
-// Definisikan tipe untuk instance Product agar casting lebih bersih
-type ProductInstance = InstanceType<typeof db.Product>;
+// 3. FIX: Lakukan type casting eksplisit pada model
+const Product = db.Product as (new () => InstanceType<typeof db.Product>) & typeof db.Product;
+const User = db.User as (new () => InstanceType<typeof db.User>) & typeof db.User;
 
-// Mengambil model dari objek db dan menerapkan type casting yang benar
-const Product = db.Product as (new () => ProductInstance) & typeof db.Product;
-const User = db.User;
-
-// Tipe data untuk input pembuatan produk, sekarang termasuk imageUrl
-export type CreateProductInput = Pick<ProductAttributes, 'name' | 'description' | 'price' | 'stock' | 'categoryId' | 'imageUrl'>;
-
-// Tipe data untuk input pembaruan produk
+// Tipe data untuk input
+export type CreateProductInput = Pick<
+  ProductAttributes,
+  'name' | 'description' | 'price' | 'stock' | 'imageUrl' | 'categoryId'
+>;
 export type UpdateProductInput = Partial<CreateProductInput>;
+
+// Tipe data baru untuk respons paginasi
+export interface PaginatedProductResult {
+  rows: ProductAttributes[];
+  pagination: {
+    totalItems: number;
+    totalPages: number;
+    currentPage: number;
+    limit: number;
+  };
+}
 
 /**
  * Service untuk menangani semua logika bisnis yang terkait dengan produk.
  */
 class ProductService {
-  /**
-   * Membuat produk baru.
-   */
   public async createProduct(productData: CreateProductInput, sellerId: string): Promise<ProductAttributes> {
-    const newProduct = await Product.create({
-      ...productData,
-      sellerId,
-    });
+    const newProduct = await Product.create({ ...productData, sellerId });
     return newProduct.toJSON();
   }
 
   /**
-   * Mengambil semua produk dari database dengan fitur query lanjutan.
+   * [DIPERBARUI] Mengambil semua produk dengan fitur query lanjutan.
+   * @param queryString Query string dari URL request.
+   * @returns Objek dengan daftar produk dan metadata paginasi.
    */
-  public async getAllProducts(queryString: ParsedQs): Promise<ProductAttributes[]> {
+  public async getAllProducts(queryString: ParsedQs): Promise<PaginatedProductResult> {
+    // 1. Buat query dasar
     const features = new APIFeatures(Product, queryString)
       .filter()
       .sort()
-      .limitFields()
-      .paginate();
+      .limitFields();
 
+    // 2. Tambahkan include untuk relasi penjual (seller)
     features.queryOptions.include = [{ model: User, as: 'seller', attributes: ['id', 'fullName'] }];
 
-    const products = await Product.findAll(features.queryOptions);
+    // 3. Dapatkan nilai limit dan offset secara terpisah
+    const { limit, offset } = features.paginate();
+    const page = Math.floor(offset / limit) + 1;
+
+    // 4. Gunakan findAndCountAll
+    const { rows, count } = await Product.findAndCountAll({
+      ...features.queryOptions,
+      limit,
+      offset,
+    });
     
-    return products.map((product) => product.toJSON());
+    const totalPages = Math.ceil(count / limit);
+
+    return {
+      rows: rows.map((product) => product.toJSON()),
+      pagination: {
+        totalItems: count,
+        totalPages,
+        currentPage: page,
+        limit,
+      },
+    };
   }
 
   /**
-   * Mengambil semua produk milik seorang penjual.
-   * @param sellerId ID penjual.
-   * @param queryString Query string dari URL request.
-   * @returns Daftar produk milik penjual.
+   * [DIPERBARUI] Mengambil produk milik penjual tertentu dengan fitur query.
    */
-  public async getProductsBySeller(sellerId: string, queryString: ParsedQs): Promise<ProductAttributes[]> {
+  public async getProductsBySeller(sellerId: string, queryString: ParsedQs): Promise<PaginatedProductResult> {
     const features = new APIFeatures(Product, queryString)
       .filter()
       .sort()
-      .limitFields()
-      .paginate();
+      .limitFields();
 
-    // Pastikan filter utama adalah untuk sellerId
-    features.queryOptions.where = { ...features.queryOptions.where, sellerId };
+    // Tambahkan filter wajib untuk sellerId
+    if (features.queryOptions.where) {
+      (features.queryOptions.where as any).sellerId = sellerId;
+    } else {
+      features.queryOptions.where = { sellerId };
+    }
 
-    const products = await Product.findAll(features.queryOptions);
-    return products.map(p => p.toJSON());
+    const { limit, offset } = features.paginate();
+    const page = Math.floor(offset / limit) + 1;
+
+    const { rows, count } = await Product.findAndCountAll({
+      ...features.queryOptions,
+      limit,
+      offset,
+    });
+
+    const totalPages = Math.ceil(count / limit);
+
+    return {
+      rows: rows.map((product) => product.toJSON()),
+      pagination: {
+        totalItems: count,
+        totalPages,
+        currentPage: page,
+        limit,
+      },
+    };
   }
 
   /**
    * Mengambil satu produk berdasarkan ID.
    */
-  public async getProductById(productId: string): Promise<ProductAttributes> {
-    const product = await Product.findByPk(productId, {
+  public async getProductById(id: string): Promise<ProductAttributes> {
+    const product = await Product.findByPk(id, {
       include: [{ model: User, as: 'seller', attributes: ['id', 'fullName'] }],
     });
+
     if (!product) {
       throw new HttpException(StatusCodes.NOT_FOUND, 'Product not found');
     }
     return product.toJSON();
   }
-
+  
   /**
-   * Memperbarui produk berdasarkan ID.
+   * Memperbarui produk.
    */
-  public async updateProduct(productId: string, productData: UpdateProductInput, userId: string): Promise<ProductAttributes> {
-    const product = await Product.findByPk(productId);
+  public async updateProduct(id: string, productData: UpdateProductInput, userId: string): Promise<ProductAttributes> {
+    const product = await Product.findByPk(id);
     if (!product) {
       throw new HttpException(StatusCodes.NOT_FOUND, 'Product not found');
     }
@@ -100,16 +145,17 @@ class ProductService {
   }
 
   /**
-   * Menghapus produk berdasarkan ID.
+   * Menghapus (soft delete) produk.
    */
-  public async deleteProduct(productId: string, userId: string): Promise<void> {
-    const product = await Product.findByPk(productId);
+  public async deleteProduct(id: string, userId: string): Promise<void> {
+    const product = await Product.findByPk(id);
     if (!product) {
       throw new HttpException(StatusCodes.NOT_FOUND, 'Product not found');
     }
     if (product.sellerId !== userId) {
       throw new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to delete this product');
     }
+
     await product.destroy();
   }
 }

@@ -2,9 +2,11 @@ import { StatusCodes } from 'http-status-codes';
 import db from '../database/models';
 import { CategoryAttributes } from '../database/models/category.model';
 import HttpException from '../utils/http-exception.util';
+import APIFeatures from '../utils/apiFeatures.util';
+import { ParsedQs } from 'qs';
 
 // Mengambil model Category dari objek db yang sudah diinisialisasi
-const Category = db.Category;
+const Category = db.Category as (new () => InstanceType<typeof db.Category>) & typeof db.Category;
 
 // Tipe data spesifik untuk input pembuatan kategori
 export type CreateCategoryInput = Pick<CategoryAttributes, 'name'>;
@@ -12,41 +14,75 @@ export type CreateCategoryInput = Pick<CategoryAttributes, 'name'>;
 // Tipe data spesifik untuk input pembaruan kategori
 export type UpdateCategoryInput = Partial<CreateCategoryInput>;
 
+// Tipe data baru untuk respons paginasi
+export interface PaginatedCategoryResult {
+  rows: CategoryAttributes[];
+  pagination: {
+    totalItems: number;
+    totalPages: number;
+    currentPage: number;
+    limit: number;
+  };
+}
+
 /**
  * Service untuk menangani semua logika bisnis yang terkait dengan kategori produk.
  */
 class CategoryService {
   /**
    * Membuat kategori baru.
-   * @param categoryData Data untuk kategori baru.
-   * @returns Kategori yang baru dibuat.
    */
   public async createCategory(categoryData: CreateCategoryInput): Promise<CategoryAttributes> {
     const { name } = categoryData;
 
-    // Cek apakah kategori dengan nama yang sama sudah ada
     const existingCategory = await Category.findOne({ where: { name } });
     if (existingCategory) {
       throw new HttpException(StatusCodes.CONFLICT, 'Category with this name already exists');
     }
 
-    const newCategory = await Category.create({ name });
+    const newCategory = await Category.create(categoryData);
     return newCategory.toJSON();
   }
 
   /**
-   * Mengambil semua kategori dari database.
-   * @returns Array berisi semua kategori.
+   * [DIPERBARUI] Mengambil semua kategori dengan fitur query lanjutan.
+   * @param queryString Query string dari URL request.
+   * @returns Objek dengan daftar kategori dan metadata paginasi.
    */
-  public async getAllCategories(): Promise<CategoryAttributes[]> {
-    const categories = await Category.findAll();
-    return categories.map((category) => category.toJSON());
+  public async getAllCategories(queryString: ParsedQs): Promise<PaginatedCategoryResult> {
+    // 1. Buat query dasar
+    const features = new APIFeatures(Category, queryString)
+      .filter()
+      .sort()
+      .limitFields(); // Hentikan chain sebelum .paginate()
+
+    // 2. Dapatkan nilai limit dan offset secara terpisah
+    const { limit, offset } = features.paginate();
+    const page = Math.floor(offset / limit) + 1;
+
+    // 3. Gunakan findAndCountAll
+    const { rows, count } = await Category.findAndCountAll({
+      ...features.queryOptions,
+      limit,
+      offset,
+    });
+
+    const totalPages = Math.ceil(count / limit);
+
+    // 4. Kembalikan data dengan format paginasi baru
+    return {
+      rows: rows.map((category) => category.toJSON()),
+      pagination: {
+        totalItems: count,
+        totalPages,
+        currentPage: page,
+        limit,
+      },
+    };
   }
 
   /**
    * Mengambil satu kategori berdasarkan ID.
-   * @param id ID kategori.
-   * @returns Objek kategori.
    */
   public async getCategoryById(id: string): Promise<CategoryAttributes> {
     const category = await Category.findByPk(id);
@@ -58,9 +94,6 @@ class CategoryService {
 
   /**
    * Memperbarui kategori berdasarkan ID.
-   * @param id ID kategori.
-   * @param categoryData Data pembaruan.
-   * @returns Kategori yang sudah diperbarui.
    */
   public async updateCategory(id: string, categoryData: UpdateCategoryInput): Promise<CategoryAttributes> {
     const category = await Category.findByPk(id);
@@ -74,7 +107,6 @@ class CategoryService {
 
   /**
    * Menghapus kategori berdasarkan ID.
-   * @param id ID kategori.
    */
   public async deleteCategory(id: string): Promise<void> {
     const category = await Category.findByPk(id);

@@ -429,3 +429,728 @@
 2025-10-16 10:12:27:1227 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
 2025-10-16 10:12:27:1227 error: [PUT] /api/v1/products/de154ff2-5156-4384-8f8f-6d632196e0fd >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
 2025-10-16 10:12:28:1228 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-22 23:38:03:383 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-22 23:38:03:383 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:38:03:383 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:38:03:383 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:38:03:383 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:38:03:383 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:38:03:383 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:38:04:384 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-22 23:38:04:384 error: [PUT] /api/v1/products/83502212-5f38-41ec-830c-efdcf245d829 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-22 23:38:05:385 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-22 23:42:20:4220 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-22 23:42:20:4220 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:42:20:4220 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:42:20:4220 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:42:20:4220 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:42:20:4220 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:42:20:4220 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:42:21:4221 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-22 23:42:22:4222 error: [PUT] /api/v1/products/3a508da9-62e6-4954-b537-cd577eb6154c >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-22 23:42:23:4223 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-22 23:45:21:4521 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-22 23:45:21:4521 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:45:21:4521 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:45:21:4521 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:45:21:4521 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:45:21:4521 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:45:21:4521 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:45:22:4522 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-22 23:45:22:4522 error: [PUT] /api/v1/products/de975ece-40bb-4de1-9e16-99a3b6adb11a >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-22 23:45:24:4524 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-22 23:51:20:5120 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-22 23:51:22:5122 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-22 23:51:22:5122 error: [PUT] /api/v1/products/a7dc3383-4e93-44f0-95ba-7c70a99da4fc >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-22 23:51:23:5123 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-22 23:51:23:5123 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:51:23:5123 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:51:23:5123 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:51:23:5123 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:51:23:5123 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:51:23:5123 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:51:24:5124 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-22 23:57:10:5710 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-22 23:57:11:5711 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-22 23:57:11:5711 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:57:11:5711 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:57:11:5711 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:57:11:5711 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:57:11:5711 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:57:11:5711 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-22 23:57:13:5713 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-22 23:57:13:5713 error: [PUT] /api/v1/products/b48a6851-76e4-4c59-9c1b-419675f7af85 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-22 23:57:14:5714 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-23 00:00:12:012 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-23 00:00:13:013 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-23 00:00:13:013 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-23 00:00:13:013 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-23 00:00:13:013 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-23 00:00:13:013 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-23 00:00:13:013 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-23 00:00:13:013 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-23 00:00:14:014 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-23 00:00:14:014 error: [PUT] /api/v1/products/e4878a08-4e7a-4f7a-83bb-001d3dd48ed0 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-23 00:00:15:015 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-23 00:00:41:041 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-23 00:00:42:042 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-23 00:00:43:043 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-23 00:00:43:043 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-23 00:00:43:043 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-23 00:00:43:043 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-23 00:00:43:043 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-23 00:00:43:043 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-23 00:00:44:044 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-23 00:00:44:044 error: [PUT] /api/v1/products/c306fbd9-51aa-4bda-968a-04b1d93968e6 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-23 00:00:46:046 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-23 00:13:01:131 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-23 00:13:07:137 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-23 00:13:07:137 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-23 00:13:07:137 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-23 00:13:07:137 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-23 00:13:07:137 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-23 00:13:07:137 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-23 00:13:07:137 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-23 00:13:09:139 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-23 00:13:11:1311 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-23 00:13:11:1311 error: [PUT] /api/v1/products/34999988-36e6-4489-9118-358c850d9781 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 19:52:52:5252 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-10-29 19:52:52:5252 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-10-29 19:54:42:5442 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-10-29 19:54:42:5442 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-10-29 19:58:56:5856 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 19:58:57:5857 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 19:58:57:5857 error: [PUT] /api/v1/products/8c3d70b8-5d1c-4e42-9981-42cb8e596c9f >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 19:58:58:5858 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 19:59:00:590 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 19:59:00:590 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 19:59:00:590 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 19:59:00:590 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 19:59:00:590 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 19:59:00:590 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 19:59:00:590 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:00:09:09 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 20:00:10:010 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 20:00:10:010 error: [PUT] /api/v1/products/4347a90c-0374-458a-9057-4534013c15d9 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 20:00:12:012 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 20:00:12:012 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:00:12:012 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:00:12:012 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:00:12:012 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:00:12:012 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:00:12:012 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:00:13:013 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 20:00:20:020 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 20:00:21:021 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 20:00:21:021 error: [PUT] /api/v1/products/f7e51edd-ccba-40af-8243-7665d8e2e0ea >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 20:00:22:022 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 20:00:22:022 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:00:22:022 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:00:22:022 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:00:22:022 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:00:22:022 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:00:22:022 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:00:24:024 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 20:04:10:410 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 20:04:11:411 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 20:04:11:411 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:04:11:411 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:04:11:411 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:04:11:411 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:04:11:411 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:04:11:411 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:04:13:413 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 20:04:13:413 error: [PUT] /api/v1/products/41b754b4-88d5-4787-96ef-3ba6b3ae42ba >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 20:04:14:414 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 20:27:27:2727 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 20:27:27:2727 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 20:27:30:2730 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 20:27:30:2730 error: [PUT] /api/v1/products/bb366aa4-3309-4f6b-a3de-d66c728a6860 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 20:27:31:2731 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 20:27:31:2731 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:27:31:2731 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:27:31:2731 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:27:31:2731 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:27:31:2731 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:27:31:2731 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:27:33:2733 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 20:27:34:2734 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 20:31:19:3119 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 20:31:19:3119 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 20:31:20:3120 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 20:31:20:3120 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 20:31:21:3121 error: [PUT] /api/v1/products/69b26eea-d85a-464e-9f1f-5d2f4174df3e >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 20:31:22:3122 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 20:31:22:3122 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:31:22:3122 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:31:22:3122 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:31:22:3122 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:31:22:3122 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:31:22:3122 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:31:24:3124 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 20:33:49:3349 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 20:33:49:3349 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 20:33:50:3350 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 20:33:50:3350 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:33:50:3350 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:33:50:3350 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:33:50:3350 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:33:50:3350 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:33:50:3350 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:33:51:3351 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 20:33:52:3352 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 20:33:52:3352 error: [PUT] /api/v1/products/75e5865b-c3e7-4a64-8b8e-329fffbb865d >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 20:33:53:3353 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 20:36:58:3658 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 20:36:58:3658 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 20:37:01:371 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 20:37:01:371 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:37:01:371 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:37:01:371 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:37:01:371 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:37:01:371 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:37:01:371 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:37:03:373 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 20:37:03:373 error: [PUT] /api/v1/products/7c14e6d5-2e9c-4142-a490-4faeaa9a4279 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 20:37:04:374 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 20:37:05:375 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 20:39:20:3920 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 20:39:20:3920 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 20:39:21:3921 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 20:39:21:3921 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:39:21:3921 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:39:21:3921 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:39:21:3921 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:39:21:3921 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:39:21:3921 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 20:39:23:3923 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 20:39:23:3923 error: [PUT] /api/v1/products/b8da1ae0-337b-46f9-a7de-42d73016ce65 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 20:39:24:3924 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 20:39:25:3925 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:04:07:47 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 21:14:42:1442 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 21:23:25:2325 error: [GET] /api/vEntry/v1/sellers/dashboard/stats >> StatusCode:: 404, Message:: Resource not found on this server
+2025-10-29 21:23:27:2327 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 21:23:27:2327 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 21:23:28:2328 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 21:23:28:2328 error: [PUT] /api/v1/products/69540249-9050-4af8-8db0-40c1306eafff >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:23:29:2329 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 21:23:30:2330 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:23:31:2331 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 21:23:31:2331 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 21:23:32:2332 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 21:23:32:2332 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:23:32:2332 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:23:32:2332 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:23:32:2332 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:23:32:2332 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:23:32:2332 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:23:32:2332 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:23:32:2332 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:23:32:2332 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:23:32:2332 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:23:32:2332 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:30:54:3054 error: [GET] /api/vEntry/v1/sellers/dashboard/stats >> StatusCode:: 404, Message:: Resource not found on this server
+2025-10-29 21:30:55:3055 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 21:30:55:3055 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 21:30:56:3056 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 21:30:56:3056 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 21:30:57:3057 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 21:30:57:3057 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 21:30:57:3057 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:30:58:3058 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:30:58:3058 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:30:58:3058 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:30:58:3058 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:30:58:3058 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:30:58:3058 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:30:58:3058 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:30:58:3058 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:30:58:3058 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:30:58:3058 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:30:59:3059 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 21:30:59:3059 error: [PUT] /api/v1/products/007dcb4b-4776-434d-a7f7-50e69addc938 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:31:01:311 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:31:02:312 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 21:32:54:3254 error: [GET] /api/vEntry/v1/sellers/dashboard/stats >> StatusCode:: 404, Message:: Resource not found on this server
+2025-10-29 21:32:55:3255 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 21:32:55:3255 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 21:32:55:3255 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:32:55:3255 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:32:55:3255 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:32:55:3255 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:32:55:3255 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:32:55:3255 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:32:55:3255 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:32:55:3255 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:32:55:3255 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:32:55:3255 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:32:55:3255 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:32:57:3257 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 21:32:57:3257 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 21:32:58:3258 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 21:32:59:3259 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 21:32:59:3259 error: [PUT] /api/v1/products/7f043ad1-2b3d-48f1-911a-74a1be6d0698 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:33:00:330 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:33:02:332 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 21:33:02:332 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 21:33:09:339 error: [GET] /api/vEntry/v1/sellers/dashboard/stats >> StatusCode:: 404, Message:: Resource not found on this server
+2025-10-29 21:33:10:3310 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 21:33:10:3310 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 21:33:10:3310 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:33:10:3310 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:33:10:3310 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:33:10:3310 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:33:10:3310 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:33:10:3310 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:33:10:3310 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:33:10:3310 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:33:10:3310 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:33:10:3310 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:33:10:3310 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:33:11:3311 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 21:33:11:3311 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 21:33:12:3312 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 21:33:13:3313 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 21:33:14:3314 error: [PUT] /api/v1/products/4eac95b1-68c4-442e-ae8f-567d186ed904 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:33:15:3315 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:33:17:3317 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 21:33:17:3317 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 21:36:27:3627 error: [GET] /api/vEntry/v1/sellers/dashboard/stats >> StatusCode:: 404, Message:: Resource not found on this server
+2025-10-29 21:36:29:3629 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 21:36:29:3629 error: [PUT] /api/v1/products/ad772824-6ddc-4b0f-a856-b07ccd2ad227 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:36:30:3630 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:36:31:3631 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 21:36:31:3631 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 21:36:31:3631 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:36:31:3631 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:36:31:3631 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:36:31:3631 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:36:31:3631 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:36:31:3631 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:36:31:3631 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:36:31:3631 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:36:31:3631 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:36:31:3631 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:36:31:3631 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:36:32:3632 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 21:36:32:3632 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 21:36:34:3634 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 21:36:35:3635 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 21:36:35:3635 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 21:36:45:3645 error: [GET] /api/vEntry/v1/sellers/dashboard/stats >> StatusCode:: 404, Message:: Resource not found on this server
+2025-10-29 21:36:46:3646 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 21:36:47:3647 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 21:36:47:3647 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:36:47:3647 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:36:47:3647 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:36:47:3647 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:36:47:3647 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:36:47:3647 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:36:47:3647 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:36:47:3647 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:36:47:3647 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:36:47:3647 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:36:47:3647 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:36:48:3648 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 21:36:48:3648 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 21:36:49:3649 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 21:36:49:3649 error: [PUT] /api/v1/products/5a67f75a-6d6b-4ab0-95ba-53ff5035ca62 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:36:51:3651 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 21:36:52:3652 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:36:56:3656 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 21:36:56:3656 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 21:39:15:3915 error: [GET] /api/vEntry/v1/sellers/dashboard/stats >> StatusCode:: 404, Message:: Resource not found on this server
+2025-10-29 21:39:17:3917 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 21:39:17:3917 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 21:39:17:3917 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 21:39:18:3918 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 21:39:18:3918 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:39:18:3918 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:39:18:3918 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:39:18:3918 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:39:18:3918 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:39:18:3918 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:39:18:3918 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:39:18:3918 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:39:18:3918 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:39:18:3918 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:39:18:3918 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:39:19:3919 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 21:39:20:3920 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:39:21:3921 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 21:39:21:3921 error: [PUT] /api/v1/products/3182bb67-82d5-45cc-a878-8d82cc9f8c44 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:39:22:3922 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 21:39:22:3922 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 21:40:23:4023 error: [GET] /api/vEntry/v1/sellers/dashboard/stats >> StatusCode:: 404, Message:: Resource not found on this server
+2025-10-29 21:40:24:4024 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 21:40:24:4024 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 21:40:24:4024 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:40:24:4024 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:40:24:4024 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:40:24:4024 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:40:24:4024 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:40:24:4024 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:40:24:4024 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:40:24:4024 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:40:24:4024 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:40:24:4024 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:40:24:4024 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:40:25:4025 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 21:40:25:4025 error: [PUT] /api/v1/products/41dcf2db-234e-4374-8695-3428be4e022c >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:40:26:4026 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 21:40:26:4026 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 21:40:28:4028 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:40:30:4030 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 21:40:33:4033 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 21:40:33:4033 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 21:46:30:4630 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 21:46:30:4630 error: [PUT] /api/v1/products/c567e07a-f2f3-43b1-98f1-400244bf9447 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:46:31:4631 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:46:33:4633 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 21:46:33:4633 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 21:46:34:4634 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 21:46:35:4635 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 21:46:35:4635 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 21:46:35:4635 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:46:35:4635 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:46:35:4635 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:46:35:4635 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:46:35:4635 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:46:35:4635 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:46:35:4635 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:46:35:4635 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:46:35:4635 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:46:35:4635 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:46:35:4635 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:46:35:4635 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 21:46:35:4635 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 21:48:49:4849 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 21:48:49:4849 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 21:48:49:4849 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:48:49:4849 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:48:49:4849 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:48:49:4849 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:48:49:4849 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:48:49:4849 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:48:49:4849 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:48:49:4849 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:48:49:4849 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:48:49:4849 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:48:49:4849 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:48:50:4850 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 21:48:50:4850 error: [PUT] /api/v1/products/04517674-10c3-4bd8-8b0f-4150e8792ead >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:48:51:4851 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 21:48:51:4851 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 21:48:53:4853 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 21:48:54:4854 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:48:58:4858 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 21:48:58:4858 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 21:54:53:5453 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 21:54:53:5453 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 21:54:53:5453 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:54:53:5453 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:54:53:5453 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:54:53:5453 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:54:53:5453 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:54:53:5453 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:54:53:5453 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:54:53:5453 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:54:53:5453 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:54:53:5453 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:54:53:5453 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:54:54:5454 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 21:54:54:5454 error: [PUT] /api/v1/products/0728f9b5-476f-4e2d-9d5e-14b6c59e8638 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:54:55:5455 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 21:54:55:5455 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 21:54:56:5456 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:54:57:5457 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 21:54:59:5459 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 21:54:59:5459 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 21:57:38:5738 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 21:57:38:5738 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 21:57:38:5738 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:57:38:5738 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:57:38:5738 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:57:38:5738 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:57:38:5738 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:57:38:5738 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 21:57:38:5738 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:57:38:5738 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:57:38:5738 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:57:38:5738 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:57:38:5738 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 21:57:39:5739 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 21:57:40:5740 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 21:57:40:5740 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 21:57:41:5741 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:57:42:5742 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 21:57:42:5742 error: [PUT] /api/v1/products/a9b9f9a4-77e7-4707-85c7-5900b6c78851 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 21:57:46:5746 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 21:57:46:5746 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 22:03:22:322 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 22:03:22:322 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 22:03:22:322 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:03:22:322 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:03:22:322 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:03:22:322 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:03:22:322 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:03:22:322 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:03:22:322 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:03:22:322 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:03:22:322 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:03:22:322 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:03:22:322 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:03:23:323 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 22:03:23:323 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 22:03:24:324 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 22:03:24:324 error: [PUT] /api/v1/products/6c7b669e-5417-4cb6-9657-de98a6e98345 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 22:03:25:325 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 22:03:27:327 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 22:03:28:328 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 22:03:28:328 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 22:11:35:1135 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 22:11:35:1135 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 22:11:35:1135 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:11:35:1135 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:11:35:1135 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:11:35:1135 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:11:35:1135 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:11:35:1135 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:11:35:1135 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:11:35:1135 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:11:35:1135 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:11:35:1135 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:11:35:1135 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:11:36:1136 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 22:11:36:1136 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 22:11:37:1137 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 22:11:40:1140 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 22:11:41:1141 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 22:11:41:1141 error: [PUT] /api/v1/products/0bd5442b-0dcc-4877-83b8-06be66514380 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 22:11:44:1144 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 22:11:44:1144 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 22:31:44:3144 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 22:31:46:3146 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 22:31:47:3147 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 22:31:47:3147 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 22:31:47:3147 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:31:47:3147 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:31:47:3147 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:31:47:3147 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:31:47:3147 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:31:47:3147 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:31:47:3147 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:31:47:3147 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:31:47:3147 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:31:47:3147 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:31:47:3147 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:31:48:3148 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 22:31:48:3148 error: [PUT] /api/v1/products/29b08989-1f79-41eb-9f64-8a7d6545ba86 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 22:31:49:3149 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 22:31:49:3149 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 22:31:52:3152 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 22:31:54:3154 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 22:31:54:3154 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 22:55:25:5525 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 22:55:31:5531 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 22:55:32:5532 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 22:55:32:5532 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 22:55:33:5533 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 22:55:33:5533 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 22:55:33:5533 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:55:33:5533 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:55:33:5533 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:55:33:5533 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:55:33:5533 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:55:33:5533 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 22:55:33:5533 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:55:33:5533 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:55:33:5533 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:55:33:5533 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:55:33:5533 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 22:55:35:5535 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 22:55:35:5535 error: [PUT] /api/v1/products/d64a537f-efdd-44d4-b15d-797dda553c25 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 22:55:36:5536 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 22:55:47:5547 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 22:55:47:5547 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 23:07:00:70 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 23:07:00:70 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 23:12:13:1213 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 23:12:13:1213 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 23:18:44:1844 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 23:18:44:1844 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 23:27:08:278 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 23:27:08:278 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 23:27:15:2715 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:27:17:2717 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 23:27:17:2717 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 23:27:19:2719 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 23:27:19:2719 error: [PUT] /api/v1/products/3ffb6d21-fbdc-4f3b-b582-b65f2ce45b41 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:27:20:2720 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 23:27:21:2721 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:27:22:2722 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 23:27:22:2722 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 23:27:22:2722 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:27:22:2722 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:27:22:2722 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:27:22:2722 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:27:22:2722 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:27:22:2722 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:27:22:2722 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:27:22:2722 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:27:22:2722 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:27:22:2722 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:27:22:2722 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:15:3015 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:30:16:3016 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 23:30:16:3016 error: [PUT] /api/v1/products/956084d8-b130-491c-9926-47e5d5c8f118 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:30:17:3017 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 23:30:17:3017 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 23:30:18:3018 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 23:30:18:3018 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 23:30:18:3018 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:18:3018 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:30:18:3018 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:30:18:3018 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:30:18:3018 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:30:18:3018 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:30:18:3018 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:18:3018 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:18:3018 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:18:3018 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:18:3018 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:20:3020 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:30:21:3021 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 23:30:21:3021 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 23:30:22:3022 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 23:30:35:3035 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 23:30:35:3035 error: [PUT] /api/v1/products/f8643bb8-9ded-471f-82b1-1247db6d6f4f >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:30:36:3036 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:30:38:3038 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 23:30:38:3038 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 23:30:39:3039 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 23:30:39:3039 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 23:30:39:3039 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:39:3039 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:30:39:3039 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:30:39:3039 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:30:39:3039 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:30:39:3039 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:30:39:3039 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:39:3039 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:39:3039 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:39:3039 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:39:3039 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:40:3040 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:30:41:3041 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 23:30:48:3048 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 23:30:49:3049 error: [PUT] /api/v1/products/ec89f7e8-87ff-4497-89b5-a1cb6eba637b >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:30:50:3050 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:30:51:3051 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 23:30:51:3051 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 23:30:52:3052 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 23:30:52:3052 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 23:30:52:3052 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:52:3052 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:30:52:3052 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:30:52:3052 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:30:52:3052 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:30:52:3052 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:52:3052 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:52:3052 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:52:3052 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:52:3052 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:30:52:3052 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:30:53:3053 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:30:55:3055 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 23:31:02:312 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 23:31:02:312 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 23:31:19:3119 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 23:31:20:3120 error: [PUT] /api/v1/products/bd06a0fd-fc46-4584-8702-cb0c28085c43 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:31:21:3121 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:31:22:3122 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:31:24:3124 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 23:31:24:3124 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 23:31:25:3125 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 23:31:25:3125 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 23:31:25:3125 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 23:31:26:3126 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 23:31:26:3126 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 23:31:26:3126 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:31:26:3126 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:31:26:3126 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:31:26:3126 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:31:26:3126 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:31:26:3126 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:31:26:3126 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:31:26:3126 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:31:26:3126 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:31:26:3126 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:31:26:3126 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:31:36:3136 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 23:31:36:3136 error: [PUT] /api/v1/products/93d1f536-21d6-4752-be92-5c125b9366a4 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:31:38:3138 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:31:40:3140 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:31:41:3141 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 23:31:41:3141 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 23:31:42:3142 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 23:31:43:3143 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 23:31:43:3143 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 23:31:44:3144 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 23:31:44:3144 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 23:31:44:3144 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:31:44:3144 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:31:44:3144 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:31:44:3144 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:31:44:3144 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:31:44:3144 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:31:44:3144 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:31:44:3144 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:31:44:3144 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:31:44:3144 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:31:44:3144 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:33:14:3314 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 23:33:14:3314 error: [PUT] /api/v1/products/af6fa330-1afc-4c11-9942-aace8e457d7f >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:33:15:3315 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 23:33:15:3315 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 23:33:16:3316 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 23:33:16:3316 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 23:33:16:3316 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:33:16:3316 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:33:16:3316 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:33:16:3316 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:33:16:3316 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:33:16:3316 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:33:16:3316 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:33:16:3316 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:33:16:3316 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:33:16:3316 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:33:16:3316 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:33:17:3317 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:33:18:3318 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 23:33:19:3319 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:33:23:3323 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 23:33:23:3323 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-10-29 23:33:47:3347 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-10-29 23:33:47:3347 error: [PUT] /api/v1/products/add0d1b4-1308-48c8-b813-7ee414206f74 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:33:49:3349 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-10-29 23:33:49:3349 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-10-29 23:33:49:3349 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:33:49:3349 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:33:49:3349 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:33:49:3349 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:33:49:3349 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:33:49:3349 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-10-29 23:33:49:3349 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:33:49:3349 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:33:49:3349 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:33:49:3349 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:33:49:3349 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-10-29 23:33:50:3350 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:33:51:3351 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-10-29 23:33:51:3351 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-10-29 23:33:52:3352 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-10-29 23:33:53:3353 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-10-29 23:34:02:342 warn: Login attempt failed for email: test@example.com. User not found.
+2025-10-29 23:34:02:342 warn: Login attempt failed for user: test@example.com. Incorrect password.

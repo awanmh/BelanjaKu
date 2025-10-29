@@ -10,9 +10,10 @@ export interface ProductAttributes {
   imageUrl: string;
   sellerId: string; // Foreign key untuk User (seller)
   categoryId: string; // Foreign key untuk Category
-  lowStockThreshold?: number; // Kolom baru untuk ambang batas stok rendah
+  lowStockThreshold?: number;
   createdAt?: Date;
   updatedAt?: Date;
+  deletedAt?: Date; // 1. Tambahkan kolom deletedAt
 }
 
 // Beberapa atribut bersifat opsional saat pembuatan
@@ -32,6 +33,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+  public readonly deletedAt!: Date; // 2. Tambahkan kolom deletedAt
 
   // Method untuk asosiasi (relasi)
   public static associate(models: any) {
@@ -100,13 +102,14 @@ export default function (sequelize: Sequelize): typeof Product {
       lowStockThreshold: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: 5, // Default ambang batas adalah 5
+        defaultValue: 5,
       },
     },
     {
       sequelize,
       tableName: 'products',
       timestamps: true,
+      paranoid: true, // 3. Aktifkan soft deletes
     }
   );
 

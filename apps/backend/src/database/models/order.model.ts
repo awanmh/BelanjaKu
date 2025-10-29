@@ -6,8 +6,8 @@ export interface OrderAttributes {
   userId: string;
   totalAmount: number;
   shippingAddress: string;
-  status: 'pending' | 'processing' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
-  // FIX: Izinkan null agar sesuai dengan definisi class
+  // FIX: Tambahkan 'completed' ke daftar status yang valid
+  status: 'pending' | 'processing' | 'paid' | 'shipped' | 'delivered' | 'cancelled' | 'completed';
   promotionId?: string | null;
   discountAmount?: number | null;
   createdAt?: Date;
@@ -23,7 +23,7 @@ export class Order extends Model<OrderAttributes, OrderCreationAttributes> imple
   public userId!: string;
   public totalAmount!: number;
   public shippingAddress!: string;
-  public status!: 'pending' | 'processing' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
+  public status!: 'pending' | 'processing' | 'paid' | 'shipped' | 'delivered' | 'cancelled' | 'completed';
   public promotionId!: string | null;
   public discountAmount!: number | null;
 
@@ -40,7 +40,6 @@ export class Order extends Model<OrderAttributes, OrderCreationAttributes> imple
       foreignKey: 'orderId',
       as: 'items',
     });
-    // Sebuah pesanan bisa memiliki satu promosi
     Order.belongsTo(models.Promotion, {
         foreignKey: 'promotionId',
         as: 'promotion'
@@ -73,7 +72,8 @@ export default function (sequelize: Sequelize): typeof Order {
         allowNull: false,
       },
       status: {
-        type: DataTypes.ENUM('pending', 'processing', 'paid', 'shipped', 'delivered', 'cancelled'),
+        // FIX: Tambahkan 'completed' ke ENUM di database
+        type: DataTypes.ENUM('pending', 'processing', 'paid', 'shipped', 'delivered', 'cancelled', 'completed'),
         defaultValue: 'pending',
       },
       promotionId: {

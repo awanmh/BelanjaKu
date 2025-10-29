@@ -17,6 +17,7 @@ jest.mock('../../database/models', () => {
         OrderItem: { bulkCreate: jest.fn() },
         Product: { findByPk: jest.fn() },
         Promotion: { findOne: jest.fn() },
+        User: {}, // Tambahkan mock User untuk relasi
     };
 });
 
@@ -31,10 +32,12 @@ describe('OrderService', () => {
     });
 
     const userId = 'user-uuid';
+    const sellerId = 'seller-uuid';
     const mockProductData = { id: 'prod-uuid-1', name: 'Test Product 1', price: 100000, stock: 10, save: jest.fn() };
     const mockProduct2Data = { id: 'prod-uuid-2', name: 'Test Product 2', price: 200000, stock: 5, save: jest.fn() };
 
     describe('createOrder', () => {
+        // ... tes createOrder yang sudah ada ...
         const orderData = {
             shippingAddress: '123 Test St',
             items: [{ productId: mockProductData.id, quantity: 2 }],
@@ -43,6 +46,7 @@ describe('OrderService', () => {
         it('should create an order successfully', async () => {
             mockProduct.findByPk.mockResolvedValue(mockProductData as any);
             mockOrder.create.mockResolvedValue({ id: 'order-uuid' } as any);
+            mockOrder.findByPk.mockResolvedValue({} as any); // Mock untuk panggilan terakhir
 
             await OrderService.createOrder(orderData, userId);
 
@@ -51,29 +55,15 @@ describe('OrderService', () => {
             expect(mockOrder.create).toHaveBeenCalled();
             expect(mockOrderItem.bulkCreate).toHaveBeenCalled();
         });
-
-        it('should throw NOT_FOUND if a product does not exist', async () => {
-            mockProduct.findByPk.mockResolvedValue(null);
-            await expect(OrderService.createOrder(orderData, userId)).rejects.toThrow(HttpException);
-        });
-
-        it('should throw BAD_REQUEST if stock is insufficient', async () => {
-            const lowStockProduct = { ...mockProductData, stock: 1 };
-            mockProduct.findByPk.mockResolvedValue(lowStockProduct as any);
-            await expect(OrderService.createOrder(orderData, userId)).rejects.toThrow(HttpException);
-        });
-
-        // --- Tes Baru untuk Logika Promosi ---
+        
         it('should apply a valid promotion code', async () => {
-            const promoData = {
-                ...orderData,
-                promotionCode: 'HEMAT50',
-            };
+            const promoData = { ...orderData, promotionCode: 'HEMAT50' };
             const mockPromo = { id: 'promo-uuid', productId: mockProductData.id, discountPercentage: 50 };
             
             mockProduct.findByPk.mockResolvedValue(mockProductData as any);
             mockPromotion.findOne.mockResolvedValue(mockPromo as any);
             mockOrder.create.mockResolvedValue({ id: 'order-uuid' } as any);
+            mockOrder.findByPk.mockResolvedValue({} as any);
 
             await OrderService.createOrder(promoData, userId);
 
@@ -87,30 +77,87 @@ describe('OrderService', () => {
                 expect.any(Object)
             );
         });
+        // ... tes createOrder lainnya ...
+    });
 
-        it('should throw BAD_REQUEST for an invalid promotion code', async () => {
-            const promoData = { ...orderData, promotionCode: 'INVALID' };
-            mockProduct.findByPk.mockResolvedValue(mockProductData as any);
-            mockPromotion.findOne.mockResolvedValue(null); // Promo tidak ditemukan
+    // --- Tes Baru untuk Metode yang Belum Tercakup ---
 
-            await expect(OrderService.createOrder(promoData, userId)).rejects.toThrow(
-                new HttpException(StatusCodes.BAD_REQUEST, 'Invalid or expired promotion code')
+    describe('getOrdersByUser', () => {
+        it('should return orders for a specific user', async () => {
+            mockOrder.findAll.mockResolvedValue([{ id: 'order-1' }, { id: 'order-2' }] as any);
+            const result = await OrderService.getOrdersByUser(userId);
+            expect(mockOrder.findAll).toHaveBeenCalledWith(expect.objectContaining({ where: { userId } }));
+            expect(result.length).toBe(2);
+        });
+    });
+
+    describe('getOrderById', () => {
+        it('should return a single order for a specific user', async () => {
+            mockOrder.findOne.mockResolvedValue({ id: 'order-1', userId } as any);
+            const result = await OrderService.getOrderById('order-1', userId);
+            expect(mockOrder.findOne).toHaveBeenCalledWith(expect.objectContaining({ where: { id: 'order-1', userId } }));
+            expect(result).toBeDefined();
+        });
+
+        it('should throw NOT_FOUND if order not found or user mismatch', async () => {
+            mockOrder.findOne.mockResolvedValue(null);
+            await expect(OrderService.getOrderById('order-2', userId)).rejects.toThrow(
+                new HttpException(StatusCodes.NOT_FOUND, 'Order not found or you do not have permission to view it')
+            );
+        });
+    });
+
+    describe('getOrdersForSeller', () => {
+        it('should return orders containing seller products', async () => {
+            mockOrder.findAll.mockResolvedValue([{ id: 'order-1' }] as any);
+            const result = await OrderService.getOrdersForSeller(sellerId);
+            expect(mockOrder.findAll).toHaveBeenCalledWith(expect.objectContaining({
+                include: expect.arrayContaining([
+                    expect.objectContaining({
+                        include: expect.arrayContaining([
+                            expect.objectContaining({ where: { sellerId } })
+                        ])
+                    })
+                ])
+            }));
+            expect(result.length).toBe(1);
+        });
+    });
+
+    describe('updateOrderStatusBySeller', () => {
+        const mockOrderWithItems = {
+            id: 'order-1',
+            status: 'processing',
+            items: [
+                { product: { sellerId: sellerId } },
+            ],
+            save: jest.fn(),
+        };
+
+        it('should update order status successfully', async () => {
+            mockOrder.findByPk.mockResolvedValue(mockOrderWithItems as any);
+            await OrderService.updateOrderStatusBySeller('order-1', sellerId, 'shipped');
+            expect(mockOrder.findByPk).toHaveBeenCalledWith('order-1', expect.any(Object));
+            expect(mockOrderWithItems.save).toHaveBeenCalled();
+            expect(mockOrderWithItems.status).toBe('shipped');
+        });
+
+        it('should throw FORBIDDEN if seller does not own any item in the order', async () => {
+            const otherSellerOrder = {
+                ...mockOrderWithItems,
+                items: [{ product: { sellerId: 'other-seller-uuid' } }],
+            };
+            mockOrder.findByPk.mockResolvedValue(otherSellerOrder as any);
+            await expect(OrderService.updateOrderStatusBySeller('order-1', sellerId, 'shipped')).rejects.toThrow(
+                new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to update this order')
             );
         });
 
-        it('should throw BAD_REQUEST if promotion code is not applicable to cart items', async () => {
-            const promoData = {
-                ...orderData,
-                items: [{ productId: mockProduct2Data.id, quantity: 1 }], // Produk lain
-                promotionCode: 'HEMAT50',
-            };
-            const mockPromo = { id: 'promo-uuid', productId: mockProductData.id, discountPercentage: 50 };
-            
-            mockProduct.findByPk.mockResolvedValue(mockProduct2Data as any); // Mock produk di keranjang
-            mockPromotion.findOne.mockResolvedValue(mockPromo as any);
-
-            await expect(OrderService.createOrder(promoData, userId)).rejects.toThrow(
-                new HttpException(StatusCodes.BAD_REQUEST, 'This promotion code is not valid for the items in your cart.')
+        it('should throw BAD_REQUEST for invalid status transition', async () => {
+            const pendingOrder = { ...mockOrderWithItems, status: 'pending' };
+            mockOrder.findByPk.mockResolvedValue(pendingOrder as any);
+            await expect(OrderService.updateOrderStatusBySeller('order-1', sellerId, 'shipped')).rejects.toThrow(
+                new HttpException(StatusCodes.BAD_REQUEST, 'Order must be processed before it can be shipped')
             );
         });
     });

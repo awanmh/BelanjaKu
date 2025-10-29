@@ -15,12 +15,8 @@ class OrderController {
    */
   public async createOrder(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (!req.user) {
-        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication is required to place an order');
-      }
-
-      const userId = req.user.id;
-      // Sekarang data mencakup promotionCode yang opsional
+      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
+      const userId = req.user!.id;
       const orderData: CreateOrderInput = req.body;
 
       const newOrder = await OrderService.createOrder(orderData, userId);
@@ -40,11 +36,8 @@ class OrderController {
    */
   public async getMyOrders(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (!req.user) {
-        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication is required to view orders');
-      }
-
-      const userId = req.user.id;
+      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
+      const userId = req.user!.id;
       const orders = await OrderService.getOrdersByUser(userId);
 
       res.status(StatusCodes.OK).json({
@@ -62,11 +55,8 @@ class OrderController {
    */
   public async getOrderById(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (!req.user) {
-        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication is required to view an order');
-      }
-
-      const userId = req.user.id;
+      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
+      const userId = req.user!.id;
       const { id: orderId } = req.params;
       const order = await OrderService.getOrderById(orderId, userId);
       
@@ -87,11 +77,8 @@ class OrderController {
    */
   public async getSellerOrders(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (!req.user) {
-        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
-      }
-      
-      const sellerId = req.user.id;
+      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
+      const sellerId = req.user!.id;
       const orders = await OrderService.getOrdersForSeller(sellerId);
 
       res.status(StatusCodes.OK).json({
@@ -109,11 +96,8 @@ class OrderController {
    */
   public async updateOrderStatus(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (!req.user) {
-        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
-      }
-      
-      const sellerId = req.user.id;
+      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
+      const sellerId = req.user!.id;
       const { id: orderId } = req.params;
       const { status } = req.body; // status: 'processing' | 'shipped'
 

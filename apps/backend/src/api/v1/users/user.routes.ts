@@ -4,7 +4,6 @@ import { updateUserValidator } from './user.validator';
 import { validate } from '../../../middlewares/validator.middleware';
 import { protect, authorize } from '../../../middlewares/auth.middleware';
 
-// Membuat instance router baru
 const userRouter = Router();
 
 // 🔐 Semua rute di bawah ini memerlukan autentikasi dan peran 'admin'.
@@ -14,10 +13,17 @@ userRouter.use(authorize('admin'));
 
 /**
  * @route   GET /api/v1/users
- * @desc    Mendapatkan daftar semua pengguna
+ * @desc    Mendapatkan daftar semua pengguna aktif
  * @access  Private (Hanya Admin)
  */
 userRouter.get('/', UserController.getAllUsers);
+
+/**
+ * @route   GET /api/v1/users/archived
+ * @desc    [BARU] Mendapatkan daftar semua pengguna yang diarsipkan
+ * @access  Private (Hanya Admin)
+ */
+userRouter.get('/archived', UserController.getArchivedUsers);
 
 /**
  * @route   GET /api/v1/users/:id
@@ -25,6 +31,13 @@ userRouter.get('/', UserController.getAllUsers);
  * @access  Private (Hanya Admin)
  */
 userRouter.get('/:id', UserController.getUserById);
+
+/**
+ * @route   POST /api/v1/users/:id/restore
+ * @desc    [BARU] Memulihkan pengguna yang diarsipkan
+ * @access  Private (Hanya Admin)
+ */
+userRouter.post('/:id/restore', UserController.restoreUser);
 
 /**
  * @route   PUT /api/v1/users/:id
@@ -40,7 +53,7 @@ userRouter.put(
 
 /**
  * @route   DELETE /api/v1/users/:id
- * @desc    Menghapus pengguna
+ * @desc    Menghapus (soft delete) pengguna
  * @access  Private (Hanya Admin)
  */
 userRouter.delete('/:id', UserController.deleteUser);

@@ -1,22 +1,22 @@
 import { DataTypes, Model, Sequelize, Optional } from 'sequelize';
 import bcrypt from 'bcryptjs';
 
-// Atribut yang wajib ada saat membuat user baru
+// Interface untuk atribut-atribut User
 export interface UserAttributes {
   id: string;
   fullName: string;
   email: string;
-  password: string; // Password wajib ada saat pembuatan
+  password: string;
   role: 'user' | 'seller' | 'admin';
   isVerified: boolean;
   createdAt?: Date;
   updatedAt?: Date;
+  deletedAt?: Date | null; // 1. Tambahkan kolom deletedAt (izinkan null)
 }
 
-// Atribut yang bisa diisi saat membuat user (id bersifat opsional)
+// Atribut yang opsional saat pembuatan
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
 
-// FIX: Memperbaiki kesalahan ketik dari UserCreation-Attributes menjadi UserCreationAttributes
 export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
   public id!: string;
   public fullName!: string;
@@ -26,6 +26,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   public isVerified!: boolean;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+  public readonly deletedAt!: Date | null; // 2. Tambahkan kolom deletedAt
 
   // Method untuk membandingkan password
   public async comparePassword(password: string): Promise<boolean> {
@@ -34,12 +35,10 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
 
   // Method untuk asosiasi (relasi)
   public static associate(models: any) {
-    // Seorang User memiliki satu profil Seller
     User.hasOne(models.Seller, {
       foreignKey: 'userId',
       as: 'sellerProfile',
     });
-    // Seorang User memiliki banyak Produk (sebagai penjual)
     User.hasMany(models.Product, {
       foreignKey: 'sellerId',
       as: 'products',
@@ -78,10 +77,13 @@ export default function (sequelize: Sequelize): typeof User {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
+      // Kolom deletedAt akan ditambahkan secara otomatis oleh Sequelize
     },
     {
       sequelize,
       tableName: 'users',
+      timestamps: true,
+      paranoid: true, // 3. Aktifkan soft deletes
       hooks: {
         beforeCreate: async (user: User) => {
           if (user.password) {
@@ -98,6 +100,12 @@ export default function (sequelize: Sequelize): typeof User {
       },
     }
   );
+
+  // Hook toJSON untuk menghapus password secara otomatis
+  User.prototype.toJSON = function () {
+    const { password, ...values } = { ...this.get() };
+    return values;
+  };
 
   return User;
 }

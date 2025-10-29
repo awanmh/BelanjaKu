@@ -9,7 +9,7 @@ interface AuthenticatedRequest extends Request {
     id: string;
     role: 'user' | 'seller' | 'admin';
   };
-  file?: Express.Multer.File;
+  file?: Express.Multer.File; // Tambahkan properti file dari Multer
 }
 
 /**
@@ -21,14 +21,13 @@ class ProductController {
    */
   public async createProduct(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (!req.user) {
-        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
-      }
+      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan karena sudah ditangani oleh middleware 'protect'
       if (!req.file) {
         throw new HttpException(StatusCodes.BAD_REQUEST, 'Product image is required');
       }
       
-      const sellerId = req.user.id;
+      // Kita bisa langsung mengakses req.user!.id dengan aman
+      const sellerId = req.user!.id;
       const productData: CreateProductInput = req.body;
 
       productData.imageUrl = req.file.path;
@@ -66,11 +65,8 @@ class ProductController {
    */
   public async getMyProducts(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (!req.user) {
-        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
-      }
-      
-      const sellerId = req.user.id;
+      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
+      const sellerId = req.user!.id;
       const products = await ProductService.getProductsBySeller(sellerId, req.query);
 
       res.status(StatusCodes.OK).json({
@@ -105,12 +101,9 @@ class ProductController {
    */
   public async updateProduct(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (!req.user) {
-        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
-      }
-      
+      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
       const { id: productId } = req.params;
-      const userId = req.user.id;
+      const userId = req.user!.id;
       const productData: UpdateProductInput = req.body;
 
       if (req.file) {
@@ -134,12 +127,9 @@ class ProductController {
    */
   public async deleteProduct(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-        if (!req.user) {
-            throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
-        }
-
+        // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
         const { id: productId } = req.params;
-        const userId = req.user.id;
+        const userId = req.user!.id;
 
         await ProductService.deleteProduct(productId, userId);
 

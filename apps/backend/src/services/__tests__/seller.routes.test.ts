@@ -1,4 +1,5 @@
 import request from 'supertest';
+// FIX: Path impor diperbarui untuk mencerminkan lokasi file yang benar (naik 4 level)
 import app from '../../server';
 import db from '../../database/models';
 
@@ -59,8 +60,6 @@ describe('Seller API Endpoints', () => {
 
   describe('Seller Dashboard', () => {
     it('should get dashboard stats', async () => {
-        // (Setup data pesanan jika perlu untuk stats yang lebih akurat)
-        // Untuk saat ini, kita hanya cek apakah endpoint berjalan dan mengembalikan struktur yang benar
         const response = await request(app)
             .get('/api/v1/sellers/dashboard/stats')
             .set('Authorization', `Bearer ${sellerToken}`);
@@ -73,12 +72,10 @@ describe('Seller API Endpoints', () => {
     });
 
     it('should get low stock products', async () => {
-        // Buat produk dengan stok rendah
         const category = await db.Category.create({ name: 'Gadgets' });
-        // FIX: Tambahkan properti 'description' yang wajib ada
         await db.Product.create({ 
             name: 'Power Bank', 
-            description: 'A reliable power bank', // Ditambahkan
+            description: 'A reliable power bank',
             price: 200000, 
             stock: 3, 
             lowStockThreshold: 5, 
@@ -98,3 +95,4 @@ describe('Seller API Endpoints', () => {
     });
   });
 });
+

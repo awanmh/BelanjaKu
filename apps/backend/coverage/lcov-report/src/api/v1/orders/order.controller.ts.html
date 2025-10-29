@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.47% </span>
+                <span class="strong">47.54% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>60/138</span>
+                <span class='fraction'>58/122</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.47% </span>
+                <span class="strong">47.54% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>60/138</span>
+                <span class='fraction'>58/122</span>
             </div>
         
             
@@ -184,23 +184,7 @@
 <a name='L119'></a><a href='#L119'>119</a>
 <a name='L120'></a><a href='#L120'>120</a>
 <a name='L121'></a><a href='#L121'>121</a>
-<a name='L122'></a><a href='#L122'>122</a>
-<a name='L123'></a><a href='#L123'>123</a>
-<a name='L124'></a><a href='#L124'>124</a>
-<a name='L125'></a><a href='#L125'>125</a>
-<a name='L126'></a><a href='#L126'>126</a>
-<a name='L127'></a><a href='#L127'>127</a>
-<a name='L128'></a><a href='#L128'>128</a>
-<a name='L129'></a><a href='#L129'>129</a>
-<a name='L130'></a><a href='#L130'>130</a>
-<a name='L131'></a><a href='#L131'>131</a>
-<a name='L132'></a><a href='#L132'>132</a>
-<a name='L133'></a><a href='#L133'>133</a>
-<a name='L134'></a><a href='#L134'>134</a>
-<a name='L135'></a><a href='#L135'>135</a>
-<a name='L136'></a><a href='#L136'>136</a>
-<a name='L137'></a><a href='#L137'>137</a>
-<a name='L138'></a><a href='#L138'>138</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L122'></a><a href='#L122'>122</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -216,10 +200,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -255,17 +235,11 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -302,17 +276,11 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -354,12 +322,8 @@ class OrderController {
    */
   public async createOrder(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise&lt;void&gt; {
     try {
-      if (!req.user) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication is required to place an order');</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-&nbsp;
-      const userId = req.user.id;
-      // Sekarang data mencakup promotionCode yang opsional
+      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
+      const userId = req.user!.id;
       const orderData: CreateOrderInput = req.body;
 &nbsp;
       const newOrder = await OrderService.createOrder(orderData, userId);
@@ -379,11 +343,8 @@ class OrderController {
    */
   public async <span class="fstat-no" title="function not covered" >getMyOrders(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise&lt;void&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >      if (!req.user) {</span>
-<span class="cstat-no" title="statement not covered" >        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication is required to view orders');</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      const userId = req.user.id;</span>
+<span class="cstat-no" title="statement not covered" >      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan</span>
+<span class="cstat-no" title="statement not covered" >      const userId = req.user!.id;</span>
 <span class="cstat-no" title="statement not covered" >      const orders = await OrderService.getOrdersByUser(userId);</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >      res.status(StatusCodes.OK).json({</span>
@@ -401,11 +362,8 @@ class OrderController {
    */
   public async <span class="fstat-no" title="function not covered" >getOrderById(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise&lt;void&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >      if (!req.user) {</span>
-<span class="cstat-no" title="statement not covered" >        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication is required to view an order');</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      const userId = req.user.id;</span>
+<span class="cstat-no" title="statement not covered" >      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan</span>
+<span class="cstat-no" title="statement not covered" >      const userId = req.user!.id;</span>
 <span class="cstat-no" title="statement not covered" >      const { id: orderId } = req.params;</span>
 <span class="cstat-no" title="statement not covered" >      const order = await OrderService.getOrderById(orderId, userId);</span>
 <span class="cstat-no" title="statement not covered" >      </span>
@@ -426,11 +384,8 @@ class OrderController {
    */
   public async <span class="fstat-no" title="function not covered" >getSellerOrders(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise&lt;void&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >      if (!req.user) {</span>
-<span class="cstat-no" title="statement not covered" >        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >      </span>
-<span class="cstat-no" title="statement not covered" >      const sellerId = req.user.id;</span>
+<span class="cstat-no" title="statement not covered" >      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan</span>
+<span class="cstat-no" title="statement not covered" >      const sellerId = req.user!.id;</span>
 <span class="cstat-no" title="statement not covered" >      const orders = await OrderService.getOrdersForSeller(sellerId);</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >      res.status(StatusCodes.OK).json({</span>
@@ -448,11 +403,8 @@ class OrderController {
    */
   public async <span class="fstat-no" title="function not covered" >updateOrderStatus(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise&lt;void&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >      if (!req.user) {</span>
-<span class="cstat-no" title="statement not covered" >        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >      </span>
-<span class="cstat-no" title="statement not covered" >      const sellerId = req.user.id;</span>
+<span class="cstat-no" title="statement not covered" >      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan</span>
+<span class="cstat-no" title="statement not covered" >      const sellerId = req.user!.id;</span>
 <span class="cstat-no" title="statement not covered" >      const { id: orderId } = req.params;</span>
 <span class="cstat-no" title="statement not covered" >      const { status } = req.body; // status: 'processing' | 'shipped'</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -481,7 +433,7 @@ export default new OrderController();</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-16T03:12:33.786Z
+                at 2025-10-29T16:34:03.805Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

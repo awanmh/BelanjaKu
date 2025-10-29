@@ -1,4 +1,4 @@
-import { Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express'; // FIX: Tambahkan 'Request' di sini
 import { StatusCodes } from 'http-status-codes';
 import ReviewService, { CreateReviewInput } from '../../../services/review.service';
 import HttpException from '../../../utils/http-exception.util';
@@ -13,12 +13,8 @@ class ReviewController {
    */
   public async createReview(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      // Pastikan pengguna sudah terautentikasi dan memiliki ID
-      if (!req.user) {
-        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication is required to post a review');
-      }
-
-      const userId = req.user.id;
+      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan karena sudah ditangani oleh middleware 'protect'
+      const userId = req.user!.id;
       const reviewData: CreateReviewInput = req.body;
 
       const newReview = await ReviewService.createReview(reviewData, userId);
@@ -36,7 +32,7 @@ class ReviewController {
   /**
    * Menangani permintaan untuk mendapatkan semua ulasan untuk produk tertentu.
    */
-  public async getReviewsByProduct(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+  public async getReviewsByProduct(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { productId } = req.params;
       const reviews = await ReviewService.getReviewsByProduct(productId);

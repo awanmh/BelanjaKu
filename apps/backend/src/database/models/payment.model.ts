@@ -1,25 +1,26 @@
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 
-// Enum untuk metode pembayaran
-export type PaymentMethod = 'cod' | 'credit_card' | 'e_wallet' | 'qris' | 'bank_transfer';
-export type PaymentStatus = 'pending' | 'success' | 'failed' | 'expired';
+// Definisikan tipe literal untuk metode pembayaran
+export type PaymentMethod = 'cod' | 'credit_card' | 'debit_card' | 'e_wallet' | 'qris' | 'bank_transfer';
 
 // Interface untuk atribut-atribut Payment
 export interface PaymentAttributes {
   id: string;
-  orderId: string;
+  orderId: string; // Foreign key ke Order
   transactionId: string; // ID transaksi dari payment gateway
-  paymentGateway: string; // Nama payment gateway (e.g., 'midtrans', 'simulation')
+  paymentGateway: string; // Nama payment gateway yang digunakan
   amount: number;
   method: PaymentMethod;
-  status: PaymentStatus;
-  paymentUrl?: string; // URL/instruksi untuk pelanggan membayar
+  status: 'pending' | 'success' | 'failed' | 'expired';
+  paymentUrl?: string | null; // FIX: Izinkan null agar sesuai dengan logika service
   createdAt?: Date;
   updatedAt?: Date;
 }
 
+// Atribut yang opsional saat pembuatan
 interface PaymentCreationAttributes extends Optional<PaymentAttributes, 'id'> {}
 
+// Definisikan class Model untuk Payment
 export class Payment extends Model<PaymentAttributes, PaymentCreationAttributes> implements PaymentAttributes {
   public id!: string;
   public orderId!: string;
@@ -27,13 +28,15 @@ export class Payment extends Model<PaymentAttributes, PaymentCreationAttributes>
   public paymentGateway!: string;
   public amount!: number;
   public method!: PaymentMethod;
-  public status!: PaymentStatus;
-  public paymentUrl!: string;
-  
+  public status!: 'pending' | 'success' | 'failed' | 'expired';
+  public paymentUrl!: string | null;
+
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
+  // Method untuk asosiasi (relasi)
   public static associate(models: any) {
+    // Sebuah pembayaran dimiliki oleh satu Order
     Payment.belongsTo(models.Order, {
       foreignKey: 'orderId',
       as: 'order',
@@ -41,6 +44,7 @@ export class Payment extends Model<PaymentAttributes, PaymentCreationAttributes>
   }
 }
 
+// Fungsi factory untuk menginisialisasi model
 export default function (sequelize: Sequelize): typeof Payment {
   Payment.init(
     {
@@ -53,6 +57,8 @@ export default function (sequelize: Sequelize): typeof Payment {
         type: DataTypes.UUID,
         allowNull: false,
         references: { model: 'orders', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE', // Jika pesanan dihapus, catatan pembayaran juga terhapus
       },
       transactionId: {
         type: DataTypes.STRING,
@@ -68,7 +74,7 @@ export default function (sequelize: Sequelize): typeof Payment {
         allowNull: false,
       },
       method: {
-        type: DataTypes.ENUM('cod', 'credit_card', 'e_wallet', 'qris', 'bank_transfer'),
+        type: DataTypes.ENUM('cod', 'credit_card', 'debit_card', 'e_wallet', 'qris', 'bank_transfer'),
         allowNull: false,
       },
       status: {
@@ -89,3 +95,4 @@ export default function (sequelize: Sequelize): typeof Payment {
 
   return Payment;
 }
+

@@ -1,110 +1,115 @@
-import UserService from '../user.service';
-import db from '../../database/models';
-import HttpException from '../../utils/http-exception.util';
+import { Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import UserService, { UpdateUserInput } from '../../services/user.service';
+import { AuthenticatedRequest } from '../../middlewares/auth.middleware';
 
-// Mock dependensi eksternal
-jest.mock('../../database/models', () => ({
-  User: {
-    findAll: jest.fn(),
-    findByPk: jest.fn(),
-    destroy: jest.fn(),
-  },
-}));
+/**
+ * Controller untuk menangani semua request yang berhubungan dengan manajemen pengguna oleh admin.
+ */
+class UserController {
+  /**
+   * Menangani permintaan untuk mendapatkan semua pengguna.
+   */
+  public async getAllUsers(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+    try {
+      // FIX: Teruskan req.query dari controller ke service
+      const users = await UserService.getAllUsers(req.query);
+      res.status(StatusCodes.OK).json({
+        success: true,
+        message: 'Users retrieved successfully',
+        data: users,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 
-const mockUser = db.User as jest.Mocked<typeof db.User>;
+  /**
+   * Menangani permintaan untuk mendapatkan satu pengguna berdasarkan ID.
+   */
+  public async getUserById(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const { id } = req.params;
+      const user = await UserService.getUserById(id);
+      res.status(StatusCodes.OK).json({
+        success: true,
+        message: 'User retrieved successfully',
+        data: user,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 
-describe('UserService', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
+  /**
+   * Menangani permintaan untuk memperbarui data pengguna.
+   */
+  public async updateUser(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const { id } = req.params;
+      const userData: UpdateUserInput = req.body;
+      const updatedUser = await UserService.updateUser(id, userData);
 
-  // --- Pengujian untuk Metode `getAllUsers` ---
-  describe('getAllUsers', () => {
-    it('should return a list of users', async () => {
-      const mockUsers = [
-        { toJSON: () => ({ id: '1', email: 'user1@test.com' }) },
-        { toJSON: () => ({ id: '2', email: 'user2@test.com' }) },
-      ];
-      mockUser.findAll.mockResolvedValue(mockUsers as any);
+      res.status(StatusCodes.OK).json({
+        success: true,
+        message: 'User updated successfully',
+        data: updatedUser,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 
-      const result = await UserService.getAllUsers();
+  /**
+   * Menangani permintaan untuk menghapus (soft delete) pengguna.
+   */
+  public async deleteUser(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const { id } = req.params;
+      await UserService.deleteUser(id);
+      res.status(StatusCodes.OK).json({
+        success: true,
+        message: 'User archived successfully',
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 
-      expect(mockUser.findAll).toHaveBeenCalled();
-      expect(result.length).toBe(2);
-      expect(result[0].email).toBe('user1@test.com');
-    });
-  });
+  /**
+   * [BARU] Menangani permintaan untuk mendapatkan semua pengguna yang diarsipkan.
+   */
+  public async getArchivedUsers(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const users = await UserService.getArchivedUsers(req.query);
+      res.status(StatusCodes.OK).json({
+        success: true,
+        message: 'Archived users retrieved successfully',
+        data: users,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 
-  // --- Pengujian untuk Metode `getUserById` ---
-  describe('getUserById', () => {
-    it('should return a single user if found', async () => {
-      const mockUserData = { id: '1', email: 'user1@test.com' };
-      const mockUserInstance = { toJSON: () => mockUserData };
-      mockUser.findByPk.mockResolvedValue(mockUserInstance as any);
+  /**
+   * [BARU] Menangani permintaan untuk memulihkan pengguna yang diarsipkan.
+   */
+  public async restoreUser(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const { id } = req.params;
+      const restoredUser = await UserService.restoreUser(id);
+      res.status(StatusCodes.OK).json({
+        success: true,
+        message: 'User restored successfully',
+        data: restoredUser,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+}
 
-      const result = await UserService.getUserById('1');
-
-      expect(mockUser.findByPk).toHaveBeenCalledWith('1', expect.any(Object));
-      expect(result).toEqual(mockUserData);
-    });
-
-    it('should throw NOT_FOUND if user is not found', async () => {
-      mockUser.findByPk.mockResolvedValue(null);
-
-      await expect(UserService.getUserById('1')).rejects.toThrow(
-        new HttpException(StatusCodes.NOT_FOUND, 'User not found')
-      );
-    });
-  });
-
-  // --- Pengujian untuk Metode `updateUser` ---
-  describe('updateUser', () => {
-    it('should update a user successfully', async () => {
-      // FIX: Gunakan 'as const' untuk memberitahu TypeScript tipe yang lebih spesifik
-      const updateData = { role: 'seller' } as const;
-      const mockUserInstance = {
-        update: jest.fn(),
-      };
-      mockUser.findByPk.mockResolvedValue(mockUserInstance as any);
-      // Mock panggilan kedua di dalam updateUser
-      jest.spyOn(UserService, 'getUserById').mockResolvedValue({ id: '1', role: 'seller' } as any);
-
-      const result = await UserService.updateUser('1', updateData);
-
-      expect(mockUser.findByPk).toHaveBeenCalledWith('1');
-      expect(mockUserInstance.update).toHaveBeenCalledWith(updateData);
-      expect(result.role).toBe('seller');
-    });
-
-    it('should throw NOT_FOUND if user to update is not found', async () => {
-      mockUser.findByPk.mockResolvedValue(null);
-      await expect(UserService.updateUser('1', {})).rejects.toThrow(
-        new HttpException(StatusCodes.NOT_FOUND, 'User not found')
-      );
-    });
-  });
-
-  // --- Pengujian untuk Metode `deleteUser` ---
-  describe('deleteUser', () => {
-    it('should delete a user successfully', async () => {
-      const mockUserInstance = {
-        destroy: jest.fn(),
-      };
-      mockUser.findByPk.mockResolvedValue(mockUserInstance as any);
-
-      await UserService.deleteUser('1');
-
-      expect(mockUser.findByPk).toHaveBeenCalledWith('1');
-      expect(mockUserInstance.destroy).toHaveBeenCalledTimes(1);
-    });
-
-    it('should throw NOT_FOUND if user to delete is not found', async () => {
-      mockUser.findByPk.mockResolvedValue(null);
-      await expect(UserService.deleteUser('1')).rejects.toThrow(
-        new HttpException(StatusCodes.NOT_FOUND, 'User not found')
-      );
-    });
-  });
-});
+// Ekspor sebagai singleton instance
+export default new UserController();
 

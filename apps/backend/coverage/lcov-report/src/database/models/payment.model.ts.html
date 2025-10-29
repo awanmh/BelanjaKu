@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>91/91</span>
+                <span class='fraction'>97/97</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>91/91</span>
+                <span class='fraction'>97/97</span>
             </div>
         
             
@@ -154,7 +154,14 @@
 <a name='L89'></a><a href='#L89'>89</a>
 <a name='L90'></a><a href='#L90'>90</a>
 <a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -245,28 +252,36 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 &nbsp;
-// Enum untuk metode pembayaran
-export type PaymentMethod = 'cod' | 'credit_card' | 'e_wallet' | 'qris' | 'bank_transfer';
-export type PaymentStatus = 'pending' | 'success' | 'failed' | 'expired';
+// Definisikan tipe literal untuk metode pembayaran
+export type PaymentMethod = 'cod' | 'credit_card' | 'debit_card' | 'e_wallet' | 'qris' | 'bank_transfer';
 &nbsp;
 // Interface untuk atribut-atribut Payment
 export interface PaymentAttributes {
   id: string;
-  orderId: string;
+  orderId: string; // Foreign key ke Order
   transactionId: string; // ID transaksi dari payment gateway
-  paymentGateway: string; // Nama payment gateway (e.g., 'midtrans', 'simulation')
+  paymentGateway: string; // Nama payment gateway yang digunakan
   amount: number;
   method: PaymentMethod;
-  status: PaymentStatus;
-  paymentUrl?: string; // URL/instruksi untuk pelanggan membayar
+  status: 'pending' | 'success' | 'failed' | 'expired';
+  paymentUrl?: string | null; // FIX: Izinkan null agar sesuai dengan logika service
   createdAt?: Date;
   updatedAt?: Date;
 }
 &nbsp;
+// Atribut yang opsional saat pembuatan
 interface PaymentCreationAttributes extends Optional&lt;PaymentAttributes, 'id'&gt; {}
 &nbsp;
+// Definisikan class Model untuk Payment
 export class Payment extends Model&lt;PaymentAttributes, PaymentCreationAttributes&gt; implements PaymentAttributes {
   public id!: string;
   public orderId!: string;
@@ -274,13 +289,15 @@ export class Payment extends Model&lt;PaymentAttributes, PaymentCreationAttribut
   public paymentGateway!: string;
   public amount!: number;
   public method!: PaymentMethod;
-  public status!: PaymentStatus;
-  public paymentUrl!: string;
-  
+  public status!: 'pending' | 'success' | 'failed' | 'expired';
+  public paymentUrl!: string | null;
+&nbsp;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 &nbsp;
+  // Method untuk asosiasi (relasi)
   public static associate(models: any) {
+    // Sebuah pembayaran dimiliki oleh satu Order
     Payment.belongsTo(models.Order, {
       foreignKey: 'orderId',
       as: 'order',
@@ -288,6 +305,7 @@ export class Payment extends Model&lt;PaymentAttributes, PaymentCreationAttribut
   }
 }
 &nbsp;
+// Fungsi factory untuk menginisialisasi model
 export default function (sequelize: Sequelize): typeof Payment {
   Payment.init(
     {
@@ -300,6 +318,8 @@ export default function (sequelize: Sequelize): typeof Payment {
         type: DataTypes.UUID,
         allowNull: false,
         references: { model: 'orders', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE', // Jika pesanan dihapus, catatan pembayaran juga terhapus
       },
       transactionId: {
         type: DataTypes.STRING,
@@ -315,7 +335,7 @@ export default function (sequelize: Sequelize): typeof Payment {
         allowNull: false,
       },
       method: {
-        type: DataTypes.ENUM('cod', 'credit_card', 'e_wallet', 'qris', 'bank_transfer'),
+        type: DataTypes.ENUM('cod', 'credit_card', 'debit_card', 'e_wallet', 'qris', 'bank_transfer'),
         allowNull: false,
       },
       status: {
@@ -336,6 +356,7 @@ export default function (sequelize: Sequelize): typeof Payment {
 &nbsp;
   return Payment;
 }
+&nbsp;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -343,7 +364,7 @@ export default function (sequelize: Sequelize): typeof Payment {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-16T03:12:33.786Z
+                at 2025-10-29T16:34:03.805Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -12,7 +12,8 @@ class UserController {
    */
   public async getAllUsers(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      const users = await UserService.getAllUsers();
+      // FIX: Teruskan req.query dari controller ke service
+      const users = await UserService.getAllUsers(req.query);
       res.status(StatusCodes.OK).json({
         success: true,
         message: 'Users retrieved successfully',
@@ -60,7 +61,7 @@ class UserController {
   }
 
   /**
-   * Menangani permintaan untuk menghapus pengguna.
+   * Menangani permintaan untuk menghapus (soft delete) pengguna.
    */
   public async deleteUser(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
@@ -68,7 +69,40 @@ class UserController {
       await UserService.deleteUser(id);
       res.status(StatusCodes.OK).json({
         success: true,
-        message: 'User deleted successfully',
+        message: 'User archived successfully',
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /**
+   * [BARU] Menangani permintaan untuk mendapatkan semua pengguna yang diarsipkan.
+   */
+  public async getArchivedUsers(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const users = await UserService.getArchivedUsers(req.query);
+      res.status(StatusCodes.OK).json({
+        success: true,
+        message: 'Archived users retrieved successfully',
+        data: users,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /**
+   * [BARU] Menangani permintaan untuk memulihkan pengguna yang diarsipkan.
+   */
+  public async restoreUser(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const { id } = req.params;
+      const restoredUser = await UserService.restoreUser(id);
+      res.status(StatusCodes.OK).json({
+        success: true,
+        message: 'User restored successfully',
+        data: restoredUser,
       });
     } catch (error) {
       next(error);

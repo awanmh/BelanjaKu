@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>80/80</span>
+                <span class='fraction'>85/85</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>80/80</span>
+                <span class='fraction'>85/85</span>
             </div>
         
             
@@ -144,7 +144,11 @@
 <a name='L79'></a><a href='#L79'>79</a>
 <a name='L80'></a><a href='#L80'>80</a>
 <a name='L81'></a><a href='#L81'>81</a>
-<a name='L82'></a><a href='#L82'>82</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -171,6 +175,7 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -196,6 +201,7 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -224,20 +230,21 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import bcrypt from 'bcryptjs';
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import bcrypt from 'bcryptjs';
 import db from '../database/models';
 import { UserAttributes } from '../database/models/user.model';
 import HttpException from '../utils/http-exception.util';
 import { StatusCodes } from 'http-status-codes';
 import { generateAccessToken, generateRefreshToken } from '../utils/jwt.util';
+import logger from '../utils/logger.util';
 &nbsp;
 const User = db.User;
 &nbsp;
-// FIX: Tambahkan keyword 'export' agar tipe ini bisa diimpor oleh file lain
+// Tipe data spesifik untuk input registrasi
 export type RegisterInput = Pick&lt;UserAttributes, 'email' | 'password' | 'fullName'&gt;;
 &nbsp;
-// FIX: Tambahkan keyword 'export' agar tipe ini bisa diimpor oleh file lain
+// Tipe data spesifik untuk input login
 export type LoginInput = Pick&lt;UserAttributes, 'email' | 'password'&gt;;
 &nbsp;
 /**
@@ -263,8 +270,9 @@ class AuthService {
       isVerified: false,
     });
 &nbsp;
-    const { password: _, ...userWithoutPassword } = newUser.toJSON();
-    return userWithoutPassword;
+    // REFACTOR: Kita tidak perlu lagi menghapus password secara manual.
+    // Hook toJSON di model User akan menanganinya secara otomatis.
+    return newUser.toJSON();
   }
 &nbsp;
   /**
@@ -275,11 +283,13 @@ class AuthService {
 &nbsp;
     const user = await User.findOne({ where: { email } });
     if (!user) {
+      logger.warn(`Login attempt failed for email: ${email}. User not found.`);
       throw new HttpException(StatusCodes.UNAUTHORIZED, 'Invalid email or password');
     }
 &nbsp;
-    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    const isPasswordMatch = await user.comparePassword(password);
     if (!isPasswordMatch) {
+      logger.warn(`Login attempt failed for user: ${email}. Incorrect password.`);
       throw new HttpException(StatusCodes.UNAUTHORIZED, 'Invalid email or password');
     }
 &nbsp;
@@ -292,10 +302,10 @@ class AuthService {
     const accessToken = generateAccessToken(tokenPayload);
     const refreshToken = generateRefreshToken(tokenPayload);
 &nbsp;
-    const { password: __, ...userWithoutPassword } = user.toJSON();
-&nbsp;
+    // REFACTOR: Kita tidak perlu lagi menghapus password.
+    // Hook toJSON akan menanganinya secara otomatis.
     return {
-      user: userWithoutPassword,
+      user: user.toJSON(),
       tokens: {
         accessToken,
         refreshToken,
@@ -304,16 +314,15 @@ class AuthService {
   }
 }
 &nbsp;
-export default new AuthService();
-&nbsp;
-&nbsp;</pre></td></tr></table></pre>
+// Ekspor sebagai singleton instance
+export default new AuthService();</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-15T18:32:08.744Z
+                at 2025-10-29T16:18:51.425Z
             </div>
         <script src="../prettify.js"></script>
         <script>

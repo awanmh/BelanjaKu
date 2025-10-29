@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import CategoryService, { CreateCategoryInput, UpdateCategoryInput } from '../../../services/category.service';
+import { AuthenticatedRequest } from '../../../middlewares/auth.middleware';
+import HttpException from '../../../utils/http-exception.util';
 
 /**
  * Controller untuk menangani semua request yang berhubungan dengan kategori produk.
@@ -9,7 +11,7 @@ class CategoryController {
   /**
    * Menangani permintaan untuk membuat kategori baru.
    */
-  public async createCategory(req: Request, res: Response, next: NextFunction): Promise<void> {
+  public async createCategory(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const categoryData: CreateCategoryInput = req.body;
       const newCategory = await CategoryService.createCategory(categoryData);
@@ -29,7 +31,8 @@ class CategoryController {
    */
   public async getAllCategories(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const categories = await CategoryService.getAllCategories();
+      // FIX: Teruskan req.query ke service untuk filtering, sorting, dll.
+      const categories = await CategoryService.getAllCategories(req.query);
       res.status(StatusCodes.OK).json({
         success: true,
         message: 'Categories retrieved successfully',
@@ -60,7 +63,7 @@ class CategoryController {
   /**
    * Menangani permintaan untuk memperbarui kategori.
    */
-  public async updateCategory(req: Request, res: Response, next: NextFunction): Promise<void> {
+  public async updateCategory(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const { id } = req.params;
       const categoryData: UpdateCategoryInput = req.body;
@@ -79,7 +82,7 @@ class CategoryController {
   /**
    * Menangani permintaan untuk menghapus kategori.
    */
-  public async deleteCategory(req: Request, res: Response, next: NextFunction): Promise<void> {
+  public async deleteCategory(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const { id } = req.params;
       await CategoryService.deleteCategory(id);
@@ -95,3 +98,4 @@ class CategoryController {
 
 // Ekspor sebagai singleton instance
 export default new CategoryController();
+

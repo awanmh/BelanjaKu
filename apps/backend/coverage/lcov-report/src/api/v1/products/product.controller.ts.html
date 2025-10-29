@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60.89% </span>
+                <span class="strong">65.06% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>95/156</span>
+                <span class='fraction'>95/146</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30% </span>
+                <span class="strong">37.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/10</span>
+                <span class='fraction'>3/8</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60.89% </span>
+                <span class="strong">65.06% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>95/156</span>
+                <span class='fraction'>95/146</span>
             </div>
         
             
@@ -208,17 +208,8 @@
 <a name='L143'></a><a href='#L143'>143</a>
 <a name='L144'></a><a href='#L144'>144</a>
 <a name='L145'></a><a href='#L145'>145</a>
-<a name='L146'></a><a href='#L146'>146</a>
-<a name='L147'></a><a href='#L147'>147</a>
-<a name='L148'></a><a href='#L148'>148</a>
-<a name='L149'></a><a href='#L149'>149</a>
-<a name='L150'></a><a href='#L150'>150</a>
-<a name='L151'></a><a href='#L151'>151</a>
-<a name='L152'></a><a href='#L152'>152</a>
-<a name='L153'></a><a href='#L153'>153</a>
-<a name='L154'></a><a href='#L154'>154</a>
-<a name='L155'></a><a href='#L155'>155</a>
-<a name='L156'></a><a href='#L156'>156</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L146'></a><a href='#L146'>146</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -245,8 +236,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -299,9 +288,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -325,9 +311,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -353,9 +336,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -384,7 +364,7 @@ interface AuthenticatedRequest extends Request {
     id: string;
     role: 'user' | 'seller' | 'admin';
   };
-  file?: Express.Multer.File;
+  file?: Express.Multer.File; // Tambahkan properti file dari Multer
 }
 &nbsp;
 /**
@@ -396,14 +376,13 @@ class ProductController {
    */
   public async createProduct(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise&lt;void&gt; {
     try {
-      if (!req.user) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
+      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan karena sudah ditangani oleh middleware 'protect'
       if (!req.file) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >        throw new HttpException(StatusCodes.BAD_REQUEST, 'Product image is required');</span>
 <span class="cstat-no" title="statement not covered" >      }</span>
       
-      const sellerId = req.user.id;
+      // Kita bisa langsung mengakses req.user!.id dengan aman
+      const sellerId = req.user!.id;
       const productData: CreateProductInput = req.body;
 &nbsp;
       productData.imageUrl = req.file.path;
@@ -441,11 +420,8 @@ class ProductController {
    */
   public async <span class="fstat-no" title="function not covered" >getMyProducts(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise&lt;void&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >      if (!req.user) {</span>
-<span class="cstat-no" title="statement not covered" >        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >      </span>
-<span class="cstat-no" title="statement not covered" >      const sellerId = req.user.id;</span>
+<span class="cstat-no" title="statement not covered" >      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan</span>
+<span class="cstat-no" title="statement not covered" >      const sellerId = req.user!.id;</span>
 <span class="cstat-no" title="statement not covered" >      const products = await ProductService.getProductsBySeller(sellerId, req.query);</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >      res.status(StatusCodes.OK).json({</span>
@@ -480,12 +456,9 @@ class ProductController {
    */
   public async updateProduct(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise&lt;void&gt; {
     try {
-      if (!req.user) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-      
+      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
       const { id: productId } = req.params;
-      const userId = req.user.id;
+      const userId = req.user!.id;
       const productData: UpdateProductInput = req.body;
 &nbsp;
       if (req.file) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
@@ -509,12 +482,9 @@ class ProductController {
    */
   public async <span class="fstat-no" title="function not covered" >deleteProduct(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise&lt;void&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >        if (!req.user) {</span>
-<span class="cstat-no" title="statement not covered" >            throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan</span>
 <span class="cstat-no" title="statement not covered" >        const { id: productId } = req.params;</span>
-<span class="cstat-no" title="statement not covered" >        const userId = req.user.id;</span>
+<span class="cstat-no" title="statement not covered" >        const userId = req.user!.id;</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >        await ProductService.deleteProduct(productId, userId);</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -535,7 +505,7 @@ export default new ProductController();</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-16T03:12:33.786Z
+                at 2025-10-29T16:34:03.805Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

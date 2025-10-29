@@ -1,16 +1,23 @@
-import { Model, FindOptions, Order } from 'sequelize';
-import { ParsedQs } from 'qs'; // 1. Impor tipe ParsedQs
+import { ParsedQs } from 'qs';
+import { FindOptions, Model, Op } from 'sequelize';
+
+// Definisikan tipe untuk hasil paginasi
+export interface PaginationResult {
+  limit: number;
+  offset: number;
+}
 
 /**
  * Kelas untuk membangun query Sequelize secara dinamis dari query string URL.
- * Mendukung filtering, sorting, field limiting, dan pagination.
+ * Mendukung filtering, sorting, dan field limiting.
+ * PAGINASI sekarang ditangani secara terpisah.
  */
 class APIFeatures<T extends Model> {
   public queryOptions: FindOptions;
-  private queryString: ParsedQs; // 2. Gunakan tipe ParsedQs
+  private queryString: ParsedQs;
   private model: { new(): T } & typeof Model;
 
-  constructor(model: { new(): T } & typeof Model, queryString: ParsedQs) { // 3. Terima ParsedQs di constructor
+  constructor(model: { new(): T } & typeof Model, queryString: ParsedQs) {
     this.model = model;
     this.queryString = queryString;
     this.queryOptions = {};
@@ -18,37 +25,30 @@ class APIFeatures<T extends Model> {
 
   /**
    * Menambahkan filter ke queryOptions berdasarkan query string.
-   * Contoh: /products?price[lt]=100000&stock[gte]=5
    */
   public filter(): this {
     const queryObj = { ...this.queryString };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
     excludedFields.forEach((el) => delete (queryObj as any)[el]);
 
-    // Mengonversi operator seperti [gt], [gte], [lt], [lte] menjadi format Sequelize
     let queryStr = JSON.stringify(queryObj);
-    queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `[Op.${match}]`);
+    queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in|ne)\b/g, (match) => `[Op.${match}]`);
     
-    // Hapus 'Op.' agar bisa di-parse oleh Sequelize dengan benar
-    // Sequelize v6 secara otomatis mengenali simbol operator
-    queryStr = queryStr.replace(/\[Op\./g, '[Symbol(op).'); 
-
-    this.queryOptions.where = JSON.parse(queryStr, (key, value) => {
-        // Mengonversi string operator kembali ke simbol Sequelize
-        if (typeof value === 'string' && value.startsWith('[Symbol(op).')) {
-            const opKey = value.substring('[Symbol(op).'.length, value.length - 1);
-            const { Op } = require('sequelize');
-            return Op[opKey];
+    // Konversi string kembali ke simbol Op Sequelize
+    const whereClause = JSON.parse(queryStr, (key, value) => {
+        if (typeof value === 'string' && value.startsWith('[Op.')) {
+            const opKey = value.substring(4, value.length - 1);
+            return (Op as any)[opKey];
         }
         return value;
     });
 
+    this.queryOptions.where = whereClause;
     return this;
   }
 
   /**
    * Menambahkan sorting ke queryOptions.
-   * Contoh: /products?sort=-price,createdAt
    */
   public sort(): this {
     if (typeof this.queryString.sort === 'string') {
@@ -58,9 +58,8 @@ class APIFeatures<T extends Model> {
         }
         return [field, 'ASC'];
       });
-      this.queryOptions.order = sortBy as Order;
+      this.queryOptions.order = sortBy as any;
     } else {
-      // Default sort
       this.queryOptions.order = [['createdAt', 'DESC']];
     }
     return this;
@@ -68,7 +67,6 @@ class APIFeatures<T extends Model> {
 
   /**
    * Membatasi field yang dikembalikan oleh query.
-   * Contoh: /products?fields=name,price
    */
   public limitFields(): this {
     if (typeof this.queryString.fields === 'string') {
@@ -79,18 +77,19 @@ class APIFeatures<T extends Model> {
   }
 
   /**
-   * Menambahkan paginasi ke queryOptions.
-   * Contoh: /products?page=2&limit=10
+   * [DIPERBARUI] Hanya menghitung dan mengembalikan nilai limit dan offset.
+   * @returns Objek PaginationResult { limit, offset }
    */
-  public paginate(): this {
+  public paginate(): PaginationResult {
     const page = Number(this.queryString.page) || 1;
     const limit = Number(this.queryString.limit) || 100;
     const offset = (page - 1) * limit;
 
-    this.queryOptions.limit = limit;
-    this.queryOptions.offset = offset;
+    // Tidak lagi menerapkan ke queryOptions secara langsung
+    // this.queryOptions.limit = limit;
+    // this.queryOptions.offset = offset;
 
-    return this;
+    return { limit, offset };
   }
 }
 
