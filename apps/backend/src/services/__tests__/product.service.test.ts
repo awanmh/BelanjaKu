@@ -8,24 +8,24 @@ import APIFeatures from '../../utils/apiFeatures.util';
 jest.mock('../../database/models', () => ({
   Product: {
     create: jest.fn(),
-    findAll: jest.fn(),
+    findAndCountAll: jest.fn(), // FIX: Tambahkan mock untuk findAndCountAll
     findByPk: jest.fn(),
     destroy: jest.fn(),
   },
   User: {},
 }));
 
+// Mock implementasi APIFeatures
 jest.mock('../../utils/apiFeatures.util');
+const mockAPIFeatures = APIFeatures as jest.MockedClass<typeof APIFeatures>;
 
 const mockProduct = db.Product as jest.Mocked<typeof db.Product>;
-const mockAPIFeatures = APIFeatures as jest.MockedClass<typeof APIFeatures>;
 
 describe('ProductService', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  // Tes yang sudah ada...
   describe('createProduct', () => {
     it('should create a new product successfully', async () => {
       const productData = { name: 'New Product', description: 'A great new product', price: 100, stock: 10, categoryId: 'cat-uuid', imageUrl: 'image.jpg' };
@@ -40,57 +40,120 @@ describe('ProductService', () => {
     });
   });
 
+  // FIX: Perbarui tes getAllProducts untuk menggunakan findAndCountAll
   describe('getAllProducts', () => {
-    it('should call APIFeatures and return all products', async () => {
-      const mockProducts = [{ name: 'Product 1' }, { name: 'Product 2' }];
+    it('should call APIFeatures and return paginated products', async () => {
+      const mockProducts = [{ name: 'Product 1', toJSON: () => ({ name: 'Product 1' }) }, { name: 'Product 2', toJSON: () => ({ name: 'Product 2' }) }];
+      
       (mockAPIFeatures as any).mockImplementation(() => ({
-          filter: jest.fn().mockReturnThis(), sort: jest.fn().mockReturnThis(), limitFields: jest.fn().mockReturnThis(), paginate: jest.fn().mockReturnThis(), queryOptions: {},
+          filter: jest.fn().mockReturnThis(),
+          sort: jest.fn().mockReturnThis(),
+          limitFields: jest.fn().mockReturnThis(),
+          paginate: jest.fn(() => ({ limit: 10, offset: 0 })),
+          queryOptions: { include: [] },
       }));
-      mockProduct.findAll.mockResolvedValue(mockProducts.map(p => ({ toJSON: () => p })) as any);
+
+      // Mock findAndCountAll alih-alih findAll
+      mockProduct.findAndCountAll.mockResolvedValue({ rows: mockProducts, count: 2 } as any);
+
       const result = await ProductService.getAllProducts({});
+      
       expect(mockAPIFeatures).toHaveBeenCalled();
-      expect(mockProduct.findAll).toHaveBeenCalled();
-      expect(result).toEqual(mockProducts);
+      expect(mockProduct.findAndCountAll).toHaveBeenCalled();
+      expect(result.rows).toEqual(mockProducts.map(p => p.toJSON()));
+      expect(result.pagination.totalItems).toBe(2);
+    });
+  });
+
+  // FIX: Perbarui tes getProductsBySeller untuk menggunakan findAndCountAll
+  describe('getProductsBySeller', () => {
+    it('should correctly filter products by sellerId', async () => {
+        const sellerId = 'seller-uuid';
+        const mockProducts = [{ name: 'My Product 1', toJSON: () => ({ name: 'My Product 1' }) }];
+        const mockQueryOptions = { where: {} };
+    
+        (mockAPIFeatures as any).mockImplementation(() => ({
+            filter: jest.fn().mockReturnThis(),
+            sort: jest.fn().mockReturnThis(),
+            limitFields: jest.fn().mockReturnThis(),
+            paginate: jest.fn(() => ({ limit: 10, offset: 0 })),
+            queryOptions: mockQueryOptions,
+        }));
+    
+        // Mock findAndCountAll alih-alih findAll
+        mockProduct.findAndCountAll.mockResolvedValue({ rows: mockProducts, count: 1 } as any);
+    
+        const result = await ProductService.getProductsBySeller(sellerId, {});
+    
+        expect(mockQueryOptions.where).toHaveProperty('sellerId', sellerId);
+        expect(mockProduct.findAndCountAll).toHaveBeenCalledWith(expect.objectContaining({
+            where: { sellerId },
+            limit: 10,
+            offset: 0
+        }));
+        expect(result.rows.length).toBe(1);
     });
   });
 
   describe('updateProduct', () => {
-    const productId = 'prod-uuid';
-    const sellerId = 'seller-uuid';
-    const updateData = { name: 'Updated Name' };
-    const mockExistingProduct = { id: productId, sellerId: sellerId, update: jest.fn(), toJSON: () => ({ id: productId, sellerId, name: 'Updated Name' }) };
+     const productId = 'prod-uuid';
+     const sellerId = 'seller-uuid';
+     const updateData = { name: 'Updated Name' };
+     const mockExistingProduct = {
+       id: productId,
+       sellerId: sellerId,
+       update: jest.fn(),
+       toJSON: () => ({ id: productId, sellerId, name: 'Updated Name' }),
+     };
+ 
+     it('should update a product successfully if user is the owner', async () => {
+         mockProduct.findByPk.mockResolvedValue(mockExistingProduct as any);
+         mockExistingProduct.update.mockResolvedValue(mockExistingProduct as any);
+   
+         const result = await ProductService.updateProduct(productId, updateData, sellerId);
+   
+         expect(mockProduct.findByPk).toHaveBeenCalledWith(productId);
+         expect(mockExistingProduct.update).toHaveBeenCalledWith(updateData);
+         expect(result).toEqual(mockExistingProduct.toJSON());
+     });
+ 
+     it('should throw FORBIDDEN error if user is not the owner', async () => {
+         const anotherSellerId = 'another-seller-uuid';
+         mockProduct.findByPk.mockResolvedValue(mockExistingProduct as any);
+   
+         await expect(ProductService.updateProduct(productId, updateData, anotherSellerId)).rejects.toThrow(
+             new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to update this product')
+         );
+     });
+ 
+     it('should throw NOT_FOUND error if product does not exist', async () => {
+         mockProduct.findByPk.mockResolvedValue(null);
+   
+         await expect(ProductService.updateProduct(productId, updateData, sellerId)).rejects.toThrow(
+             new HttpException(StatusCodes.NOT_FOUND, 'Product not found')
+         );
+     });
+   });
 
-    it('should update a product successfully if user is the owner', async () => {
-        mockProduct.findByPk.mockResolvedValue(mockExistingProduct as any);
-        mockExistingProduct.update.mockResolvedValue(mockExistingProduct as any);
-        const result = await ProductService.updateProduct(productId, updateData, sellerId);
-        expect(mockProduct.findByPk).toHaveBeenCalledWith(productId);
-        expect(mockExistingProduct.update).toHaveBeenCalledWith(updateData);
-        expect(result).toEqual(mockExistingProduct.toJSON());
-    });
-    it('should throw FORBIDDEN error if user is not the owner', async () => {
-        const anotherSellerId = 'another-seller-uuid';
-        mockProduct.findByPk.mockResolvedValue(mockExistingProduct as any);
-        await expect(ProductService.updateProduct(productId, updateData, anotherSellerId)).rejects.toThrow(new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to update this product'));
-    });
-    it('should throw NOT_FOUND error if product does not exist', async () => {
-        mockProduct.findByPk.mockResolvedValue(null);
-        await expect(ProductService.updateProduct(productId, updateData, sellerId)).rejects.toThrow(new HttpException(StatusCodes.NOT_FOUND, 'Product not found'));
-    });
-  });
-
-  describe('getProductById', () => {
+   describe('getProductById', () => {
     const productId = 'prod-uuid';
+
     it('should return a product if found', async () => {
       const mockProductData = { id: productId, name: 'Found Product', toJSON: () => ({ id: productId, name: 'Found Product' }) };
       mockProduct.findByPk.mockResolvedValue(mockProductData as any);
+      
       const result = await ProductService.getProductById(productId);
+
       expect(mockProduct.findByPk).toHaveBeenCalledWith(productId, expect.any(Object));
       expect(result).toEqual(mockProductData.toJSON());
     });
+
     it('should throw NOT_FOUND error if product is not found', async () => {
       mockProduct.findByPk.mockResolvedValue(null);
-      await expect(ProductService.getProductById(productId)).rejects.toThrow(new HttpException(StatusCodes.NOT_FOUND, 'Product not found'));
+      
+      await expect(ProductService.getProductById(productId)).rejects.toThrow(
+        new HttpException(StatusCodes.NOT_FOUND, 'Product not found')
+      );
     });
   });
 
@@ -98,50 +161,29 @@ describe('ProductService', () => {
     const productId = 'prod-uuid';
     const sellerId = 'seller-uuid';
     const mockExistingProduct = { id: productId, sellerId: sellerId, destroy: jest.fn() };
+
     it('should delete the product if user is the owner', async () => {
       mockProduct.findByPk.mockResolvedValue(mockExistingProduct as any);
+      
       await ProductService.deleteProduct(productId, sellerId);
+
       expect(mockProduct.findByPk).toHaveBeenCalledWith(productId);
       expect(mockExistingProduct.destroy).toHaveBeenCalledTimes(1);
     });
+
     it('should throw FORBIDDEN error if user is not the owner', async () => {
       const anotherSellerId = 'another-seller-uuid';
       mockProduct.findByPk.mockResolvedValue(mockExistingProduct as any);
-      await expect(ProductService.deleteProduct(productId, anotherSellerId)).rejects.toThrow(new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to delete this product'));
+      
+      await expect(ProductService.deleteProduct(productId, anotherSellerId)).rejects.toThrow(
+        new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to delete this product')
+      );
       expect(mockExistingProduct.destroy).not.toHaveBeenCalled();
     });
-    // Tes baru untuk kasus NOT_FOUND
+
     it('should throw NOT_FOUND error if product does not exist', async () => {
         mockProduct.findByPk.mockResolvedValue(null);
         await expect(ProductService.deleteProduct(productId, sellerId)).rejects.toThrow(new HttpException(StatusCodes.NOT_FOUND, 'Product not found'));
-    });
-  });
-
-  // --- Tes Baru untuk Metode getProductsBySeller ---
-  describe('getProductsBySeller', () => {
-    it('should correctly filter products by sellerId', async () => {
-        const sellerId = 'seller-uuid';
-        const mockProducts = [{ name: 'My Product 1' }];
-        const mockQueryOptions = { where: {} }; // Obyek untuk dimodifikasi
-    
-        (mockAPIFeatures as any).mockImplementation(() => ({
-            filter: jest.fn().mockReturnThis(),
-            sort: jest.fn().mockReturnThis(),
-            limitFields: jest.fn().mockReturnThis(),
-            paginate: jest.fn().mockReturnThis(),
-            queryOptions: mockQueryOptions,
-        }));
-    
-        mockProduct.findAll.mockResolvedValue(mockProducts.map(p => ({ toJSON: () => p })) as any);
-    
-        const result = await ProductService.getProductsBySeller(sellerId, {});
-    
-        // Verifikasi bahwa sellerId ditambahkan ke klausa 'where'
-        expect(mockQueryOptions.where).toHaveProperty('sellerId', sellerId);
-        expect(mockProduct.findAll).toHaveBeenCalledWith(expect.objectContaining({
-            where: { sellerId }
-        }));
-        expect(result).toEqual(mockProducts);
     });
   });
 });
