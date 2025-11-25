@@ -27,6 +27,7 @@ npx create-next-app@latest frontend
 
 ```Bash
 cd frontend
+npm install
 npm install axios zustand lucide-react clsx tailwind-merge
 ```
 
