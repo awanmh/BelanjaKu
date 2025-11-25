@@ -25,7 +25,7 @@ class ProductController {
       if (!req.file) {
         throw new HttpException(StatusCodes.BAD_REQUEST, 'Product image is required');
       }
-      
+
       // Kita bisa langsung mengakses req.user!.id dengan aman
       const sellerId = req.user!.id;
       const productData: CreateProductInput = req.body;
@@ -53,7 +53,7 @@ class ProductController {
       res.status(StatusCodes.OK).json({
         success: true,
         message: 'Products retrieved successfully',
-        data: products,
+        data: products || [], // <-- INI PERBAIKANNYA
       });
     } catch (error) {
       next(error);
@@ -127,18 +127,18 @@ class ProductController {
    */
   public async deleteProduct(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-        // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
-        const { id: productId } = req.params;
-        const userId = req.user!.id;
+      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
+      const { id: productId } = req.params;
+      const userId = req.user!.id;
 
-        await ProductService.deleteProduct(productId, userId);
+      await ProductService.deleteProduct(productId, userId);
 
-        res.status(StatusCodes.OK).json({
-            success: true,
-            message: 'Product deleted successfully',
-        });
+      res.status(StatusCodes.OK).json({
+        success: true,
+        message: 'Product deleted successfully',
+      });
     } catch (error) {
-        next(error);
+      next(error);
     }
   }
 }

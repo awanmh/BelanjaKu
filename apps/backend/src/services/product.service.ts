@@ -1,14 +1,14 @@
 import { StatusCodes } from 'http-status-codes';
 import db from '../database/models';
-import { ProductAttributes } from '../database/models/product.model';
+import { ProductAttributes, Product as ProductModel } from '../database/models/product.model';
 import HttpException from '../utils/http-exception.util';
 import APIFeatures from '../utils/apiFeatures.util'; // 1. Impor APIFeatures
 import { ParsedQs } from 'qs'; // Tipe untuk query string
 import { Model, Op } from 'sequelize'; // 2. Impor Model untuk casting
 
 // 3. FIX: Lakukan type casting eksplisit pada model
-const Product = db.Product as (new () => InstanceType<typeof db.Product>) & typeof db.Product;
-const User = db.User as (new () => InstanceType<typeof db.User>) & typeof db.User;
+const Product = db.Product;
+const User = db.User;
 
 // Tipe data untuk input
 export type CreateProductInput = Pick<
@@ -44,7 +44,7 @@ class ProductService {
    */
   public async getAllProducts(queryString: ParsedQs): Promise<PaginatedProductResult> {
     // 1. Buat query dasar
-    const features = new APIFeatures(Product, queryString)
+    const features = new APIFeatures(queryString)
       .filter()
       .sort()
       .limitFields();
@@ -62,7 +62,7 @@ class ProductService {
       limit,
       offset,
     });
-    
+
     const totalPages = Math.ceil(count / limit);
 
     return {
@@ -80,7 +80,7 @@ class ProductService {
    * [DIPERBARUI] Mengambil produk milik penjual tertentu dengan fitur query.
    */
   public async getProductsBySeller(sellerId: string, queryString: ParsedQs): Promise<PaginatedProductResult> {
-    const features = new APIFeatures(Product, queryString)
+    const features = new APIFeatures(queryString)
       .filter()
       .sort()
       .limitFields();
@@ -127,7 +127,7 @@ class ProductService {
     }
     return product.toJSON();
   }
-  
+
   /**
    * Memperbarui produk.
    */

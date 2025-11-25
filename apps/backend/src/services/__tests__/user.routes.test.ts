@@ -46,8 +46,8 @@ describe('User Management API Endpoints (Admin)', () => {
 
       expect(response.statusCode).toBe(200);
       expect(response.body.success).toBe(true);
-      expect(Array.isArray(response.body.data)).toBe(true);
-      expect(response.body.data.length).toBe(2); // Admin dan user biasa
+      expect(Array.isArray(response.body.data.rows)).toBe(true);
+      expect(response.body.data.rows.length).toBe(2); // Admin dan user biasa
     });
   });
 
@@ -84,33 +84,33 @@ describe('User Management API Endpoints (Admin)', () => {
 
   describe('GET /api/v1/users/archived', () => {
     it('should allow an admin to get a list of archived users', async () => {
-        const response = await request(app)
-            .get('/api/v1/users/archived')
-            .set('Authorization', `Bearer ${adminToken}`);
+      const response = await request(app)
+        .get('/api/v1/users/archived')
+        .set('Authorization', `Bearer ${adminToken}`);
 
-        expect(response.statusCode).toBe(200);
-        expect(response.body.success).toBe(true);
-        expect(Array.isArray(response.body.data)).toBe(true);
-        expect(response.body.data.length).toBe(1);
-        expect(response.body.data[0].id).toBe(regularUserId);
+      expect(response.statusCode).toBe(200);
+      expect(response.body.success).toBe(true);
+      expect(Array.isArray(response.body.data.rows)).toBe(true);
+      expect(response.body.data.rows.length).toBe(1);
+      expect(response.body.data.rows[0].id).toBe(regularUserId);
     });
   });
 
   describe('POST /api/v1/users/:id/restore', () => {
     it('should allow an admin to restore a soft-deleted user', async () => {
-        const response = await request(app)
-            .post(`/api/v1/users/${regularUserId}/restore`)
-            .set('Authorization', `Bearer ${adminToken}`);
-        
-        expect(response.statusCode).toBe(200);
-        expect(response.body.data.id).toBe(regularUserId);
-        expect(response.body.data.deletedAt).toBeNull();
+      const response = await request(app)
+        .post(`/api/v1/users/${regularUserId}/restore`)
+        .set('Authorization', `Bearer ${adminToken}`);
 
-        // Verifikasi bahwa user sudah tidak ada di daftar arsip
-        const archiveResponse = await request(app)
-            .get('/api/v1/users/archived')
-            .set('Authorization', `Bearer ${adminToken}`);
-        expect(archiveResponse.body.data.length).toBe(0);
+      expect(response.statusCode).toBe(200);
+      expect(response.body.data.id).toBe(regularUserId);
+      expect(response.body.data.deletedAt).toBeNull();
+
+      // Verifikasi bahwa user sudah tidak ada di daftar arsip
+      const archiveResponse = await request(app)
+        .get('/api/v1/users/archived')
+        .set('Authorization', `Bearer ${adminToken}`);
+      expect(archiveResponse.body.data.rows.length).toBe(0);
     });
   });
 });

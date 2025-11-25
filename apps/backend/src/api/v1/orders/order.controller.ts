@@ -59,7 +59,7 @@ class OrderController {
       const userId = req.user!.id;
       const { id: orderId } = req.params;
       const order = await OrderService.getOrderById(orderId, userId);
-      
+
       res.status(StatusCodes.OK).json({
         success: true,
         message: 'Order details retrieved successfully',

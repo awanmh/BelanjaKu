@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.41% </span>
+                <span class="strong">82.92% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>145/164</span>
+                <span class='fraction'>136/164</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.33% </span>
+                <span class="strong">82.35% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>11/15</span>
+                <span class='fraction'>14/17</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.41% </span>
+                <span class="strong">82.92% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>145/164</span>
+                <span class='fraction'>136/164</span>
             </div>
         
             
@@ -290,19 +290,19 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -360,13 +360,13 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -391,15 +391,15 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { StatusCodes } from 'http-status-codes';
 import db from '../database/models';
-import { ProductAttributes } from '../database/models/product.model';
+import { ProductAttributes, Product as ProductModel } from '../database/models/product.model';
 import HttpException from '../utils/http-exception.util';
 import APIFeatures from '../utils/apiFeatures.util'; // 1. Impor APIFeatures
 import { ParsedQs } from 'qs'; // Tipe untuk query string
 import { Model, Op } from 'sequelize'; // 2. Impor Model untuk casting
 &nbsp;
 // 3. FIX: Lakukan type casting eksplisit pada model
-const Product = db.Product as (new () =&gt; InstanceType&lt;typeof db.Product&gt;) &amp; typeof db.Product;
-const User = db.User as (new () =&gt; InstanceType&lt;typeof db.User&gt;) &amp; typeof db.User;
+const Product = db.Product;
+const User = db.User;
 &nbsp;
 // Tipe data untuk input
 export type CreateProductInput = Pick&lt;
@@ -435,7 +435,7 @@ class ProductService {
    */
   public async getAllProducts(queryString: ParsedQs): Promise&lt;PaginatedProductResult&gt; {
     // 1. Buat query dasar
-    const features = new APIFeatures(Product, queryString)
+    const features = new APIFeatures(queryString)
       .filter()
       .sort()
       .limitFields();
@@ -453,25 +453,25 @@ class ProductService {
       limit,
       offset,
     });
-    
-    const totalPages = Math.ceil(count / limit);
-&nbsp;
-    return {
-      rows: rows.map((product) =&gt; product.toJSON()),
-      pagination: {
-        totalItems: count,
-        totalPages,
-        currentPage: page,
-        limit,
-      },
-    };
-  }
+<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >    const totalPages = Math.ceil(count / limit);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+<span class="cstat-no" title="statement not covered" >      rows: rows.map((product) =&gt; product.toJSON()),</span>
+<span class="cstat-no" title="statement not covered" >      pagination: {</span>
+<span class="cstat-no" title="statement not covered" >        totalItems: count,</span>
+<span class="cstat-no" title="statement not covered" >        totalPages,</span>
+<span class="cstat-no" title="statement not covered" >        currentPage: page,</span>
+<span class="cstat-no" title="statement not covered" >        limit,</span>
+<span class="cstat-no" title="statement not covered" >      },</span>
+<span class="cstat-no" title="statement not covered" >    };</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 &nbsp;
   /**
    * [DIPERBARUI] Mengambil produk milik penjual tertentu dengan fitur query.
    */
   public async getProductsBySeller(sellerId: string, queryString: ParsedQs): Promise&lt;PaginatedProductResult&gt; {
-    const features = new APIFeatures(Product, queryString)
+    const features = new APIFeatures(queryString)
       .filter()
       .sort()
       .limitFields();
@@ -518,18 +518,18 @@ class ProductService {
     }
     return product.toJSON();
   }
-  
+&nbsp;
   /**
    * Memperbarui produk.
    */
   public async updateProduct(id: string, productData: UpdateProductInput, userId: string): Promise&lt;ProductAttributes&gt; {
     const product = await Product.findByPk(id);
-    if (!product) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      throw new HttpException(StatusCodes.NOT_FOUND, 'Product not found');</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-    if (product.sellerId !== userId) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      throw new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to update this product');</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    if (!product) {
+      throw new HttpException(StatusCodes.NOT_FOUND, 'Product not found');
+    }
+    if (product.sellerId !== userId) {
+      throw new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to update this product');
+    }
 &nbsp;
     await product.update(productData);
     return product.toJSON();
@@ -559,7 +559,7 @@ export default new ProductService();</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-29T16:34:03.805Z
+                at 2025-11-06T12:40:37.566Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

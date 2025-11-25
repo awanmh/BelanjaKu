@@ -51,7 +51,7 @@ class CategoryService {
    */
   public async getAllCategories(queryString: ParsedQs): Promise<PaginatedCategoryResult> {
     // 1. Buat query dasar
-    const features = new APIFeatures(Category, queryString)
+    const features = new APIFeatures(queryString)
       .filter()
       .sort()
       .limitFields(); // Hentikan chain sebelum .paginate()

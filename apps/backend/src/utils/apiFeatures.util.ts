@@ -12,13 +12,11 @@ export interface PaginationResult {
  * Mendukung filtering, sorting, dan field limiting.
  * PAGINASI sekarang ditangani secara terpisah.
  */
-class APIFeatures<T extends Model> {
+class APIFeatures {
   public queryOptions: FindOptions;
   private queryString: ParsedQs;
-  private model: { new(): T } & typeof Model;
 
-  constructor(model: { new(): T } & typeof Model, queryString: ParsedQs) {
-    this.model = model;
+  constructor(queryString: ParsedQs) {
     this.queryString = queryString;
     this.queryOptions = {};
   }
@@ -33,14 +31,14 @@ class APIFeatures<T extends Model> {
 
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in|ne)\b/g, (match) => `[Op.${match}]`);
-    
+
     // Konversi string kembali ke simbol Op Sequelize
     const whereClause = JSON.parse(queryStr, (key, value) => {
-        if (typeof value === 'string' && value.startsWith('[Op.')) {
-            const opKey = value.substring(4, value.length - 1);
-            return (Op as any)[opKey];
-        }
-        return value;
+      if (typeof value === 'string' && value.startsWith('[Op.')) {
+        const opKey = value.substring(4, value.length - 1);
+        return (Op as any)[opKey];
+      }
+      return value;
     });
 
     this.queryOptions.where = whereClause;

@@ -32,7 +32,7 @@ class UserService {
    */
   public async getAllUsers(queryString: ParsedQs): Promise<PaginatedUserResult> {
     // 1. Buat query dasar
-    const features = new APIFeatures(User, queryString)
+    const features = new APIFeatures(queryString)
       .filter()
       .sort()
       .limitFields(); // Hentikan chain sebelum .paginate()
@@ -101,11 +101,11 @@ class UserService {
    * [DIPERBARUI] Mengambil daftar semua pengguna yang diarsipkan.
    */
   public async getArchivedUsers(queryString: ParsedQs): Promise<PaginatedUserResult> {
-    const features = new APIFeatures(User, queryString)
+    const features = new APIFeatures(queryString)
       .filter()
       .sort()
       .limitFields();
-    
+
     const { limit, offset } = features.paginate();
     const page = Math.floor(offset / limit) + 1;
 
