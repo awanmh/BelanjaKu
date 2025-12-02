@@ -51,11 +51,11 @@ export default function Navbar() {
       {/* Bottom Section: Categories (Sub-nav) */}
       <div className="container mx-auto px-4">
         <nav className="flex justify-center gap-8 h-12 items-center text-sm font-medium text-gray-600 uppercase tracking-wider overflow-x-auto no-scrollbar">
-            {['Wanita', 'Pria', 'Anak', 'Sports', 'Lifestyle'].map((item) => (
+            {['Wanita', 'Pria', 'Sport', 'Anak'].map((item) => (
                 <Link 
                     key={item} 
-                    href={`/products?category=${item.toLowerCase()}`} 
-                    className={`hover:text-black hover:border-b-2 hover:border-black transition-colors py-3 ${item === 'Sale' ? 'text-red-600 font-bold' : ''}`}
+                    href={`/${item.toLowerCase()}`} 
+                    className={`hover:text-black hover:border-b-2 hover:border-black transition-colors py-3`}
                 >
                     {item}
                 </Link>

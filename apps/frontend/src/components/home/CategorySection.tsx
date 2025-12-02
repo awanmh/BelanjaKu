@@ -9,27 +9,27 @@ const categories = [
   {
     id: 'wanita',
     name: 'Wanita',
-    image: '/image/categories/wanita.png',
+    image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800&auto=format&fit=crop',
   },
   {
     id: 'pria',
     name: 'Pria',
-    image: '/image/categories/pria.png',
+    image: 'https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?q=80&w=800&auto=format&fit=crop',
   },
   {
     id: 'anak',
     name: 'Anak',
-    image: '/image/categories/anak.png',
+    image: 'https://images.unsplash.com/photo-1519238263496-63439708bc0c?q=80&w=800&auto=format&fit=crop',
   },
   {
     id: 'sport',
     name: 'Sport',
-    image: '/image/categories/sport.png',
+    image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop',
   },
   {
     id: 'lifestyle',
     name: 'Lifestyle',
-    image: '/image/categories/lifestyle.jpg',
+    image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop',
   },
 ];
 
