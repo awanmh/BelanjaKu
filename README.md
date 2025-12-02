@@ -21,51 +21,52 @@ Halo Tim\! Berikut adalah cara bekerja di repositori ini. Kita memisahkan penger
 
 -----
 
-#### 🎨 Untuk Tim Frontend (UI/UX & Tampilan)
+#### 👨‍💻 Untuk Tim Backend (Server & Database)
 
-Tugas kalian hanya fokus di dalam folder `apps/frontend`. Jangan menyentuh folder backend.
+Tugas kalian hanya fokus di dalam folder `apps/backend`. Jangan menyentuh folder frontend.
 
-1.  **Pindah ke Branch Frontend:**
+1.  **Pindah ke Branch Backend:**
 
     ```bash
-    git checkout frontend-update
+    git checkout backend-update
     ```
 
-    *(Pastikan terminal menampilkan: "Switched to branch 'frontend-update'")*
+    *(Pastikan terminal menampilkan: "Switched to branch 'backend-update'")*
 
 2.  **Masuk ke Folder Kerja:**
 
     ```bash
-    cd apps/frontend
+    cd apps/backend
     ```
 
 3.  **Instalasi & Running (Harian):**
 
     ```bash
     npm install
+    npm run db:migrate  # Jika ada perubahan database
     npm run dev
     ```
 
 4.  **Cara Push Codingan (Simpan Pekerjaan):**
-    Setelah selesai coding halaman/komponen tertentu:
+    Setelah selesai coding fitur tertentu:
 
     ```bash
     # 1. Pastikan Anda masih di branch yang benar
     git branch 
-    # (Harus ada tanda bintang * di frontend-update)
+    # (Harus ada tanda bintang * di backend-update)
 
     # 2. Masukkan perubahan ke antrian
     git add .
 
     # 3. Simpan dengan pesan yang jelas
-    git commit -m "feat(frontend): membuat halaman login"
-    # atau "style(frontend): memperbaiki layout navbar"
+    git commit -m "feat(backend): menambahkan fitur X"
+    # atau "fix(backend): memperbaiki bug Y"
 
     # 4. Tarik update terbaru teman lain dulu (PENTING!)
-    git pull origin frontend-update
+    git pull origin backend-update
 
     # 5. Kirim ke GitHub
-    git push origin frontend-update
+    git push origin backend-update
     ```
 
 -----
