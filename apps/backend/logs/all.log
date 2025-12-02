@@ -2274,3 +2274,58 @@
 2025-12-02 10:18:23:1823 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
 2025-12-02 10:18:27:1827 warn: Login attempt failed for email: test@example.com. User not found.
 2025-12-02 10:18:27:1827 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-12-02 22:32:50:3250 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-12-02 22:32:50:3250 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-12-02 22:32:52:3252 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-02 22:32:53:3253 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-12-02 22:32:53:3253 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-12-02 22:32:53:3253 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-02 22:32:53:3253 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-02 22:32:53:3253 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-02 22:32:53:3253 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-02 22:32:53:3253 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-02 22:32:54:3254 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-02 22:32:54:3254 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-02 22:32:54:3254 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-02 22:32:54:3254 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-02 22:32:54:3254 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-02 22:32:54:3254 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-02 22:32:57:3257 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-02 22:32:57:3257 error: [PUT] /api/v1/products/542334d4-006a-421b-8e1b-ca5b483ae27d >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-02 22:32:59:3259 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-12-02 22:33:03:333 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-02 22:33:11:3311 warn: Login attempt failed for email: test@example.com. User not found.
+2025-12-02 22:33:11:3311 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-12-02 22:33:22:3322 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-12-02 22:33:22:3322 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-12-02 22:36:18:3618 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:36:18 +0000] "GET / HTTP/1.1" 200 67 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:36:18:3618 [31merror[39m: [31m[GET] /favicon.ico >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-02 22:36:18:3618 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:36:18 +0000] "GET /favicon.ico HTTP/1.1" 404 81 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:36:21:3621 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:36:21 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:36:39:3639 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:36:39 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:39:11:3911 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:39:11 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:54:45:5445 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:54:45 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:54:47:5447 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:54:47 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:54:47:5447 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:54:47 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:54:47:5447 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:54:47 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:54:47:5447 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:54:47 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:54:47:5447 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:54:47 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:54:47:5447 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:54:47 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:54:48:5448 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:54:48 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:54:48:5448 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:54:48 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:54:48:5448 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:54:48 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:54:58:5458 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:54:58 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:54:58:5458 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:54:58 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:54:58:5458 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:54:58 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:54:58:5458 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:54:58 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 22:55:04:554 [35mhttp[39m: [35m::1 - - [02/Dec/2025:15:55:04 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 23:02:01:21 [35mhttp[39m: [35m::1 - - [02/Dec/2025:16:02:01 +0000] "GET / HTTP/1.1" 200 67 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 23:02:01:21 [31merror[39m: [31m[GET] /favicon.ico >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-02 23:02:01:21 [35mhttp[39m: [35m::1 - - [02/Dec/2025:16:02:01 +0000] "GET /favicon.ico HTTP/1.1" 404 81 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 23:02:22:222 [31merror[39m: [31m[GET] /auth/login >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-02 23:02:22:222 [35mhttp[39m: [35m::1 - - [02/Dec/2025:16:02:22 +0000] "GET /auth/login HTTP/1.1" 404 81 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 23:17:24:1724 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-12-02 23:17:24:1724 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-12-02 23:23:28:2328 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-02 23:23:28:2328 [35mhttp[39m: [35m::1 - - [02/Dec/2025:16:23:28 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
+2025-12-02 23:23:28:2328 [35mhttp[39m: [35m::1 - - [02/Dec/2025:16:23:28 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"[39m
