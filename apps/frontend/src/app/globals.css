@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+/* Konfigurasi Tema di v4 langsung di CSS */
+@theme {
+  --color-primary: #0F172A;
+  --color-secondary: #64748B;
+  --color-accent: #3B82F6;
+  
+  --font-sans: var(--font-inter);
+}
+
+/* FIX: Gunakan CSS standar untuk body. 
+  Hindari penggunaan @apply untuk style dasar global di v4 beta 
+  jika mengalami masalah deteksi class.
+*/
+body {
+  background-color: white; /* Pengganti @apply bg-white */
+  color: #0F172A;          /* Pengganti @apply text-slate-900 */
+  -webkit-font-smoothing: antialiased; /* Pengganti @apply antialiased */
+}
