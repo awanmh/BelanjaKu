@@ -1,233 +1,93 @@
-# Proyek E-commerce **belanjaKu**
+# 📋 Panduan Kontribusi Tim (SOP Git)
 
-Selamat datang di repositori proyek **belanjaKu**.  
-Proyek ini merupakan implementasi cetak biru arsitektur untuk platform e-commerce modern yang dinamis dan berkonversi tinggi, dengan meniru strategi pemimpin pasar di Indonesia seperti **Tokopedia** dan **Shopee**.
+Halo Tim\! Berikut adalah cara bekerja di repositori ini. Kita memisahkan pengerjaan Backend dan Frontend di branch yang berbeda agar lebih rapi dan aman.
 
----
+#### 1\. Persiapan Awal (Lakukan Sekali Saja)
 
-## 📌 Ringkasan Eksekutif
+1.  **Clone Repositori:**
+    Buka terminal di folder tujuan Anda, lalu jalankan:
 
-**belanjaKu** dirancang lebih dari sekadar platform e-commerce biasa.  
-Inti dari proyek ini adalah **arsitektur halaman produk dinamis** yang dibangun di atas kerangka kerja modular berbasis data. Sistem ini menggunakan **Master Prompt**, sebuah sistem variabel terstruktur yang mampu menghasilkan skenario halaman produk yang realistis dan sadar konteks.
+    ```bash
+    git clone (https://github.com/awanmh/BelanjaKu.git)
+    cd BelanjaKu
+    ```
 
-🎯 **Tujuan**: Menciptakan fondasi kuat bagi **manajer produk, desainer UX/UI, dan pengembang** dalam membangun pengalaman e-commerce kelas dunia yang disesuaikan dengan pasar Indonesia.
+2.  **Ambil Semua Update Terbaru:**
+    Agar laptop Anda mengenali branch baru yang sudah dibuat (`backend-update` & `frontend-update`):
 
----
+    ```bash
+    git fetch origin
+    ```
 
-## 🏗 Filosofi Arsitektur: Anatomi Halaman Produk Berkonversi Tinggi
+-----
 
-Halaman produk bukanlah halaman statis, melainkan **ekosistem dinamis** yang terbagi dalam **empat zona strategis utama** untuk membimbing pengguna dari penemuan hingga konversi:
+#### 🎨 Untuk Tim Frontend (UI/UX & Tampilan)
 
-1. **Zona Kepercayaan & Bukti Sosial**  
-   Menghadirkan sinyal validasi kualitas produk dan keandalan penjual, seperti rating, jumlah terjual, dan lencana penjual.
+Tugas kalian hanya fokus di dalam folder `apps/frontend`. Jangan menyentuh folder backend.
 
-2. **Zona Informasi Inti Produk**  
-   Menyajikan fitur, manfaat, dan spesifikasi melalui galeri gambar/video serta deskripsi detail.
+1.  **Pindah ke Branch Frontend:**
 
-3. **Zona Aksi Komersial**  
-   Mendorong keputusan pembelian dengan menampilkan harga, promosi, dan logistik secara jelas serta persuasif.
+    ```bash
+    git checkout frontend-update
+    ```
 
-4. **Zona Penemuan & Navigasi**  
-   Memberikan rekomendasi produk relevan untuk mendorong *cross-selling* dan *upselling*.
+    *(Pastikan terminal menampilkan: "Switched to branch 'frontend-update'")*
 
----
+2.  **Masuk ke Folder Kerja:**
 
-## ✨ Fitur Utama
+    ```bash
+    cd apps/frontend
+    ```
 
-Platform **belanjaKu** dirancang untuk mendukung fitur komprehensif yang esensial dalam e-commerce modern.
+3.  **Instalasi & Running (Harian):**
 
-### 🔹 Bukti Sosial & Kepercayaan Pengguna
-- **Peringkat & Ulasan**: Agregat bintang + jumlah ulasan.  
-- **Metrik Kecepatan Penjualan**: Indikator popularitas (misal: *Terjual 25rb+*).  
-- **Identitas Penjual Terverifikasi**: Nama toko, lokasi, lencana (*Official Store*, *Power Merchant*).  
+    ```bash
+    npm install
+    npm run dev
+    ```
 
-### 🔹 Informasi Produk yang Kaya
-- **Hierarki Visual**: Galeri gambar/video berkualitas tinggi.  
-- **Deskripsi Terstruktur**: Deskripsi visual seperti *mini landing page*.  
-- **Atribut & Spesifikasi**: Daftar lengkap untuk mendukung keputusan & pencarian.  
+4.  **Cara Push Codingan (Simpan Pekerjaan):**
+    Setelah selesai coding halaman/komponen tertentu:
 
-### 🔹 Mesin Harga & Promosi Berlapis
-- **Tampilan Harga Dinamis**: Harga coret + diskon.  
-- **Promosi Multi-Lapis**: Diskon, cashback, voucher, *Kombo Hemat*, *Flash Sale*.  
-- **Gratis Ongkir**: Penawaran pengiriman gratis sebagai pendorong utama.  
+    ```bash
+    # 1. Pastikan Anda masih di branch yang benar
+    git branch 
+    # (Harus ada tanda bintang * di frontend-update)
 
-### 🔹 Logistik & Opsi Pengiriman Fleksibel
-- **Pilihan Pengiriman**: Instan, *Same Day*, Reguler, Kargo, COD.  
-- **Transparansi Biaya & Waktu**: Informasi jelas tentang ongkir & estimasi tiba.  
+    # 2. Masukkan perubahan ke antrian
+    git add .
 
-### 🔹 Keterlibatan & Personalisasi Pengguna
-- **Lencana Status Produk**: *Terbaru*, *Paling Laris*.  
-- **Notifikasi Penting**: *Ingatkan Saya* untuk *price drop alert*.  
+    # 3. Simpan dengan pesan yang jelas
+    git commit -m "feat(frontend): membuat halaman login"
+    # atau "style(frontend): memperbaiki layout navbar"
 
----
+    # 4. Tarik update terbaru teman lain dulu (PENTING!)
+    git pull origin frontend-update
 
-## ⚙️ Tech Stack yang Direkomendasikan
+    # 5. Kirim ke GitHub
+    git push origin frontend-update
+    ```
 
-### 🎨 Frontend
-- **Framework**: [Next.js (React)](https://nextjs.org/) – mendukung SSR & SSG untuk SEO dan performa.  
-- **Bahasa**: TypeScript – aman & terkelola dengan type safety.  
-- **Styling**: Tailwind CSS – utility-first untuk desain cepat & konsisten.  
-- **Manajemen State**: Zustand / React Context – state global yang sederhana.  
+-----
 
-### 🔧 Backend
-- **Framework**: Node.js dengan Express.js / NestJS.  
-- **Bahasa**: TypeScript – konsisten dengan frontend.  
-- **API**: REST API – standar komunikasi client-server.  
-- **Autentikasi**: JWT (JSON Web Token) – stateless & aman.  
+### ⚠️ Aturan Penting (Wajib Baca)
 
-### 🗄 Database
-- **Utama**: PostgreSQL – kuat, andal, cocok untuk data transaksional.  
-- **Caching**: Redis – caching untuk produk populer & sesi pengguna.  
+1.  **Jangan Coding di `main`:** Branch `main` adalah branch suci yang hanya berisi kode gabungan yang sudah final. Jangan pernah push langsung ke `main`.
+2.  **Selalu `git pull` Dulu:** Sebelum melakukan `git push`, biasakan melakukan `git pull origin <nama_branch>` untuk menghindari bentrok kode (*conflict*) dengan teman satu tim.
+3.  **Perhatikan `.gitignore`:** Folder seperti `node_modules`, `.next`, atau `dist` **TIDAK BOLEH** di-push. File `.gitignore` sudah disiapkan untuk mencegah ini otomatis, jangan dihapus.
+4.  **API URL:** Untuk tim Frontend, pastikan file `.env.local` Anda mengarah ke URL backend teman Anda (jika satu jaringan) atau localhost masing-masing.
+5.  **Saat ingin push** usahakan update file `README.md` dan perbarui update-an apa yang dikerjakan dan to-do selanjutnya.
 
-### ☁️ Infrastruktur & Deployment
-- **Kontainerisasi**: Docker – konsistensi lintas lingkungan.  
-- **Cloud Provider**: AWS atau GCP.  
-- **Deployment Frontend**: Vercel – hosting Next.js dengan CI/CD bawaan.  
+### Update
+- Sudah membenahi error di fitur A.
+- Fitur B sudah tahap awal/fondasi.
+- Fitur C sudah aman.
 
-## Arsitektur & Model Data {#arsitektur-model-data}
+### To-Do (example)
+- Selanjutnya mengerjakan fitur A.
+- Melanjutkan fitur B karena masih error
+- Tambahkan bla-bla dibagian fitur C.
 
-### Diagram Alur Pengguna (Flowchart)
+Selamat bekerja\! 🚀
 
-<img src="assets/Flowchart.jpeg" width="500"/>
-
-### Diagram Kelas (Class Diagram)
-
-<img src="assets/ClassDiagram.jpeg" width="500"/>
-
-### Contoh Struktur Data API (Berdasarkan Master Prompt)
-
-Respons API untuk halaman produk akan mengikuti struktur modular ini,
-memastikan konsistensi antara backend dan frontend.
-
-```api
-{
-  "user_context": {
-    "location": "Jakarta Barat"
-  },
-  "product": {
-    "name": "Kemeja Flanel Pria Lengan Panjang",
-    "category": "Fashion Pria > Kemeja",
-    "sku": "KFP-001-RED-L"
-  },
-  "seller": {
-    "name": "Toko Resmi Flanelku",
-    "location": "Jakarta Utara",
-    "type": "Official Store"
-  },
-  "social_proof": {
-    "rating": {
-      "score": 4.9,
-      "count": 32150
-    },
-    "sales": {
-      "sold": 75000,
-      "status": "terlaris"
-    },
-    "recency": {
-      "status": null
-    }
-  },
-  "commercial": {
-    "pricing": {
-      "base": 200000,
-      "discount_percentage": 5,
-      "final": 190000
-    },
-    "promotions": [
-      {
-        "type": "cashback",
-        "value": "5%"
-      },
-      {
-        "type": "shipping",
-        "value": "Gratis Ongkir Min. Belanja Rp50rb"
-      }
-    ]
-  },
-  "logistics": {
-    "options": [
-      {
-        "type": "Instan",
-        "cost": 25000,
-        "eta": "1-2 jam"
-      },
-      {
-        "type": "Reguler",
-        "cost": 9000,
-        "eta": "1-2 hari"
-      },
-      {
-        "type": "COD",
-        "cost": 12000,
-        "eta": "2-3 hari"
-      }
-    ]
-  }
-}
-```
-
-## Skenario Penggunaan Dinamis
-
-Arsitektur ini memungkinkan simulasi berbagai skenario siklus hidup
-produk secara dinamis.
-
-#### 1. Skenario A: Peluncuran Produk Baru {#skenario-a-peluncuran-produk-baru}
-
-- **Tujuan**: Mendorong adopsi awal untuk produk baru tanpa riwayat penjualan.
-
-- **Strategi**: Memanfaatkan tumpukan promosi yang agresif.
-
-- **Konfigurasi API**: rating.count = 0, sales.sold = 0, recency.status = \'terbaru\', promotions diisi dengan diskon peluncuran, voucher, dan gratis ongkir.
-
-#### 2. Skenario B: Produk Terlaris (Best-Seller) {#skenario-b-produk-terlaris-best-seller}
-
-- **Tujuan**: Menampilkan produk pemimpin pasar dengan bukti sosial yang luar biasa.
-
-- **Strategi**: Menekankan pada rating tinggi dan volume penjualan, dengan promosi minimal.
-
-- **Konfigurasi API**: rating.count \> 10000, sales.sold \> 50000, sales.status = \'terlaris\', promosi minimal (misal: diskon kecil).
-
-#### 3. Skenario C: Urgensi Flash Sale {#skenario-c-urgensi-flash-sale}
-
-- **Tujuan**: Menciptakan urgensi yang kuat melalui promosi berbatas waktu.
-
-- **Strategi**: Menggabungkan diskon besar dengan kelangkaan stok dan penghitung waktu mundur.
-
-- **Konfigurasi API**: promotions berisi type: \'flash_sale\' dengan end_time, dan ditambah data inventory.stock yang rendah.
-
-## Pemanfaatan Strategis Lintas Tim
-
-Arsitektur ini dirancang untuk menjadi **\"sumber kebenaran tunggal\"**
-yang menyelaraskan tim Desain, Produk, dan Rekayasa.
-
-- **Untuk Desain UX/UI**: Memungkinkan desainer mengisi mockup dengan data yang realistis dan melakukan *stress testing* pada komponen UI.
-
-- **Untuk Manajemen Produk**: Menjadi alat untuk validasi hipotesis dan merancang pengujian A/B yang terkontrol.
-
-- **Untuk Rekayasa (Engineering)**: Berfungsi sebagai spesifikasi yang jelas untuk definisi *endpoint* API dan memodelkan logika bisnis di server.
-
-## Setup & Instalasi {#setup-instalasi}
-
-*(Bagian ini akan berisi instruksi tentang cara menjalankan proyek
-secara lokal, termasuk prasyarat, instalasi dependensi, dan perintah
-untuk menjalankan server pengembangan.)*
-
-### Clone repositori ini  
-```bash
-git clone https://github.com/awanmh/BelanjaKu.git  
-```
- 
-### Masuk ke direktori proyek  
-```bash
-cd belanjaku  
-```
-  
-### Instal dependensi  
-```bash
-npm install  
-```
-  
-### Jalankan server pengembangan  
-```bash
-npm run dev
-```
+-----
