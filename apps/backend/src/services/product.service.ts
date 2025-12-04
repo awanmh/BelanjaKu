@@ -45,18 +45,19 @@ class ProductService {
   public async getAllProducts(queryString: ParsedQs): Promise<PaginatedProductResult> {
     // 1. Buat query dasar
     const features = new APIFeatures(queryString)
+      .search() // <--- TAMBAHKAN INI (Urutan: Search dulu, baru filter/sort)
       .filter()
       .sort()
       .limitFields();
 
-    // 2. Tambahkan include untuk relasi penjual (seller)
+    // 2. Tambahkan include (tetap sama)
     features.queryOptions.include = [{ model: User, as: 'seller', attributes: ['id', 'fullName'] }];
 
-    // 3. Dapatkan nilai limit dan offset secara terpisah
+    // 3. Dapatkan nilai limit dan offset (tetap sama)
     const { limit, offset } = features.paginate();
     const page = Math.floor(offset / limit) + 1;
 
-    // 4. Gunakan findAndCountAll
+    // 4. Gunakan findAndCountAll (tetap sama)
     const { rows, count } = await Product.findAndCountAll({
       ...features.queryOptions,
       limit,
@@ -81,6 +82,7 @@ class ProductService {
    */
   public async getProductsBySeller(sellerId: string, queryString: ParsedQs): Promise<PaginatedProductResult> {
     const features = new APIFeatures(queryString)
+      .search()
       .filter()
       .sort()
       .limitFields();

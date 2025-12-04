@@ -11,13 +11,17 @@ export interface ProductAttributes {
   sellerId: string; // Foreign key untuk User (seller)
   categoryId: string; // Foreign key untuk Category
   lowStockThreshold?: number;
+
+  // TAMBAHAN TYPE
+  search_vector?: any; // Kita set 'any' atau 'string' karena ini tipe khusus postgres
+
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date; // 1. Tambahkan kolom deletedAt
 }
 
 // Beberapa atribut bersifat opsional saat pembuatan
-interface ProductCreationAttributes extends Optional<ProductAttributes, 'id'> {}
+interface ProductCreationAttributes extends Optional<ProductAttributes, 'id'> { }
 
 // Definisikan class Model untuk Product
 export class Product extends Model<ProductAttributes, ProductCreationAttributes> implements ProductAttributes {
@@ -30,6 +34,9 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
   public sellerId!: string;
   public categoryId!: string;
   public lowStockThreshold!: number;
+
+  // TAMBAHAN TYPE
+  public readonly search_vector!: any;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -46,8 +53,8 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
       as: 'category',
     });
     Product.hasMany(models.Promotion, {
-        foreignKey: 'productId',
-        as: 'promotions'
+      foreignKey: 'productId',
+      as: 'promotions'
     });
   }
 }

@@ -1,5 +1,5 @@
 import { ParsedQs } from 'qs';
-import { FindOptions, Model, Op } from 'sequelize';
+import { FindOptions, Model, Op, Sequelize } from 'sequelize';
 
 // Definisikan tipe untuk hasil paginasi
 export interface PaginationResult {
@@ -10,11 +10,11 @@ export interface PaginationResult {
 /**
  * Kelas untuk membangun query Sequelize secara dinamis dari query string URL.
  * Mendukung filtering, sorting, dan field limiting.
- * PAGINASI sekarang ditangani secara terpisah.
  */
 class APIFeatures {
   public queryOptions: FindOptions;
   private queryString: ParsedQs;
+  private isSearching: boolean = false; // Property baru
 
   constructor(queryString: ParsedQs) {
     this.queryString = queryString;
@@ -22,11 +22,34 @@ class APIFeatures {
   }
 
   /**
+   * Method Baru: Menangani Full Text Search
+   */
+  public search(): this {
+    if (this.queryString.search && typeof this.queryString.search === 'string') {
+      this.isSearching = true;
+      const searchTerm = this.queryString.search;
+
+      // Sanitasi sederhana: hapus karakter kutip tunggal agar aman
+      const safeSearchTerm = searchTerm.replace(/'/g, "''");
+
+      // Tambahkan kondisi WHERE dengan operator @@
+      this.queryOptions.where = {
+        ...this.queryOptions.where,
+        [Op.and]: Sequelize.literal(
+          `search_vector @@ plainto_tsquery('english', '${safeSearchTerm}')`
+        ),
+      };
+    }
+    return this;
+  }
+
+  /**
    * Menambahkan filter ke queryOptions berdasarkan query string.
    */
   public filter(): this {
     const queryObj = { ...this.queryString };
-    const excludedFields = ['page', 'sort', 'limit', 'fields'];
+    // Tambahkan 'search' ke excludedFields agar tidak dianggap filter kolom biasa
+    const excludedFields = ['page', 'sort', 'limit', 'fields', 'search'];
     excludedFields.forEach((el) => delete (queryObj as any)[el]);
 
     let queryStr = JSON.stringify(queryObj);
@@ -41,7 +64,11 @@ class APIFeatures {
       return value;
     });
 
-    this.queryOptions.where = whereClause;
+    this.queryOptions.where = {
+      ...this.queryOptions.where, // Gabungkan dengan where dari search()
+      ...whereClause,
+    };
+
     return this;
   }
 
@@ -49,7 +76,7 @@ class APIFeatures {
    * Menambahkan sorting ke queryOptions.
    */
   public sort(): this {
-    if (typeof this.queryString.sort === 'string') {
+    if (this.queryString.sort && typeof this.queryString.sort === 'string') {
       const sortBy = this.queryString.sort.split(',').map((field) => {
         if (field.startsWith('-')) {
           return [field.substring(1), 'DESC'];
@@ -58,7 +85,16 @@ class APIFeatures {
       });
       this.queryOptions.order = sortBy as any;
     } else {
-      this.queryOptions.order = [['createdAt', 'DESC']];
+      // Jika user sedang mencari (isSearching = true), urutkan berdasarkan RELEVANSI
+      if (this.isSearching) {
+        const searchTerm = (this.queryString.search as string).replace(/'/g, "''");
+        this.queryOptions.order = [
+          [Sequelize.literal(`ts_rank(search_vector, plainto_tsquery('english', '${searchTerm}'))`), 'DESC'],
+          ['createdAt', 'DESC']
+        ];
+      } else {
+        this.queryOptions.order = [['createdAt', 'DESC']];
+      }
     }
     return this;
   }
@@ -75,21 +111,15 @@ class APIFeatures {
   }
 
   /**
-   * [DIPERBARUI] Hanya menghitung dan mengembalikan nilai limit dan offset.
-   * @returns Objek PaginationResult { limit, offset }
+   * Mengembalikan nilai limit dan offset.
    */
   public paginate(): PaginationResult {
     const page = Number(this.queryString.page) || 1;
     const limit = Number(this.queryString.limit) || 100;
     const offset = (page - 1) * limit;
 
-    // Tidak lagi menerapkan ke queryOptions secara langsung
-    // this.queryOptions.limit = limit;
-    // this.queryOptions.offset = offset;
-
     return { limit, offset };
   }
 }
 
 export default APIFeatures;
-
