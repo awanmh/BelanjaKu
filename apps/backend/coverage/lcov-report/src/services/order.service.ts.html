@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.63% </span>
+                <span class="strong">95.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>230/238</span>
+                <span class='fraction'>243/254</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.76% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>21/26</span>
+                <span class='fraction'>24/30</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.63% </span>
+                <span class="strong">95.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>230/238</span>
+                <span class='fraction'>243/254</span>
             </div>
         
             
@@ -300,7 +300,25 @@
 <a name='L235'></a><a href='#L235'>235</a>
 <a name='L236'></a><a href='#L236'>236</a>
 <a name='L237'></a><a href='#L237'>237</a>
-<a name='L238'></a><a href='#L238'>238</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L238'></a><a href='#L238'>238</a>
+<a name='L239'></a><a href='#L239'>239</a>
+<a name='L240'></a><a href='#L240'>240</a>
+<a name='L241'></a><a href='#L241'>241</a>
+<a name='L242'></a><a href='#L242'>242</a>
+<a name='L243'></a><a href='#L243'>243</a>
+<a name='L244'></a><a href='#L244'>244</a>
+<a name='L245'></a><a href='#L245'>245</a>
+<a name='L246'></a><a href='#L246'>246</a>
+<a name='L247'></a><a href='#L247'>247</a>
+<a name='L248'></a><a href='#L248'>248</a>
+<a name='L249'></a><a href='#L249'>249</a>
+<a name='L250'></a><a href='#L250'>250</a>
+<a name='L251'></a><a href='#L251'>251</a>
+<a name='L252'></a><a href='#L252'>252</a>
+<a name='L253'></a><a href='#L253'>253</a>
+<a name='L254'></a><a href='#L254'>254</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -427,6 +445,20 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -541,6 +573,7 @@
 import db from '../database/models';
 import HttpException from '../utils/http-exception.util';
 import { Op } from 'sequelize';
+import { sendOrderConfirmationEmail } from '../utils/email.util';
 &nbsp;
 // Definisikan tipe instance model
 type OrderInstance = InstanceType&lt;typeof db.Order&gt;;
@@ -552,6 +585,7 @@ const Order = db.Order;
 const OrderItem = db.OrderItem;
 const Product = db.Product;
 const Promotion = db.Promotion;
+const User = db.User;
 const sequelize = db.sequelize;
 &nbsp;
 // Tipe data untuk item dalam keranjang belanja
@@ -623,18 +657,18 @@ class OrderService {
         // Pastikan promosi berlaku untuk salah satu produk di keranjang
         const isApplicable = items.some(item =&gt; item.productId === promo.productId);
         if (!isApplicable) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >            throw new HttpException(StatusCodes.BAD_REQUEST, 'This promotion code is not valid for the items in your cart.');</span>
+<span class="cstat-no" title="statement not covered" >          throw new HttpException(StatusCodes.BAD_REQUEST, 'This promotion code is not valid for the items in your cart.');</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
 &nbsp;
         // Hitung diskon (hanya pada produk yang dipromosikan)
         const promoProductInCart = items.find(item =&gt; item.productId === promo.productId);
         const productForPromo = await Product.findByPk(promo.productId, { transaction });
-        
+&nbsp;
         if (promoProductInCart &amp;&amp; productForPromo) {
-            const priceOfPromoProduct = productForPromo.price * promoProductInCart.quantity;
-            discountAmount = priceOfPromoProduct * (promo.discountPercentage / 100);
-            totalAmount -= discountAmount;
-            promotionId = promo.id;
+          const priceOfPromoProduct = productForPromo.price * promoProductInCart.quantity;
+          discountAmount = priceOfPromoProduct * (promo.discountPercentage / 100);
+          totalAmount -= discountAmount;
+          promotionId = promo.id;
         }
       }
 &nbsp;
@@ -664,6 +698,20 @@ class OrderService {
       );
 &nbsp;
       await transaction.commit();
+&nbsp;
+      try {
+        const user = await User.findByPk(userId);
+        if (user &amp;&amp; user.email) {
+          // Kita tidak menggunakan 'await' agar user tidak perlu menunggu email terkirim
+          sendOrderConfirmationEmail(user.email, {
+            id: newOrder.id,
+            totalAmount: newOrder.totalAmount,
+          }).catch((err) =&gt; console.error("Gagal mengirim email background:", err));
+        }
+      } <span class="branch-0 cbranch-no" title="branch not covered" >catch (emailError) {</span>
+<span class="cstat-no" title="statement not covered" >        // Kita log error saja, jangan sampai error email menggagalkan response order</span>
+<span class="cstat-no" title="statement not covered" >        console.error("Error saat menyiapkan data email:", emailError);</span>
+<span class="cstat-no" title="statement not covered" >      }</span>
 &nbsp;
       const fullOrder = await Order.findByPk(newOrder.id, {
         include: [{ model: OrderItem, as: 'items' }],
@@ -745,7 +793,7 @@ class OrderService {
         product?: ProductInstance;
       })[];
     }
-    
+&nbsp;
     const order = await Order.findByPk(orderId, {
       include: [{ model: OrderItem, as: 'items', include: [{ model: Product, as: 'product' }] }],
     });
@@ -765,9 +813,9 @@ class OrderService {
     }
 &nbsp;
     if (order.status !== 'processing' &amp;&amp; status === 'shipped') {
-        throw new HttpException(StatusCodes.BAD_REQUEST, 'Order must be processed before it can be shipped');
+      throw new HttpException(StatusCodes.BAD_REQUEST, 'Order must be processed before it can be shipped');
     }
-    
+&nbsp;
     order.status = status;
     await order.save();
     return order;
@@ -781,7 +829,7 @@ export default new OrderService();</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-04T07:48:18.796Z
+                at 2025-12-04T14:45:56.677Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

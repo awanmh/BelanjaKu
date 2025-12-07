@@ -9,13 +9,17 @@ export interface UserAttributes {
   password: string;
   role: 'user' | 'seller' | 'admin';
   isVerified: boolean;
+  // [TAMBAHAN] Tambahkan 2 properti ini
+  resetPasswordToken?: string | null;
+  resetPasswordExpires?: Date | null;
+
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date | null; // 1. Tambahkan kolom deletedAt (izinkan null)
 }
 
 // Atribut yang opsional saat pembuatan
-interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
+interface UserCreationAttributes extends Optional<UserAttributes, 'id'> { }
 
 export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
   public id!: string;

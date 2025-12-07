@@ -1609,3 +1609,17 @@
 2025-12-04 14:48:03:483 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
 2025-12-04 14:48:03:483 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
 2025-12-04 14:48:03:483 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-04 21:44:53:4453 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-04 21:44:54:4454 error: [PUT] /api/v1/products/e0932bf1-a6fb-448d-a7f6-29e0d9eecbb8 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-04 21:44:58:4458 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-12-04 21:44:58:4458 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-04 21:44:58:4458 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-04 21:44:58:4458 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-04 21:44:58:4458 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-04 21:44:58:4458 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-04 21:44:58:4458 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-04 21:45:08:458 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-04 21:45:14:4514 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-12-04 21:45:14:4514 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-12-04 21:45:19:4519 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-04 21:45:25:4525 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code

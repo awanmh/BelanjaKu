@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
 import db from '../database/models';
 import { UserAttributes } from '../database/models/user.model';
@@ -5,6 +6,7 @@ import HttpException from '../utils/http-exception.util';
 import { StatusCodes } from 'http-status-codes';
 import { generateAccessToken, generateRefreshToken } from '../utils/jwt.util';
 import logger from '../utils/logger.util';
+import { sendResetPasswordEmail } from '../utils/email.util';
 
 const User = db.User;
 
@@ -78,6 +80,40 @@ class AuthService {
         refreshToken,
       },
     };
+  }
+
+  /**
+   * Mengirim email reset password jika user lupa kata sandi.
+   */
+  public async forgotPassword(email: string) {
+    const user: any = await User.findOne({ where: { email } });
+
+    if (!user) {
+      throw new HttpException(StatusCodes.NOT_FOUND, 'User with that email does not exist');
+    }
+
+    // 1. Generate Reset Token
+    const resetToken = crypto.randomBytes(32).toString('hex');
+
+    // 2. Simpan token ke DB
+    // Sekarang error di bawah ini akan hilang karena user bertipe 'any'
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpires = new Date(Date.now() + 3600 * 1000);
+    await user.save();
+
+    // 3. Kirim Email
+    try {
+      await sendResetPasswordEmail(user.email, resetToken);
+    } catch (error) {
+      user.resetPasswordToken = null;
+      user.resetPasswordExpires = null;
+      await user.save();
+
+      logger.error('Failed to send reset email', error);
+      throw new HttpException(StatusCodes.INTERNAL_SERVER_ERROR, 'Error sending email');
+    }
+
+    return { message: 'Password reset link sent to your email' };
   }
 }
 
