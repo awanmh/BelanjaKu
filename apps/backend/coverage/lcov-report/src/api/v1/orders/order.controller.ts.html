@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">47.54% </span>
+                <span class="strong">34.42% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>58/122</span>
+                <span class='fraction'>42/122</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/5</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">47.54% </span>
+                <span class="strong">34.42% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>58/122</span>
+                <span class='fraction'>42/122</span>
             </div>
         
             
@@ -200,22 +200,22 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -320,23 +320,23 @@ class OrderController {
   /**
    * Menangani permintaan untuk membuat pesanan baru (checkout).
    */
-  public async createOrder(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise&lt;void&gt; {
-    try {
-      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
-      const userId = req.user!.id;
-      const orderData: CreateOrderInput = req.body;
-&nbsp;
-      const newOrder = await OrderService.createOrder(orderData, userId);
-&nbsp;
-      res.status(StatusCodes.CREATED).json({
-        success: true,
-        message: 'Order placed successfully',
-        data: newOrder,
-      });
-    } catch (error) {
-      next(error);
-    }
-  }
+  public async <span class="fstat-no" title="function not covered" >createOrder(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise&lt;void&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan</span>
+<span class="cstat-no" title="statement not covered" >      const userId = req.user!.id;</span>
+<span class="cstat-no" title="statement not covered" >      const orderData: CreateOrderInput = req.body;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      const newOrder = await OrderService.createOrder(orderData, userId);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      res.status(StatusCodes.CREATED).json({</span>
+<span class="cstat-no" title="statement not covered" >        success: true,</span>
+<span class="cstat-no" title="statement not covered" >        message: 'Order placed successfully',</span>
+<span class="cstat-no" title="statement not covered" >        data: newOrder,</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >    } catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >      next(error);</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 &nbsp;
   /**
    * Menangani permintaan untuk mendapatkan semua pesanan milik pengguna yang sedang login.
@@ -433,7 +433,7 @@ export default new OrderController();</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-02T15:19:31.891Z
+                at 2025-12-02T16:54:44.540Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

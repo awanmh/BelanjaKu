@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.18% </span>
+                <span class="strong">68.18% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>41/44</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>30/44</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
-                <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.18% </span>
+                <span class="strong">0% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>0/3</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">68.18% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>41/44</span>
+                <span class='fraction'>30/44</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -119,18 +119,14 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -139,7 +135,11 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -162,28 +162,28 @@ const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
 &nbsp;
 // Konfigurasi penyimpanan untuk Multer
 const storage = multer.diskStorage({
-  destination: (req: Request, file: Express.Multer.File, cb: Function) =&gt; {
-    // Simpan file di folder 'uploads' di root proyek
-    cb(null, 'uploads/');
+  destination: <span class="fstat-no" title="function not covered" >(req: Request, file: Express.Multer.File, cb: Function) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    // Simpan file di folder 'uploads' di root proyek</span>
+<span class="cstat-no" title="statement not covered" >    cb(null, 'uploads/');</span>
   },
-  filename: (req: Request, file: Express.Multer.File, cb: Function) =&gt; {
-    // Buat nama file yang unik untuk menghindari konflik
-    const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    const extension = path.extname(file.originalname);
-    cb(null, `${file.fieldname}-${uniqueSuffix}${extension}`);
+  filename: <span class="fstat-no" title="function not covered" >(req: Request, file: Express.Multer.File, cb: Function) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    // Buat nama file yang unik untuk menghindari konflik</span>
+<span class="cstat-no" title="statement not covered" >    const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;</span>
+<span class="cstat-no" title="statement not covered" >    const extension = path.extname(file.originalname);</span>
+<span class="cstat-no" title="statement not covered" >    cb(null, `${file.fieldname}-${uniqueSuffix}${extension}`);</span>
   },
 });
 &nbsp;
 // Filter untuk memvalidasi tipe file
-const fileFilter = (req: Request, file: Express.Multer.File, cb: multer.FileFilterCallback) =&gt; {
-  if (allowedMimeTypes.includes(file.mimetype)) {
-    // Terima file
-    cb(null, true);
-  }<span class="branch-0 cbranch-no" title="branch not covered" > else {</span>
+const fileFilter = <span class="fstat-no" title="function not covered" >(req: Request, file: Express.Multer.File, cb: multer.FileFilterCallback) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  if (allowedMimeTypes.includes(file.mimetype)) {</span>
+<span class="cstat-no" title="statement not covered" >    // Terima file</span>
+<span class="cstat-no" title="statement not covered" >    cb(null, true);</span>
+<span class="cstat-no" title="statement not covered" >  } else {</span>
 <span class="cstat-no" title="statement not covered" >    // Tolak file dan kirim error</span>
 <span class="cstat-no" title="statement not covered" >    cb(new HttpException(StatusCodes.BAD_REQUEST, 'Invalid file type. Only JPEG, PNG, GIF, and WEBP are allowed.'));</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-};
+<span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
 // Buat instance middleware upload
 const upload = multer({
@@ -202,7 +202,7 @@ export default upload;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-02T15:19:31.891Z
+                at 2025-12-02T16:54:44.540Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
