@@ -49,13 +49,17 @@ class ProductController {
    */
   public async getAllProducts(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
+      console.log('GET /products query:', req.query); // DEBUG LOG
       const products = await ProductService.getAllProducts(req.query);
+      console.log('Products found:', products?.rows?.length || 0); // DEBUG LOG
+      
       res.status(StatusCodes.OK).json({
         success: true,
         message: 'Products retrieved successfully',
-        data: products || [], // <-- INI PERBAIKANNYA
+        data: products || [],
       });
     } catch (error) {
+      console.error('Error fetching products:', error);
       next(error);
     }
   }

@@ -49,8 +49,50 @@ class ProductService {
       .sort()
       .limitFields();
 
-    // 2. Tambahkan include untuk relasi penjual (seller)
-    features.queryOptions.include = [{ model: User, as: 'seller', attributes: ['id', 'fullName'] }];
+    // CUSTOM LOGIC: Handle filtering by Category Name (e.g. ?category=Wanita)
+    // APIFeatures maps query params to WHERE directly. If 'category' is passed but not a column, 
+    // we need to resolve it to categoryId.
+    if (queryString.category) {
+       const categoryName = queryString.category as string;
+       // Find category by name (case insensitive usually good, but exact for now)
+       const category = await db.Category.findOne({ 
+         where: { 
+            name: db.Sequelize.where(
+               db.Sequelize.fn('LOWER', db.Sequelize.col('name')), 
+               'LIKE', 
+               '%' + categoryName.toLowerCase() + '%'
+            ) 
+         } as any 
+       });
+
+       if (category) {
+         // Apply categoryId filter
+         if (!features.queryOptions.where) features.queryOptions.where = {};
+         (features.queryOptions.where as any).categoryId = category.id;
+         
+         // Remove the invalid 'category' field from WHERE clause if APIFeatures accidentally added it
+         // (APIFeatures puts everything from qs into where, so 'category' might be invalid column)
+         if ((features.queryOptions.where as any).category) {
+            delete (features.queryOptions.where as any).category;
+         }
+       }
+    }
+
+    // Clean up invalid fields from WHERE clause (pagination params that got added by APIFeatures)
+    if (features.queryOptions.where) {
+      const invalidFields = ['limit', 'offset', 'page', 'sort', 'fields'];
+      invalidFields.forEach(field => {
+        if ((features.queryOptions.where as any)[field]) {
+          delete (features.queryOptions.where as any)[field];
+        }
+      });
+    }
+
+    // 2. Tambahkan include untuk relasi penjual (seller) DAN Category
+    features.queryOptions.include = [
+      { model: User, as: 'seller', attributes: ['id', 'fullName'] },
+      { model: db.Category, as: 'category' }
+    ];
 
     // 3. Dapatkan nilai limit dan offset secara terpisah
     const { limit, offset } = features.paginate();

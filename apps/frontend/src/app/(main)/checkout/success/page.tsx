@@ -8,9 +8,9 @@ export default function OrderSuccessPage() {
   return (
     <div className="bg-white min-h-screen flex items-center justify-center pb-20">
       <div className="container mx-auto px-4 text-center max-w-lg">
-        <div className="mb-8 flex justify-center">
-          <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center animate-in zoom-in duration-500">
-            <CheckCircle2 className="w-12 h-12 text-green-600" />
+        <div className="mb-6 flex justify-center">
+          <div className="w-20 h-20 bg-black rounded-full flex items-center justify-center animate-in zoom-in duration-500 shadow-xl">
+            <CheckCircle2 className="w-10 h-10 text-white" />
           </div>
         </div>
         

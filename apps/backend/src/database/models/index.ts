@@ -11,7 +11,9 @@ import ReviewModel from './review.model';
 import SellerModel from './seller.model';
 import PromotionModel from './promotion.model';
 import ShippingOptionModel from './shippingOption.model';
-import PaymentModel from './payment.model'; // 1. Impor model Payment
+import PaymentModel from './payment.model';
+import CartModel from './cart.model';
+import WishlistModel from './wishlist.model';
 
 // Tentukan environment (default: development)
 const env = process.env.NODE_ENV || 'development';
@@ -40,7 +42,9 @@ const Review = ReviewModel(sequelize);
 const Seller = SellerModel(sequelize);
 const Promotion = PromotionModel(sequelize);
 const ShippingOption = ShippingOptionModel(sequelize);
-const Payment = PaymentModel(sequelize); // 2. Inisialisasi model Payment
+const Payment = PaymentModel(sequelize);
+const Cart = CartModel(sequelize);
+const Wishlist = WishlistModel(sequelize);
 
 // Kumpulan model dan instance Sequelize
 const db = {
@@ -55,7 +59,9 @@ const db = {
   Seller,
   Promotion,
   ShippingOption,
-  Payment, // 3. Tambahkan model Payment ke objek db
+  Payment,
+  Cart,
+  Wishlist,
 };
 
 // Definisikan asosiasi antar model

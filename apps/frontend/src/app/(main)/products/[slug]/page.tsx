@@ -1,220 +1,512 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { Star, ShoppingCart, Heart, Truck, Shield, RotateCcw, ChevronDown, ChevronUp } from 'lucide-react';
 import api from '@/lib/api';
 import { formatRupiah } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
-import { Heart, Share2, Star, Truck, ShieldCheck, RefreshCw } from 'lucide-react';
-import Link from 'next/link';
 
 interface Product {
   id: string;
   name: string;
   description: string;
-  price: string;
+  price: number;
   stock: number;
   imageUrl: string;
+  categoryId: string;
   seller: {
     fullName: string;
   };
+  category?: {
+    name: string;
+  };
 }
+
+const SHOE_SIZES = ['38', '39', '40', '41', '42', '43', '44'];
 
 export default function ProductDetailPage() {
   const params = useParams();
-  const id = params.slug as string;
+  const router = useRouter();
+  const productId = params.slug as string;
 
   const [product, setProduct] = useState<Product | null>(null);
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  const [activeImage, setActiveImage] = useState<string>('');
+  const [selectedSize, setSelectedSize] = useState<string>('');
+  const [quantity, setQuantity] = useState(1);
+  const [addingToCart, setAddingToCart] = useState(false);
+  const [addingToWishlist, setAddingToWishlist] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  
+  // Accordion states
+  const [accordions, setAccordions] = useState({
+    description: true,
+    sizeGuide: false,
+    shipping: false,
+  });
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await api.get(`/products/${id}`);
+        const res = await api.get(`/products/${productId}`);
         if (res.data.success) {
-          setProduct(res.data.data);
-          // Handle image URL
-          const imgUrl = res.data.data.imageUrl.startsWith('http') 
-            ? res.data.data.imageUrl 
-            : `${process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '')}/${res.data.data.imageUrl}`;
-          setActiveImage(imgUrl);
+          const productData = res.data.data;
+          setProduct(productData);
+          
+          // Fetch related products from same category
+          if (productData.categoryId) {
+            const relatedRes = await api.get(`/products?limit=4&category=${productData.category?.name || ''}`);
+            if (relatedRes.data.success) {
+              const allProducts = Array.isArray(relatedRes.data.data) 
+                ? relatedRes.data.data 
+                : relatedRes.data.data.rows || [];
+              
+              // Filter out current product and take first 4
+              const filtered = allProducts
+                .filter((p: Product) => p.id !== productId)
+                .slice(0, 4);
+              setRelatedProducts(filtered);
+            }
+          }
         }
       } catch (error) {
-        console.error('Gagal mengambil detail produk:', error);
+        console.error('Failed to fetch product:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    if (id) {
+    if (productId) {
       fetchProduct();
     }
-  }, [id]);
+  }, [productId]);
+
+  const handleAddToCart = async () => {
+    if (!selectedSize) {
+      alert('Silakan pilih ukuran terlebih dahulu');
+      return;
+    }
+
+    setAddingToCart(true);
+    try {
+      await api.post('/cart', {
+        productId: product!.id,
+        size: selectedSize,
+        quantity,
+      });
+      
+      alert('Produk berhasil ditambahkan ke keranjang!');
+    } catch (error: any) {
+      if (error.response?.status === 401) {
+        alert('Silakan login terlebih dahulu');
+        router.push('/auth/login');
+      } else {
+        alert(error.response?.data?.message || 'Gagal menambahkan ke keranjang');
+      }
+    } finally {
+      setAddingToCart(false);
+    }
+  };
+
+  const handleAddToWishlist = async () => {
+    setAddingToWishlist(true);
+    try {
+      await api.post('/wishlist', {
+        productId: product!.id,
+      });
+      
+      alert('Produk berhasil ditambahkan ke wishlist!');
+      router.push('/wishlist');
+    } catch (error: any) {
+      if (error.response?.status === 401) {
+        alert('Silakan login terlebih dahulu');
+        router.push('/auth/login');
+      } else if (error.response?.status === 400) {
+        alert('Produk sudah ada di wishlist');
+      } else {
+        alert(error.response?.data?.message || 'Gagal menambahkan ke wishlist');
+      }
+    } finally {
+      setAddingToWishlist(false);
+    }
+  };
+
+  const toggleAccordion = (key: keyof typeof accordions) => {
+    setAccordions(prev => ({ ...prev, [key]: !prev[key] }));
+  };
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-20 flex justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-black"></div>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-black border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-500">Loading product...</p>
+        </div>
       </div>
     );
   }
 
   if (!product) {
     return (
-      <div className="container mx-auto px-4 py-20 text-center">
-        <h1 className="text-2xl font-bold">Produk tidak ditemukan</h1>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold mb-2">Product Not Found</h2>
+          <p className="text-gray-500 mb-4">The product you're looking for doesn't exist.</p>
+          <Button onClick={() => router.push('/')}>Back to Home</Button>
+        </div>
       </div>
     );
   }
 
-  // Mock images for slider (since backend might only return one)
-  const images = [
-    activeImage,
-    'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1000&auto=format&fit=crop', // Mock 1
-    'https://images.unsplash.com/photo-1607522370275-f14206abe5d3?q=80&w=1000&auto=format&fit=crop', // Mock 2
-    'https://images.unsplash.com/photo-1556906781-9a412961c28c?q=80&w=1000&auto=format&fit=crop', // Mock 3
+  const imageUrl = product.imageUrl.startsWith('http')
+    ? product.imageUrl
+    : `${process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '')}/${product.imageUrl}`;
+
+  // Generate multiple thumbnails (for demo, we'll use same image with different filters)
+  const thumbnails = [
+    imageUrl,
+    imageUrl,
+    imageUrl,
   ];
 
-  const sizes = ['37', '38', '39', '40', '41', '42', '43', '44', '45'];
-
   return (
-    <div className="bg-white min-h-screen pb-20 pt-8">
-      <div className="container mx-auto px-4">
+    <div className="bg-white min-h-screen">
+      <div className="container mx-auto px-4 py-8">
         {/* Breadcrumb */}
-        <div className="text-xs text-gray-500 mb-6 uppercase tracking-wide">
-          Home / Wanita / Sepatu / <span className="text-black font-medium">{product.name}</span>
+        <div className="text-sm text-gray-500 mb-6">
+          <span className="hover:text-black cursor-pointer" onClick={() => router.push('/')}>Home</span>
+          <span className="mx-2">/</span>
+          <span className="hover:text-black cursor-pointer">{product.category?.name || 'Products'}</span>
+          <span className="mx-2">/</span>
+          <span className="text-black">{product.name}</span>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-12">
-          {/* Left: Image Gallery */}
-          <div className="w-full lg:w-3/5 flex gap-4">
-            {/* Thumbnails */}
-            <div className="hidden md:flex flex-col gap-4 w-20 shrink-0">
-              {images.map((img, idx) => (
-                <div 
-                  key={idx}
-                  className={`aspect-square cursor-pointer border ${activeImage === img ? 'border-black' : 'border-transparent hover:border-gray-300'}`}
-                  onMouseEnter={() => setActiveImage(img)}
-                >
-                  <img src={img} alt={`Thumbnail ${idx}`} className="w-full h-full object-cover" />
-                </div>
-              ))}
-            </div>
-            
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Left: Product Images with Thumbnails */}
+          <div className="space-y-4">
             {/* Main Image */}
-            <div className="flex-1 bg-gray-50 aspect-[3/4] relative overflow-hidden group">
-               <img 
-                 src={activeImage} 
-                 alt={product.name} 
-                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-125 cursor-zoom-in"
-                 onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/600x800/png?text=No+Image'; }}
-               />
-               <div className="absolute top-4 right-4">
-                 <button className="p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition">
-                   <Share2 className="w-5 h-5" />
-                 </button>
-               </div>
+            <div className="relative aspect-square w-full bg-gray-50 rounded-lg overflow-hidden border border-gray-200">
+              <img
+                src={thumbnails[selectedImageIndex]}
+                alt={product.name}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = 'https://placehold.co/600x600/png?text=Product';
+                }}
+              />
+            </div>
+
+            {/* Thumbnails */}
+            <div className="grid grid-cols-3 gap-3">
+              {thumbnails.map((thumb, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedImageIndex(index)}
+                  className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
+                    selectedImageIndex === index 
+                      ? 'border-black' 
+                      : 'border-gray-200 hover:border-gray-400'
+                  }`}
+                >
+                  <img
+                    src={thumb}
+                    alt={`${product.name} view ${index + 1}`}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = 'https://placehold.co/200x200/png?text=View';
+                    }}
+                  />
+                </button>
+              ))}
             </div>
           </div>
 
           {/* Right: Product Info */}
-          <div className="w-full lg:w-2/5">
-            <div className="mb-6">
-              <h1 className="text-2xl md:text-3xl font-serif font-bold text-black mb-2">{product.name}</h1>
-              <p className="text-sm text-gray-500 uppercase tracking-widest mb-4">
-                Dijual oleh <span className="text-black font-semibold">{product.seller?.fullName || 'Official Store'}</span>
+          <div className="space-y-6">
+            {/* Brand */}
+            <div>
+              <p className="text-xs uppercase tracking-widest text-gray-500 mb-2">
+                {product.seller?.fullName || 'Official Store'}
               </p>
+              <h1 className="text-3xl font-bold text-black mb-2">{product.name}</h1>
               
-              <div className="flex items-center gap-4 mb-6">
-                <p className="text-2xl font-bold text-black">{formatRupiah(Number(product.price))}</p>
-                <div className="flex items-center gap-1 text-yellow-500 text-sm">
-                  <Star className="w-4 h-4 fill-current" />
-                  <span className="font-medium text-black">4.8</span>
-                  <span className="text-gray-400">(120 Ulasan)</span>
+              {/* Rating */}
+              <div className="flex items-center gap-2">
+                <div className="flex items-center">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  ))}
                 </div>
+                <span className="text-sm text-gray-600">(4.8) • 120 Reviews</span>
               </div>
             </div>
 
-            {/* Size Selection */}
-            <div className="mb-8">
-              <div className="flex justify-between items-center mb-3">
-                <span className="text-sm font-bold uppercase tracking-widest">Pilih Ukuran</span>
-                <button className="text-xs text-gray-500 underline">Panduan Ukuran</button>
+            {/* Price */}
+            <div className="border-y border-gray-200 py-6">
+              <div className="text-3xl font-bold text-black">
+                {formatRupiah(product.price)}
               </div>
-              <div className="grid grid-cols-5 gap-3">
-                {sizes.map((size) => (
+              <p className="text-sm text-gray-500 mt-1">Harga sudah termasuk PPN</p>
+            </div>
+
+            {/* Size Selector */}
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <label className="text-sm font-semibold uppercase tracking-wide">
+                  Pilih Ukuran
+                </label>
+                <button 
+                  onClick={() => toggleAccordion('sizeGuide')}
+                  className="text-xs text-gray-500 underline hover:text-black"
+                >
+                  Panduan Ukuran
+                </button>
+              </div>
+              
+              <div className="grid grid-cols-7 gap-2">
+                {SHOE_SIZES.map((size) => (
                   <button
                     key={size}
                     onClick={() => setSelectedSize(size)}
-                    className={`h-10 flex items-center justify-center text-sm border transition-all
-                      ${selectedSize === size 
-                        ? 'border-black bg-black text-white' 
-                        : 'border-gray-200 hover:border-black text-black'
-                      }`}
+                    className={`
+                      aspect-square border-2 rounded-lg flex items-center justify-center
+                      text-sm font-medium transition-all
+                      ${
+                        selectedSize === size
+                          ? 'border-black bg-black text-white'
+                          : 'border-gray-300 hover:border-black'
+                      }
+                    `}
                   >
                     {size}
                   </button>
                 ))}
               </div>
+              
               {selectedSize && (
-                <p className="text-xs text-green-600 mt-2">Ukuran {selectedSize} tersedia</p>
+                <p className="text-xs text-green-600 mt-2">✓ Ukuran {selectedSize} tersedia</p>
               )}
             </div>
 
-            {/* Actions */}
-            <div className="flex gap-4 mb-8">
-              <Link href="/cart" className="flex-1">
-                <Button className="w-full bg-black text-white h-12 uppercase tracking-widest font-bold hover:bg-gray-800 rounded-none">
-                  Tambahkan ke Tas
-                </Button>
-              </Link>
-              <Button variant="outline" className="w-12 h-12 p-0 border-gray-300 rounded-none hover:border-black hover:text-black">
-                <Heart className="w-5 h-5" />
+            {/* Quantity */}
+            <div>
+              <label className="text-sm font-semibold uppercase tracking-wide mb-3 block">
+                Jumlah
+              </label>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  className="w-10 h-10 border border-gray-300 rounded-lg hover:border-black transition"
+                >
+                  −
+                </button>
+                <span className="w-12 text-center font-medium">{quantity}</span>
+                <button
+                  onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
+                  className="w-10 h-10 border border-gray-300 rounded-lg hover:border-black transition"
+                >
+                  +
+                </button>
+                <span className="text-sm text-gray-500 ml-2">
+                  ({product.stock} tersedia)
+                </span>
+              </div>
+            </div>
+
+            {/* Add to Cart Button */}
+            <div className="space-y-3 pt-4">
+              <Button
+                onClick={handleAddToCart}
+                disabled={!selectedSize || addingToCart}
+                className="w-full bg-black text-white hover:bg-gray-800 h-14 text-base font-semibold uppercase tracking-wide rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed"
+              >
+                {addingToCart ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    Menambahkan...
+                  </span>
+                ) : (
+                  <span className="flex items-center justify-center gap-2">
+                    <ShoppingCart className="w-5 h-5" />
+                    Tambah ke Keranjang
+                  </span>
+                )}
+              </Button>
+
+              <Button
+                onClick={handleAddToWishlist}
+                disabled={addingToWishlist}
+                variant="outline"
+                className="w-full border-2 border-black text-black hover:bg-black hover:text-white h-14 text-base font-semibold uppercase tracking-wide rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {addingToWishlist ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+                    Menambahkan...
+                  </span>
+                ) : (
+                  <>
+                    <Heart className="w-5 h-5 mr-2" />
+                    Simpan ke Wishlist
+                  </>
+                )}
               </Button>
             </div>
 
-            {/* Delivery & Services */}
-            <div className="space-y-4 border-t border-gray-100 pt-6">
-              <div className="flex gap-3">
-                <Truck className="w-5 h-5 text-gray-400" />
-                <div>
-                  <p className="text-sm font-bold">Gratis Ongkir</p>
-                  <p className="text-xs text-gray-500">Untuk pembelian di atas Rp 500.000</p>
-                </div>
+            {/* Features */}
+            <div className="border-t border-gray-200 pt-6 space-y-3">
+              <div className="flex items-center gap-3 text-sm">
+                <Truck className="w-5 h-5 text-gray-600" />
+                <span>Gratis ongkir untuk pembelian di atas Rp500.000</span>
               </div>
-              <div className="flex gap-3">
-                <ShieldCheck className="w-5 h-5 text-gray-400" />
-                <div>
-                  <p className="text-sm font-bold">100% Original</p>
-                  <p className="text-xs text-gray-500">Barang terjamin keasliannya</p>
-                </div>
+              <div className="flex items-center gap-3 text-sm">
+                <Shield className="w-5 h-5 text-gray-600" />
+                <span>100% produk original</span>
               </div>
-              <div className="flex gap-3">
-                <RefreshCw className="w-5 h-5 text-gray-400" />
-                <div>
-                  <p className="text-sm font-bold">15 Hari Pengembalian</p>
-                  <p className="text-xs text-gray-500">Mudah dan tanpa biaya</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Description Accordion (Simplified) */}
-            <div className="mt-8 pt-8 border-t border-gray-100">
-              <h3 className="font-bold text-sm uppercase tracking-widest mb-4">Deskripsi Produk</h3>
-              <div className="text-sm text-gray-600 leading-relaxed space-y-4">
-                <p>{product.description || 'Tidak ada deskripsi produk.'}</p>
-                <ul className="list-disc pl-5 space-y-1">
-                  <li>Material berkualitas tinggi</li>
-                  <li>Desain trendy dan modern</li>
-                  <li>Nyaman digunakan sehari-hari</li>
-                  <li>Tahan lama dan awet</li>
-                </ul>
+              <div className="flex items-center gap-3 text-sm">
+                <RotateCcw className="w-5 h-5 text-gray-600" />
+                <span>Pengembalian mudah dalam 14 hari</span>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Accordion Sections */}
+        <div className="mt-16 max-w-4xl">
+          {/* Description Accordion */}
+          <div className="border-b border-gray-200">
+            <button
+              onClick={() => toggleAccordion('description')}
+              className="w-full py-6 flex items-center justify-between text-left hover:bg-gray-50 transition"
+            >
+              <h2 className="text-lg font-bold">Detail Produk</h2>
+              {accordions.description ? (
+                <ChevronUp className="w-5 h-5" />
+              ) : (
+                <ChevronDown className="w-5 h-5" />
+              )}
+            </button>
+            {accordions.description && (
+              <div className="pb-6 prose max-w-none">
+                <p className="text-gray-700 whitespace-pre-line">{product.description}</p>
+              </div>
+            )}
+          </div>
+
+          {/* Size Guide Accordion */}
+          <div className="border-b border-gray-200">
+            <button
+              onClick={() => toggleAccordion('sizeGuide')}
+              className="w-full py-6 flex items-center justify-between text-left hover:bg-gray-50 transition"
+            >
+              <h2 className="text-lg font-bold">Panduan Ukuran</h2>
+              {accordions.sizeGuide ? (
+                <ChevronUp className="w-5 h-5" />
+              ) : (
+                <ChevronDown className="w-5 h-5" />
+              )}
+            </button>
+            {accordions.sizeGuide && (
+              <div className="pb-6">
+                <table className="w-full text-sm">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-4 py-2 text-left">Ukuran</th>
+                      <th className="px-4 py-2 text-left">Panjang Kaki (cm)</th>
+                      <th className="px-4 py-2 text-left">EU</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b"><td className="px-4 py-2">38</td><td className="px-4 py-2">24.0</td><td className="px-4 py-2">38</td></tr>
+                    <tr className="border-b"><td className="px-4 py-2">39</td><td className="px-4 py-2">25.0</td><td className="px-4 py-2">39</td></tr>
+                    <tr className="border-b"><td className="px-4 py-2">40</td><td className="px-4 py-2">25.5</td><td className="px-4 py-2">40</td></tr>
+                    <tr className="border-b"><td className="px-4 py-2">41</td><td className="px-4 py-2">26.5</td><td className="px-4 py-2">41</td></tr>
+                    <tr className="border-b"><td className="px-4 py-2">42</td><td className="px-4 py-2">27.0</td><td className="px-4 py-2">42</td></tr>
+                    <tr className="border-b"><td className="px-4 py-2">43</td><td className="px-4 py-2">28.0</td><td className="px-4 py-2">43</td></tr>
+                    <tr className="border-b"><td className="px-4 py-2">44</td><td className="px-4 py-2">28.5</td><td className="px-4 py-2">44</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+
+          {/* Shipping Accordion */}
+          <div className="border-b border-gray-200">
+            <button
+              onClick={() => toggleAccordion('shipping')}
+              className="w-full py-6 flex items-center justify-between text-left hover:bg-gray-50 transition"
+            >
+              <h2 className="text-lg font-bold">Pengiriman & Pengembalian</h2>
+              {accordions.shipping ? (
+                <ChevronUp className="w-5 h-5" />
+              ) : (
+                <ChevronDown className="w-5 h-5" />
+              )}
+            </button>
+            {accordions.shipping && (
+              <div className="pb-6 space-y-4 text-gray-700">
+                <div>
+                  <h3 className="font-semibold mb-2">Pengiriman</h3>
+                  <ul className="list-disc list-inside space-y-1 text-sm">
+                    <li>Gratis ongkir untuk pembelian di atas Rp500.000</li>
+                    <li>Estimasi pengiriman 2-5 hari kerja</li>
+                    <li>Tersedia COD untuk area tertentu</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-2">Pengembalian</h3>
+                  <ul className="list-disc list-inside space-y-1 text-sm">
+                    <li>Pengembalian gratis dalam 14 hari</li>
+                    <li>Produk harus dalam kondisi original dengan tag</li>
+                    <li>Refund diproses dalam 7-14 hari kerja</li>
+                  </ul>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Related Products - "Kamu Mungkin Suka" */}
+        {relatedProducts.length > 0 && (
+          <div className="mt-20">
+            <h2 className="text-2xl font-bold mb-8 text-center">Kamu Mungkin Suka</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {relatedProducts.map((item) => {
+                const itemImageUrl = item.imageUrl.startsWith('http')
+                  ? item.imageUrl
+                  : `${process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '')}/${item.imageUrl}`;
+
+                return (
+                  <Link key={item.id} href={`/products/${item.id}`} className="group">
+                    <div className="relative aspect-[3/4] bg-gray-50 rounded-lg overflow-hidden border border-gray-200 mb-3">
+                      <img
+                        src={itemImageUrl}
+                        alt={item.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = 'https://placehold.co/400x600/png?text=Product';
+                        }}
+                      />
+                    </div>
+                    <div className="text-center">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">
+                        {item.seller?.fullName || 'Official Store'}
+                      </p>
+                      <h3 className="text-sm font-medium text-black mb-2 line-clamp-1">
+                        {item.name}
+                      </h3>
+                      <p className="text-base font-bold text-black">
+                        {formatRupiah(item.price)}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

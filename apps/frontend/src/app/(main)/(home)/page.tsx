@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/Button';
 import HeroBanner from '@/components/home/HeroBanner';
 import FlashSale from '@/components/home/FlashSale';
 import TopBrands from '@/components/home/TopBrands';
-import AccessoriesShowcase from '@/components/home/AccessoriesShowcase';
 import CategorySection from '@/components/home/CategorySection';
 import Link from 'next/link';
 import { ShoppingBag } from 'lucide-react';
@@ -54,19 +53,11 @@ export default function HomePage() {
         <FlashSale />
       </div>
 
-      {/* TOP BRANDS */}
-      <div className="bg-white">
-        <TopBrands />
-      </div>
+
 
       {/* CATEGORY SECTION (Sesuai Desain Gambar 3) */}
       <div className="bg-white border-t border-gray-100">
         <CategorySection />
-      </div>
-
-      {/* ACCESSORIES */}
-      <div className="bg-white">
-        <AccessoriesShowcase />
       </div>
 
       {/* NEW ARRIVALS */}
@@ -93,7 +84,7 @@ export default function HomePage() {
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-12">
             {products.map((product) => (
-              <div key={product.id} className="group cursor-pointer flex flex-col">
+              <Link key={product.id} href={`/products/${product.id}`} className="group cursor-pointer flex flex-col">
                 {/* IMAGE */}
                 <div
                   className="relative w-full overflow-hidden rounded-md bg-gray-50 border border-gray-200"
@@ -113,7 +104,7 @@ export default function HomePage() {
                     }}
                   />
 
-                  {/* Hover "Beli" Button */}
+                  {/* Hover \"Beli\" Button */}
                   <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-all duration-300">
                     <Button className="w-full rounded-none bg-black text-white h-12 font-medium tracking-wide uppercase hover:bg-gray-900">
                       <ShoppingBag className="w-4 h-4 mr-2" />
@@ -140,7 +131,7 @@ export default function HomePage() {
                     {formatRupiah(Number(product.price))}
                   </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}

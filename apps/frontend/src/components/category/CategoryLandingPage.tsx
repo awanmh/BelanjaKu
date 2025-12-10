@@ -49,20 +49,7 @@ export default function CategoryLandingPage({
         </div>
       </div>
 
-      {/* Subcategories (Circles) */}
-      <div className="container mx-auto px-4 py-16">
-        <h2 className="text-2xl font-serif font-bold text-center mb-10 text-black uppercase tracking-widest">Kategori Populer</h2>
-        <div className="flex flex-wrap justify-center gap-8 md:gap-12">
-          {subCategories.map((sub, index) => (
-            <Link key={index} href={sub.link} className="group flex flex-col items-center gap-4">
-              <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border border-gray-200 group-hover:border-black transition-all shadow-sm group-hover:shadow-md">
-                <img src={sub.image} alt={sub.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-              </div>
-              <span className="text-xs md:text-sm font-medium uppercase tracking-widest group-hover:text-black text-gray-500 transition-colors">{sub.name}</span>
-            </Link>
-          ))}
-        </div>
-      </div>
+
 
       {/* Placeholder for Product Grid (New Arrivals) */}
       <div className="container mx-auto px-4 py-12 border-t border-gray-100">

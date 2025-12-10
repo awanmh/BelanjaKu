@@ -1,198 +1,257 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Button } from '@/components/ui/Button';
-import { Trash2, Plus, Minus, Heart, ArrowRight } from 'lucide-react';
+import { Trash2, Plus, Minus, ShoppingBag, ArrowRight } from 'lucide-react';
+import api from '@/lib/api';
 import { formatRupiah } from '@/lib/utils';
+import { Button } from '@/components/ui/Button';
 
-// Mock Cart Data
-const initialCartItems = [
-  {
-    id: 1,
-    name: 'Velocity Black',
-    brand: 'COMPASS',
-    price: 789000,
-    size: '42',
-    quantity: 1,
-    image: 'https://images.unsplash.com/photo-1560769629-975e13f0c470?q=80&w=400&auto=format&fit=crop',
-    selected: true,
-  },
-  {
-    id: 2,
-    name: 'Ethnic Low Black',
-    brand: 'VENTELA',
-    price: 187350,
-    size: '40',
-    quantity: 2,
-    image: 'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?q=80&w=400&auto=format&fit=crop',
-    selected: true,
-  },
-];
+interface CartItem {
+  id: string;
+  quantity: number;
+  size: string;
+  product: {
+    id: string;
+    name: string;
+    price: number;
+    imageUrl: string;
+    stock: number;
+    seller: {
+      fullName: string;
+    };
+  };
+}
 
 export default function CartPage() {
-  const [cartItems, setCartItems] = useState(initialCartItems);
+  const router = useRouter();
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [updating, setUpdating] = useState<string | null>(null);
 
-  const updateQuantity = (id: number, delta: number) => {
-    setCartItems(items =>
-      items.map(item => {
-        if (item.id === id) {
-          const newQty = Math.max(1, item.quantity + delta);
-          return { ...item, quantity: newQty };
-        }
-        return item;
-      })
+  useEffect(() => {
+    fetchCart();
+  }, []);
+
+  const fetchCart = async () => {
+    try {
+      const res = await api.get('/cart');
+      if (res.data.success) {
+        setCartItems(res.data.data.items || []);
+      }
+    } catch (error: any) {
+      if (error.response?.status === 401) {
+        router.push('/auth/login');
+      } else {
+        console.error('Failed to fetch cart:', error);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updateQuantity = async (cartId: string, newQuantity: number) => {
+    if (newQuantity < 1) return;
+    
+    setUpdating(cartId);
+    try {
+      await api.patch(`/cart/${cartId}`, { quantity: newQuantity });
+      await fetchCart();
+    } catch (error) {
+      alert('Gagal update quantity');
+    } finally {
+      setUpdating(null);
+    }
+  };
+
+  const removeItem = async (cartId: string) => {
+    if (!confirm('Hapus produk dari keranjang?')) return;
+    
+    setUpdating(cartId);
+    try {
+      await api.delete(`/cart/${cartId}`);
+      await fetchCart();
+    } catch (error) {
+      alert('Gagal menghapus produk');
+    } finally {
+      setUpdating(null);
+    }
+  };
+
+  const calculateTotal = () => {
+    return cartItems.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+  };
+
+  const shippingCost = 0; // Free shipping
+  const total = calculateTotal() + shippingCost;
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-black border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-500">Loading cart...</p>
+        </div>
+      </div>
     );
-  };
-
-  const removeItem = (id: number) => {
-    setCartItems(items => items.filter(item => item.id !== id));
-  };
-
-  const toggleSelect = (id: number) => {
-    setCartItems(items =>
-      items.map(item => (item.id === id ? { ...item, selected: !item.selected } : item))
-    );
-  };
-
-  const subtotal = cartItems
-    .filter(item => item.selected)
-    .reduce((acc, item) => acc + item.price * item.quantity, 0);
-  
-  const shipping = subtotal > 500000 ? 0 : 20000;
-  const total = subtotal + shipping;
+  }
 
   if (cartItems.length === 0) {
     return (
-      <div className="container mx-auto px-4 py-20 text-center">
-        <div className="max-w-md mx-auto">
-          <img 
-            src="https://images.unsplash.com/photo-1516961642265-531546e84af2?q=80&w=600&auto=format&fit=crop" 
-            alt="Empty Cart" 
-            className="w-48 h-48 object-cover rounded-full mx-auto mb-6 opacity-50"
-          />
-          <h2 className="text-2xl font-bold mb-2">Tas Belanja Anda Kosong</h2>
-          <p className="text-gray-500 mb-8">Sepertinya Anda belum menambahkan produk apapun.</p>
-          <Link href="/">
-            <Button className="bg-black text-white px-8 py-3 rounded-full uppercase tracking-widest text-xs font-bold hover:bg-gray-800">
-              Mulai Belanja
-            </Button>
-          </Link>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <ShoppingBag className="w-24 h-24 mx-auto mb-6 text-gray-300" />
+          <h2 className="text-2xl font-bold mb-2">Keranjang Kosong</h2>
+          <p className="text-gray-500 mb-6">Belum ada produk di keranjang Anda</p>
+          <Button onClick={() => router.push('/')} className="bg-black text-white hover:bg-gray-800">
+            Mulai Belanja
+          </Button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen pb-20">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-2xl font-serif font-bold mb-8">Tas Belanja ({cartItems.length})</h1>
+    <div className="bg-gray-50 min-h-screen py-8">
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold mb-2">Keranjang Belanja</h1>
+          <p className="text-gray-600">{cartItems.length} item{cartItems.length > 1 ? 's' : ''}</p>
+        </div>
 
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Left: Cart Items */}
-          <div className="flex-1 space-y-4">
-            {cartItems.map((item) => (
-              <div key={item.id} className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex gap-4">
-                {/* Checkbox */}
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={item.selected}
-                    onChange={() => toggleSelect(item.id)}
-                    className="w-5 h-5 rounded border-gray-300 text-black focus:ring-black"
-                  />
-                </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Cart Items */}
+          <div className="lg:col-span-2 space-y-4">
+            {cartItems.map((item) => {
+              const imageUrl = item.product.imageUrl.startsWith('http')
+                ? item.product.imageUrl
+                : `${process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '')}/${item.product.imageUrl}`;
 
-                {/* Image */}
-                <div className="w-24 h-24 bg-gray-100 rounded-md overflow-hidden shrink-0">
-                  <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                </div>
-
-                {/* Details */}
-                <div className="flex-1 flex flex-col justify-between">
-                  <div>
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">{item.brand}</p>
-                        <h3 className="font-medium text-black">{item.name}</h3>
-                        <p className="text-sm text-gray-500 mt-1">Ukuran: {item.size}</p>
+              return (
+                <div key={item.id} className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+                  <div className="flex gap-4">
+                    {/* Product Image */}
+                    <Link href={`/products/${item.product.id}`} className="flex-shrink-0">
+                      <div className="w-24 h-24 bg-gray-100 rounded-lg overflow-hidden">
+                        <img
+                          src={imageUrl}
+                          alt={item.product.name}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = 'https://placehold.co/200x200/png?text=Product';
+                          }}
+                        />
                       </div>
-                      <p className="font-bold text-black">{formatRupiah(item.price)}</p>
-                    </div>
-                  </div>
+                    </Link>
 
-                  <div className="flex justify-between items-end mt-4">
-                    <div className="flex items-center gap-4">
-                      <button 
-                        onClick={() => removeItem(item.id)}
-                        className="text-gray-400 hover:text-red-500 transition-colors"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                      <button className="text-gray-400 hover:text-black transition-colors">
-                        <Heart className="w-4 h-4" />
-                      </button>
-                    </div>
+                    {/* Product Info */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex justify-between items-start mb-2">
+                        <div className="flex-1">
+                          <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">
+                            {item.product.seller?.fullName || 'Official Store'}
+                          </p>
+                          <Link href={`/products/${item.product.id}`}>
+                            <h3 className="font-semibold text-black hover:underline line-clamp-1">
+                              {item.product.name}
+                            </h3>
+                          </Link>
+                          <p className="text-sm text-gray-600 mt-1">Ukuran: {item.size}</p>
+                        </div>
+                        
+                        {/* Remove Button */}
+                        <button
+                          onClick={() => removeItem(item.id)}
+                          disabled={updating === item.id}
+                          className="text-gray-400 hover:text-red-600 transition p-2"
+                        >
+                          <Trash2 className="w-5 h-5" />
+                        </button>
+                      </div>
 
-                    <div className="flex items-center border border-gray-200 rounded-md">
-                      <button 
-                        onClick={() => updateQuantity(item.id, -1)}
-                        className="p-1 hover:bg-gray-50 text-gray-600 disabled:opacity-50"
-                        disabled={item.quantity <= 1}
-                      >
-                        <Minus className="w-4 h-4" />
-                      </button>
-                      <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
-                      <button 
-                        onClick={() => updateQuantity(item.id, 1)}
-                        className="p-1 hover:bg-gray-50 text-gray-600"
-                      >
-                        <Plus className="w-4 h-4" />
-                      </button>
+                      {/* Price & Quantity */}
+                      <div className="flex justify-between items-end mt-4">
+                        <div className="flex items-center gap-3 border border-gray-300 rounded-lg">
+                          <button
+                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            disabled={updating === item.id || item.quantity <= 1}
+                            className="p-2 hover:bg-gray-100 transition disabled:opacity-50"
+                          >
+                            <Minus className="w-4 h-4" />
+                          </button>
+                          <span className="w-8 text-center font-medium">{item.quantity}</span>
+                          <button
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            disabled={updating === item.id || item.quantity >= item.product.stock}
+                            className="p-2 hover:bg-gray-100 transition disabled:opacity-50"
+                          >
+                            <Plus className="w-4 h-4" />
+                          </button>
+                        </div>
+
+                        <div className="text-right">
+                          <p className="text-lg font-bold text-black">
+                            {formatRupiah(item.product.price * item.quantity)}
+                          </p>
+                          {item.quantity > 1 && (
+                            <p className="text-xs text-gray-500">
+                              {formatRupiah(item.product.price)} / item
+                            </p>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
-          {/* Right: Summary */}
-          <div className="w-full lg:w-96 shrink-0">
-            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 sticky top-24">
-              <h3 className="font-bold text-lg mb-4">Ringkasan Pesanan</h3>
+          {/* Order Summary */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 sticky top-4">
+              <h2 className="text-xl font-bold mb-6">Ringkasan Pesanan</h2>
               
-              <div className="space-y-3 text-sm mb-6">
+              <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-gray-600">
-                  <span>Subtotal</span>
-                  <span>{formatRupiah(subtotal)}</span>
+                  <span>Subtotal ({cartItems.length} item{cartItems.length > 1 ? 's' : ''})</span>
+                  <span>{formatRupiah(calculateTotal())}</span>
                 </div>
                 <div className="flex justify-between text-gray-600">
-                  <span>Pengiriman</span>
-                  <span>{shipping === 0 ? 'Gratis' : formatRupiah(shipping)}</span>
+                  <span>Ongkir</span>
+                  <span className="text-green-600 font-semibold">GRATIS</span>
                 </div>
-                {shipping === 0 && (
-                  <p className="text-xs text-green-600 italic">Anda hemat ongkos kirim!</p>
-                )}
-                <div className="border-t border-gray-100 pt-3 flex justify-between font-bold text-lg text-black">
+                <div className="border-t border-gray-200 pt-3 flex justify-between text-lg font-bold">
                   <span>Total</span>
                   <span>{formatRupiah(total)}</span>
                 </div>
               </div>
 
-              <Link href="/checkout">
-                <Button className="w-full bg-black text-white h-12 uppercase tracking-widest font-bold hover:bg-gray-800 rounded-none flex justify-between items-center px-6">
-                  <span>Checkout</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Button>
-              </Link>
+              <Button
+                onClick={() => router.push('/checkout')}
+                className="w-full bg-black text-white hover:bg-gray-800 h-12 font-semibold uppercase tracking-wide rounded-lg mb-3"
+              >
+                <span className="flex items-center justify-center gap-2">
+                  Checkout
+                  <ArrowRight className="w-5 h-5" />
+                </span>
+              </Button>
 
-              <div className="mt-6 text-xs text-gray-500 text-center">
-                <p>Kami menerima berbagai metode pembayaran</p>
-                <div className="flex justify-center gap-2 mt-2 opacity-60">
-                  <div className="w-8 h-5 bg-gray-200 rounded"></div>
-                  <div className="w-8 h-5 bg-gray-200 rounded"></div>
-                  <div className="w-8 h-5 bg-gray-200 rounded"></div>
-                </div>
+              <Button
+                onClick={() => router.push('/')}
+                variant="outline"
+                className="w-full border-2 border-gray-300 text-gray-700 hover:border-black hover:text-black h-12 font-semibold rounded-lg"
+              >
+                Lanjut Belanja
+              </Button>
+
+              {/* Info */}
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <p className="text-xs text-gray-500 text-center">
+                  Gratis ongkir untuk semua pembelian
+                </p>
               </div>
             </div>
           </div>

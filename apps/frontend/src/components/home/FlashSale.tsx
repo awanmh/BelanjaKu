@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { formatRupiah } from '@/lib/utils';
 import { Zap, Star } from 'lucide-react';
@@ -159,92 +160,93 @@ export default function FlashSale() {
                 : 'https://placehold.co/400x400/png?text=Product';
 
             return (
-              <div
-                key={item.id}
-                className="bg-white rounded-2xl p-4 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 flex flex-col relative overflow-hidden group"
-              >
-                {/* Seller */}
-                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">
-                  {item.seller?.fullName || item.brand}
-                </p>
-
-                {/* IMAGE */}
-                <div className="relative aspect-square rounded-xl overflow-hidden bg-gray-50 mb-4">
-                  <img
-                    src={imgSrc}
-                    alt={`${item.brand} ${item.article}`}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://placehold.co/400x400/png?text=Product';
-                    }}
-                  />
-
-                  {/* DISCOUNT BADGE */}
-                  <div className="absolute top-0 right-0 bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-bl-xl shadow-md">
-                    {item.discount}% OFF
-                  </div>
-                </div>
-
-                {/* DETAILS */}
-                <div className="flex-1 flex flex-col">
-                  {/* Brand */}
-                  <h3 className="font-bold text-gray-900 text-lg leading-snug mb-1 line-clamp-2 min-h-3.5rem">
-                    {item.brand}
-                  </h3>
-
-                  {/* Article (FIXED) */}
-                  <p className="text-gray-600 text-sm mb-1 line-clamp-1">
-                    {item.article}
+              <Link key={item.id} href={`/products/${item.id}`}>
+                <div
+                  className="bg-white rounded-2xl p-4 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 flex flex-col relative overflow-hidden group cursor-pointer"
+                >
+                  {/* Seller */}
+                  <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">
+                    {item.seller?.fullName || item.brand}
                   </p>
 
-                  {/* PRICE */}
-                  <div className="mt-1 mb-3">
-                    <div className="text-red-600 font-black text-xl">{formatRupiah(item.price)}</div>
+                  {/* IMAGE */}
+                  <div className="relative aspect-square rounded-xl overflow-hidden bg-gray-50 mb-4">
+                    <img
+                      src={imgSrc}
+                      alt={`${item.brand} ${item.article}`}
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = 'https://placehold.co/400x400/png?text=Product';
+                      }}
+                    />
 
-                    <div className="flex items-center gap-2 text-xs text-gray-400 font-medium">
-                      <span className="line-through decoration-gray-400">
-                        {formatRupiah(item.originalPrice)}
-                      </span>
+                    {/* DISCOUNT BADGE */}
+                    <div className="absolute top-0 right-0 bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-bl-xl shadow-md">
+                      {item.discount}% OFF
                     </div>
                   </div>
 
-                  {/* RATING */}
-                  <div className="flex items-center gap-1 text-xs font-bold text-gray-700 mb-3">
-                    <Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
-                    {item.rating}
-                    <span className="text-gray-400 font-normal ml-1">(50+)</span>
-                  </div>
+                  {/* DETAILS */}
+                  <div className="flex-1 flex flex-col">
+                    {/* Brand */}
+                    <h3 className="font-bold text-gray-900 text-lg leading-snug mb-1 line-clamp-2 min-h-3.5rem">
+                      {item.brand}
+                    </h3>
 
-                  {/* PROGRESS */}
-                  <div className="mb-4">
-                    <div className="flex justify-between text-[10px] font-bold text-gray-500 mb-1.5">
-                      <span>Terjual {item.sold}</span>
-                      <span className="text-red-500">Segera Habis!</span>
+                    {/* Article (FIXED) */}
+                    <p className="text-gray-600 text-sm mb-1 line-clamp-1">
+                      {item.article}
+                    </p>
+
+                    {/* PRICE */}
+                    <div className="mt-1 mb-3">
+                      <div className="text-red-600 font-black text-xl">{formatRupiah(item.price)}</div>
+
+                      <div className="flex items-center gap-2 text-xs text-gray-400 font-medium">
+                        <span className="line-through decoration-gray-400">
+                          {formatRupiah(item.originalPrice)}
+                        </span>
+                      </div>
                     </div>
 
-                    <div
-                      className="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden"
-                      role="progressbar"
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      aria-valuenow={progressPercent}
-                    >
+                    {/* RATING */}
+                    <div className="flex items-center gap-1 text-xs font-bold text-gray-700 mb-3">
+                      <Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
+                      {item.rating}
+                      <span className="text-gray-400 font-normal ml-1">(50+)</span>
+                    </div>
+
+                    {/* PROGRESS */}
+                    <div className="mb-4">
+                      <div className="flex justify-between text-[10px] font-bold text-gray-500 mb-1.5">
+                        <span>Terjual {item.sold}</span>
+                        <span className="text-red-500">Segera Habis!</span>
+                      </div>
+
                       <div
-                        className="bg-red-600 h-full rounded-full transition-all duration-1000"
-                        style={{ width: `${progressPercent}%` }}
-                      />
+                        className="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden"
+                        role="progressbar"
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                        aria-valuenow={progressPercent}
+                      >
+                        <div
+                          className="bg-red-600 h-full rounded-full transition-all duration-1000"
+                          style={{ width: `${progressPercent}%` }}
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  {/* BUTTON */}
-                  <Button
-                    type="button"
-                    className="w-full rounded-full bg-black text-white hover:bg-gray-800 text-sm font-bold py-6 shadow-lg mt-auto tracking-wide"
-                  >
-                    Beli Sekarang
-                  </Button>
+                    {/* BUTTON */}
+                    <Button
+                      type="button"
+                      className="w-full rounded-full bg-black text-white hover:bg-gray-800 text-sm font-bold py-6 shadow-lg mt-auto tracking-wide"
+                    >
+                      Beli Sekarang
+                    </Button>
+                  </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
