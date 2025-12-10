@@ -80,14 +80,33 @@ Tugas kalian hanya fokus di dalam folder `apps/backend`. Jangan menyentuh folder
 5.  **Saat ingin push** usahakan update file `README.md` dan perbarui update-an apa yang dikerjakan dan to-do selanjutnya.
 
 ### Update
-- Sudah membenahi error di fitur A.
-- Fitur B sudah tahap awal/fondasi.
-- Fitur C sudah aman.
+- Progress Search Bar:
+    1. Penambahan File Migrasi baru di folder src/database/migrations/ dengan nama 2025120400-add-fulltext-search.js.
+
+- Progress Notification Email:
+    1. Penambahan File Migrasi baru di folder src/database/migrations/ dengan nama 20251204130950-add-reset-password-to-users.js
+    2. Penambahan File Utils baru di folder scr/utils dengan nama email.util.ts
+    3. Penambahan File Image baru di folder uploads dengan nama productImage-1764859493599-354795959.png
+    4. Penambahan Folder dengan nama folder tests di folder src/utils/__tests__/ dan file dengan nama email.util.test.ts
+
 
 ### To-Do (example)
-- Selanjutnya mengerjakan fitur A.
-- Melanjutkan fitur B karena masih error
-- Tambahkan bla-bla dibagian fitur C.
+#### 🛒 Shopping Cart (Keranjang)
+- [ ] **Database:** Membuat file migrasi untuk tabel `carts` dan `cart_items` (Relasi ke User & Products).
+- [ ] **API Endpoint:** Membuat CRUD untuk `api/v1/carts` (Add to cart, Update qty, Delete item).
+- [ ] **Logic:** Implementasi logika sinkronisasi stok produk saat dimasukkan ke keranjang (opsional: reservasi stok).
+
+#### 💳 Payment Gateway Integration (Midtrans/Xendit)
+- [ ] **Integration:** Update `payment.service.ts` untuk request token pembayaran ke Payment Gateway (Mode Sandbox).
+- [ ] **Webhook:** Membuat endpoint khusus untuk menangani Webhook/Callback dari Payment Gateway untuk update status pembayaran otomatis.
+- [ ] **Security:** Memastikan validasi signature key pada Webhook agar aman.
+
+#### 📍 User Address & Shipping
+- [ ] **Address Book:** Membuat tabel `user_addresses` agar user bisa menyimpan banyak alamat.
+- [ ] **Shipping Calculation:** Integrasi `shipping.service.ts` dengan API Logistik (contoh: RajaOngkir) untuk menghitung biaya kirim real-time berdasarkan alamat terpilih.
+
+#### ❤️ Wishlist
+- [ ] **Feature:** Membuat endpoint untuk user menambahkan produk ke daftar favorit (`api/v1/wishlists`).
 
 Selamat bekerja\! 🚀
 
