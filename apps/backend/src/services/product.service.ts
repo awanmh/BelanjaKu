@@ -156,12 +156,12 @@ class ProductService {
     };
   }
 
-  /**
-   * Mengambil satu produk berdasarkan ID.
-   */
   public async getProductById(id: string): Promise<ProductAttributes> {
     const product = await Product.findByPk(id, {
-      include: [{ model: User, as: 'seller', attributes: ['id', 'fullName'] }],
+      include: [
+        { model: User, as: 'seller', attributes: ['id', 'fullName'] },
+        { model: db.Category, as: 'category' }
+      ],
     });
 
     if (!product) {
