@@ -9,17 +9,15 @@ export interface UserAttributes {
   password: string;
   role: 'user' | 'seller' | 'admin';
   isVerified: boolean;
-  // [TAMBAHAN] Tambahkan 2 properti ini
+  // Kolom Baru untuk Reset Password
   resetPasswordToken?: string | null;
   resetPasswordExpires?: Date | null;
-
   createdAt?: Date;
   updatedAt?: Date;
-  deletedAt?: Date | null; // 1. Tambahkan kolom deletedAt (izinkan null)
+  deletedAt?: Date | null;
 }
 
-// Atribut yang opsional saat pembuatan
-interface UserCreationAttributes extends Optional<UserAttributes, 'id'> { }
+interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
 
 export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
   public id!: string;
@@ -28,29 +26,26 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   public password!: string;
   public role!: 'user' | 'seller' | 'admin';
   public isVerified!: boolean;
+  // Definisi Type Class
+  public resetPasswordToken!: string | null;
+  public resetPasswordExpires!: Date | null;
+  
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
-  public readonly deletedAt!: Date | null; // 2. Tambahkan kolom deletedAt
+  public readonly deletedAt!: Date | null;
 
-  // Method untuk membandingkan password
   public async comparePassword(password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);
   }
 
-  // Method untuk asosiasi (relasi)
   public static associate(models: any) {
-    User.hasOne(models.Seller, {
-      foreignKey: 'userId',
-      as: 'sellerProfile',
-    });
-    User.hasMany(models.Product, {
-      foreignKey: 'sellerId',
-      as: 'products',
-    });
+    User.hasOne(models.Seller, { foreignKey: 'userId', as: 'sellerProfile' });
+    User.hasMany(models.Product, { foreignKey: 'sellerId', as: 'products' });
+
+    User.hasMany(models.UserAddress, { foreignKey: 'userId', as: 'addresses' });
   }
 }
 
-// Ekspor fungsi yang akan menginisialisasi model
 export default function (sequelize: Sequelize): typeof User {
   User.init(
     {
@@ -59,35 +54,21 @@ export default function (sequelize: Sequelize): typeof User {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      fullName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: { isEmail: true },
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      role: {
-        type: DataTypes.ENUM('user', 'seller', 'admin'),
-        defaultValue: 'user',
-      },
-      isVerified: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
-      // Kolom deletedAt akan ditambahkan secara otomatis oleh Sequelize
+      fullName: { type: DataTypes.STRING, allowNull: false },
+      email: { type: DataTypes.STRING, allowNull: false, unique: true, validate: { isEmail: true } },
+      password: { type: DataTypes.STRING, allowNull: false },
+      role: { type: DataTypes.ENUM('user', 'seller', 'admin'), defaultValue: 'user' },
+      isVerified: { type: DataTypes.BOOLEAN, defaultValue: false },
+      
+      // Definisi Kolom Baru di Database
+      resetPasswordToken: { type: DataTypes.STRING, allowNull: true },
+      resetPasswordExpires: { type: DataTypes.DATE, allowNull: true },
     },
     {
       sequelize,
       tableName: 'users',
       timestamps: true,
-      paranoid: true, // 3. Aktifkan soft deletes
+      paranoid: true,
       hooks: {
         beforeCreate: async (user: User) => {
           if (user.password) {
@@ -105,9 +86,8 @@ export default function (sequelize: Sequelize): typeof User {
     }
   );
 
-  // Hook toJSON untuk menghapus password secara otomatis
   User.prototype.toJSON = function () {
-    const { password, ...values } = { ...this.get() };
+    const { password, resetPasswordToken, resetPasswordExpires, ...values } = this.get();
     return values;
   };
 

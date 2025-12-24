@@ -1,7 +1,15 @@
 import { Request, Response, NextFunction } from 'express';
-import { validationResult, ValidationError, FieldValidationError } from 'express-validator';
+import { validationResult, FieldValidationError } from 'express-validator';
+import Joi from 'joi';
 import { StatusCodes } from 'http-status-codes';
+import HttpException from '../utils/http-exception.util';
 
+/**
+ * ==========================================
+ * 1. VALIDATOR UNTUK EXPRESS-VALIDATOR (LEGACY)
+ * Digunakan oleh Auth, Products, dll.
+ * ==========================================
+ */
 export const validate = (req: Request, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -25,3 +33,27 @@ export const validate = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
+/**
+ * ==========================================
+ * 2. VALIDATOR UNTUK JOI (NEW FEATURE)
+ * Digunakan oleh Cart, Shipping, Payment, dll.
+ * ==========================================
+ */
+export const validateJoi = (schema: Joi.ObjectSchema) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    // Validasi req.body dengan opsi abortEarly: false agar menampilkan semua error
+    const { error } = schema.validate(req.body, { abortEarly: false });
+
+    if (error) {
+      // Ambil pesan error dan gabungkan
+      const errorMessage = error.details
+        .map((details) => details.message.replace(/"/g, ''))
+        .join(', ');
+        
+      // Lempar ke Error Handler
+      return next(new HttpException(StatusCodes.BAD_REQUEST, errorMessage));
+    }
+
+    next();
+  };
+};

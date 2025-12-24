@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1764859556986" clover="3.2.0">
-  <project timestamp="1764859556986" name="All files">
-    <metrics statements="4828" coveredstatements="4305" conditionals="294" coveredconditionals="206" methods="133" coveredmethods="110" elements="5255" coveredelements="4621" complexity="0" loc="4828" ncloc="4828" packages="17" files="65" classes="65"/>
+<coverage generated="1765381662048" clover="3.2.0">
+  <project timestamp="1765381662048" name="All files">
+    <metrics statements="4992" coveredstatements="4440" conditionals="293" coveredconditionals="201" methods="138" coveredmethods="114" elements="5423" coveredelements="4755" complexity="0" loc="4992" ncloc="4992" packages="17" files="67" classes="67"/>
     <package name="src">
       <metrics statements="61" coveredstatements="41" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
-      <file name="server.ts" path="C:\Dev\BelanjaKu\apps\backend\src\server.ts">
+      <file name="server.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\server.ts">
         <metrics statements="61" coveredstatements="41" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -70,9 +70,9 @@
       </file>
     </package>
     <package name="src.api.v1">
-      <metrics statements="26" coveredstatements="26" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="index.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\index.ts">
-        <metrics statements="26" coveredstatements="26" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="30" coveredstatements="30" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="index.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\index.ts">
+        <metrics statements="30" coveredstatements="30" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -99,11 +99,15 @@
         <line num="24" count="1" type="stmt"/>
         <line num="25" count="1" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.api.v1.auth">
       <metrics statements="139" coveredstatements="133" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2"/>
-      <file name="auth.controller.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\auth\auth.controller.ts">
+      <file name="auth.controller.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\auth\auth.controller.ts">
         <metrics statements="59" coveredstatements="53" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -119,24 +123,24 @@
         <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="15" count="2" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
-        <line num="18" count="2" type="stmt"/>
-        <line num="19" count="2" type="stmt"/>
-        <line num="20" count="2" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
-        <line num="22" count="2" type="stmt"/>
-        <line num="23" count="2" type="stmt"/>
-        <line num="24" count="2" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
-        <line num="26" count="2" type="stmt"/>
-        <line num="27" count="2" type="stmt"/>
-        <line num="28" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="25" count="3" type="stmt"/>
+        <line num="26" count="3" type="stmt"/>
+        <line num="27" count="3" type="stmt"/>
+        <line num="28" count="3" type="cond" truecount="0" falsecount="1"/>
         <line num="29" count="0" type="stmt"/>
         <line num="30" count="0" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
-        <line num="32" count="2" type="stmt"/>
+        <line num="32" count="3" type="stmt"/>
         <line num="33" count="1" type="stmt"/>
         <line num="34" count="1" type="stmt"/>
         <line num="35" count="1" type="stmt"/>
@@ -165,7 +169,7 @@
         <line num="58" count="1" type="stmt"/>
         <line num="59" count="1" type="stmt"/>
       </file>
-      <file name="auth.routes.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\auth\auth.routes.ts">
+      <file name="auth.routes.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\auth\auth.routes.ts">
         <metrics statements="36" coveredstatements="36" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -204,7 +208,7 @@
         <line num="35" count="1" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
       </file>
-      <file name="auth.validator.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\auth\auth.validator.ts">
+      <file name="auth.validator.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\auth\auth.validator.ts">
         <metrics statements="44" coveredstatements="44" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -254,7 +258,7 @@
     </package>
     <package name="src.api.v1.categories">
       <metrics statements="155" coveredstatements="123" conditionals="6" coveredconditionals="3" methods="5" coveredmethods="3"/>
-      <file name="category.controller.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\categories\category.controller.ts">
+      <file name="category.controller.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\categories\category.controller.ts">
         <metrics statements="100" coveredstatements="68" conditionals="6" coveredconditionals="3" methods="5" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -357,7 +361,7 @@
         <line num="99" count="1" type="stmt"/>
         <line num="100" count="1" type="stmt"/>
       </file>
-      <file name="category.routes.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\categories\category.routes.ts">
+      <file name="category.routes.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\categories\category.routes.ts">
         <metrics statements="40" coveredstatements="40" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -400,7 +404,7 @@
         <line num="39" count="1" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
       </file>
-      <file name="category.validator.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\categories\category.validator.ts">
+      <file name="category.validator.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\categories\category.validator.ts">
         <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -421,7 +425,7 @@
     </package>
     <package name="src.api.v1.orders">
       <metrics statements="213" coveredstatements="149" conditionals="3" coveredconditionals="3" methods="5" coveredmethods="1"/>
-      <file name="order.controller.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\orders\order.controller.ts">
+      <file name="order.controller.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\orders\order.controller.ts">
         <metrics statements="122" coveredstatements="58" conditionals="3" coveredconditionals="3" methods="5" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -546,7 +550,7 @@
         <line num="121" count="1" type="stmt"/>
         <line num="122" count="1" type="stmt"/>
       </file>
-      <file name="order.routes.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\orders\order.routes.ts">
+      <file name="order.routes.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\orders\order.routes.ts">
         <metrics statements="54" coveredstatements="54" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -603,7 +607,7 @@
         <line num="53" count="1" type="stmt"/>
         <line num="54" count="1" type="stmt"/>
       </file>
-      <file name="order.validator.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\orders\order.validator.ts">
+      <file name="order.validator.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\orders\order.validator.ts">
         <metrics statements="37" coveredstatements="37" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -646,7 +650,7 @@
     </package>
     <package name="src.api.v1.payments">
       <metrics statements="115" coveredstatements="74" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-      <file name="payment.controller.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\payments\payment.controller.ts">
+      <file name="payment.controller.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\payments\payment.controller.ts">
         <metrics statements="65" coveredstatements="24" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -714,7 +718,7 @@
         <line num="64" count="1" type="stmt"/>
         <line num="65" count="1" type="stmt"/>
       </file>
-      <file name="payment.routes.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\payments\payment.routes.ts">
+      <file name="payment.routes.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\payments\payment.routes.ts">
         <metrics statements="29" coveredstatements="29" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -746,7 +750,7 @@
         <line num="28" count="1" type="stmt"/>
         <line num="29" count="1" type="stmt"/>
       </file>
-      <file name="payment.validator.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\payments\payment.validator.ts">
+      <file name="payment.validator.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\payments\payment.validator.ts">
         <metrics statements="21" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -773,7 +777,7 @@
     </package>
     <package name="src.api.v1.products">
       <metrics statements="262" coveredstatements="211" conditionals="9" coveredconditionals="3" methods="6" coveredmethods="3"/>
-      <file name="product.controller.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\products\product.controller.ts">
+      <file name="product.controller.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\products\product.controller.ts">
         <metrics statements="146" coveredstatements="95" conditionals="9" coveredconditionals="3" methods="6" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -922,7 +926,7 @@
         <line num="145" count="1" type="stmt"/>
         <line num="146" count="1" type="stmt"/>
       </file>
-      <file name="product.routes.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\products\product.routes.ts">
+      <file name="product.routes.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\products\product.routes.ts">
         <metrics statements="56" coveredstatements="56" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -981,7 +985,7 @@
         <line num="55" count="1" type="stmt"/>
         <line num="56" count="1" type="stmt"/>
       </file>
-      <file name="product.validator.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\products\product.validator.ts">
+      <file name="product.validator.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\products\product.validator.ts">
         <metrics statements="60" coveredstatements="60" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1047,7 +1051,7 @@
     </package>
     <package name="src.api.v1.promotions">
       <metrics statements="205" coveredstatements="122" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
-      <file name="promotion.controller.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\promotions\promotion.controller.ts">
+      <file name="promotion.controller.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\promotions\promotion.controller.ts">
         <metrics statements="117" coveredstatements="38" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1167,7 +1171,7 @@
         <line num="116" count="1" type="stmt"/>
         <line num="117" count="1" type="stmt"/>
       </file>
-      <file name="promotion.routes.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\promotions\promotion.routes.ts">
+      <file name="promotion.routes.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\promotions\promotion.routes.ts">
         <metrics statements="42" coveredstatements="42" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1212,7 +1216,7 @@
         <line num="41" count="1" type="stmt"/>
         <line num="42" count="1" type="stmt"/>
       </file>
-      <file name="promotion.validator.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\promotions\promotion.validator.ts">
+      <file name="promotion.validator.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\promotions\promotion.validator.ts">
         <metrics statements="46" coveredstatements="42" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1264,7 +1268,7 @@
     </package>
     <package name="src.api.v1.reviews">
       <metrics statements="109" coveredstatements="107" conditionals="5" coveredconditionals="4" methods="2" coveredmethods="2"/>
-      <file name="review.controller.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\reviews\review.controller.ts">
+      <file name="review.controller.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\reviews\review.controller.ts">
         <metrics statements="52" coveredstatements="50" conditionals="5" coveredconditionals="4" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1319,7 +1323,7 @@
         <line num="51" count="1" type="stmt"/>
         <line num="52" count="1" type="stmt"/>
       </file>
-      <file name="review.routes.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\reviews\review.routes.ts">
+      <file name="review.routes.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\reviews\review.routes.ts">
         <metrics statements="30" coveredstatements="30" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1352,7 +1356,7 @@
         <line num="29" count="1" type="stmt"/>
         <line num="30" count="1" type="stmt"/>
       </file>
-      <file name="review.validator.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\reviews\review.validator.ts">
+      <file name="review.validator.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\reviews\review.validator.ts">
         <metrics statements="27" coveredstatements="27" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1385,7 +1389,7 @@
     </package>
     <package name="src.api.v1.sellers">
       <metrics statements="165" coveredstatements="157" conditionals="8" coveredconditionals="4" methods="4" coveredmethods="4"/>
-      <file name="seller.controller.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\sellers\seller.controller.ts">
+      <file name="seller.controller.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\sellers\seller.controller.ts">
         <metrics statements="91" coveredstatements="83" conditionals="8" coveredconditionals="4" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1479,7 +1483,7 @@
         <line num="90" count="1" type="stmt"/>
         <line num="91" count="1" type="stmt"/>
       </file>
-      <file name="seller.routes.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\sellers\seller.routes.ts">
+      <file name="seller.routes.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\sellers\seller.routes.ts">
         <metrics statements="47" coveredstatements="47" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1529,7 +1533,7 @@
         <line num="46" count="1" type="stmt"/>
         <line num="47" count="1" type="stmt"/>
       </file>
-      <file name="seller.validator.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\sellers\seller.validator.ts">
+      <file name="seller.validator.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\sellers\seller.validator.ts">
         <metrics statements="27" coveredstatements="27" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1562,7 +1566,7 @@
     </package>
     <package name="src.api.v1.shipping">
       <metrics statements="207" coveredstatements="175" conditionals="6" coveredconditionals="3" methods="5" coveredmethods="3"/>
-      <file name="shipping.controller.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\shipping\shipping.controller.ts">
+      <file name="shipping.controller.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\shipping\shipping.controller.ts">
         <metrics statements="100" coveredstatements="68" conditionals="6" coveredconditionals="3" methods="5" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1665,7 +1669,7 @@
         <line num="99" count="1" type="stmt"/>
         <line num="100" count="1" type="stmt"/>
       </file>
-      <file name="shipping.routes.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\shipping\shipping.routes.ts">
+      <file name="shipping.routes.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\shipping\shipping.routes.ts">
         <metrics statements="42" coveredstatements="42" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1710,7 +1714,7 @@
         <line num="41" count="1" type="stmt"/>
         <line num="42" count="1" type="stmt"/>
       </file>
-      <file name="shipping.validator.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\shipping\shipping.validator.ts">
+      <file name="shipping.validator.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\shipping\shipping.validator.ts">
         <metrics statements="65" coveredstatements="65" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1780,9 +1784,9 @@
       </file>
     </package>
     <package name="src.api.v1.users">
-      <metrics statements="200" coveredstatements="178" conditionals="10" coveredconditionals="5" methods="6" coveredmethods="5"/>
-      <file name="user.controller.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\users\user.controller.ts">
-        <metrics statements="114" coveredstatements="92" conditionals="10" coveredconditionals="5" methods="6" coveredmethods="5"/>
+      <metrics statements="203" coveredstatements="181" conditionals="10" coveredconditionals="5" methods="6" coveredmethods="5"/>
+      <file name="user.controller.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\users\user.controller.ts">
+        <metrics statements="117" coveredstatements="95" conditionals="10" coveredconditionals="5" methods="6" coveredmethods="5"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -1804,17 +1808,17 @@
         <line num="19" count="1" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
-        <line num="22" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
         <line num="27" count="1" type="stmt"/>
         <line num="28" count="1" type="stmt"/>
         <line num="29" count="1" type="stmt"/>
         <line num="30" count="1" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
         <line num="33" count="0" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
@@ -1825,13 +1829,13 @@
         <line num="40" count="0" type="stmt"/>
         <line num="41" count="0" type="stmt"/>
         <line num="42" count="0" type="stmt"/>
-        <line num="43" count="1" type="stmt"/>
-        <line num="44" count="1" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
         <line num="45" count="1" type="stmt"/>
         <line num="46" count="1" type="stmt"/>
-        <line num="47" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="47" count="1" type="stmt"/>
         <line num="48" count="1" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
+        <line num="49" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="50" count="1" type="stmt"/>
         <line num="51" count="1" type="stmt"/>
         <line num="52" count="1" type="stmt"/>
@@ -1840,65 +1844,68 @@
         <line num="55" count="1" type="stmt"/>
         <line num="56" count="1" type="stmt"/>
         <line num="57" count="1" type="stmt"/>
-        <line num="58" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="59" count="0" type="stmt"/>
-        <line num="60" count="0" type="stmt"/>
-        <line num="61" count="1" type="stmt"/>
-        <line num="62" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="60" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
         <line num="63" count="1" type="stmt"/>
         <line num="64" count="1" type="stmt"/>
         <line num="65" count="1" type="stmt"/>
-        <line num="66" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="66" count="1" type="stmt"/>
         <line num="67" count="1" type="stmt"/>
-        <line num="68" count="1" type="stmt"/>
+        <line num="68" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="69" count="1" type="stmt"/>
         <line num="70" count="1" type="stmt"/>
         <line num="71" count="1" type="stmt"/>
         <line num="72" count="1" type="stmt"/>
         <line num="73" count="1" type="stmt"/>
-        <line num="74" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="75" count="0" type="stmt"/>
-        <line num="76" count="0" type="stmt"/>
-        <line num="77" count="1" type="stmt"/>
-        <line num="78" count="1" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="76" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
         <line num="79" count="1" type="stmt"/>
         <line num="80" count="1" type="stmt"/>
         <line num="81" count="1" type="stmt"/>
-        <line num="82" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="83" count="2" type="stmt"/>
-        <line num="84" count="2" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="84" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="85" count="2" type="stmt"/>
         <line num="86" count="2" type="stmt"/>
         <line num="87" count="2" type="stmt"/>
         <line num="88" count="2" type="stmt"/>
         <line num="89" count="2" type="stmt"/>
-        <line num="90" count="2" type="cond" truecount="0" falsecount="1"/>
-        <line num="91" count="0" type="stmt"/>
-        <line num="92" count="0" type="stmt"/>
-        <line num="93" count="2" type="stmt"/>
-        <line num="94" count="1" type="stmt"/>
-        <line num="95" count="1" type="stmt"/>
-        <line num="96" count="1" type="stmt"/>
+        <line num="90" count="2" type="stmt"/>
+        <line num="91" count="2" type="stmt"/>
+        <line num="92" count="2" type="stmt"/>
+        <line num="93" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="95" count="0" type="stmt"/>
+        <line num="96" count="2" type="stmt"/>
         <line num="97" count="1" type="stmt"/>
-        <line num="98" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="98" count="1" type="stmt"/>
         <line num="99" count="1" type="stmt"/>
         <line num="100" count="1" type="stmt"/>
-        <line num="101" count="1" type="stmt"/>
+        <line num="101" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="102" count="1" type="stmt"/>
         <line num="103" count="1" type="stmt"/>
         <line num="104" count="1" type="stmt"/>
         <line num="105" count="1" type="stmt"/>
         <line num="106" count="1" type="stmt"/>
-        <line num="107" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="108" count="0" type="stmt"/>
-        <line num="109" count="0" type="stmt"/>
-        <line num="110" count="1" type="stmt"/>
-        <line num="111" count="1" type="stmt"/>
-        <line num="112" count="1" type="stmt"/>
+        <line num="107" count="1" type="stmt"/>
+        <line num="108" count="1" type="stmt"/>
+        <line num="109" count="1" type="stmt"/>
+        <line num="110" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="111" count="0" type="stmt"/>
+        <line num="112" count="0" type="stmt"/>
         <line num="113" count="1" type="stmt"/>
         <line num="114" count="1" type="stmt"/>
+        <line num="115" count="1" type="stmt"/>
+        <line num="116" count="1" type="stmt"/>
+        <line num="117" count="1" type="stmt"/>
       </file>
-      <file name="user.routes.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\users\user.routes.ts">
+      <file name="user.routes.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\users\user.routes.ts">
         <metrics statements="61" coveredstatements="61" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1962,7 +1969,7 @@
         <line num="60" count="1" type="stmt"/>
         <line num="61" count="1" type="stmt"/>
       </file>
-      <file name="user.validator.ts" path="C:\Dev\BelanjaKu\apps\backend\src\api\v1\users\user.validator.ts">
+      <file name="user.validator.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\api\v1\users\user.validator.ts">
         <metrics statements="25" coveredstatements="25" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1993,7 +2000,7 @@
     </package>
     <package name="src.config">
       <metrics statements="88" coveredstatements="88" conditionals="12" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="database.config.ts" path="C:\Dev\BelanjaKu\apps\backend\src\config\database.config.ts">
+      <file name="database.config.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\config\database.config.ts">
         <metrics statements="32" coveredstatements="32" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2028,7 +2035,7 @@
         <line num="31" count="1" type="stmt"/>
         <line num="32" count="1" type="stmt"/>
       </file>
-      <file name="env.config.ts" path="C:\Dev\BelanjaKu\apps\backend\src\config\env.config.ts">
+      <file name="env.config.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\config\env.config.ts">
         <metrics statements="56" coveredstatements="56" conditionals="12" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2089,8 +2096,154 @@
       </file>
     </package>
     <package name="src.database.models">
-      <metrics statements="1004" coveredstatements="1000" conditionals="32" coveredconditionals="28" methods="24" coveredmethods="24"/>
-      <file name="category.model.ts" path="C:\Dev\BelanjaKu\apps\backend\src\database\models\category.model.ts">
+      <metrics statements="1128" coveredstatements="1124" conditionals="36" coveredconditionals="32" methods="28" coveredmethods="28"/>
+      <file name="cart.model.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\database\models\cart.model.ts">
+        <metrics statements="57" coveredstatements="57" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+      </file>
+      <file name="cartItem.model.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\database\models\cartItem.model.ts">
+        <metrics statements="83" coveredstatements="83" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+      </file>
+      <file name="category.model.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\database\models\category.model.ts">
         <metrics statements="55" coveredstatements="55" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2148,8 +2301,8 @@
         <line num="54" count="1" type="stmt"/>
         <line num="55" count="1" type="stmt"/>
       </file>
-      <file name="index.ts" path="C:\Dev\BelanjaKu\apps\backend\src\database\models\index.ts">
-        <metrics statements="68" coveredstatements="67" conditionals="5" coveredconditionals="2" methods="0" coveredmethods="0"/>
+      <file name="index.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\database\models\index.ts">
+        <metrics statements="74" coveredstatements="73" conditionals="5" coveredconditionals="2" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -2166,15 +2319,15 @@
         <line num="14" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
-        <line num="17" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="17" count="1" type="stmt"/>
         <line num="18" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
+        <line num="19" count="1" type="cond" truecount="0" falsecount="1"/>
         <line num="20" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
-        <line num="22" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="25" count="0" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
         <line num="27" count="1" type="stmt"/>
         <line num="28" count="1" type="stmt"/>
@@ -2211,15 +2364,21 @@
         <line num="59" count="1" type="stmt"/>
         <line num="60" count="1" type="stmt"/>
         <line num="61" count="1" type="stmt"/>
-        <line num="62" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="63" count="12" type="cond" truecount="1" falsecount="1"/>
-        <line num="64" count="10" type="stmt"/>
-        <line num="65" count="10" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
         <line num="66" count="1" type="stmt"/>
         <line num="67" count="1" type="stmt"/>
-        <line num="68" count="1" type="stmt"/>
+        <line num="68" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="69" count="14" type="cond" truecount="1" falsecount="1"/>
+        <line num="70" count="12" type="stmt"/>
+        <line num="71" count="12" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
       </file>
-      <file name="order.model.ts" path="C:\Dev\BelanjaKu\apps\backend\src\database\models\order.model.ts">
+      <file name="order.model.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\database\models\order.model.ts">
         <metrics statements="100" coveredstatements="100" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2322,7 +2481,7 @@
         <line num="99" count="1" type="stmt"/>
         <line num="100" count="1" type="stmt"/>
       </file>
-      <file name="orderItem.model.ts" path="C:\Dev\BelanjaKu\apps\backend\src\database\models\orderItem.model.ts">
+      <file name="orderItem.model.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\database\models\orderItem.model.ts">
         <metrics statements="91" coveredstatements="91" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2416,7 +2575,7 @@
         <line num="90" count="1" type="stmt"/>
         <line num="91" count="1" type="stmt"/>
       </file>
-      <file name="payment.model.ts" path="C:\Dev\BelanjaKu\apps\backend\src\database\models\payment.model.ts">
+      <file name="payment.model.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\database\models\payment.model.ts">
         <metrics statements="97" coveredstatements="97" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2516,7 +2675,7 @@
         <line num="96" count="1" type="stmt"/>
         <line num="97" count="1" type="stmt"/>
       </file>
-      <file name="product.model.ts" path="C:\Dev\BelanjaKu\apps\backend\src\database\models\product.model.ts">
+      <file name="product.model.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\database\models\product.model.ts">
         <metrics statements="124" coveredstatements="124" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2643,7 +2802,7 @@
         <line num="123" count="1" type="stmt"/>
         <line num="124" count="1" type="stmt"/>
       </file>
-      <file name="promotion.model.ts" path="C:\Dev\BelanjaKu\apps\backend\src\database\models\promotion.model.ts">
+      <file name="promotion.model.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\database\models\promotion.model.ts">
         <metrics statements="95" coveredstatements="95" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2741,7 +2900,7 @@
         <line num="94" count="1" type="stmt"/>
         <line num="95" count="1" type="stmt"/>
       </file>
-      <file name="review.model.ts" path="C:\Dev\BelanjaKu\apps\backend\src\database\models\review.model.ts">
+      <file name="review.model.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\database\models\review.model.ts">
         <metrics statements="101" coveredstatements="101" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2845,7 +3004,7 @@
         <line num="100" count="1" type="stmt"/>
         <line num="101" count="1" type="stmt"/>
       </file>
-      <file name="seller.model.ts" path="C:\Dev\BelanjaKu\apps\backend\src\database\models\seller.model.ts">
+      <file name="seller.model.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\database\models\seller.model.ts">
         <metrics statements="82" coveredstatements="82" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2930,7 +3089,7 @@
         <line num="81" count="1" type="stmt"/>
         <line num="82" count="1" type="stmt"/>
       </file>
-      <file name="shippingOption.model.ts" path="C:\Dev\BelanjaKu\apps\backend\src\database\models\shippingOption.model.ts">
+      <file name="shippingOption.model.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\database\models\shippingOption.model.ts">
         <metrics statements="76" coveredstatements="76" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -3009,8 +3168,8 @@
         <line num="75" count="1" type="stmt"/>
         <line num="76" count="1" type="stmt"/>
       </file>
-      <file name="user.model.ts" path="C:\Dev\BelanjaKu\apps\backend\src\database\models\user.model.ts">
-        <metrics statements="115" coveredstatements="112" conditionals="9" coveredconditionals="8" methods="6" coveredmethods="6"/>
+      <file name="user.model.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\database\models\user.model.ts">
+        <metrics statements="93" coveredstatements="90" conditionals="9" coveredconditionals="8" methods="6" coveredmethods="6"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -3046,10 +3205,10 @@
         <line num="33" count="1" type="stmt"/>
         <line num="34" count="1" type="stmt"/>
         <line num="35" count="1" type="stmt"/>
-        <line num="36" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="37" count="2" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="38" count="2" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
         <line num="41" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="42" count="1" type="stmt"/>
@@ -3057,14 +3216,14 @@
         <line num="44" count="1" type="stmt"/>
         <line num="45" count="1" type="stmt"/>
         <line num="46" count="1" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
+        <line num="47" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="48" count="1" type="stmt"/>
         <line num="49" count="1" type="stmt"/>
         <line num="50" count="1" type="stmt"/>
         <line num="51" count="1" type="stmt"/>
         <line num="52" count="1" type="stmt"/>
         <line num="53" count="1" type="stmt"/>
-        <line num="54" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="54" count="1" type="stmt"/>
         <line num="55" count="1" type="stmt"/>
         <line num="56" count="1" type="stmt"/>
         <line num="57" count="1" type="stmt"/>
@@ -3081,57 +3240,35 @@
         <line num="68" count="1" type="stmt"/>
         <line num="69" count="1" type="stmt"/>
         <line num="70" count="1" type="stmt"/>
-        <line num="71" count="1" type="stmt"/>
-        <line num="72" count="1" type="stmt"/>
-        <line num="73" count="1" type="stmt"/>
-        <line num="74" count="1" type="stmt"/>
-        <line num="75" count="1" type="stmt"/>
-        <line num="76" count="1" type="stmt"/>
-        <line num="77" count="1" type="stmt"/>
-        <line num="78" count="1" type="stmt"/>
-        <line num="79" count="1" type="stmt"/>
-        <line num="80" count="1" type="stmt"/>
-        <line num="81" count="1" type="stmt"/>
+        <line num="71" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="72" count="3" type="stmt"/>
+        <line num="73" count="3" type="stmt"/>
+        <line num="74" count="3" type="stmt"/>
+        <line num="75" count="3" type="stmt"/>
+        <line num="76" count="3" type="stmt"/>
+        <line num="77" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="78" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
         <line num="82" count="1" type="stmt"/>
         <line num="83" count="1" type="stmt"/>
         <line num="84" count="1" type="stmt"/>
         <line num="85" count="1" type="stmt"/>
         <line num="86" count="1" type="stmt"/>
-        <line num="87" count="1" type="stmt"/>
-        <line num="88" count="1" type="stmt"/>
-        <line num="89" count="1" type="stmt"/>
+        <line num="87" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="88" count="5" type="stmt"/>
+        <line num="89" count="5" type="stmt"/>
         <line num="90" count="1" type="stmt"/>
         <line num="91" count="1" type="stmt"/>
-        <line num="92" count="1" type="cond" truecount="2" falsecount="0"/>
-        <line num="93" count="2" type="stmt"/>
-        <line num="94" count="2" type="stmt"/>
-        <line num="95" count="2" type="stmt"/>
-        <line num="96" count="2" type="stmt"/>
-        <line num="97" count="2" type="stmt"/>
-        <line num="98" count="1" type="cond" truecount="2" falsecount="0"/>
-        <line num="99" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="100" count="0" type="stmt"/>
-        <line num="101" count="0" type="stmt"/>
-        <line num="102" count="0" type="stmt"/>
-        <line num="103" count="1" type="stmt"/>
-        <line num="104" count="1" type="stmt"/>
-        <line num="105" count="1" type="stmt"/>
-        <line num="106" count="1" type="stmt"/>
-        <line num="107" count="1" type="stmt"/>
-        <line num="108" count="1" type="stmt"/>
-        <line num="109" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="110" count="4" type="stmt"/>
-        <line num="111" count="4" type="stmt"/>
-        <line num="112" count="1" type="stmt"/>
-        <line num="113" count="1" type="stmt"/>
-        <line num="114" count="1" type="stmt"/>
-        <line num="115" count="1" type="stmt"/>
+        <line num="92" count="1" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.middlewares">
-      <metrics statements="185" coveredstatements="161" conditionals="23" coveredconditionals="16" methods="7" coveredmethods="7"/>
-      <file name="auth.middleware.ts" path="C:\Dev\BelanjaKu\apps\backend\src\middlewares\auth.middleware.ts">
-        <metrics statements="74" coveredstatements="70" conditionals="12" coveredconditionals="9" methods="2" coveredmethods="2"/>
+      <metrics statements="218" coveredstatements="175" conditionals="21" coveredconditionals="13" methods="8" coveredmethods="7"/>
+      <file name="auth.middleware.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\middlewares\auth.middleware.ts">
+        <metrics statements="74" coveredstatements="68" conditionals="10" coveredconditionals="6" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -3158,9 +3295,9 @@
         <line num="24" count="1" type="stmt"/>
         <line num="25" count="1" type="stmt"/>
         <line num="26" count="1" type="cond" truecount="2" falsecount="0"/>
-        <line num="27" count="4" type="stmt"/>
-        <line num="28" count="4" type="stmt"/>
-        <line num="29" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="27" count="3" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
         <line num="30" count="3" type="stmt"/>
         <line num="31" count="3" type="stmt"/>
         <line num="32" count="3" type="stmt"/>
@@ -3183,11 +3320,11 @@
         <line num="49" count="0" type="stmt"/>
         <line num="50" count="0" type="stmt"/>
         <line num="51" count="3" type="stmt"/>
-        <line num="52" count="4" type="stmt"/>
-        <line num="53" count="4" type="cond" truecount="1" falsecount="0"/>
-        <line num="54" count="1" type="stmt"/>
-        <line num="55" count="1" type="stmt"/>
-        <line num="56" count="4" type="stmt"/>
+        <line num="52" count="3" type="stmt"/>
+        <line num="53" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="56" count="3" type="stmt"/>
         <line num="57" count="1" type="stmt"/>
         <line num="58" count="1" type="stmt"/>
         <line num="59" count="1" type="stmt"/>
@@ -3207,7 +3344,7 @@
         <line num="73" count="17" type="stmt"/>
         <line num="74" count="17" type="stmt"/>
       </file>
-      <file name="error.middleware.ts" path="C:\Dev\BelanjaKu\apps\backend\src\middlewares\error.middleware.ts">
+      <file name="error.middleware.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\middlewares\error.middleware.ts">
         <metrics statements="23" coveredstatements="23" conditionals="3" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -3233,7 +3370,7 @@
         <line num="22" count="2" type="stmt"/>
         <line num="23" count="2" type="stmt"/>
       </file>
-      <file name="rateLimit.middleware.ts" path="C:\Dev\BelanjaKu\apps\backend\src\middlewares\rateLimit.middleware.ts">
+      <file name="rateLimit.middleware.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\middlewares\rateLimit.middleware.ts">
         <metrics statements="18" coveredstatements="18" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -3254,7 +3391,7 @@
         <line num="17" count="1" type="stmt"/>
         <line num="18" count="1" type="stmt"/>
       </file>
-      <file name="upload.middleware.ts" path="C:\Dev\BelanjaKu\apps\backend\src\middlewares\upload.middleware.ts">
+      <file name="upload.middleware.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\middlewares\upload.middleware.ts">
         <metrics statements="44" coveredstatements="41" conditionals="4" coveredconditionals="3" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -3301,39 +3438,72 @@
         <line num="43" count="1" type="stmt"/>
         <line num="44" count="1" type="stmt"/>
       </file>
-      <file name="validator.middleware.ts" path="C:\Dev\BelanjaKu\apps\backend\src\middlewares\validator.middleware.ts">
-        <metrics statements="26" coveredstatements="9" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
+      <file name="validator.middleware.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\middlewares\validator.middleware.ts">
+        <metrics statements="59" coveredstatements="25" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
-        <line num="5" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="6" count="6" type="stmt"/>
-        <line num="7" count="6" type="cond" truecount="0" falsecount="1"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="11" count="0" type="cond" truecount="1" falsecount="0"/>
-        <line num="12" count="0" type="cond" truecount="1" falsecount="0"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="15" count="8" type="cond" truecount="0" falsecount="1"/>
         <line num="16" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
+        <line num="19" count="0" type="cond" truecount="1" falsecount="0"/>
+        <line num="20" count="0" type="cond" truecount="1" falsecount="0"/>
         <line num="21" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
         <line num="23" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
-        <line num="25" count="6" type="stmt"/>
-        <line num="26" count="6" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+        <line num="34" count="8" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.services">
-      <metrics statements="1398" coveredstatements="1309" conditionals="143" coveredconditionals="114" methods="44" coveredmethods="43"/>
-      <file name="auth.service.ts" path="C:\Dev\BelanjaKu\apps\backend\src\services\auth.service.ts">
+      <metrics statements="1398" coveredstatements="1305" conditionals="141" coveredconditionals="110" methods="44" coveredmethods="43"/>
+      <file name="auth.service.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\services\auth.service.ts">
         <metrics statements="121" coveredstatements="84" conditionals="5" coveredconditionals="2" methods="3" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -3361,25 +3531,25 @@
         <line num="24" count="1" type="stmt"/>
         <line num="25" count="1" type="stmt"/>
         <line num="26" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="27" count="2" type="stmt"/>
-        <line num="28" count="2" type="stmt"/>
-        <line num="29" count="2" type="stmt"/>
-        <line num="30" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="27" count="3" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="30" count="3" type="cond" truecount="0" falsecount="1"/>
         <line num="31" count="0" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
-        <line num="33" count="2" type="stmt"/>
-        <line num="34" count="2" type="stmt"/>
-        <line num="35" count="2" type="stmt"/>
-        <line num="36" count="2" type="stmt"/>
-        <line num="37" count="2" type="stmt"/>
-        <line num="38" count="2" type="stmt"/>
-        <line num="39" count="2" type="stmt"/>
-        <line num="40" count="2" type="stmt"/>
-        <line num="41" count="2" type="stmt"/>
-        <line num="42" count="2" type="stmt"/>
-        <line num="43" count="2" type="stmt"/>
-        <line num="44" count="2" type="stmt"/>
-        <line num="45" count="2" type="stmt"/>
+        <line num="33" count="3" type="stmt"/>
+        <line num="34" count="3" type="stmt"/>
+        <line num="35" count="3" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="37" count="3" type="stmt"/>
+        <line num="38" count="3" type="stmt"/>
+        <line num="39" count="3" type="stmt"/>
+        <line num="40" count="3" type="stmt"/>
+        <line num="41" count="3" type="stmt"/>
+        <line num="42" count="3" type="stmt"/>
+        <line num="43" count="3" type="stmt"/>
+        <line num="44" count="3" type="stmt"/>
+        <line num="45" count="3" type="stmt"/>
         <line num="46" count="1" type="stmt"/>
         <line num="47" count="1" type="stmt"/>
         <line num="48" count="1" type="stmt"/>
@@ -3457,7 +3627,7 @@
         <line num="120" count="1" type="stmt"/>
         <line num="121" count="1" type="stmt"/>
       </file>
-      <file name="category.service.ts" path="C:\Dev\BelanjaKu\apps\backend\src\services\category.service.ts">
+      <file name="category.service.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\services\category.service.ts">
         <metrics statements="122" coveredstatements="118" conditionals="10" coveredconditionals="8" methods="5" coveredmethods="5"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -3582,8 +3752,8 @@
         <line num="121" count="1" type="stmt"/>
         <line num="122" count="1" type="stmt"/>
       </file>
-      <file name="order.service.ts" path="C:\Dev\BelanjaKu\apps\backend\src\services\order.service.ts">
-        <metrics statements="254" coveredstatements="243" conditionals="30" coveredconditionals="24" methods="5" coveredmethods="5"/>
+      <file name="order.service.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\services\order.service.ts">
+        <metrics statements="254" coveredstatements="243" conditionals="29" coveredconditionals="23" methods="5" coveredmethods="5"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -3721,7 +3891,7 @@
         <line num="135" count="2" type="stmt"/>
         <line num="136" count="2" type="stmt"/>
         <line num="137" count="2" type="stmt"/>
-        <line num="138" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="138" count="2" type="stmt"/>
         <line num="139" count="2" type="stmt"/>
         <line num="140" count="3" type="cond" truecount="0" falsecount="1"/>
         <line num="141" count="0" type="stmt"/>
@@ -3839,7 +4009,7 @@
         <line num="253" count="1" type="stmt"/>
         <line num="254" count="1" type="stmt"/>
       </file>
-      <file name="payment.service.ts" path="C:\Dev\BelanjaKu\apps\backend\src\services\payment.service.ts">
+      <file name="payment.service.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\services\payment.service.ts">
         <metrics statements="129" coveredstatements="127" conditionals="20" coveredconditionals="19" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -3971,8 +4141,8 @@
         <line num="128" count="1" type="stmt"/>
         <line num="129" count="1" type="stmt"/>
       </file>
-      <file name="product.service.ts" path="C:\Dev\BelanjaKu\apps\backend\src\services\product.service.ts">
-        <metrics statements="166" coveredstatements="164" conditionals="16" coveredconditionals="15" methods="6" coveredmethods="6"/>
+      <file name="product.service.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\services\product.service.ts">
+        <metrics statements="166" coveredstatements="160" conditionals="15" coveredconditionals="12" methods="6" coveredmethods="6"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -4109,13 +4279,13 @@
         <line num="134" count="1" type="stmt"/>
         <line num="135" count="1" type="stmt"/>
         <line num="136" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="137" count="3" type="stmt"/>
-        <line num="138" count="3" type="cond" truecount="1" falsecount="0"/>
-        <line num="139" count="1" type="stmt"/>
-        <line num="140" count="1" type="stmt"/>
-        <line num="141" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="142" count="1" type="stmt"/>
-        <line num="143" count="1" type="stmt"/>
+        <line num="137" count="1" type="stmt"/>
+        <line num="138" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="139" count="0" type="stmt"/>
+        <line num="140" count="0" type="stmt"/>
+        <line num="141" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="142" count="0" type="stmt"/>
+        <line num="143" count="0" type="stmt"/>
         <line num="144" count="1" type="stmt"/>
         <line num="145" count="1" type="stmt"/>
         <line num="146" count="1" type="stmt"/>
@@ -4140,7 +4310,7 @@
         <line num="165" count="1" type="stmt"/>
         <line num="166" count="1" type="stmt"/>
       </file>
-      <file name="promotion.service.ts" path="C:\Dev\BelanjaKu\apps\backend\src\services\promotion.service.ts">
+      <file name="promotion.service.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\services\promotion.service.ts">
         <metrics statements="116" coveredstatements="114" conditionals="22" coveredconditionals="19" methods="5" coveredmethods="5"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -4259,7 +4429,7 @@
         <line num="115" count="1" type="stmt"/>
         <line num="116" count="1" type="stmt"/>
       </file>
-      <file name="review.service.ts" path="C:\Dev\BelanjaKu\apps\backend\src\services\review.service.ts">
+      <file name="review.service.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\services\review.service.ts">
         <metrics statements="91" coveredstatements="91" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -4353,7 +4523,7 @@
         <line num="90" count="1" type="stmt"/>
         <line num="91" count="1" type="stmt"/>
       </file>
-      <file name="seller.service.ts" path="C:\Dev\BelanjaKu\apps\backend\src\services\seller.service.ts">
+      <file name="seller.service.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\services\seller.service.ts">
         <metrics statements="151" coveredstatements="134" conditionals="11" coveredconditionals="5" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -4507,7 +4677,7 @@
         <line num="150" count="1" type="stmt"/>
         <line num="151" count="1" type="stmt"/>
       </file>
-      <file name="shipping.service.ts" path="C:\Dev\BelanjaKu\apps\backend\src\services\shipping.service.ts">
+      <file name="shipping.service.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\services\shipping.service.ts">
         <metrics statements="92" coveredstatements="88" conditionals="10" coveredconditionals="8" methods="5" coveredmethods="5"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -4602,7 +4772,7 @@
         <line num="91" count="1" type="stmt"/>
         <line num="92" count="1" type="stmt"/>
       </file>
-      <file name="user.service.ts" path="C:\Dev\BelanjaKu\apps\backend\src\services\user.service.ts">
+      <file name="user.service.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\services\user.service.ts">
         <metrics statements="156" coveredstatements="146" conditionals="13" coveredconditionals="8" methods="6" coveredmethods="6"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -4763,8 +4933,8 @@
       </file>
     </package>
     <package name="src.utils">
-      <metrics statements="296" coveredstatements="251" conditionals="31" coveredconditionals="21" methods="14" coveredmethods="13"/>
-      <file name="apiFeatures.util.ts" path="C:\Dev\BelanjaKu\apps\backend\src\utils\apiFeatures.util.ts">
+      <metrics statements="296" coveredstatements="245" conditionals="30" coveredconditionals="19" methods="14" coveredmethods="13"/>
+      <file name="apiFeatures.util.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\utils\apiFeatures.util.ts">
         <metrics statements="125" coveredstatements="93" conditionals="16" coveredconditionals="8" methods="6" coveredmethods="6"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -4892,8 +5062,8 @@
         <line num="124" count="1" type="stmt"/>
         <line num="125" count="1" type="stmt"/>
       </file>
-      <file name="email.util.ts" path="C:\Dev\BelanjaKu\apps\backend\src\utils\email.util.ts">
-        <metrics statements="50" coveredstatements="50" conditionals="8" coveredconditionals="8" methods="3" coveredmethods="3"/>
+      <file name="email.util.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\utils\email.util.ts">
+        <metrics statements="50" coveredstatements="44" conditionals="7" coveredconditionals="6" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -4914,26 +5084,26 @@
         <line num="18" count="1" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
         <line num="20" count="1" type="cond" truecount="2" falsecount="0"/>
-        <line num="21" count="4" type="stmt"/>
-        <line num="22" count="4" type="stmt"/>
-        <line num="23" count="4" type="stmt"/>
-        <line num="24" count="4" type="stmt"/>
-        <line num="25" count="4" type="stmt"/>
-        <line num="26" count="4" type="stmt"/>
-        <line num="27" count="4" type="stmt"/>
-        <line num="28" count="3" type="cond" truecount="1" falsecount="0"/>
-        <line num="29" count="3" type="stmt"/>
-        <line num="30" count="4" type="cond" truecount="1" falsecount="0"/>
-        <line num="31" count="1" type="stmt"/>
-        <line num="32" count="1" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="34" count="4" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="28" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
         <line num="35" count="1" type="stmt"/>
         <line num="36" count="1" type="cond" truecount="2" falsecount="0"/>
-        <line num="37" count="1" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
         <line num="41" count="1" type="stmt"/>
         <line num="42" count="1" type="cond" truecount="2" falsecount="0"/>
         <line num="43" count="1" type="stmt"/>
@@ -4945,22 +5115,22 @@
         <line num="49" count="1" type="stmt"/>
         <line num="50" count="1" type="stmt"/>
       </file>
-      <file name="http-exception.util.ts" path="C:\Dev\BelanjaKu\apps\backend\src\utils\http-exception.util.ts">
+      <file name="http-exception.util.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\utils\http-exception.util.ts">
         <metrics statements="12" coveredstatements="12" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="6" count="10" type="stmt"/>
-        <line num="7" count="10" type="stmt"/>
-        <line num="8" count="10" type="stmt"/>
-        <line num="9" count="10" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
       </file>
-      <file name="jwt.util.ts" path="C:\Dev\BelanjaKu\apps\backend\src\utils\jwt.util.ts">
+      <file name="jwt.util.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\utils\jwt.util.ts">
         <metrics statements="53" coveredstatements="40" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -5016,7 +5186,7 @@
         <line num="52" count="0" type="stmt"/>
         <line num="53" count="0" type="stmt"/>
       </file>
-      <file name="logger.util.ts" path="C:\Dev\BelanjaKu\apps\backend\src\utils\logger.util.ts">
+      <file name="logger.util.ts" path="E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\src\utils\logger.util.ts">
         <metrics statements="56" coveredstatements="56" conditionals="3" coveredconditionals="1" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>

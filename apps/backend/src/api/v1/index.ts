@@ -9,6 +9,9 @@ import sellerRouter from './sellers/seller.routes';
 import paymentRouter from './payments/payment.routes';
 import shippingRouter from './shipping/shipping.routes';
 import promotionRouter from './promotions/promotion.routes';
+import CartRoute from './carts/cart.routes';
+
+
 const v1Router = Router();
 
 // Daftarkan semua router untuk API v1 di sini
@@ -22,5 +25,7 @@ v1Router.use('/sellers', sellerRouter);
 v1Router.use('/payments', paymentRouter);
 v1Router.use('/shipping', shippingRouter);
 v1Router.use('/promotions', promotionRouter);
+v1Router.use('/auth', authRouter);
+v1Router.use('/products', productRouter);
 
 export default v1Router;

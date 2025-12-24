@@ -12,8 +12,10 @@ class UserController {
    */
   public async getAllUsers(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      // FIX: Teruskan req.query dari controller ke service
+      // FIX: Teruskan req.query ke service. 
+      // Ini adalah perbaikan utama untuk mengatasi error TS2554.
       const users = await UserService.getAllUsers(req.query);
+      
       res.status(StatusCodes.OK).json({
         success: true,
         message: 'Users retrieved successfully',
@@ -81,6 +83,7 @@ class UserController {
    */
   public async getArchivedUsers(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
+      // Teruskan req.query juga di sini untuk konsistensi paginasi
       const users = await UserService.getArchivedUsers(req.query);
       res.status(StatusCodes.OK).json({
         success: true,
