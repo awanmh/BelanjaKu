@@ -79,6 +79,11 @@ backend
 │   │       │   ├── 📜 auth.routes.ts
 │   │       │   └── 📜 auth.validator.ts
 │   │       │
+│   │       ├── 📂 cart/
+│   │       │   ├── 📜 cart.controller.ts
+│   │       │   ├── 📜 cart.routes.ts
+│   │       │   └── 📜 cart.validator.ts
+│   │       │
 │   │       ├── 📂 categories/
 │   │       │   ├── 📜 category.controller.ts
 │   │       │   ├── 📜 category.routes.ts
@@ -145,6 +150,7 @@ backend
 │   │   │   ├── 📜 20251029010001-add-deletedAt-to-users.js
 │   │   │   ├── 📜 2025120400-add-fulltext-search.js
 │   │   │   └── 📜 20251204130950-add-reset-password-to-users.js
+│   │   │   └── 📜 2025122501-create-cart-items.js
 │   │   │
 │   │   ├── 📂 models/            # Definisi tabel dan relasi (Sequelize)
 │   │   │   ├── 📜 category.model.ts
@@ -158,6 +164,7 @@ backend
 │   │   │   ├── 📜 seller.model.ts
 │   │   │   ├── 📜 shippingOption.model.ts
 │   │   │   └── 📜 user.model.ts
+│   │   │   └── 📜 cartItem.model.ts
 │   │   │
 │   │   └── 📂 seeders/           # File untuk mengisi data awal (seeding)
 │   │       └── 📜 2025100602-demo-products.js
@@ -173,6 +180,7 @@ backend
 │   │   ├── 📂 __tests__/         # Unit & Integration Tests
 │   │   │   ├── 📜 auth.routes.test.ts
 │   │   │   ├── 📜 auth.service.test.ts
+│   │   │   ├── 📜 cart.service.test.ts
 │   │   │   ├── 📜 category.routes.test.ts
 │   │   │   ├── 📜 category.service.test.ts
 │   │   │   ├── 📜 order.routes.test.ts
@@ -193,6 +201,7 @@ backend
 │   │   │
 │   │   ├── 📜 auth.service.ts
 │   │   ├── 📜 category.service.ts
+│   │   ├── 📜 cart.service.ts
 │   │   ├── 📜 order.service.ts
 │   │   ├── 📜 payment.service.ts
 │   │   ├── 📜 product.service.ts
@@ -220,8 +229,8 @@ backend
 ├── 📜 jest.config.js
 ├── 📜 package.json
 └── 📜 tsconfig.json
-Frontend
 
+frontend
 📂 frontend/
 ├── 📂 app/                      # Direktori utama untuk routing, halaman, dan layout
 │   │
