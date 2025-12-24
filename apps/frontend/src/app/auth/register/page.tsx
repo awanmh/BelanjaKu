@@ -26,9 +26,20 @@ export default function RegisterPage() {
     e.preventDefault();
     setError('');
 
+    // Client-side validation
+    if (!formData.email || !formData.password || !formData.fullName) {
+      setError('Semua field harus diisi.');
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError('Password minimal 6 karakter.');
+      return;
+    }
+
     if (formData.password !== formData.retypePassword) {
-        setError('Password tidak cocok.');
-        return;
+      setError('Password tidak cocok.');
+      return;
     }
 
     setIsLoading(true);
@@ -42,12 +53,38 @@ export default function RegisterPage() {
       });
       
       if (res.data.success) {
-        // Jika sukses, arahkan ke login
+        // Jika sukses, tampilkan pesan dan arahkan ke login
+        alert('Registrasi berhasil! Silakan login.');
         router.push('/auth/login');
       }
     } catch (err: any) {
-      console.error(err);
-      setError(err.response?.data?.message || 'Gagal mendaftar. Silakan coba lagi.');
+      console.error('Registration error:', err);
+      
+      // Handle different error types
+      if (err.response) {
+        // Server responded with error
+        const errorMessage = err.response.data?.message || err.response.data?.error;
+        
+        if (err.response.status === 409) {
+          setError('Email sudah terdaftar. Silakan gunakan email lain atau login.');
+        } else if (err.response.status === 400) {
+          // Validation errors
+          if (err.response.data?.errors && Array.isArray(err.response.data.errors)) {
+            const validationErrors = err.response.data.errors.map((e: any) => e.msg).join(', ');
+            setError(validationErrors);
+          } else {
+            setError(errorMessage || 'Data tidak valid. Periksa kembali form Anda.');
+          }
+        } else {
+          setError(errorMessage || 'Gagal mendaftar. Silakan coba lagi.');
+        }
+      } else if (err.request) {
+        // Request made but no response
+        setError('Tidak dapat terhubung ke server. Pastikan backend sedang berjalan.');
+      } else {
+        // Something else happened
+        setError('Terjadi kesalahan. Silakan coba lagi.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -58,7 +95,7 @@ export default function RegisterPage() {
       {/* Tab Navigation */}
       <div className="flex gap-8 mb-8 text-lg font-medium z-10 relative">
         <Link 
-          href="/auth/login" 
+          href="/api/auth/login" 
           className="text-white/60 hover:text-white transition-colors pb-1 tracking-wide"
         >
           Masuk

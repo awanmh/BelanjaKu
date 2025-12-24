@@ -7,6 +7,7 @@ import { Trash2, Plus, Minus, ShoppingBag, ArrowRight } from 'lucide-react';
 import api from '@/lib/api';
 import { formatRupiah } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
+import { useCartStore } from '@/store/cart.store';
 
 interface CartItem {
   id: string;
@@ -29,6 +30,7 @@ export default function CartPage() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState<string | null>(null);
+  const setCartCount = useCartStore((state) => state.setCartCount);
 
   useEffect(() => {
     fetchCart();
@@ -38,7 +40,15 @@ export default function CartPage() {
     try {
       const res = await api.get('/cart');
       if (res.data.success) {
-        setCartItems(res.data.data.items || []);
+        const items = res.data.data.items || [];
+        setCartItems(items);
+        
+        // Update cart count in store
+        const totalItems = items.reduce(
+          (sum: number, item: CartItem) => sum + item.quantity,
+          0
+        );
+        setCartCount(totalItems);
       }
     } catch (error: any) {
       if (error.response?.status === 401) {
