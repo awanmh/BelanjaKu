@@ -1,25 +1,29 @@
-'use strict';
+"use strict";
 
-import { Sequelize } from 'sequelize';
-import { config as envConfig } from '../../config/env.config';
-import UserModel from './user.model';
-import ProductModel from './product.model';
-import CategoryModel from './category.model';
-import OrderModel from './order.model';
-import OrderItemModel from './orderItem.model';
-import ReviewModel from './review.model';
-import SellerModel from './seller.model';
-import PromotionModel from './promotion.model';
-import ShippingOptionModel from './shippingOption.model';
-import PaymentModel from './payment.model';
-import CartModel from './cart.model'; // 1. Impor Cart
-import CartItemModel from './cartItem.model'; // 2. Impor CartItem
-import UserAddressModel from './userAddress.model';
+import { Sequelize } from "sequelize";
+import { config as envConfig } from "../../config/env.config";
+import UserModel from "./user.model";
+import ProductModel from "./product.model";
+import CategoryModel from "./category.model";
+import OrderModel from "./order.model";
+import OrderItemModel from "./orderItem.model";
+import ReviewModel from "./review.model";
+import SellerModel from "./seller.model";
+import PromotionModel from "./promotion.model";
+import ShippingOptionModel from "./shippingOption.model";
+import PaymentModel from "./payment.model";
+import CartModel from "./cart.model"; // 1. Impor Cart
+import CartItemModel from "./cartItem.model"; // 2. Impor CartItem
+import ProductImageModel from "./productImage.model"; // Impor ProductImage
+import UserAddressModel from "./userAddress.model";
+import WishlistModel from "./wishlist.model";
+import NotificationModel from "./notification.model";
+import ProductVariantModel from "./productVariant.model";
+import ProductDiscussionModel from "./productDiscussion.model";
 
 // Tentukan environment (default: development)
-const env = process.env.NODE_ENV || 'development';
-const dbConfig = require('../../config/database.config.ts')[env];
-
+const env = process.env.NODE_ENV || "development";
+const dbConfig = require("../../config/database.config.ts")[env];
 
 // Inisialisasi Sequelize
 let sequelize: Sequelize;
@@ -48,6 +52,11 @@ const Payment = PaymentModel(sequelize);
 const Cart = CartModel(sequelize); // 3. Init Cart
 const CartItem = CartItemModel(sequelize); // 4. Init CartItem
 const UserAddress = UserAddressModel(sequelize);
+const ProductImage = ProductImageModel(sequelize); // Init ProductImage
+const Wishlist = WishlistModel(sequelize);
+const Notification = NotificationModel(sequelize);
+const ProductVariant = ProductVariantModel(sequelize);
+const ProductDiscussion = ProductDiscussionModel(sequelize);
 
 // Kumpulan model dan instance Sequelize
 const db = {
@@ -63,9 +72,14 @@ const db = {
   Promotion,
   ShippingOption,
   Payment,
-  Cart, // 5. Masukkan ke object db
-  CartItem, // 6. Masukkan ke object db
+  Cart,
+  CartItem,
   UserAddress,
+  ProductImage,
+  Wishlist,
+  Notification,
+  ProductVariant,
+  ProductDiscussion,
 };
 
 // Definisikan asosiasi antar model

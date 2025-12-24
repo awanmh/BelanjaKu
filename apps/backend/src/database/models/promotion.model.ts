@@ -1,4 +1,4 @@
-import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
+import { DataTypes, Model, Optional, Sequelize } from "sequelize";
 
 // Interface untuk atribut-atribut Promotion
 export interface PromotionAttributes {
@@ -9,15 +9,27 @@ export interface PromotionAttributes {
   startDate: Date; // Tanggal mulai promosi
   endDate: Date; // Tanggal berakhir promosi
   isActive: boolean;
+  type: "DISCOUNT" | "FLASH_SALE" | "BUNDLE" | "CASHBACK";
+  minPurchaseAmount: number;
+  maxDiscountAmount?: number;
+  quota?: number;
+  usageCount: number;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
 // Atribut yang opsional saat pembuatan
-interface PromotionCreationAttributes extends Optional<PromotionAttributes, 'id' | 'isActive'> {}
+interface PromotionCreationAttributes
+  extends Optional<
+    PromotionAttributes,
+    "id" | "isActive" | "usageCount" | "minPurchaseAmount"
+  > {}
 
 // Definisikan class Model untuk Promotion
-export class Promotion extends Model<PromotionAttributes, PromotionCreationAttributes> implements PromotionAttributes {
+export class Promotion
+  extends Model<PromotionAttributes, PromotionCreationAttributes>
+  implements PromotionAttributes
+{
   public id!: string;
   public productId!: string;
   public code!: string;
@@ -25,6 +37,11 @@ export class Promotion extends Model<PromotionAttributes, PromotionCreationAttri
   public startDate!: Date;
   public endDate!: Date;
   public isActive!: boolean;
+  public type!: "DISCOUNT" | "FLASH_SALE" | "BUNDLE" | "CASHBACK";
+  public minPurchaseAmount!: number;
+  public maxDiscountAmount!: number;
+  public quota!: number;
+  public usageCount!: number;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -33,8 +50,8 @@ export class Promotion extends Model<PromotionAttributes, PromotionCreationAttri
   public static associate(models: any) {
     // Sebuah promosi berlaku untuk satu Product
     Promotion.belongsTo(models.Product, {
-      foreignKey: 'productId',
-      as: 'product',
+      foreignKey: "productId",
+      as: "product",
     });
   }
 }
@@ -52,11 +69,11 @@ export default function (sequelize: Sequelize): typeof Promotion {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'products',
-          key: 'id',
+          model: "products",
+          key: "id",
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       code: {
         type: DataTypes.STRING,
@@ -83,10 +100,30 @@ export default function (sequelize: Sequelize): typeof Promotion {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },
+      type: {
+        type: DataTypes.ENUM("DISCOUNT", "FLASH_SALE", "BUNDLE", "CASHBACK"),
+        defaultValue: "DISCOUNT",
+      },
+      minPurchaseAmount: {
+        type: DataTypes.DECIMAL(10, 2),
+        defaultValue: 0,
+      },
+      maxDiscountAmount: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: true,
+      },
+      quota: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      usageCount: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
     },
     {
       sequelize,
-      tableName: 'promotions',
+      tableName: "promotions",
       timestamps: true,
     }
   );
