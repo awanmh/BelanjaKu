@@ -1,0 +1,19 @@
+{
+       "name": "belanjaku-monorepo",
+       "private": true,
+       "version": "1.0.0",
+       "description": "Proyek E-commerce BelanjaKu",
+       "scripts": {
+              "dev": "pnpm --parallel --stream dev",
+              "build": "pnpm --filter \"./apps/*\" build"
+       },
+       "devDependencies": {
+              "@types/jest": "^30.0.0",
+              "@types/supertest": "^6.0.3",
+              "jest": "^30.2.0",
+              "sequelize-mock": "^0.10.2",
+              "supertest": "^7.1.4",
+              "ts-jest": "^29.4.5",
+              "turbo": "^1.10.16"
+       }
+}

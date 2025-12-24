@@ -1,0 +1,300 @@
+belanjaKu/
+├── 📂 apps/
+│   ├── 📂 frontend/        # Proyek Next.js
+│   │   ├── 📂 app/
+│   │   │   ├── 📂 (main)/      # Grup route utama dengan layout
+│   │   │   │   ├── 📂 products/
+│   │   │   │   │   └── 📂 [slug]/
+│   │   │   │   │       └── page.tsx      # Halaman Detail Produk Dinamis
+│   │   │   │   ├── 📂 cart/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   ├── 📂 checkout/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   ├── 📂 profile/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── layout.tsx            # Layout utama (Navbar, Footer)
+│   │   │   ├── page.tsx                  # Halaman Beranda (Homepage)
+│   │   │   └── layout.tsx                # Layout root
+│   │   ├── 📂 components/
+│   │   │   ├── 📂 ui/                    # Komponen UI generik (Button, Card, Input)
+│   │   │   ├── 📂 product/               # Komponen spesifik untuk Halaman Produk
+│   │   │   │   ├── TrustZone.tsx         # Rating, Terjual, Info Penjual
+│   │   │   │   ├── InfoZone.tsx          # Galeri gambar/video, Deskripsi
+│   │   │   │   ├── ActionZone.tsx        # Harga, Promo, Opsi Logistik, Add to Cart
+│   │   │   │   └── DiscoveryZone.tsx     # Rekomendasi produk
+│   │   │   └── 📂 layout/
+│   │   │       ├── Navbar.tsx
+│   │   │       └── Footer.tsx
+│   │   ├── 📂 lib/                       # Helpers, utils, koneksi API client
+│   │   ├── 📂 store/                     # State management (Zustand)
+│   │   ├── next.config.mjs
+│   │   ├── tailwind.config.ts
+│   │   └── tsconfig.json
+│   │
+│   └── 📂 backend/         # Proyek Node.js (Express/NestJS)
+│       ├── 📂 src/
+│       │   ├── 📂 api/                   # Router & Controllers (berdasarkan Class Diagram)
+│       │   │   ├── 📂 v1/
+│       │   │   │   ├── auth.routes.ts
+│       │   │   │   ├── user.routes.ts
+│       │   │   │   ├── product.routes.ts
+│       │   │   │   ├── order.routes.ts
+│       │   │   │   └── seller.routes.ts
+│       │   ├── 📂 config/                # Konfigurasi (database, env)
+│       │   ├── 📂 database/
+│       │   │   ├── 📂 models/            # Model (berdasarkan Class Diagram)
+│       │   │   │   ├── user.model.ts
+│       │   │   │   ├── product.model.ts
+│       │   │   │   ├── order.model.ts
+│       │   │   │   ├── review.model.ts
+│       │   │   │   └── ...
+│       │   │   ├── 📂 migrations/
+│       │   │   └── 📂 seeders/
+│       │   ├── 📂 middlewares/           # Middleware (auth JWT, error handling)
+│       │   ├── 📂 services/              # Logika bisnis
+│       │   ├── 📂 utils/                 # Fungsi helper
+│       │   └── server.ts                 # Entry point server
+│       ├── .env.example
+│       └── tsconfig.json
+│
+├── 📂 packages/
+│   └── 📂 ui/              # (Opsional) Komponen UI bersama
+│
+├── docker-compose.yml      # Konfigurasi Docker untuk Postgres & Redis
+├── .gitignore
+├── package.json            # Konfigurasi monorepo & script utama
+├── pnpm-workspace.yaml     # Mendefinisikan workspaces
+└── tsconfig.base.json      # Konfigurasi TypeScript dasar
+
+backend
+📂 backend/
+├── 📂 src/
+│   │
+│   ├── 📂 api/                   # Layer untuk routing, controller, dan validasi
+│   │   └── 📂 v1/
+│   │       ├── 📜 index.ts       # Menggabungkan semua router v1
+│   │       │
+│   │       ├── 📂 auth/
+│   │       │   ├── 📜 auth.controller.ts
+│   │       │   ├── 📜 auth.routes.ts
+│   │       │   └── 📜 auth.validator.ts
+│   │       │
+│   │       ├── 📂 categories/
+│   │       │   ├── 📜 category.controller.ts
+│   │       │   ├── 📜 category.routes.ts
+│   │       │   └── 📜 category.validator.ts
+│   │       │
+│   │       ├── 📂 orders/
+│   │       │   ├── 📜 order.controller.ts
+│   │       │   ├── 📜 order.routes.ts
+│   │       │   └── 📜 order.validator.ts
+│   │       │
+│   │       ├── 📂 payments/
+│   │       │   ├── 📜 payment.controller.ts
+│   │       │   ├── 📜 payment.routes.ts
+│   │       │   └── 📜 payment.validator.ts
+│   │       │
+│   │       ├── 📂 products/
+│   │       │   ├── 📜 product.controller.ts
+│   │       │   ├── 📜 product.routes.ts
+│   │       │   └── 📜 product.validator.ts
+│   │       │
+│   │       ├── 📂 promotions/
+│   │       │   ├── 📜 promotion.controller.ts
+│   │       │   ├── 📜 promotion.routes.ts
+│   │       │   └── 📜 promotion.validator.ts
+│   │       │
+│   │       ├── 📂 reviews/
+│   │       │   ├── 📜 review.controller.ts
+│   │       │   ├── 📜 review.routes.ts
+│   │       │   └── 📜 review.validator.ts
+│   │       │
+│   │       ├── 📂 sellers/
+│   │       │   ├── 📜 seller.controller.ts
+│   │       │   ├── 📜 seller.routes.ts
+│   │       │   └── 📜 seller.validator.ts
+│   │       │
+│   │       ├── 📂 shipping/
+│   │       │   ├── 📜 shipping.controller.ts
+│   │       │   ├── 📜 shipping.routes.ts
+│   │       │   └── 📜 shipping.validator.ts
+│   │       │
+│   │       └── 📂 users/
+│   │           ├── 📜 user.controller.ts
+│   │           ├── 📜 user.routes.ts
+│   │           └── 📜 user.validator.ts
+│   │
+│   ├── 📂 config/                # Konfigurasi aplikasi
+│   │   ├── 📜 database.config.js # Config JS (Kompatibilitas)
+│   │   ├── 📜 database.config.ts # Config TS
+│   │   └── 📜 env.config.ts      # Memuat variabel dari .env
+│   │
+│   ├── 📂 database/              # Semua yang berhubungan dengan database
+│   │   ├── 📂 migrations/        # File migrasi untuk mengubah skema DB
+│   │   │   ├── 📜 2025100601-create-users.js
+│   │   │   ├── 📜 2025100602-create-categories.js
+│   │   │   ├── 📜 2025100603-create-products.js
+│   │   │   ├── 📜 2025100604-create-sellers.js
+│   │   │   ├── 📜 2025100605-create-promotions.js
+│   │   │   ├── 📜 2025100606-create-orders.js
+│   │   │   ├── 📜 2025100607-create-order-items.js
+│   │   │   ├── 📜 2025100608-create-reviews.js
+│   │   │   ├── 📜 2025100609-create-shipping.js
+│   │   │   ├── 📜 2025100610-create-payments.js
+│   │   │   ├── 📜 20251029010000-add-deletedAt-to-products.js
+│   │   │   ├── 📜 20251029010001-add-deletedAt-to-users.js
+│   │   │   ├── 📜 2025120400-add-fulltext-search.js
+│   │   │   └── 📜 20251204130950-add-reset-password-to-users.js
+│   │   │
+│   │   ├── 📂 models/            # Definisi tabel dan relasi (Sequelize)
+│   │   │   ├── 📜 category.model.ts
+│   │   │   ├── 📜 index.ts       # Inisialisasi Sequelize dan asosiasi model
+│   │   │   ├── 📜 order.model.ts
+│   │   │   ├── 📜 orderItem.model.ts
+│   │   │   ├── 📜 payment.model.ts
+│   │   │   ├── 📜 product.model.ts
+│   │   │   ├── 📜 promotion.model.ts
+│   │   │   ├── 📜 review.model.ts
+│   │   │   ├── 📜 seller.model.ts
+│   │   │   ├── 📜 shippingOption.model.ts
+│   │   │   └── 📜 user.model.ts
+│   │   │
+│   │   └── 📂 seeders/           # File untuk mengisi data awal (seeding)
+│   │       └── 📜 2025100602-demo-products.js
+│   │
+│   ├── 📂 middlewares/           # Fungsi perantara untuk request
+│   │   ├── 📜 auth.middleware.ts
+│   │   ├── 📜 error.middleware.ts
+│   │   ├── 📜 rateLimit.middleware.ts
+│   │   ├── 📜 upload.middleware.ts
+│   │   └── 📜 validator.middleware.ts
+│   │
+│   ├── 📂 services/              # Tempat logika bisnis
+│   │   ├── 📂 __tests__/         # Unit & Integration Tests
+│   │   │   ├── 📜 auth.routes.test.ts
+│   │   │   ├── 📜 auth.service.test.ts
+│   │   │   ├── 📜 category.routes.test.ts
+│   │   │   ├── 📜 category.service.test.ts
+│   │   │   ├── 📜 order.routes.test.ts
+│   │   │   ├── 📜 order.service.test.ts
+│   │   │   ├── 📜 payment.service.test.ts
+│   │   │   ├── 📜 product.routes.test.ts
+│   │   │   ├── 📜 product.service.test.ts
+│   │   │   ├── 📜 promotion.service.test.ts
+│   │   │   ├── 📜 review.routes.test.ts
+│   │   │   ├── 📜 review.service.test.ts
+│   │   │   ├── 📜 seller.routes.test.ts
+│   │   │   ├── 📜 seller.service.test.ts
+│   │   │   ├── 📜 shipping.routes.test.ts
+│   │   │   ├── 📜 shipping.service.test.ts
+│   │   │   ├── 📜 test-image.png
+│   │   │   ├── 📜 user.routes.test.ts
+│   │   │   └── 📜 user.service.test.ts
+│   │   │
+│   │   ├── 📜 auth.service.ts
+│   │   ├── 📜 category.service.ts
+│   │   ├── 📜 order.service.ts
+│   │   ├── 📜 payment.service.ts
+│   │   ├── 📜 product.service.ts
+│   │   ├── 📜 promotion.service.ts
+│   │   ├── 📜 review.service.ts
+│   │   ├── 📜 seller.service.ts
+│   │   ├── 📜 shipping.service.ts
+│   │   └── 📜 user.service.ts
+│   │
+│   ├── 📂 utils/                 # Fungsi bantuan (helpers)
+│   │   ├── 📂 __tests__/         # Tests untuk Utils
+│   │   │   └── 📜 email.util.test.ts
+│   │   │
+│   │   ├── 📜 apiFeatures.util.ts
+│   │   ├── 📜 email.util.ts      # (Baru) Fitur kirim email
+│   │   ├── 📜 http-exception.util.ts
+│   │   ├── 📜 jwt.util.ts
+│   │   └── 📜 logger.util.ts
+│   │
+│   └── 📜 server.ts              # Entry point utama aplikasi
+│
+├── 📜 .env.example
+├── 📜 .gitignore
+├── 📜 .sequelizerc
+├── 📜 jest.config.js
+├── 📜 package.json
+└── 📜 tsconfig.json
+
+Frontend
+
+frontend/
+├── .env.local                  # Environment variables (misal: API URL, secret keys)
+├── .gitignore                  # File/folder yang diabaikan Git (node_modules, build, dll)
+├── next.config.mjs             # Konfigurasi Next.js (custom webpack, env, dll)
+├── package.json                # Dependencies & scripts
+├── postcss.config.js           # Konfigurasi PostCSS (plugin CSS)
+├── tailwind.config.ts          # Konfigurasi Tailwind (path, theme, plugin)
+├── tsconfig.json               # Konfigurasi TypeScript (path alias, strict mode)
+│
+├── public/                     # Aset statis (images, fonts, icons)
+│   ├── images/                 # Gambar umum (logo, banner)
+│   └── icons/                  # Ikon statis (SVG, PNG)
+│
+└── src/                        # DIREKTORI UTAMA APLIKASI
+    ├── app/                    # App Router (Pages & Layouts)
+    │   ├── (auth)/             # Route Group: Auth (Login/Register)
+    │   │   ├── layout.tsx      # Layout khusus Auth (misal: centered box)
+    │   │   ├── login/          # Halaman Login
+    │   │   │       └── page.tsx
+    │   │   └── register/        # Halaman Register
+    │   │           └── page.tsx
+    │   │
+    │   ├── (main)/             # Route Group: Main App (Navbar + Footer)
+    │   │   ├── layout.tsx      # Layout utama (Navbar & Footer)
+    │   │   ├── (home)/         # Homepage (Hero Banner, Produk)
+    │   │   │       └── page.tsx
+    │   │   ├── cart/           # Halaman Keranjang
+    │   │   │       └── page.tsx
+    │   │   ├── checkout/        # Halaman Checkout
+    │   │   │       └── page.tsx
+    │   │   ├── products/       # Produk
+    │   │   │   ├── page.tsx    # List semua produk
+    │   │   │   └── [slug]/     # Detail produk dinamis
+    │   │   │       ├── page.tsx
+    │   │   │       ├── loading.tsx
+    │   │   │       └── error.tsx
+    │   │   └── profile/         # Halaman Profil User
+    │   │           └── page.tsx
+    │   │
+    │   ├── globals.css         # CSS Global (Tailwind directives)
+    │   ├── layout.tsx          # Root Layout (HTML & Body tag)
+    │   ├── not-found.tsx       # Halaman 404 Custom
+    │   └── providers.tsx       # Context Providers (Auth, Theme, dll)
+    │
+    ├── components/             # Reusable UI Components
+    │   ├── common/             # Komponen umum (Modal, Alert, Loader)
+    │   ├── home/               # Komponen spesifik Home (HeroBanner, Section)
+    │   │   ├── AccessoriesShowcase.tsx
+    │   │   ├── CategorySection.tsx
+    │   │   ├── FlashSale.tsx
+    │   │   ├── HeroBanner.tsx
+    │   │   └── TopBrands.tsx 
+    │   ├── layout/             # Layout (Navbar, Footer)
+    │   │   ├── Navbar.tsx
+    │   │   └── Footer.tsx
+    │   ├── product/            # Komponen Produk (Card, Gallery, Detail)
+    │   └── ui/                 # UI Primitives (Button, Input, Card)
+    │       ├── Button.tsx
+    │       └── Input.tsx
+    │
+    ├── hooks/                  # Custom React Hooks
+    │   ├── useAuth.ts          # Hook untuk autentikasi
+    │   └── useCart.ts          # Hook untuk keranjang
+    │
+    ├── lib/                    # Utilities & Libraries
+    │   ├── api.ts              # Axios setup (baseURL, interceptors)
+    │   ├── constants.ts        # Konstanta global (API endpoints, dll)
+    │   ├── types.ts            # TypeScript types global
+    │   └── utils.ts            # Helper functions (cn, formatRupiah, dll)
+    │
+    ├── store/                  # State Management (Zustand)
+    │   ├── user.store.ts       # Store user
+    │   └── cart.store.ts       # Store keranjang
+    │
+    └── types/                  # Global Type Definitions (opsional)
