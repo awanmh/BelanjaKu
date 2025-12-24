@@ -123,6 +123,13 @@ Tugas kalian hanya fokus di dalam folder `apps/backend`. Jangan menyentuh folder
 - [ ] **Real-Time UI:** Implementasi `socket.io-client` di frontend untuk notifikasi real-time.
 - [ ] **Search UI:** Membuat UI pencarian yang memanfaatkan endpoint full-text search backend.
 
+#### 🛒 Shopping Cart (Keranjang)
+
+- [ ] **Database:** Membuat file migrasi untuk tabel `carts` dan `cart_items` (Relasi ke User & Products).
+- [ ] **API Endpoint:** Membuat CRUD untuk `api/v1/carts` (Add to cart, Update qty, Delete item).
+- [ ] **Logic:** Implementasi logika sinkronisasi stok produk saat dimasukkan ke keranjang (opsional: reservasi stok).
+- [ ] **CATATAN:** Sudah ada fitur cuman belum integrasi dengan frontend
+
 #### 💳 Payment Gateway Integration (Midtrans/Xendit)
 
 - [ ] **Integration:** Update `payment.service.ts` untuk request token pembayaran ke Payment Gateway (Mode Sandbox).
