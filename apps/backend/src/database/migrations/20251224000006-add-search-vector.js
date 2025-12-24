@@ -3,9 +3,8 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
+    // 1. Pastikan kolom search_vector ada, kalau belum tambahkan
     const tableInfo = await queryInterface.describeTable("products");
-
-    // 1. Add column search_vector (TSVECTOR) if not exists
     if (!tableInfo.search_vector) {
       await queryInterface.addColumn("products", "search_vector", {
         type: "TSVECTOR",
@@ -13,117 +12,59 @@ module.exports = {
       });
     }
 
-    // 2. Create GIN index for fast search (Check via try-catch or just create if column was missing, best is try-catch to be safe)
+    // 2. Buat index GIN untuk mempercepat pencarian
     try {
       await queryInterface.addIndex("products", ["search_vector"], {
         using: "GIN",
         name: "products_search_vector_idx",
       });
     } catch (e) {
-      // Ignore if index already exists
-      console.log("Index products_search_vector_idx might already exist, skipping.");
+      console.log("Index products_search_vector_idx mungkin sudah ada, dilewati.");
     }
 
-    // 3. Update existing data
+    // 3. Update data existing agar kolom search_vector terisi
     await queryInterface.sequelize.query(`
-      UPDATE "products" SET "search_vector" = to_tsvector('english', "name" || ' ' || "description");
+      UPDATE "products" 
+      SET "search_vector" = to_tsvector('english', "name" || ' ' || "description");
     `);
 
-    // 4. Create function (OR REPLACE makes it idempotent)
+    // 4. Buat function trigger (idempotent dengan OR REPLACE)
     await queryInterface.sequelize.query(`
       CREATE OR REPLACE FUNCTION products_search_vector_trigger() RETURNS trigger AS $$
       BEGIN
-        new.search_vector := to_tsvector('english', new.name || ' ' || new.description);
-        return new;
+        NEW.search_vector := to_tsvector('english', NEW.name || ' ' || NEW.description);
+        RETURN NEW;
       END
       $$ LANGUAGE plpgsql;
     `);
 
-    // 5. Create trigger (Drop first to ensure idempotency)
+    // 5. Buat trigger (hapus dulu kalau sudah ada)
     await queryInterface.sequelize.query(`
       DROP TRIGGER IF EXISTS tsvectorupdate ON "products";
     `);
 
     await queryInterface.sequelize.query(`
-      CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE
-      ON "products" FOR EACH ROW EXECUTE PROCEDURE products_search_vector_trigger();
+      CREATE TRIGGER tsvectorupdate 
+      BEFORE INSERT OR UPDATE ON "products"
+      FOR EACH ROW EXECUTE PROCEDURE products_search_vector_trigger();
     `);
   },
 
   async down(queryInterface, Sequelize) {
-    // Drop trigger
+    // Hapus trigger
     await queryInterface.sequelize.query(`
       DROP TRIGGER IF EXISTS tsvectorupdate ON "products";
     `);
 
-    // Drop function
+    // Hapus function
     await queryInterface.sequelize.query(`
       DROP FUNCTION IF EXISTS products_search_vector_trigger();
     `);
 
-    // Remove index
+    // Hapus index
     await queryInterface.removeIndex("products", "products_search_vector_idx");
 
-    // Remove column
-    await queryInterface.removeColumn("products", "search_vector");
-  },
-};
-
-"use strict";
-
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
-    // 1. Add column search_vector (TSVECTOR)
-    await queryInterface.addColumn("products", "search_vector", {
-      type: "TSVECTOR",
-      allowNull: true,
-    });
-
-    // 2. Create GIN index for fast search
-    await queryInterface.addIndex("products", ["search_vector"], {
-      using: "GIN",
-      name: "products_search_vector_idx",
-    });
-
-    // 3. Create a trigger to automatically update search_vector on INSERT/UPDATE
-    // Note: We search on 'name' and 'description'
-    await queryInterface.sequelize.query(`
-      UPDATE "products" SET "search_vector" = to_tsvector('english', "name" || ' ' || "description");
-    `);
-
-    // Create function to update trigger
-    await queryInterface.sequelize.query(`
-      CREATE FUNCTION products_search_vector_trigger() RETURNS trigger AS $$
-      BEGIN
-        new.search_vector := to_tsvector('english', new.name || ' ' || new.description);
-        return new;
-      END
-      $$ LANGUAGE plpgsql;
-    `);
-
-    // Create trigger
-    await queryInterface.sequelize.query(`
-      CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE
-      ON "products" FOR EACH ROW EXECUTE PROCEDURE products_search_vector_trigger();
-    `);
-  },
-
-  async down(queryInterface, Sequelize) {
-    // Drop trigger
-    await queryInterface.sequelize.query(`
-      DROP TRIGGER IF EXISTS tsvectorupdate ON "products";
-    `);
-
-    // Drop function
-    await queryInterface.sequelize.query(`
-      DROP FUNCTION IF EXISTS products_search_vector_trigger();
-    `);
-
-    // Remove index
-    await queryInterface.removeIndex("products", "products_search_vector_idx");
-
-    // Remove column
+    // Hapus kolom
     await queryInterface.removeColumn("products", "search_vector");
   },
 };
