@@ -1,8 +1,8 @@
 # 📋 Panduan Kontribusi Tim (SOP Git)
 
-Halo Tim\! Berikut adalah cara bekerja di repositori ini. Kita memisahkan pengerjaan Backend dan Frontend di branch yang berbeda agar lebih rapi dan aman.
+Halo Tim! Berikut adalah cara bekerja di repositori ini. Kita memisahkan pengerjaan Backend dan Frontend di branch yang berbeda agar lebih rapi dan aman.
 
-#### 1\. Persiapan Awal (Lakukan Sekali Saja)
+#### 1. Persiapan Awal (Lakukan Sekali Saja)
 
 1.  **Clone Repositori:**
     Buka terminal di folder tujuan Anda, lalu jalankan:
@@ -119,9 +119,16 @@ Tugas kalian hanya fokus di dalam folder `apps/backend`. Jangan menyentuh folder
 
 #### 🖥️ Frontend Integration (Next.js)
 
-- [ ] **Consume New APIs:** Integrasi endpoint baru (Product Discussions, Variants, Wishlist) ke UI.
+- [ ] **Consume New APIs:** Integrasi endpoint baru (Product Discussions, Variants, Wishlist, Cart) ke UI.
 - [ ] **Real-Time UI:** Implementasi `socket.io-client` di frontend untuk notifikasi real-time.
 - [ ] **Search UI:** Membuat UI pencarian yang memanfaatkan endpoint full-text search backend.
+
+#### 🛒 Shopping Cart (Keranjang)
+
+- [ ] **Database:** Membuat file migrasi untuk tabel `carts` dan `cart_items` (Relasi ke User & Products).
+- [ ] **API Endpoint:** Membuat CRUD untuk `api/v1/carts` (Add to cart, Update qty, Delete item).
+- [ ] **Logic:** Implementasi logika sinkronisasi stok produk saat dimasukkan ke keranjang (opsional: reservasi stok).
+- [ ] **CATATAN:** Sudah ada fitur cuman belum integrasi dengan frontend
 
 #### 💳 Payment Gateway Integration (Midtrans/Xendit)
 
