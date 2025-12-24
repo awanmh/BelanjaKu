@@ -1,7 +1,6 @@
-import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
-// 1. IMPORT Interface dari model relasi
-import { ProductAttributes } from './product.model';
-import { CartAttributes } from './cart.model';
+import { DataTypes, Model, Optional, Sequelize } from "sequelize";
+import { ProductAttributes } from "./product.model";
+import { CartAttributes } from "./cart.model";
 
 export interface CartItemAttributes {
   id: string;
@@ -13,9 +12,12 @@ export interface CartItemAttributes {
   deletedAt?: Date | null;
 }
 
-interface CartItemCreationAttributes extends Optional<CartItemAttributes, 'id'> {}
+interface CartItemCreationAttributes extends Optional<CartItemAttributes, "id"> {}
 
-export class CartItem extends Model<CartItemAttributes, CartItemCreationAttributes> implements CartItemAttributes {
+export class CartItem
+  extends Model<CartItemAttributes, CartItemCreationAttributes>
+  implements CartItemAttributes
+{
   public id!: string;
   public cartId!: string;
   public productId!: string;
@@ -25,16 +27,13 @@ export class CartItem extends Model<CartItemAttributes, CartItemCreationAttribut
   public readonly updatedAt!: Date;
   public readonly deletedAt!: Date | null;
 
-  // -------------------------------------------------------------------------
-  // 2. TAMBAHKAN DEFINISI PROPERTI ASOSIASI DI SINI
-  // Agar TypeScript mengenali item.cart dan item.product
-  // -------------------------------------------------------------------------
-  public readonly cart?: CartAttributes;       // Dipopulate saat include Cart
-  public readonly product?: ProductAttributes; // Dipopulate saat include Product
+  // Relasi untuk TypeScript agar bisa diakses saat include
+  public readonly cart?: CartAttributes;
+  public readonly product?: ProductAttributes;
 
   public static associate(models: any) {
-    CartItem.belongsTo(models.Cart, { foreignKey: 'cartId', as: 'cart' });
-    CartItem.belongsTo(models.Product, { foreignKey: 'productId', as: 'product' });
+    CartItem.belongsTo(models.Cart, { foreignKey: "cartId", as: "cart" });
+    CartItem.belongsTo(models.Product, { foreignKey: "productId", as: "product" });
   }
 }
 
@@ -50,16 +49,16 @@ export default function (sequelize: Sequelize): typeof CartItem {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'carts',
-          key: 'id',
+          model: "carts",
+          key: "id",
         },
       },
       productId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'products',
-          key: 'id',
+          model: "products",
+          key: "id",
         },
       },
       quantity: {
@@ -73,9 +72,9 @@ export default function (sequelize: Sequelize): typeof CartItem {
     },
     {
       sequelize,
-      tableName: 'cart_items',
+      tableName: "cart_items",
       timestamps: true,
-      paranoid: true,
+      paranoid: true, // soft delete
     }
   );
 
