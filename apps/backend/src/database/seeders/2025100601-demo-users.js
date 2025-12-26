@@ -40,21 +40,52 @@ module.exports = {
       },
     ];
 
-    await queryInterface.bulkInsert("users", users, {});
+    for (const user of users) {
+      const existingUser = await queryInterface.rawSelect(
+        "users",
+        {
+          where: { email: user.email },
+        },
+        ["id"]
+      );
+
+      if (!existingUser) {
+        await queryInterface.bulkInsert("users", [user]);
+      }
+    }
 
     // Create Seller Profile for the seller user
-    const sellerUser = users.find((u) => u.email === "seller@belanjaku.com");
-    await queryInterface.bulkInsert("sellers", [
+    const sellerUser = await queryInterface.rawSelect(
+      "users",
       {
-        id: uuidv4(),
-        userId: sellerUser.id,
-        storeName: "Toko Serba Ada",
-        storeAddress: "Jl. Teknologi No. 1, Jakarta",
-        storePhoneNumber: "081234567890",
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        where: { email: "seller@belanjaku.com" },
       },
-    ]);
+      ["id"]
+    );
+
+    if (sellerUser) {
+      const existingSeller = await queryInterface.rawSelect(
+        "sellers",
+        {
+          where: { userId: sellerUser },
+        },
+        ["id"]
+      );
+
+      if (!existingSeller) {
+        await queryInterface.bulkInsert("sellers", [
+          {
+            id: uuidv4(),
+            userId: sellerUser,
+            storeName: "Toko Serba Ada",
+            storeAddress: "Jl. Teknologi No. 1, Jakarta",
+            storePhoneNumber: "081234567890",
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          },
+        ]);
+      }
+    }
   },
 
   async down(queryInterface, Sequelize) {

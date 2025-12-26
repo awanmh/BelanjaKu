@@ -15,7 +15,7 @@ export interface UserAddressAttributes {
   deletedAt?: Date | null;
 }
 
-interface UserAddressCreationAttributes extends Optional<UserAddressAttributes, 'id'> {}
+interface UserAddressCreationAttributes extends Optional<UserAddressAttributes, 'id' | 'isPrimary'> { }
 
 export class UserAddress extends Model<UserAddressAttributes, UserAddressCreationAttributes> implements UserAddressAttributes {
   public id!: string;
