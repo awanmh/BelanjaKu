@@ -3,19 +3,13 @@ import { StatusCodes } from 'http-status-codes';
 import UserService, { UpdateUserInput } from '../../../services/user.service';
 import { AuthenticatedRequest } from '../../../middlewares/auth.middleware';
 
-/**
- * Controller untuk menangani semua request yang berhubungan dengan manajemen pengguna oleh admin.
- */
 class UserController {
   /**
-   * Menangani permintaan untuk mendapatkan semua pengguna.
+   * GET All Active Users
    */
   public async getAllUsers(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      // FIX: Teruskan req.query ke service. 
-      // Ini adalah perbaikan utama untuk mengatasi error TS2554.
       const users = await UserService.getAllUsers(req.query);
-      
       res.status(StatusCodes.OK).json({
         success: true,
         message: 'Users retrieved successfully',
@@ -27,7 +21,7 @@ class UserController {
   }
 
   /**
-   * Menangani permintaan untuk mendapatkan satu pengguna berdasarkan ID.
+   * GET Single User by ID
    */
   public async getUserById(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
@@ -44,7 +38,7 @@ class UserController {
   }
 
   /**
-   * Menangani permintaan untuk memperbarui data pengguna.
+   * PUT Update User
    */
   public async updateUser(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
@@ -63,7 +57,7 @@ class UserController {
   }
 
   /**
-   * Menangani permintaan untuk menghapus (soft delete) pengguna.
+   * DELETE User (Soft Delete)
    */
   public async deleteUser(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
@@ -79,11 +73,10 @@ class UserController {
   }
 
   /**
-   * [BARU] Menangani permintaan untuk mendapatkan semua pengguna yang diarsipkan.
+   * GET All Archived Users
    */
   public async getArchivedUsers(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      // Teruskan req.query juga di sini untuk konsistensi paginasi
       const users = await UserService.getArchivedUsers(req.query);
       res.status(StatusCodes.OK).json({
         success: true,
@@ -96,7 +89,7 @@ class UserController {
   }
 
   /**
-   * [BARU] Menangani permintaan untuk memulihkan pengguna yang diarsipkan.
+   * POST Restore User
    */
   public async restoreUser(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
@@ -113,5 +106,4 @@ class UserController {
   }
 }
 
-// Ekspor sebagai singleton instance
 export default new UserController();

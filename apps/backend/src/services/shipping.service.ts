@@ -52,7 +52,7 @@ class ShippingOptionService {
     const options = await ShippingOption.findAll({
       order: [["price", "ASC"]],
     });
-    return options.map((option) => option.toJSON());
+    return options.map((option: any) => option.toJSON());
   }
 
   /**

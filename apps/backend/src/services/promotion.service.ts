@@ -76,7 +76,7 @@ class PromotionService {
     }
 
     const promotions = await Promotion.findAll(options);
-    return promotions.map((promo) => promo.toJSON());
+    return promotions.map((promo: any) => promo.toJSON());
   }
 
   /**

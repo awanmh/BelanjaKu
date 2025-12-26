@@ -67,9 +67,12 @@ export default function (sequelize: Sequelize): typeof Seller {
         allowNull: true,
       },
       storePhoneNumber: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
+  type: DataTypes.STRING,
+  validate: {
+    isNumeric: true, // Ini akan menolak tanda strip (-)
+    len: [10, 15]    // Ini akan menolak jika terlalu pendek
+  }
+},
     },
     {
       sequelize,

@@ -1,18 +1,18 @@
 import { StatusCodes } from 'http-status-codes';
-import db from '../database/models';
+import { ParsedQs } from 'qs';
+import { Op } from 'sequelize';
+import db from '../database/models'; // Sesuaikan path jika berbeda
 import { UserAttributes } from '../database/models/user.model';
 import HttpException from '../utils/http-exception.util';
 import APIFeatures from '../utils/apiFeatures.util';
-import { ParsedQs } from 'qs';
-import { Op } from 'sequelize';
 
-// Mengambil model User dari objek db yang sudah diinisialisasi
+// Inisialisasi Model User
 const User = db.User as (new () => InstanceType<typeof db.User>) & typeof db.User;
 
-// Tipe data untuk input pembaruan data pengguna oleh admin
+// Tipe untuk input update
 export type UpdateUserInput = Partial<Pick<UserAttributes, 'fullName' | 'role' | 'isVerified'>>;
 
-// Tipe data baru untuk respons paginasi
+// Interface untuk hasil paginasi
 export interface PaginatedUserResult {
   rows: Omit<UserAttributes, 'password'>[];
   pagination: {
@@ -23,36 +23,30 @@ export interface PaginatedUserResult {
   };
 }
 
-/**
- * Service untuk menangani semua logika bisnis yang terkait dengan manajemen pengguna oleh admin.
- */
 class UserService {
   /**
-   * Mengambil daftar semua pengguna dengan fitur query (filter, sort, pagination).
+   * Mengambil daftar semua pengguna aktif (belum dihapus).
    */
   public async getAllUsers(queryString: ParsedQs): Promise<PaginatedUserResult> {
-    // 1. Buat query dasar
     const features = new APIFeatures(queryString)
       .filter()
       .sort()
-      .limitFields(); // Hentikan chain sebelum .paginate()
+      .limitFields();
 
-    // 2. Dapatkan nilai limit dan offset secara terpisah
     const { limit, offset } = features.paginate();
     const page = Math.floor(offset / limit) + 1;
 
-    // 3. Gunakan findAndCountAll untuk mendapatkan data DAN total hitungan
+    // Default behavior Sequelize: paranoid=true (hanya ambil yang deletedAt = null)
     const { rows, count } = await User.findAndCountAll({
-      ...features.queryOptions, // Terapkan filter, sort, attributes
+      ...features.queryOptions,
       limit,
       offset,
     });
 
     const totalPages = Math.ceil(count / limit);
 
-    // 4. Kembalikan data dengan format paginasi baru
     return {
-      rows: rows.map((user) => user.toJSON()),
+      rows: rows.map((user: any) => user.toJSON()),
       pagination: {
         totalItems: count,
         totalPages,
@@ -63,7 +57,7 @@ class UserService {
   }
 
   /**
-   * Mengambil satu pengguna berdasarkan ID (tanpa password).
+   * Mengambil detail satu pengguna berdasarkan ID.
    */
   public async getUserById(userId: string): Promise<Omit<UserAttributes, 'password'>> {
     const user = await User.findByPk(userId);
@@ -74,20 +68,23 @@ class UserService {
   }
 
   /**
-   * Memperbarui data pengguna berdasarkan ID.
+   * Memperbarui data pengguna.
    */
   public async updateUser(userId: string, userData: UpdateUserInput): Promise<Omit<UserAttributes, 'password'>> {
     const user = await User.findByPk(userId);
     if (!user) {
       throw new HttpException(StatusCodes.NOT_FOUND, 'User not found');
     }
+
     await user.update(userData);
-    const updatedUser = await this.getUserById(userId);
-    return updatedUser;
+    
+    // Refresh data untuk memastikan return value terbaru
+    const updatedUser = await user.reload();
+    return updatedUser.toJSON();
   }
 
   /**
-   * Menghapus (soft delete) pengguna berdasarkan ID.
+   * Soft delete pengguna (mengisi kolom deletedAt).
    */
   public async deleteUser(userId: string): Promise<void> {
     const user = await User.findByPk(userId);
@@ -98,7 +95,7 @@ class UserService {
   }
 
   /**
-   * [DIPERBARUI] Mengambil daftar semua pengguna yang diarsipkan.
+   * Mengambil daftar pengguna yang diarsipkan (Soft Deleted).
    */
   public async getArchivedUsers(queryString: ParsedQs): Promise<PaginatedUserResult> {
     const features = new APIFeatures(queryString)
@@ -109,24 +106,24 @@ class UserService {
     const { limit, offset } = features.paginate();
     const page = Math.floor(offset / limit) + 1;
 
+    // Filter khusus: deletedAt TIDAK null
     const whereClause = {
       ...features.queryOptions.where,
       deletedAt: { [Op.ne]: null },
     };
 
-    // Gunakan findAndCountAll di sini juga
     const { rows, count } = await User.findAndCountAll({
       ...features.queryOptions,
       where: whereClause,
       limit,
       offset,
-      paranoid: false,
+      paranoid: false, // Penting: izinkan membaca baris yang sudah dihapus
     });
 
     const totalPages = Math.ceil(count / limit);
 
     return {
-      rows: rows.map((user) => user.toJSON()),
+      rows: rows.map((user: any) => user.toJSON()),
       pagination: {
         totalItems: count,
         totalPages,
@@ -137,20 +134,23 @@ class UserService {
   }
 
   /**
-   * [DIPERBARUI] Memulihkan pengguna yang diarsipkan.
+   * Memulihkan pengguna yang sudah dihapus (Restore).
    */
   public async restoreUser(userId: string): Promise<Omit<UserAttributes, 'password'>> {
+    // Cari user termasuk yang sudah dihapus
     const user = await User.findByPk(userId, { paranoid: false });
+
     if (!user) {
       throw new HttpException(StatusCodes.NOT_FOUND, 'Archived user not found');
     }
+
     if (user.deletedAt === null) {
-      throw new HttpException(StatusCodes.BAD_REQUEST, 'User is not archived');
+      throw new HttpException(StatusCodes.BAD_REQUEST, 'User is currently active (not archived)');
     }
+
     await user.restore();
     return user.toJSON();
   }
 }
 
-// Ekspor sebagai singleton instance
 export default new UserService();
