@@ -1812,6 +1812,7 @@
 2025-12-24 23:04:16:416 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
 2025-12-24 23:04:17:417 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
 2025-12-24 23:04:19:419 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+<<<<<<< HEAD
 2025-12-26 18:45:42:4542 [31merror[39m: [31mUnable to connect to the database: password authentication failed for user "postgres"[39m
 2025-12-26 18:45:54:4554 [31merror[39m: [31mUnable to connect to the database: password authentication failed for user "postgres"[39m
 2025-12-26 18:51:59:5159 [31merror[39m: [31mUnable to connect to the database: password authentication failed for user "postgres"[39m
@@ -1953,3 +1954,80 @@
 2025-12-26 21:08:13:813 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
 2025-12-26 21:10:04:104 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
 2025-12-26 21:10:37:1037 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+=======
+2025-12-24 23:12:25:1225 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-24 23:12:25:1225 error: [PUT] /api/v1/products/616543f4-827c-476c-9635-ca04e3e97ed9 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:12:28:1228 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-12-24 23:12:28:1228 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-12-24 23:12:30:1230 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-12-24 23:12:30:1230 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:12:30:1230 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:12:30:1230 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:12:30:1230 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:12:30:1230 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:12:30:1230 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:12:32:1232 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:12:34:1234 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:12:56:1256 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-12-24 23:17:08:178 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-24 23:17:08:178 error: [PUT] /api/v1/products/ef509fab-b464-4a8f-b48e-6f2560d3016c >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:17:54:1754 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-12-24 23:19:06:196 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-12-24 23:19:10:1910 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-24 23:19:10:1910 error: [PUT] /api/v1/products/undefined >> StatusCode:: 500, Message:: invalid input syntax for type uuid: "undefined"
+2025-12-24 23:19:10:1910 error: [PUT] /api/v1/products/undefined >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:19:51:1951 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-24 23:19:51:1951 error: [PUT] /api/v1/products/undefined >> StatusCode:: 500, Message:: invalid input syntax for type uuid: "undefined"
+2025-12-24 23:19:52:1952 error: [PUT] /api/v1/products/undefined >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:20:46:2046 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-24 23:20:46:2046 error: [PUT] /api/v1/products/undefined >> StatusCode:: 500, Message:: invalid input syntax for type uuid: "undefined"
+2025-12-24 23:20:46:2046 error: [PUT] /api/v1/products/undefined >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:20:47:2047 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-12-24 23:20:50:2050 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-12-24 23:20:50:2050 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-12-24 23:20:51:2051 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:20:52:2052 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-12-24 23:20:52:2052 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:20:52:2052 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:20:52:2052 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:20:52:2052 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:20:52:2052 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:20:52:2052 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:20:55:2055 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:23:49:2349 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-24 23:23:49:2349 error: [PUT] /api/v1/products/undefined >> StatusCode:: 500, Message:: invalid input syntax for type uuid: "undefined"
+2025-12-24 23:23:49:2349 error: [PUT] /api/v1/products/undefined >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:24:29:2429 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-24 23:24:29:2429 error: [PUT] /api/v1/products/undefined >> StatusCode:: 500, Message:: invalid input syntax for type uuid: "undefined"
+2025-12-24 23:24:29:2429 error: [PUT] /api/v1/products/undefined >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:26:06:266 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-24 23:26:06:266 error: [PUT] /api/v1/products/9fc26ab7-fb27-495a-bb71-bb8439fedd8a >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:27:56:2756 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-24 23:27:57:2757 error: [PUT] /api/v1/products/3e653d37-1346-415a-9402-4e19ff94bd54 >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:27:58:2758 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-12-24 23:27:58:2758 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:27:58:2758 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:27:58:2758 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:27:58:2758 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:27:58:2758 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:27:58:2758 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:28:00:280 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-12-24 23:28:00:280 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-12-24 23:28:02:282 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:28:07:287 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:28:08:288 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-12-24 23:52:42:5242 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-24 23:52:42:5242 error: [PUT] /api/v1/products/1bf9860a-3c3c-472e-a18e-2bf68412835c >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:52:45:5245 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:52:46:5246 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:52:48:5248 error: [POST] /api/v1/orders >> StatusCode:: 400, Message:: Invalid or expired promotion code
+2025-12-24 23:52:50:5250 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-12-24 23:52:50:5250 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:52:50:5250 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:52:50:5250 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:52:50:5250 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:52:50:5250 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:52:50:5250 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:52:52:5252 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-12-24 23:52:52:5252 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+>>>>>>> ee7c76a8b1429ebb52a4e865849ffc2d1f1e036f

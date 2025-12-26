@@ -9,7 +9,11 @@ import sellerRouter from "./sellers/seller.routes";
 import paymentRouter from "./payments/payment.routes";
 import shippingRouter from "./shipping/shipping.routes";
 import promotionRouter from "./promotions/promotion.routes";
+<<<<<<< HEAD
 import CartRoute from "./carts/cart.routes";
+=======
+import cartRoutes from "./cart/cart.routes";
+>>>>>>> ee7c76a8b1429ebb52a4e865849ffc2d1f1e036f
 import wishlistRouter from "./wishlists/wishlist.routes";
 import notificationRouter from "./notifications/notification.routes";
 import productDiscussionRouter from "./product-discussions/productDiscussion.routes";
@@ -27,7 +31,11 @@ v1Router.use("/sellers", sellerRouter);
 v1Router.use("/payments", paymentRouter);
 v1Router.use("/shipping", shippingRouter);
 v1Router.use("/promotions", promotionRouter);
+<<<<<<< HEAD
 v1Router.use("/carts", CartRoute);
+=======
+v1Router.use("/cart", cartRoutes);
+>>>>>>> ee7c76a8b1429ebb52a4e865849ffc2d1f1e036f
 v1Router.use("/wishlists", wishlistRouter);
 v1Router.use("/notifications", notificationRouter);
 v1Router.use("/discussions", productDiscussionRouter);
