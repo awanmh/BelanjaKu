@@ -49,7 +49,7 @@ class APIFeatures {
   public filter(): this {
     const queryObj = { ...this.queryString };
     // Tambahkan 'search' ke excludedFields agar tidak dianggap filter kolom biasa
-    const excludedFields = ['page', 'sort', 'limit', 'fields', 'search'];
+    const excludedFields = ['page', 'sort', 'limit', 'offset', 'fields', 'search'];
     excludedFields.forEach((el) => delete (queryObj as any)[el]);
 
     let queryStr = JSON.stringify(queryObj);

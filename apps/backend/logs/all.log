@@ -2574,3 +2574,625 @@
 2025-12-10 22:47:40:4740 warn: Login attempt failed for user: test@example.com. Incorrect password.
 2025-12-11 16:07:56:756 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
 2025-12-11 16:07:56:756 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-12-24 22:56:27:5627 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-12-24 22:56:27:5627 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-12-24 22:56:35:5635 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 22:56:37:5637 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 22:56:38:5638 error: [POST] /api/v1/products >> StatusCode:: 500, Message:: ProductVariant is not associated to Product!
+2025-12-24 22:56:38:5638 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-24 22:56:38:5638 error: [PUT] /api/v1/products/undefined >> StatusCode:: 500, Message:: invalid input syntax for type uuid: "undefined"
+2025-12-24 22:56:38:5638 error: [PUT] /api/v1/products/undefined >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 22:56:40:5640 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-12-24 22:56:40:5640 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-12-24 22:56:40:5640 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 22:56:40:5640 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 22:56:40:5640 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 22:56:40:5640 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 22:56:40:5640 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 22:56:40:5640 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 22:56:40:5640 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 22:56:40:5640 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 22:56:40:5640 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 22:56:40:5640 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 22:56:40:5640 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 22:56:44:5644 warn: Login attempt failed for email: test@example.com. User not found.
+2025-12-24 22:56:44:5644 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-12-24 22:59:28:5928 error: [POST] /api/v1/products >> StatusCode:: 500, Message:: ProductVariant is not associated to Product!
+2025-12-24 22:59:28:5928 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-24 22:59:28:5928 error: [PUT] /api/v1/products/undefined >> StatusCode:: 500, Message:: invalid input syntax for type uuid: "undefined"
+2025-12-24 22:59:29:5929 error: [PUT] /api/v1/products/undefined >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 22:59:30:5930 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-12-24 22:59:30:5930 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-12-24 22:59:33:5933 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-12-24 22:59:33:5933 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-12-24 22:59:33:5933 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 22:59:33:5933 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 22:59:33:5933 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 22:59:33:5933 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 22:59:33:5933 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 22:59:33:5933 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 22:59:33:5933 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 22:59:33:5933 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 22:59:33:5933 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 22:59:33:5933 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 22:59:33:5933 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 22:59:36:5936 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 22:59:37:5937 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 22:59:39:5939 warn: Login attempt failed for email: test@example.com. User not found.
+2025-12-24 22:59:39:5939 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-12-24 23:00:07:07 error: [POST] /api/v1/products >> StatusCode:: 500, Message:: ProductVariant is not associated to Product!
+2025-12-24 23:00:07:07 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-24 23:00:07:07 error: [PUT] /api/v1/products/undefined >> StatusCode:: 500, Message:: invalid input syntax for type uuid: "undefined"
+2025-12-24 23:00:08:08 error: [PUT] /api/v1/products/undefined >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:00:09:09 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-12-24 23:00:09:09 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-12-24 23:00:09:09 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:00:09:09 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:00:09:09 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:00:09:09 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:00:09:09 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:00:09:09 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:00:09:09 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:00:09:09 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:00:09:09 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:00:09:09 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:00:09:09 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:00:11:011 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-12-24 23:00:11:011 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-12-24 23:00:12:012 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:00:14:014 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:00:19:019 warn: Login attempt failed for email: test@example.com. User not found.
+2025-12-24 23:00:19:019 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-12-24 23:01:29:129 error: [POST] /api/v1/products >> StatusCode:: 500, Message:: ProductVariant is not associated to Product!
+2025-12-24 23:01:29:129 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-24 23:01:29:129 error: [PUT] /api/v1/products/undefined >> StatusCode:: 500, Message:: invalid input syntax for type uuid: "undefined"
+2025-12-24 23:01:29:129 error: [PUT] /api/v1/products/undefined >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:01:34:134 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-12-24 23:01:34:134 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-12-24 23:01:34:134 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:01:34:134 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:01:34:134 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:01:34:134 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:01:34:134 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:01:34:134 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:01:34:134 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:01:34:134 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:01:34:134 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:01:34:134 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:01:34:134 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:01:37:137 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:01:38:138 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-12-24 23:01:38:138 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-12-24 23:01:40:140 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:01:43:143 warn: Login attempt failed for email: test@example.com. User not found.
+2025-12-24 23:01:43:143 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-12-24 23:02:16:216 error: [POST] /api/v1/products >> StatusCode:: 500, Message:: ProductVariant is not associated to Product!
+2025-12-24 23:02:16:216 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-24 23:02:17:217 error: [PUT] /api/v1/products/undefined >> StatusCode:: 500, Message:: invalid input syntax for type uuid: "undefined"
+2025-12-24 23:02:17:217 error: [PUT] /api/v1/products/undefined >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:02:18:218 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-12-24 23:02:18:218 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-12-24 23:02:19:219 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-12-24 23:02:20:220 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-12-24 23:02:20:220 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:02:20:220 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:02:20:220 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:02:20:220 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:02:20:220 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:02:20:220 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:02:20:220 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:02:20:220 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:02:20:220 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:02:20:220 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:02:20:220 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:02:21:221 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:02:22:222 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:02:29:229 warn: Login attempt failed for email: test@example.com. User not found.
+2025-12-24 23:02:29:229 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-12-24 23:03:03:33 error: [POST] /api/v1/products >> StatusCode:: 500, Message:: ProductVariant is not associated to Product!
+2025-12-24 23:03:03:33 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-24 23:03:03:33 error: [PUT] /api/v1/products/undefined >> StatusCode:: 500, Message:: invalid input syntax for type uuid: "undefined"
+2025-12-24 23:03:03:33 error: [PUT] /api/v1/products/undefined >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:03:04:34 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-12-24 23:03:04:34 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-12-24 23:03:04:34 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:03:04:34 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:03:04:34 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:03:04:34 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:03:04:34 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:03:04:34 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:03:04:34 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:03:04:34 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:03:04:34 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:03:04:34 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:03:04:34 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:03:07:37 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-12-24 23:03:07:37 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-12-24 23:03:08:38 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:03:11:311 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:03:13:313 warn: Login attempt failed for email: test@example.com. User not found.
+2025-12-24 23:03:13:313 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-12-24 23:04:13:413 error: [POST] /api/v1/products >> StatusCode:: 500, Message:: ProductVariant is not associated to Product!
+2025-12-24 23:04:13:413 error: [POST] /api/v1/products >> StatusCode:: 401, Message:: Not authorized, no token provided
+2025-12-24 23:04:13:413 error: [PUT] /api/v1/products/undefined >> StatusCode:: 500, Message:: invalid input syntax for type uuid: "undefined"
+2025-12-24 23:04:13:413 error: [PUT] /api/v1/products/undefined >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:04:15:415 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
+2025-12-24 23:04:15:415 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
+2025-12-24 23:04:16:416 error: [POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already exists
+2025-12-24 23:04:16:416 warn: Login attempt failed for user: integration@test.com. Incorrect password.
+2025-12-24 23:04:16:416 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:04:16:416 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:04:16:416 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:04:16:416 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:04:16:416 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:04:16:416 warn: Login attempt failed for email: rate@limit.com. User not found.
+2025-12-24 23:04:16:416 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:04:16:416 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:04:16:416 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:04:16:416 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:04:16:416 error: [POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+2025-12-24 23:04:17:417 error: [POST] /api/v1/shipping >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:04:19:419 error: [POST] /api/v1/categories >> StatusCode:: 403, Message:: User role 'user' is not authorized to access this route
+2025-12-24 23:04:25:425 warn: Login attempt failed for email: test@example.com. User not found.
+2025-12-24 23:04:25:425 warn: Login attempt failed for user: test@example.com. Incorrect password.
+2025-12-26 18:45:42:4542 [31merror[39m: [31mUnable to connect to the database: password authentication failed for user "postgres"[39m
+2025-12-26 18:45:54:4554 [31merror[39m: [31mUnable to connect to the database: password authentication failed for user "postgres"[39m
+2025-12-26 18:51:59:5159 [31merror[39m: [31mUnable to connect to the database: password authentication failed for user "postgres"[39m
+2025-12-26 18:54:33:5433 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-12-26 18:54:33:5433 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-12-26 18:54:33:5433 [32minfo[39m: [32mSocket.io is ready[39m
+2025-12-26 18:57:08:578 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 18:57:08:578 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:08 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:08:578 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 18:57:08:578 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:08 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:08:578 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 18:57:08:578 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:08 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:23:5723 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 18:57:23:5723 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:23 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:25:5725 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 18:57:25:5725 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:25 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:25:5725 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 18:57:25:5725 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:25 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:28:5728 [31merror[39m: [31m[GET] /api/v1/products/m2 >> StatusCode:: 500, Message:: relation "product_images" does not exist[39m
+2025-12-26 18:57:28:5728 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:28 +0000] "GET /api/v1/products/m2 HTTP/1.1" 500 90 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:31:5731 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 18:57:31:5731 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:31 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:31:5731 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 18:57:31:5731 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:31 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:34:5734 [31merror[39m: [31m[GET] /api/v1/products/m1 >> StatusCode:: 500, Message:: relation "product_images" does not exist[39m
+2025-12-26 18:57:34:5734 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:34 +0000] "GET /api/v1/products/m1 HTTP/1.1" 500 90 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:37:5737 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 18:57:37:5737 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:37 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:37:5737 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 18:57:37:5737 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:37 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:41:5741 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 18:57:41:5741 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:41 +0000] "GET /api/v1/products?limit=20&category=wanita HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:45:5745 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.category does not exist[39m
+2025-12-26 18:57:45:5745 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:45 +0000] "GET /api/v1/products?limit=20&category=pria HTTP/1.1" 500 86 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:46:5746 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.category does not exist[39m
+2025-12-26 18:57:46:5746 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:46 +0000] "GET /api/v1/products?limit=20&category=anak HTTP/1.1" 500 86 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:49:5749 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 18:57:49:5749 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:49 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:49:5749 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.category does not exist[39m
+2025-12-26 18:57:49:5749 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:49 +0000] "GET /api/v1/products?limit=20&category=anak HTTP/1.1" 500 86 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:50:5750 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.category does not exist[39m
+2025-12-26 18:57:50:5750 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:50 +0000] "GET /api/v1/products?limit=20&category=anak HTTP/1.1" 500 86 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:53:5753 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 18:57:53:5753 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:53 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:53:5753 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 18:57:53:5753 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:53 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:57:57:5757 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 18:57:57:5757 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:57:57 +0000] "GET /api/v1/products?limit=20 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:58:00:580 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 18:58:00:580 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:58:00 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:58:00:580 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 18:58:00:580 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:58:00 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:58:08:588 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 18:58:08:588 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:58:08 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:58:08:588 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 18:58:08:588 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:58:08 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:58:08:588 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 18:58:08:588 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:58:08 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:58:24:5824 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.category does not exist[39m
+2025-12-26 18:58:24:5824 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:58:24 +0000] "GET /api/v1/products?limit=20&category=wanita HTTP/1.1" 500 86 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:58:29:5829 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 18:58:29:5829 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:58:29 +0000] "GET /api/v1/products?limit=20&category=wanita HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:58:31:5831 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 18:58:31:5831 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:58:31 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:58:31:5831 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 18:58:31:5831 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:58:31 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:58:36:5836 [31merror[39m: [31m[GET] /api/v1/products/m2 >> StatusCode:: 500, Message:: relation "product_images" does not exist[39m
+2025-12-26 18:58:36:5836 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:58:36 +0000] "GET /api/v1/products/m2 HTTP/1.1" 500 90 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:58:38:5838 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 18:58:38:5838 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:58:38 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:58:38:5838 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 18:58:38:5838 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:58:38 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:59:04:594 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 18:59:04:594 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:59:04 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:59:07:597 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 18:59:07:597 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:59:07 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:59:07:597 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 18:59:07:597 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:59:07 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:59:16:5916 [31merror[39m: [31m[GET] /api/v1/products/m2 >> StatusCode:: 500, Message:: relation "product_images" does not exist[39m
+2025-12-26 18:59:16:5916 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:59:16 +0000] "GET /api/v1/products/m2 HTTP/1.1" 500 90 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:59:17:5917 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 18:59:17:5917 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:59:17 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:59:17:5917 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 18:59:17:5917 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:59:17 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:59:22:5922 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.category does not exist[39m
+2025-12-26 18:59:22:5922 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:59:22 +0000] "GET /api/v1/products?limit=20&category=wanita HTTP/1.1" 500 86 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:59:24:5924 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 18:59:24:5924 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:59:24 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:59:24:5924 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 18:59:24:5924 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:59:24 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:59:29:5929 [31merror[39m: [31m[GET] /api/v1/products/m2 >> StatusCode:: 500, Message:: relation "product_images" does not exist[39m
+2025-12-26 18:59:29:5929 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:59:29 +0000] "GET /api/v1/products/m2 HTTP/1.1" 500 90 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:59:32:5932 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 18:59:32:5932 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:59:32 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:59:32:5932 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 18:59:32:5932 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:59:32 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:59:51:5951 [31merror[39m: [31m[GET] /api/v1/wishlist >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 18:59:51:5951 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:59:51 +0000] "GET /api/v1/wishlist HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:59:54:5954 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 18:59:54:5954 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:59:54 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:59:54:5954 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 18:59:54:5954 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:59:54 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 18:59:57:5957 [31merror[39m: [31m[GET] /api/v1/products/m2 >> StatusCode:: 500, Message:: relation "product_images" does not exist[39m
+2025-12-26 18:59:57:5957 [35mhttp[39m: [35m::1 - - [26/Dec/2025:11:59:57 +0000] "GET /api/v1/products/m2 HTTP/1.1" 500 90 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:00:03:03 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 19:00:03:03 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:00:03 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:00:03:03 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 19:00:03:03 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:00:03 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:01:27:127 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:01:27:127 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:01:27 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:01:27:127 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 19:01:27:127 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:01:27 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:01:27:127 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.weight does not exist[39m
+2025-12-26 19:01:27:127 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:01:27 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:02:37:237 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 500, Message:: column "resetPasswordToken" does not exist[39m
+2025-12-26 19:02:37:237 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:02:37 +0000] "POST /api/v1/auth/login HTTP/1.1" 500 92 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:06:09:69 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 500, Message:: column "resetPasswordToken" does not exist[39m
+2025-12-26 19:06:09:69 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:06:09 +0000] "POST /api/v1/auth/login HTTP/1.1" 500 92 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:06:16:616 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 500, Message:: column "resetPasswordToken" does not exist[39m
+2025-12-26 19:06:16:616 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:06:16 +0000] "POST /api/v1/auth/login HTTP/1.1" 500 92 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:06:16:616 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 500, Message:: column "resetPasswordToken" does not exist[39m
+2025-12-26 19:06:16:616 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:06:16 +0000] "POST /api/v1/auth/login HTTP/1.1" 500 92 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:14:17:1417 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-12-26 19:14:17:1417 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-12-26 19:14:17:1417 [32minfo[39m: [32mSocket.io is ready[39m
+2025-12-26 19:14:59:1459 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:14:59:1459 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:14:59 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:14:59:1459 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:14:59:1459 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:14:59 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:14:59:1459 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:14:59 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 200 2740 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:15:52:1552 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 500, Message:: column "resetPasswordToken" does not exist[39m
+2025-12-26 19:15:52:1552 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:15:52 +0000] "POST /api/v1/auth/login HTTP/1.1" 500 92 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:20:15:2015 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-12-26 19:20:15:2015 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-12-26 19:20:15:2015 [32minfo[39m: [32mSocket.io is ready[39m
+2025-12-26 19:20:56:2056 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:20:56:2056 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:20:56 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:20:56:2056 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:20:56:2056 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:20:56 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:20:56:2056 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:20:56 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:21:24:2124 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:21:24 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 834 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:21:24:2124 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:21:24:2124 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:21:24 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:21:24:2124 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:21:24:2124 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:21:24 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:21:24:2124 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:21:24 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:21:24:2124 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:21:24:2124 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:21:24 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:21:24:2124 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:21:24 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:21:24:2124 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:21:24:2124 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:21:24 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:21:50:2150 [33mwarn[39m: [33mLogin attempt failed for email: seller@belanjaku.com. User not found.[39m
+2025-12-26 19:21:50:2150 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 19:21:50:2150 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:21:50 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:22:15:2215 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:22:15 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 834 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:22:16:2216 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:22:16:2216 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:22:16 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:22:16:2216 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:22:16:2216 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:22:16 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:22:16:2216 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:22:16 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:22:16:2216 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:22:16:2216 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:22:16 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:22:16:2216 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:22:16 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:22:16:2216 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:22:16:2216 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:22:16 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:22:55:2255 [33mwarn[39m: [33mLogin attempt failed for email: seller@belanjaku.com. User not found.[39m
+2025-12-26 19:22:55:2255 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 19:22:55:2255 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:22:55 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:27:29:2729 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:27:29:2729 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:27:29 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:27:29:2729 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:27:29 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:27:29:2729 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:27:29:2729 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:27:29 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:27:29:2729 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:27:29 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:28:30:2830 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-12-26 19:28:30:2830 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-12-26 19:28:30:2830 [32minfo[39m: [32mSocket.io is ready[39m
+2025-12-26 19:28:51:2851 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:28:51 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:28:51:2851 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:28:51:2851 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:28:51 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:29:28:2928 [33mwarn[39m: [33mLogin attempt failed for email: seller@belanjaku.com. User not found.[39m
+2025-12-26 19:29:28:2928 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 19:29:28:2928 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:29:28 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:29:45:2945 [33mwarn[39m: [33mLogin attempt failed for email: seller@belanjaku.com. User not found.[39m
+2025-12-26 19:29:45:2945 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 19:29:45:2945 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:29:45 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:29:54:2954 [33mwarn[39m: [33mLogin attempt failed for email: seller@belanjaku.com. User not found.[39m
+2025-12-26 19:29:54:2954 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 19:29:54:2954 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:29:54 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:29:54:2954 [33mwarn[39m: [33mLogin attempt failed for email: seller@belanjaku.com. User not found.[39m
+2025-12-26 19:29:54:2954 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 19:29:54:2954 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:29:54 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:31:26:3126 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-12-26 19:31:26:3126 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-12-26 19:31:26:3126 [32minfo[39m: [32mSocket.io is ready[39m
+2025-12-26 19:31:43:3143 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:31:43:3143 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:31:43 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:31:43:3143 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:31:43 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:33:11:3311 [33mwarn[39m: [33mLogin attempt failed for email: seller@belanjaku.com. User not found.[39m
+2025-12-26 19:33:11:3311 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 19:33:11:3311 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:33:11 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:33:23:3323 [33mwarn[39m: [33mLogin attempt failed for email: seller@belanjaku.com. User not found.[39m
+2025-12-26 19:33:23:3323 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 19:33:23:3323 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:33:23 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:36:43:3643 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-12-26 19:36:43:3643 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-12-26 19:36:43:3643 [32minfo[39m: [32mSocket.io is ready[39m
+2025-12-26 19:37:19:3719 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:37:19:3719 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:37:19 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:37:19:3719 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:37:19 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:37:40:3740 [33mwarn[39m: [33mLogin attempt failed for email: user@belanjaku.com. User not found.[39m
+2025-12-26 19:37:40:3740 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 19:37:40:3740 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:37:40 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:37:42:3742 [33mwarn[39m: [33mLogin attempt failed for email: user@belanjaku.com. User not found.[39m
+2025-12-26 19:37:42:3742 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 19:37:42:3742 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:37:42 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:37:42:3742 [33mwarn[39m: [33mLogin attempt failed for email: user@belanjaku.com. User not found.[39m
+2025-12-26 19:37:42:3742 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 19:37:42:3742 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:37:42 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:37:43:3743 [33mwarn[39m: [33mLogin attempt failed for email: user@belanjaku.com. User not found.[39m
+2025-12-26 19:37:43:3743 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 19:37:43:3743 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:37:43 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:37:43:3743 [33mwarn[39m: [33mLogin attempt failed for email: user@belanjaku.com. User not found.[39m
+2025-12-26 19:37:43:3743 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 19:37:43:3743 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:37:43 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:38:57:3857 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:38:57 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:38:57:3857 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:38:57:3857 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:38:57 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:38:57:3857 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:38:57 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:38:57:3857 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:38:57:3857 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:38:57 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:40:26:4026 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:40:26:4026 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:40:26 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:40:26:4026 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:40:26 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:40:57:4057 [33mwarn[39m: [33mLogin attempt failed for email: user@belanjaku.com. User not found.[39m
+2025-12-26 19:40:57:4057 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 19:40:57:4057 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:40:57 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:41:01:411 [33mwarn[39m: [33mLogin attempt failed for email: user@belanjaku.com. User not found.[39m
+2025-12-26 19:41:01:411 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 19:41:01:411 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:41:01 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:41:01:411 [33mwarn[39m: [33mLogin attempt failed for email: user@belanjaku.com. User not found.[39m
+2025-12-26 19:41:01:411 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 19:41:01:411 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:41:01 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:41:08:418 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:41:08 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 834 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:41:08:418 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:41:08:418 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:41:08 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:41:08:418 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:41:08:418 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:41:08 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:41:08:418 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:41:08 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:41:08:418 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:41:08:418 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:41:08 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:41:08:418 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:41:08 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:41:08:418 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:41:08:418 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:41:08 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:41:31:4131 [33mwarn[39m: [33mLogin attempt failed for email: seller@belanjaku.com. User not found.[39m
+2025-12-26 19:41:31:4131 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 19:41:31:4131 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:41:31 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:41:37:4137 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:41:37 +0000] "POST /api/v1/auth/login HTTP/1.1" 429 119 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:41:37:4137 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:41:37 +0000] "POST /api/v1/auth/login HTTP/1.1" 429 119 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:41:38:4138 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:41:38 +0000] "POST /api/v1/auth/login HTTP/1.1" 429 119 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:41:38:4138 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:41:38 +0000] "POST /api/v1/auth/login HTTP/1.1" 429 119 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:41:38:4138 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:41:38 +0000] "POST /api/v1/auth/login HTTP/1.1" 429 119 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:41:38:4138 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:41:38 +0000] "POST /api/v1/auth/login HTTP/1.1" 429 119 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:41:40:4140 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:41:40 +0000] "POST /api/v1/auth/login HTTP/1.1" 429 119 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:49:58:4958 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-12-26 19:49:58:4958 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-12-26 19:49:58:4958 [32minfo[39m: [32mSocket.io is ready[39m
+2025-12-26 19:50:24:5024 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:50:24:5024 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:50:24 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:50:24:5024 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:50:24 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:50:56:5056 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:50:56 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 824 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:50:56:5056 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:50:56:5056 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:50:56 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:50:56:5056 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:50:56:5056 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:50:56 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:50:56:5056 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:50:56:5056 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:50:56 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:50:56:5056 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:50:56 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:50:56:5056 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:50:56:5056 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:50:56 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:50:56:5056 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:50:56 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:51:23:5123 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:51:23 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 839 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:51:24:5124 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:51:24:5124 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:51:24 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:51:24:5124 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:51:24:5124 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:51:24 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:51:24:5124 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:51:24 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:51:24:5124 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:51:24:5124 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:51:24 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:51:24:5124 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:51:24 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:51:24:5124 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.offset does not exist[39m
+2025-12-26 19:51:24:5124 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:51:24 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 500 84 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:57:18:5718 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-12-26 19:57:18:5718 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-12-26 19:57:18:5718 [32minfo[39m: [32mSocket.io is ready[39m
+2025-12-26 19:57:47:5747 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:57:47:5747 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:57:47 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:57:47:5747 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:57:47 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 200 2740 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:57:47:5747 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:57:47 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:58:14:5814 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:58:14 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 824 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:58:14:5814 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:58:14:5814 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:58:14 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:58:14:5814 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:58:14:5814 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:58:14 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:58:14:5814 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:58:14 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:58:14:5814 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:58:14 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:58:14:5814 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:58:14 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:58:14:5814 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:58:14 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:58:40:5840 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:58:40 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 834 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:58:40:5840 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:58:40:5840 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:58:40 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:58:40:5840 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:58:40:5840 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:58:40 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:58:40:5840 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:58:40 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:58:40:5840 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:58:40 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:58:41:5841 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:58:41 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:58:41:5841 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:58:41 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:59:00:590 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:59:00 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 839 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:59:01:591 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:59:01:591 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:59:01 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:59:01:591 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 19:59:01:591 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:59:01 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:59:01:591 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:59:01 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:59:01:591 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:59:01 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:59:01:591 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:59:01 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 19:59:01:591 [35mhttp[39m: [35m::1 - - [26/Dec/2025:12:59:01 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:52:14:5214 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-12-26 20:52:14:5214 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-12-26 20:52:14:5214 [32minfo[39m: [32mSocket.io is ready[39m
+2025-12-26 20:52:54:5254 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 20:52:54:5254 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:52:54 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:52:54:5254 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:52:54 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:52:54:5254 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:52:54 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:53:43:5343 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:53:43 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 839 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:53:43:5343 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 20:53:43:5343 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:53:43 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:53:43:5343 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 20:53:43:5343 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:53:43 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:53:43:5343 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:53:43 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:53:43:5343 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:53:43 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:53:43:5343 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:53:43 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:53:43:5343 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:53:43 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:54:14:5414 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:54:14 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 834 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:54:14:5414 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 20:54:15:5415 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:54:15 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:54:15:5415 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 20:54:15:5415 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:54:15 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:54:15:5415 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:54:15 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:54:15:5415 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:54:15 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:54:15:5415 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:54:15 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:54:15:5415 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:54:15 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:55:07:557 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:55:07 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 834 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:55:07:557 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 20:55:07:557 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:55:07 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:55:07:557 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 20:55:07:557 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:55:07 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:55:07:557 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:55:07 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:55:07:557 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:55:07 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:55:07:557 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:55:07 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:55:08:558 [35mhttp[39m: [35m::1 - - [26/Dec/2025:13:55:08 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 20:59:48:5948 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2025-12-26 20:59:48:5948 [32minfo[39m: [32mServer is running on port 5000[39m
+2025-12-26 20:59:48:5948 [32minfo[39m: [32mSocket.io is ready[39m
+2025-12-26 21:00:41:041 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 21:00:41:041 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:00:41 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:00:41:041 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:00:41 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:00:41:041 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:00:41 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:04:27:427 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:04:27 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 834 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:04:29:429 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 21:04:29:429 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:04:29 +0000] "GET /api/v1/orders HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:04:29:429 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 21:04:29:429 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:04:29 +0000] "GET /api/v1/orders HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:04:29:429 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:04:29 +0000] "GET /api/v1/users HTTP/1.1" 200 1073 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:04:29:429 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:04:29 +0000] "GET /api/v1/products HTTP/1.1" 200 2742 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:04:29:429 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:04:29 +0000] "GET /api/v1/products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:04:29:429 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:04:29 +0000] "GET /api/v1/users HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:04:58:458 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 21:04:58:458 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:04:58 +0000] "GET /api/v1/orders HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:04:58:458 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 21:04:58:458 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:04:58 +0000] "GET /api/v1/orders HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:04:58:458 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:04:58 +0000] "GET /api/v1/products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:04:58:458 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:04:58 +0000] "GET /api/v1/users HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:04:58:458 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:04:58 +0000] "GET /api/v1/users HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:04:58:458 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:04:58 +0000] "GET /api/v1/products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:16:516 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:16 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 839 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:18:518 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:18 +0000] "GET /api/v1/products/my-products HTTP/1.1" 200 157 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:18:518 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:18 +0000] "GET /api/v1/orders/seller/my-orders HTTP/1.1" 200 77 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:18:518 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:18 +0000] "GET /api/v1/products/my-products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:18:518 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:18 +0000] "GET /api/v1/orders/seller/my-orders HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:32:532 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:32 +0000] "GET /api/v1/products/my-products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:32:532 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:32 +0000] "GET /api/v1/orders/seller/my-orders HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:32:532 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:32 +0000] "GET /api/v1/products/my-products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:32:532 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:32 +0000] "GET /api/v1/orders/seller/my-orders HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:42:542 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:42 +0000] "GET /api/v1/products/my-products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:42:542 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:42 +0000] "GET /api/v1/orders/seller/my-orders HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:42:542 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:42 +0000] "GET /api/v1/products/my-products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:42:542 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:42 +0000] "GET /api/v1/orders/seller/my-orders HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:58:558 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:58 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 824 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:58:558 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 21:05:58:558 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:58 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:58:558 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 21:05:58:558 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:58 +0000] "GET /api/v1/cart HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:58:558 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:58 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:58:558 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:58 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:58:558 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:58 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:05:58:558 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:05:58 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:06:38:638 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:06:38 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 834 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:06:38:638 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 21:06:38:638 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:06:38 +0000] "GET /api/v1/orders HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:06:38:638 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 21:06:38:638 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:06:38 +0000] "GET /api/v1/orders HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:06:38:638 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:06:38 +0000] "GET /api/v1/products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:06:38:638 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:06:38 +0000] "GET /api/v1/users HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:06:38:638 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:06:38 +0000] "GET /api/v1/products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:06:38:638 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:06:38 +0000] "GET /api/v1/users HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:06:43:643 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:06:43 +0000] "GET /api/v1/users HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:06:43:643 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:06:43 +0000] "GET /api/v1/users HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:07:24:724 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:07:24 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 834 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:07:24:724 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 21:07:24:724 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:07:24 +0000] "GET /api/v1/orders HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:07:24:724 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 21:07:24:724 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:07:24 +0000] "GET /api/v1/orders HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:07:24:724 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:07:24 +0000] "GET /api/v1/products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:07:24:724 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:07:24 +0000] "GET /api/v1/users HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:07:24:724 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:07:24 +0000] "GET /api/v1/products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:07:24:724 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:07:24 +0000] "GET /api/v1/users HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:07:29:729 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:07:29 +0000] "GET /api/v1/users HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:07:29:729 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:07:29 +0000] "GET /api/v1/users HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:08:13:813 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:08:13 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 834 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:08:13:813 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 21:08:13:813 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:08:13 +0000] "GET /api/v1/orders HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:08:13:813 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-26 21:08:13:813 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:08:13 +0000] "GET /api/v1/orders HTTP/1.1" 404 81 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:08:13:813 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:08:13 +0000] "GET /api/v1/products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:08:13:813 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:08:13 +0000] "GET /api/v1/users HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:08:13:813 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:08:13 +0000] "GET /api/v1/products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:08:13:813 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:08:13 +0000] "GET /api/v1/users HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:08:18:818 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:08:18 +0000] "GET /api/v1/users HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:08:18:818 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:08:18 +0000] "GET /api/v1/users HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:08:31:831 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:08:31 +0000] "GET /api/v1/users HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:08:31:831 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:08:31 +0000] "GET /api/v1/users HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:10:04:104 [33mwarn[39m: [33mLogin attempt failed for user: seller@belanjaku.com. Incorrect password.[39m
+2025-12-26 21:10:04:104 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 21:10:04:104 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:10:04 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:10:10:1010 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:10:10 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 839 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:10:11:1011 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:10:11 +0000] "GET /api/v1/products/my-products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:10:11:1011 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:10:11 +0000] "GET /api/v1/orders/seller/my-orders HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:10:11:1011 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:10:11 +0000] "GET /api/v1/products/my-products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:10:11:1011 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:10:11 +0000] "GET /api/v1/orders/seller/my-orders HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:10:23:1023 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:10:23 +0000] "GET /api/v1/products/my-products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:10:23:1023 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:10:23 +0000] "GET /api/v1/orders/seller/my-orders HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:10:23:1023 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:10:23 +0000] "GET /api/v1/products/my-products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:10:23:1023 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:10:23 +0000] "GET /api/v1/orders/seller/my-orders HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:10:37:1037 [33mwarn[39m: [33mLogin attempt failed for user: seller@belanjaku.com. Incorrect password.[39m
+2025-12-26 21:10:37:1037 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-26 21:10:37:1037 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:10:37 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:10:39:1039 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:10:39 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 839 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:10:39:1039 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:10:39 +0000] "GET /api/v1/products/my-products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:10:39:1039 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:10:39 +0000] "GET /api/v1/orders/seller/my-orders HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:10:39:1039 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:10:39 +0000] "GET /api/v1/products/my-products HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2025-12-26 21:10:39:1039 [35mhttp[39m: [35m::1 - - [26/Dec/2025:14:10:39 +0000] "GET /api/v1/orders/seller/my-orders HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
