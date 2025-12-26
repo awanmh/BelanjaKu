@@ -1,6 +1,8 @@
 import db from "../database/models";
 import HttpException from "../utils/http-exception.util";
 
+// File: src/services/cart.service.ts
+
 export const getCart = async (userId: string) => {
   const cartItems = await db.CartItem.findAll({
     where: { userId },
@@ -9,27 +11,47 @@ export const getCart = async (userId: string) => {
         model: db.Product,
         as: "product",
         attributes: ["id", "name", "price", "stock", "imageUrl"],
+        include: [
+          {
+            // PERBAIKAN DISINI:
+            // Gunakan db.User karena di product.model.ts relasinya ke User
+            model: db.User,
+            as: "seller", // Alias ini sesuai dengan yang ada di product.model.ts
+            attributes: ["fullName"], // Ambil nama user sebagai nama penjual
+          }
+        ]
       },
     ],
     order: [["createdAt", "DESC"]],
   });
 
-  // Hitung total belanja
-  let grandTotal = 0;
-  const items = cartItems.map((item: any) => {
-    const subtotal = parseFloat(item.product.price) * item.quantity;
-    grandTotal += subtotal;
-    return {
-      id: item.id,
-      productId: item.productId,
-      productName: item.product.name,
-      productImage: item.product.imageUrl,
-      price: parseFloat(item.product.price),
-      quantity: item.quantity,
-      stockAvailable: item.product.stock,
-      subtotal: subtotal,
-    };
-  });
+  // Mapping data (Sama seperti sebelumnya)
+  const items = cartItems
+    .map((item: any) => {
+      if (!item.product) return null;
+
+      return {
+        id: item.id,
+        quantity: item.quantity,
+        size: "Standard",
+        product: {
+          id: item.product.id,
+          name: item.product.name,
+          price: parseFloat(item.product.price),
+          imageUrl: item.product.imageUrl,
+          stock: item.product.stock,
+          seller: {
+            // Data diambil dari User.fullName
+            fullName: item.product.seller?.fullName || "Official Store"
+          }
+        }
+      };
+    })
+    .filter((item) => item !== null);
+
+  const grandTotal = items.reduce((sum: number, item: any) => {
+    return sum + (item.product.price * item.quantity);
+  }, 0);
 
   return { items, grandTotal };
 };

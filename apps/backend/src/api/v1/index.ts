@@ -14,6 +14,7 @@ import wishlistRouter from "./wishlists/wishlist.routes";
 import notificationRouter from "./notifications/notification.routes";
 import productDiscussionRouter from "./product-discussions/productDiscussion.routes";
 
+
 const v1Router = Router();
 
 // Daftarkan semua router untuk API v1 di sini
@@ -28,7 +29,7 @@ v1Router.use("/payments", paymentRouter);
 v1Router.use("/shipping", shippingRouter);
 v1Router.use("/promotions", promotionRouter);
 v1Router.use("/cart", cartRoutes);
-v1Router.use("/wishlists", wishlistRouter);
+v1Router.use("/wishlist", wishlistRouter);
 v1Router.use("/notifications", notificationRouter);
 v1Router.use("/discussions", productDiscussionRouter);
 

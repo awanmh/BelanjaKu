@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.74% </span>
+                <span class="strong">93.37% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>134/151</span>
+                <span class='fraction'>141/151</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.45% </span>
+                <span class="strong">47.05% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/11</span>
+                <span class='fraction'>8/17</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.74% </span>
+                <span class="strong">93.37% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>134/151</span>
+                <span class='fraction'>141/151</span>
             </div>
         
             
@@ -245,11 +245,20 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -259,23 +268,14 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -400,9 +400,9 @@ class SellerService {
     data: CreateSellerProfileInput
   ): Promise&lt;SellerAttributes&gt; {
     const user = await User.findByPk(userId);
-    if (!user || user.role !== "seller") <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      throw new HttpException(StatusCodes.FORBIDDEN, "User is not a seller");</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    if (!user || user.role !== "seller") {
+      throw new HttpException(StatusCodes.FORBIDDEN, "User is not a seller");
+    }
 &nbsp;
     const [profile, created] = await Seller.findOrCreate({
       where: { userId },
@@ -421,12 +421,12 @@ class SellerService {
    */
   public async getProfile(userId: string): Promise&lt;SellerAttributes&gt; {
     const profile = await Seller.findOne({ where: { userId } });
-    if (!profile) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      throw new HttpException(</span>
-<span class="cstat-no" title="statement not covered" >        StatusCodes.NOT_FOUND,</span>
-<span class="cstat-no" title="statement not covered" >        "Seller profile not found. Please create one."</span>
-<span class="cstat-no" title="statement not covered" >      );</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    if (!profile) {
+      throw new HttpException(
+        StatusCodes.NOT_FOUND,
+        "Seller profile not found. Please create one."
+      );
+    }
     return profile.toJSON();
   }
 &nbsp;
@@ -478,10 +478,10 @@ class SellerService {
       });
 &nbsp;
       const stats = {
-        totalRevenue: parseFloat(salesData[0]<span class="branch-0 cbranch-no" title="branch not covered" >?.t</span>otalRevenue || "0") || 0,
+        totalRevenue: parseFloat(salesData[0]<span class="branch-0 cbranch-no" title="branch not covered" >?.t</span>otalRevenue<span class="branch-0 cbranch-no" title="branch not covered" > || "0")<span class="branch-0 cbranch-no" title="branch not covered" ></span> || 0,</span>
         totalProductsSold:
-          parseInt(salesData[0]<span class="branch-0 cbranch-no" title="branch not covered" >?.t</span>otalProductsSold || "0", 10) || 0,
-        totalOrders: totalOrders || 0,
+          parseInt(salesData[0]<span class="branch-0 cbranch-no" title="branch not covered" >?.t</span>otalProductsSold<span class="branch-0 cbranch-no" title="branch not covered" > || "0",</span> 10)<span class="branch-0 cbranch-no" title="branch not covered" > || 0,</span>
+        totalOrders: totalOrders<span class="branch-0 cbranch-no" title="branch not covered" > || 0,</span>
       };
 &nbsp;
       return stats;
@@ -523,15 +523,7 @@ export default new SellerService();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-<<<<<<< HEAD
-                at 2025-12-24T16:04:30.001Z
-=======
-<<<<<<< HEAD
-                at 2025-12-24T16:04:30.001Z
-=======
-                at 2025-12-24T16:53:10.947Z
->>>>>>> ee7c76a8b1429ebb52a4e865849ffc2d1f1e036f
->>>>>>> 23438e97b125a3094baeb6d02fcc127bf3812152
+                at 2025-12-26T19:08:50.219Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

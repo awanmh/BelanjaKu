@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">74.65% </span>
+                <span class="strong">81.5% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>109/146</span>
+                <span class='fraction'>119/146</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">74.65% </span>
+                <span class="strong">81.5% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>109/146</span>
+                <span class='fraction'>119/146</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -238,18 +238,18 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -309,13 +309,13 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -390,12 +390,12 @@ class ShippingOptionService {
 &nbsp;
     // Cek apakah nama opsi pengiriman sudah ada
     const existingOption = await ShippingOption.findOne({ where: { name } });
-    if (existingOption) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      throw new HttpException(</span>
-<span class="cstat-no" title="statement not covered" >        StatusCodes.CONFLICT,</span>
-<span class="cstat-no" title="statement not covered" >        "Shipping option with this name already exists"</span>
-<span class="cstat-no" title="statement not covered" >      );</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    if (existingOption) {
+      throw new HttpException(
+        StatusCodes.CONFLICT,
+        "Shipping option with this name already exists"
+      );
+    }
 &nbsp;
     const newOption = await ShippingOption.create(data);
     return newOption.toJSON();
@@ -456,12 +456,12 @@ class ShippingOptionService {
    */
   public async delete(id: string): Promise&lt;void&gt; {
     const option = await ShippingOption.findByPk(id);
-    if (!option) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      throw new HttpException(</span>
-<span class="cstat-no" title="statement not covered" >        StatusCodes.NOT_FOUND,</span>
-<span class="cstat-no" title="statement not covered" >        "Shipping option not found"</span>
-<span class="cstat-no" title="statement not covered" >      );</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    if (!option) {
+      throw new HttpException(
+        StatusCodes.NOT_FOUND,
+        "Shipping option not found"
+      );
+    }
 &nbsp;
     await option.destroy();
   }
@@ -508,15 +508,7 @@ export default new ShippingOptionService();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-<<<<<<< HEAD
-                at 2025-12-24T16:04:30.001Z
-=======
-<<<<<<< HEAD
-                at 2025-12-24T16:04:30.001Z
-=======
-                at 2025-12-24T16:53:10.947Z
->>>>>>> ee7c76a8b1429ebb52a4e865849ffc2d1f1e036f
->>>>>>> 23438e97b125a3094baeb6d02fcc127bf3812152
+                at 2025-12-26T19:08:50.219Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -34,7 +34,7 @@ class AuthService {
     }
 
     // 2. Tentukan role berdasarkan domain email
-    let role: 'user' | 'seller' | 'admin' = 'user'; 
+    let role: 'user' | 'seller' | 'admin' = 'user';
 
     if (email.includes('@admin.belanjaku.com')) {
       role = 'admin';

@@ -17,7 +17,7 @@ export interface UserAttributes {
   deletedAt?: Date | null;
 }
 
-interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
+interface UserCreationAttributes extends Optional<UserAttributes, 'id'> { }
 
 export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
   public id!: string;
@@ -29,7 +29,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   // Definisi Type Class
   public resetPasswordToken!: string | null;
   public resetPasswordExpires!: Date | null;
-  
+
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
   public readonly deletedAt!: Date | null;
@@ -59,7 +59,7 @@ export default function (sequelize: Sequelize): typeof User {
       password: { type: DataTypes.STRING, allowNull: false },
       role: { type: DataTypes.ENUM('user', 'seller', 'admin'), defaultValue: 'user' },
       isVerified: { type: DataTypes.BOOLEAN, defaultValue: false },
-      
+
       // Definisi Kolom Baru di Database
       resetPasswordToken: { type: DataTypes.STRING, allowNull: true },
       resetPasswordExpires: { type: DataTypes.DATE, allowNull: true },

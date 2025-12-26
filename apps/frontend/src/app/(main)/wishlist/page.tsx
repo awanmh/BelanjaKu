@@ -51,7 +51,7 @@ export default function WishlistPage() {
 
   const removeFromWishlist = async (wishlistId: string) => {
     if (!confirm('Hapus produk dari wishlist?')) return;
-    
+
     setRemoving(wishlistId);
     try {
       await api.delete(`/wishlist/${wishlistId}`);

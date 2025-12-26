@@ -1,7 +1,7 @@
 "use strict";
 
 import { Sequelize } from "sequelize";
-import { config as envConfig } from "../../config/env.config";
+// import { config as envConfig } from "../../config/env.config"; // (Opsional, bawaan file anda)
 import UserModel from "./user.model";
 import ProductModel from "./product.model";
 import CategoryModel from "./category.model";
@@ -12,9 +12,8 @@ import SellerModel from "./seller.model";
 import PromotionModel from "./promotion.model";
 import ShippingOptionModel from "./shippingOption.model";
 import PaymentModel from "./payment.model";
-// CartModel removed as per friend's structure
-import CartItemModel from "./cartItem.model"; // 2. Impor CartItem
-import ProductImageModel from "./productImage.model"; // Impor ProductImage
+import CartItemModel from "./cartItem.model";
+import ProductImageModel from "./productImage.model";
 import UserAddressModel from "./userAddress.model";
 import WishlistModel from "./wishlist.model";
 import NotificationModel from "./notification.model";
@@ -23,11 +22,12 @@ import ProductDiscussionModel from "./productDiscussion.model";
 
 // Tentukan environment (default: development)
 const env = process.env.NODE_ENV || "development";
-const dbConfig = require("../../config/database.config.ts")[env];
+// Pastikan path config ini benar sesuai struktur project anda
+const dbConfig = require("../../config/database.config.ts")[env] || require("../../config/database.config.js")[env];
 
 // Inisialisasi Sequelize
 let sequelize: Sequelize;
-if (dbConfig.use_env_variable) {
+if (dbConfig?.use_env_variable) {
   sequelize = new Sequelize(process.env[dbConfig.use_env_variable]!, dbConfig);
 } else {
   sequelize = new Sequelize(
@@ -49,10 +49,9 @@ const Seller = SellerModel(sequelize);
 const Promotion = PromotionModel(sequelize);
 const ShippingOption = ShippingOptionModel(sequelize);
 const Payment = PaymentModel(sequelize);
-// const Cart = CartModel(sequelize); // Removed
 const CartItem = CartItemModel(sequelize);
 const UserAddress = UserAddressModel(sequelize);
-const ProductImage = ProductImageModel(sequelize); // Init ProductImage
+const ProductImage = ProductImageModel(sequelize);
 const Wishlist = WishlistModel(sequelize);
 const Notification = NotificationModel(sequelize);
 const ProductVariant = ProductVariantModel(sequelize);
@@ -72,7 +71,6 @@ const db = {
   Promotion,
   ShippingOption,
   Payment,
-  // Cart, // Removed
   CartItem,
   UserAddress,
   ProductImage,
@@ -82,11 +80,12 @@ const db = {
   ProductDiscussion,
 };
 
-// Definisikan asosiasi antar model
+// Definisikan asosiasi antar model (bawaan file)
 Object.values(db).forEach((model: any) => {
   if (model?.associate) {
     model.associate(db);
   }
 });
+
 
 export default db;
