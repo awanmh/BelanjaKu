@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-const path = require('path');
-
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -18,9 +16,6 @@ const nextConfig = {
       },
     ],
   },
-
-  // 👇 Tambahkan ini untuk kasih tahu Next.js root workspace
-  outputFileTracingRoot: path.join(__dirname, '../../'), 
 };
 
 export default nextConfig;

@@ -1,10 +1,42 @@
 'use client';
 
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { Search, User, Heart, ShoppingCart } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
+import { useCartStore } from '@/store/cart.store';
+import { useUserStore } from '@/store/user.store';
+import api from '@/lib/api';
 
 export default function Navbar() {
+  const cartCount = useCartStore((state) => state.cartCount);
+  const setCartCount = useCartStore((state) => state.setCartCount);
+  const user = useUserStore((state) => state.user);
+
+  // Fetch cart count when component mounts and user is logged in
+  useEffect(() => {
+    const fetchCartCount = async () => {
+      if (user) {
+        try {
+          const res = await api.get('/cart');
+          if (res.data.success && res.data.data.items) {
+            const totalItems = res.data.data.items.reduce(
+              (sum: number, item: any) => sum + item.quantity,
+              0
+            );
+            setCartCount(totalItems);
+          }
+        } catch (error) {
+          console.error('Failed to fetch cart count:', error);
+        }
+      } else {
+        setCartCount(0);
+      }
+    };
+
+    fetchCartCount();
+  }, [user, setCartCount]);
+
   return (
     <header className="bg-white sticky top-0 z-50 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] transition-all">
       {/* Announcement Bar */}
@@ -45,7 +77,14 @@ export default function Navbar() {
                 </Link>
                 
                 <Link href="/cart" className="flex flex-col items-center group relative">
-                    <ShoppingCart className="w-6 h-6 text-gray-600 group-hover:text-black transition" />
+                    <div className="relative">
+                        <ShoppingCart className="w-6 h-6 text-gray-600 group-hover:text-black transition" />
+                        {cartCount > 0 && (
+                            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                                {cartCount > 99 ? '99+' : cartCount}
+                            </span>
+                        )}
+                    </div>
                     <span className="text-[10px] font-medium text-gray-500 mt-1 group-hover:text-black transition">Keranjang</span>
                 </Link>
             </div>

@@ -7,6 +7,7 @@ import { Star, ShoppingCart, Heart, Truck, Shield, RotateCcw, ChevronDown, Chevr
 import api from '@/lib/api';
 import { formatRupiah } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
+import { useCartStore } from '@/store/cart.store';
 
 interface Product {
   id: string;
@@ -39,6 +40,7 @@ export default function ProductDetailPage() {
   const [addingToCart, setAddingToCart] = useState(false);
   const [addingToWishlist, setAddingToWishlist] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const incrementCartCount = useCartStore((state) => state.incrementCartCount);
   
   // Accordion states
   const [accordions, setAccordions] = useState({
@@ -57,17 +59,22 @@ export default function ProductDetailPage() {
           
           // Fetch related products from same category
           if (productData.categoryId) {
-            const relatedRes = await api.get(`/products?limit=4&category=${productData.category?.name || ''}`);
-            if (relatedRes.data.success) {
-              const allProducts = Array.isArray(relatedRes.data.data) 
-                ? relatedRes.data.data 
-                : relatedRes.data.data.rows || [];
-              
-              // Filter out current product and take first 4
-              const filtered = allProducts
-                .filter((p: Product) => p.id !== productId)
-                .slice(0, 4);
-              setRelatedProducts(filtered);
+            try {
+              const relatedRes = await api.get(`/products?limit=4&categoryId=${productData.categoryId}`);
+              if (relatedRes.data.success) {
+                const allProducts = Array.isArray(relatedRes.data.data) 
+                  ? relatedRes.data.data 
+                  : relatedRes.data.data.rows || [];
+                
+                // Filter out current product and take first 4
+                const filtered = allProducts
+                  .filter((p: Product) => p.id !== productId)
+                  .slice(0, 4);
+                setRelatedProducts(filtered);
+              }
+            } catch (error) {
+              console.error('Failed to fetch related products:', error);
+              // Continue without related products
             }
           }
         }
@@ -96,6 +103,11 @@ export default function ProductDetailPage() {
         size: selectedSize,
         quantity,
       });
+      
+      // Increment cart count by the quantity added
+      for (let i = 0; i < quantity; i++) {
+        incrementCartCount();
+      }
       
       alert('Produk berhasil ditambahkan ke keranjang!');
     } catch (error: any) {
