@@ -22,25 +22,35 @@ export type LoginInput = Pick<UserAttributes, 'email' | 'password'>;
 class AuthService {
   /**
    * Mendaftarkan pengguna baru ke dalam sistem.
+   * Role ditentukan otomatis berdasarkan domain email.
    */
   public async register(userData: RegisterInput): Promise<Omit<UserAttributes, 'password'>> {
     const { email, password, fullName } = userData;
 
+    // 1. Cek apakah user sudah ada
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       throw new HttpException(StatusCodes.CONFLICT, 'Email already exists');
     }
 
+    // 2. Tentukan role berdasarkan domain email
+    let role: 'user' | 'seller' | 'admin' = 'user'; 
+
+    if (email.includes('@admin.belanjaku.com')) {
+      role = 'admin';
+    } else if (email.includes('@seller.belanjaku.com')) {
+      role = 'seller';
+    }
+
+    // 3. Buat user baru dengan role sesuai
     const newUser = await User.create({
       fullName,
       email,
       password,
-      role: 'user',
-      isVerified: false,
+      role: role,
+      isVerified: true,
     });
 
-    // REFACTOR: Kita tidak perlu lagi menghapus password secara manual.
-    // Hook toJSON di model User akan menanganinya secara otomatis.
     return newUser.toJSON();
   }
 
@@ -71,8 +81,6 @@ class AuthService {
     const accessToken = generateAccessToken(tokenPayload);
     const refreshToken = generateRefreshToken(tokenPayload);
 
-    // REFACTOR: Kita tidak perlu lagi menghapus password.
-    // Hook toJSON akan menanganinya secara otomatis.
     return {
       user: user.toJSON(),
       tokens: {
@@ -96,7 +104,6 @@ class AuthService {
     const resetToken = crypto.randomBytes(32).toString('hex');
 
     // 2. Simpan token ke DB
-    // Sekarang error di bawah ini akan hilang karena user bertipe 'any'
     user.resetPasswordToken = resetToken;
     user.resetPasswordExpires = new Date(Date.now() + 3600 * 1000);
     await user.save();
