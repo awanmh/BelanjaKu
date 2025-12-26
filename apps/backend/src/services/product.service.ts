@@ -61,7 +61,7 @@ class ProductService {
       );
 
       if (productData.images && productData.images.length > 0) {
-        const imageRecords = productData.images.map((url, index) => ({
+        const imageRecords = productData.images.map((url: string, index: number) => ({
           productId: newProduct.id,
           imageUrl: url,
           isPrimary: index === 0,
@@ -112,7 +112,8 @@ class ProductService {
     const totalPages = Math.ceil(count / limit);
 
     return {
-      rows: rows.map((product) => product.toJSON()),
+      // PERBAIKAN 1: Menambahkan tipe ': any' agar TypeScript tidak error
+      rows: rows.map((product: any) => product.toJSON()),
       pagination: {
         totalItems: count,
         totalPages,
@@ -151,7 +152,8 @@ class ProductService {
     const totalPages = Math.ceil(count / limit);
 
     return {
-      rows: rows.map((product) => product.toJSON()),
+      // PERBAIKAN 2: Menambahkan tipe ': any' agar TypeScript tidak error
+      rows: rows.map((product: any) => product.toJSON()),
       pagination: {
         totalItems: count,
         totalPages,

@@ -3,15 +3,18 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    // 1. Add column search_vector (TSVECTOR) if not exists
-    if (!tableInfo.search_vector) {
+    // 1. Cek struktur tabel terlebih dahulu untuk menghindari error
+    const tableDefinition = await queryInterface.describeTable("products");
+
+    // 2. Add column search_vector (TSVECTOR) hanya jika belum ada
+    if (!tableDefinition.search_vector) {
       await queryInterface.addColumn("products", "search_vector", {
         type: "TSVECTOR",
         allowNull: true,
       });
     }
 
-    // 2. Create GIN index for fast search (Check via try-catch or just create if column was missing, best is try-catch to be safe)
+    // 3. Create GIN index for fast search
     try {
       await queryInterface.addIndex("products", ["search_vector"], {
         using: "GIN",
@@ -24,40 +27,28 @@ module.exports = {
       );
     }
 
-    // 3. Update existing data
-    // 1. Add column search_vector (TSVECTOR)
-    await queryInterface.addColumn("products", "search_vector", {
-      type: "TSVECTOR",
-      allowNull: true,
-    });
-
-    // 2. Create GIN index for fast search
-    await queryInterface.addIndex("products", ["search_vector"], {
-      using: "GIN",
-      name: "products_search_vector_idx",
-    });
-
-    // 3. Create a trigger to automatically update search_vector on INSERT/UPDATE
-    // Note: We search on 'name' and 'description'
-
+    // 4. Update existing data (Isi data kolom search_vector yang baru dibuat)
+    // Menggunakan COALESCE agar jika name/description null tidak merusak query
     await queryInterface.sequelize.query(`
-      UPDATE "products" SET "search_vector" = to_tsvector('english', "name" || ' ' || "description");
+      UPDATE "products" 
+      SET "search_vector" = to_tsvector('english', COALESCE("name", '') || ' ' || COALESCE("description", ''));
     `);
 
-    // 4. Create function (OR REPLACE makes it idempotent)
+    // 5. Create function (OR REPLACE makes it idempotent)
     await queryInterface.sequelize.query(`
       CREATE OR REPLACE FUNCTION products_search_vector_trigger() RETURNS trigger AS $$
       BEGIN
-        new.search_vector := to_tsvector('english', new.name || ' ' || new.description);
+        new.search_vector := to_tsvector('english', COALESCE(new.name, '') || ' ' || COALESCE(new.description, ''));
         return new;
       END
       $$ LANGUAGE plpgsql;
     `);
 
-    // 5. Create trigger (Drop first to ensure idempotency)
+    // 6. Create trigger (Drop first to ensure idempotency)
     await queryInterface.sequelize.query(`
       DROP TRIGGER IF EXISTS tsvectorupdate ON "products";
     `);
+    
     await queryInterface.sequelize.query(`
       CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE
       ON "products" FOR EACH ROW EXECUTE PROCEDURE products_search_vector_trigger();
@@ -76,9 +67,16 @@ module.exports = {
     `);
 
     // Remove index
-    await queryInterface.removeIndex("products", "products_search_vector_idx");
+    try {
+      await queryInterface.removeIndex("products", "products_search_vector_idx");
+    } catch (e) {
+      console.log("Index not found, skipping removal.");
+    }
 
     // Remove column
-    await queryInterface.removeColumn("products", "search_vector");
+    const tableDefinition = await queryInterface.describeTable("products");
+    if (tableDefinition.search_vector) {
+      await queryInterface.removeColumn("products", "search_vector");
+    }
   },
 };

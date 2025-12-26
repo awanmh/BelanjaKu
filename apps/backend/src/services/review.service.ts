@@ -83,7 +83,7 @@ class ReviewService {
       order: [['createdAt', 'DESC']],
     });
 
-    return reviews.map((review) => review.toJSON());
+    return reviews.map((review: any) => review.toJSON());
   }
 }
 

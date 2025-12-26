@@ -144,7 +144,19 @@ backend
 │   │   │   ├── 📜 20251029010000-add-deletedAt-to-products.js
 │   │   │   ├── 📜 20251029010001-add-deletedAt-to-users.js
 │   │   │   ├── 📜 2025120400-add-fulltext-search.js
-│   │   │   └── 📜 20251204130950-add-reset-password-to-users.js
+│   │   │   ├── 📜 20251204130950-add-reset-password-to-users.js
+│   │   │   ├── 📜 2025120910000-add-deletedAt-to-products.js
+│   │   │   ├── 📜 2025120910001-add-deletedAt-to-users.js
+│   │   │   ├── 📜 2025121001-create-carts.js
+│   │   │   ├── 📜 2025121101-create-user-addresses.js
+│   │   │   ├── 📜 2025122501-create-cart-items.js
+│   │   │   ├── 📜 2025122400001-upgrade-products-table.js
+│   │   │   ├── 📜 2025122400002-create-product-images.js
+│   │   │   ├── 📜 2025122400003-upgrade-promotions-table.js
+│   │   │   ├── 📜 2025122400004-create-wishlist-notifications.js
+│   │   │   ├── 📜 2025122400005-create-variants-discussions.js
+│   │   │   ├── 📜 2025122400006-add-search-vector.js
+│   │   │   └── 📜 2025122600001-fix-missing-users-columns.js
 │   │   │
 │   │   ├── 📂 models/            # Definisi tabel dan relasi (Sequelize)
 │   │   │   ├── 📜 category.model.ts
@@ -160,7 +172,10 @@ backend
 │   │   │   └── 📜 user.model.ts
 │   │   │
 │   │   └── 📂 seeders/           # File untuk mengisi data awal (seeding)
-│   │       └── 📜 2025100602-demo-products.js
+│   │   │   ├── 📜 2025100601-demo-users.js
+│   │   │   ├── 📜 2025100602-demo-products.js
+│   │   │   ├── 📜 20251226000001-force-update-passwords.js
+│   │   │   └── 📜 20251226000002-ensure-all-users.js
 │   │
 │   ├── 📂 middlewares/           # Fungsi perantara untuk request
 │   │   ├── 📜 auth.middleware.ts
@@ -173,13 +188,16 @@ backend
 │   │   ├── 📂 __tests__/         # Unit & Integration Tests
 │   │   │   ├── 📜 auth.routes.test.ts
 │   │   │   ├── 📜 auth.service.test.ts
+│   │   │   ├── 📜 cart.service.test.ts
 │   │   │   ├── 📜 category.routes.test.ts
 │   │   │   ├── 📜 category.service.test.ts
+│   │   │   ├── 📜 notification.service.test.ts
 │   │   │   ├── 📜 order.routes.test.ts
 │   │   │   ├── 📜 order.service.test.ts
 │   │   │   ├── 📜 payment.service.test.ts
 │   │   │   ├── 📜 product.routes.test.ts
 │   │   │   ├── 📜 product.service.test.ts
+│   │   │   ├── 📜 productDiscussion.service.test.ts
 │   │   │   ├── 📜 promotion.service.test.ts
 │   │   │   ├── 📜 review.routes.test.ts
 │   │   │   ├── 📜 review.service.test.ts
@@ -189,18 +207,25 @@ backend
 │   │   │   ├── 📜 shipping.service.test.ts
 │   │   │   ├── 📜 test-image.png
 │   │   │   ├── 📜 user.routes.test.ts
-│   │   │   └── 📜 user.service.test.ts
+│   │   │   ├── 📜 user.service.test.ts
+│   │   │   ├── 📜 wishlist.service.test.ts
+│   │   │   └── 📜 userAddress.service.test.ts
 │   │   │
 │   │   ├── 📜 auth.service.ts
+│   │   ├── 📜 cart.service.ts
 │   │   ├── 📜 category.service.ts
+│   │   ├── 📜 notification.service.ts
 │   │   ├── 📜 order.service.ts
 │   │   ├── 📜 payment.service.ts
 │   │   ├── 📜 product.service.ts
+│   │   ├── 📜 productDiscussion.service.ts
 │   │   ├── 📜 promotion.service.ts
 │   │   ├── 📜 review.service.ts
 │   │   ├── 📜 seller.service.ts
 │   │   ├── 📜 shipping.service.ts
-│   │   └── 📜 user.service.ts
+│   │   ├── 📜 user.service.ts
+│   │   ├── 📜 userAddress.service.ts
+│   │   └── 📜 wishlist.service.ts
 │   │
 │   ├── 📂 utils/                 # Fungsi bantuan (helpers)
 │   │   ├── 📂 __tests__/         # Tests untuk Utils

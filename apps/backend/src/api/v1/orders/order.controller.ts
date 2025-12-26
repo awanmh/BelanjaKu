@@ -3,82 +3,54 @@ import { StatusCodes } from 'http-status-codes';
 import OrderService, { CreateOrderInput } from '../../../services/order.service';
 import HttpException from '../../../utils/http-exception.util';
 import { AuthenticatedRequest } from '../../../middlewares/auth.middleware';
+import db from '../../../database/models'; // Import DB
 
-/**
- * Controller untuk menangani semua request yang berhubungan dengan pesanan.
- */
 class OrderController {
-  // --- Metode untuk Pembeli (User) ---
+  
+  // --- Helper Private ---
+  private async getSellerIdFromUser(userId: string): Promise<string> {
+    const seller = await db.Seller.findOne({ where: { userId } });
+    if (!seller) {
+      throw new HttpException(StatusCodes.FORBIDDEN, 'User is not registered as a seller');
+    }
+    return seller.id;
+  }
 
-  /**
-   * Menangani permintaan untuk membuat pesanan baru (checkout).
-   */
+  // ... (Metode User/Buyer biarkan tetap sama: createOrder, getMyOrders, getOrderById) ...
+  // Paste ulang metode createOrder, getMyOrders, getOrderById dari kode lama Anda di sini
   public async createOrder(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
-    try {
-      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
-      const userId = req.user!.id;
-      const orderData: CreateOrderInput = req.body;
-
-      const newOrder = await OrderService.createOrder(orderData, userId);
-
-      res.status(StatusCodes.CREATED).json({
-        success: true,
-        message: 'Order placed successfully',
-        data: newOrder,
-      });
-    } catch (error) {
-      next(error);
-    }
+      try {
+        const userId = req.user!.id;
+        const orderData: CreateOrderInput = req.body;
+        const newOrder = await OrderService.createOrder(orderData, userId);
+        res.status(StatusCodes.CREATED).json({ success: true, message: 'Order placed successfully', data: newOrder });
+      } catch (error) { next(error); }
   }
 
-  /**
-   * Menangani permintaan untuk mendapatkan semua pesanan milik pengguna yang sedang login.
-   */
   public async getMyOrders(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
-    try {
-      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
-      const userId = req.user!.id;
-      const orders = await OrderService.getOrdersByUser(userId);
-
-      res.status(StatusCodes.OK).json({
-        success: true,
-        message: 'Orders retrieved successfully',
-        data: orders,
-      });
-    } catch (error) {
-      next(error);
-    }
+      try {
+        const userId = req.user!.id;
+        const orders = await OrderService.getOrdersByUser(userId);
+        res.status(StatusCodes.OK).json({ success: true, message: 'Orders retrieved successfully', data: orders });
+      } catch (error) { next(error); }
   }
 
-  /**
-   * Menangani permintaan untuk mendapatkan detail satu pesanan.
-   */
   public async getOrderById(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
-    try {
-      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
-      const userId = req.user!.id;
-      const { id: orderId } = req.params;
-      const order = await OrderService.getOrderById(orderId, userId);
-
-      res.status(StatusCodes.OK).json({
-        success: true,
-        message: 'Order details retrieved successfully',
-        data: order,
-      });
-    } catch (error) {
-      next(error);
-    }
+      try {
+        const userId = req.user!.id;
+        const { id: orderId } = req.params;
+        const order = await OrderService.getOrderById(orderId, userId);
+        res.status(StatusCodes.OK).json({ success: true, message: 'Order details retrieved successfully', data: order });
+      } catch (error) { next(error); }
   }
 
   // --- Metode untuk Penjual (Seller) ---
 
-  /**
-   * Menangani permintaan dari penjual untuk mendapatkan semua pesanan yang masuk ke tokonya.
-   */
   public async getSellerOrders(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
-      const sellerId = req.user!.id;
+      // PERBAIKAN: Cari Seller ID dari User ID
+      const sellerId = await this.getSellerIdFromUser(req.user!.id);
+      
       const orders = await OrderService.getOrdersForSeller(sellerId);
 
       res.status(StatusCodes.OK).json({
@@ -91,15 +63,13 @@ class OrderController {
     }
   }
 
-  /**
-   * Menangani permintaan dari penjual untuk memperbarui status sebuah pesanan.
-   */
   public async updateOrderStatus(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan
-      const sellerId = req.user!.id;
+      // PERBAIKAN: Cari Seller ID dari User ID
+      const sellerId = await this.getSellerIdFromUser(req.user!.id);
+      
       const { id: orderId } = req.params;
-      const { status } = req.body; // status: 'processing' | 'shipped'
+      const { status } = req.body;
 
       if (!status || (status !== 'processing' && status !== 'shipped')) {
         throw new HttpException(StatusCodes.BAD_REQUEST, 'Invalid status provided');
@@ -118,5 +88,4 @@ class OrderController {
   }
 }
 
-// Ekspor sebagai singleton instance
 export default new OrderController();

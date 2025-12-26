@@ -143,7 +143,7 @@ export default function CartPage() {
                 <div key={item.id} className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
                   <div className="flex gap-4">
                     {/* Product Image */}
-                    <Link href={`/products/${item.product.id}`} className="flex-shrink-0">
+                    <Link href={`/products/${item.product.id}`} className="shrink-0">
                       <div className="w-24 h-24 bg-gray-100 rounded-lg overflow-hidden">
                         <img
                           src={imageUrl}

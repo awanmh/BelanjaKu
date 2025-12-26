@@ -1,5 +1,4 @@
 import crypto from 'crypto';
-import bcrypt from 'bcryptjs';
 import db from '../database/models';
 import { UserAttributes } from '../database/models/user.model';
 import HttpException from '../utils/http-exception.util';
@@ -7,108 +6,186 @@ import { StatusCodes } from 'http-status-codes';
 import { generateAccessToken, generateRefreshToken } from '../utils/jwt.util';
 import logger from '../utils/logger.util';
 import { sendResetPasswordEmail } from '../utils/email.util';
+import { hashPassword } from '../utils/hash.util';
 
 const User = db.User;
-
-// Tipe data spesifik untuk input registrasi
-export type RegisterInput = Pick<UserAttributes, 'email' | 'password' | 'fullName'>;
-
-// Tipe data spesifik untuk input login
-export type LoginInput = Pick<UserAttributes, 'email' | 'password'>;
+const Seller = db.Seller;
 
 /**
- * Service untuk menangani semua logika bisnis yang terkait dengan autentikasi.
+ * Input register
  */
+export type RegisterInput = Pick<
+  UserAttributes,
+  'email' | 'password' | 'fullName'
+>;
+
+/**
+ * Input login
+ */
+export type LoginInput = Pick<UserAttributes, 'email' | 'password'>;
+
 class AuthService {
   /**
-   * Mendaftarkan pengguna baru ke dalam sistem.
-   * Role ditentukan otomatis berdasarkan domain email.
+   * ============================
+   * REGISTER
+   * ============================
    */
-  public async register(userData: RegisterInput): Promise<Omit<UserAttributes, 'password'>> {
+  public async register(
+    userData: RegisterInput
+  ): Promise<Omit<UserAttributes, 'password'>> {
     const { email, password, fullName } = userData;
 
-    // 1. Cek apakah user sudah ada
-    const existingUser = await User.findOne({ where: { email } });
+    logger.info(`[REGISTER] Attempt: ${email}`);
+
+    // 1️⃣ Cari user termasuk soft-deleted
+    const existingUser = await User.findOne({
+      where: { email },
+      paranoid: false,
+    });
+
     if (existingUser) {
-      throw new HttpException(StatusCodes.CONFLICT, 'Email already exists');
+      // Masih aktif
+      if (!existingUser.deletedAt) {
+        throw new HttpException(
+          StatusCodes.CONFLICT,
+          'Email already registered'
+        );
+      }
+
+      // Sudah soft delete → hapus permanen
+      logger.warn(`[REGISTER] Removing soft-deleted user: ${email}`);
+      await existingUser.destroy({ force: true });
     }
 
-    // 2. Tentukan role berdasarkan domain email
-    let role: 'user' | 'seller' | 'admin' = 'user'; 
+    // 2️⃣ Tentukan role
+    let role: 'user' | 'seller' | 'admin' = 'user';
 
-    if (email.includes('@admin.belanjaku.com')) {
+    if (email.endsWith('@admin.belanjaku.com')) {
       role = 'admin';
-    } else if (email.includes('@seller.belanjaku.com')) {
+    } else if (email.endsWith('@seller.belanjaku.com')) {
       role = 'seller';
     }
 
-    // 3. Buat user baru dengan role sesuai
-    const newUser = await User.create({
-      fullName,
-      email,
-      password,
-      role: role,
-      isVerified: true,
-    });
+    logger.info(`[REGISTER] Role assigned: ${role}`);
 
-    return newUser.toJSON();
+    // 3️⃣ Hash password (AMAN)
+    const hashedPassword = await hashPassword(password);
+
+    const transaction = await db.sequelize.transaction();
+
+    try {
+      // 4️⃣ Create User
+      const newUser = await User.create(
+        {
+          fullName,
+          email,
+          password: hashedPassword,
+          role,
+          isVerified: role === 'user', // seller/admin bisa diverifikasi manual
+        },
+        { transaction }
+      );
+
+      // 5️⃣ Jika Seller → Buat toko
+      if (role === 'seller') {
+        await Seller.create(
+          {
+            userId: newUser.id,
+            storeName: `Toko ${fullName}` || 'Toko Baru',
+            storeAddress: 'Alamat belum diatur oleh penjual',
+            storePhoneNumber: '081234567890',
+          },
+          { transaction }
+        );
+      }
+
+      await transaction.commit();
+      return newUser.toJSON();
+
+    } catch (error: any) {
+      await transaction.rollback();
+
+      // 🔎 Logging detail error Sequelize
+      if (
+        error.name === 'SequelizeValidationError' ||
+        error.name === 'SequelizeUniqueConstraintError'
+      ) {
+        console.error('\n🔴 VALIDATION ERROR 🔴');
+        error.errors.forEach((err: any) => {
+          console.error(`Field : ${err.path}`);
+          console.error(`Message: ${err.message}`);
+          console.error(`Value  : ${err.value}`);
+        });
+        console.error('------------------------\n');
+      } else {
+        console.error('❌ REGISTER ERROR:', error);
+      }
+
+      throw error;
+    }
   }
 
   /**
-   * Melakukan proses login pengguna dan mengembalikan token jika berhasil.
+   * ============================
+   * LOGIN
+   * ============================
    */
   public async login(credentials: LoginInput) {
     const { email, password } = credentials;
 
     const user = await User.findOne({ where: { email } });
+
     if (!user) {
-      logger.warn(`Login attempt failed for email: ${email}. User not found.`);
-      throw new HttpException(StatusCodes.UNAUTHORIZED, 'Invalid email or password');
+      throw new HttpException(
+        StatusCodes.UNAUTHORIZED,
+        'Invalid email or password'
+      );
     }
 
     const isPasswordMatch = await user.comparePassword(password);
     if (!isPasswordMatch) {
-      logger.warn(`Login attempt failed for user: ${email}. Incorrect password.`);
-      throw new HttpException(StatusCodes.UNAUTHORIZED, 'Invalid email or password');
+      throw new HttpException(
+        StatusCodes.UNAUTHORIZED,
+        'Invalid email or password'
+      );
     }
 
-    const tokenPayload = {
+    const payload = {
       id: user.id,
       email: user.email,
       role: user.role,
     };
 
-    const accessToken = generateAccessToken(tokenPayload);
-    const refreshToken = generateRefreshToken(tokenPayload);
-
     return {
       user: user.toJSON(),
       tokens: {
-        accessToken,
-        refreshToken,
+        accessToken: generateAccessToken(payload),
+        refreshToken: generateRefreshToken(payload),
       },
     };
   }
 
   /**
-   * Mengirim email reset password jika user lupa kata sandi.
+   * ============================
+   * FORGOT PASSWORD
+   * ============================
    */
   public async forgotPassword(email: string) {
-    const user: any = await User.findOne({ where: { email } });
+    const user = await User.findOne({ where: { email } });
 
     if (!user) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'User with that email does not exist');
+      throw new HttpException(
+        StatusCodes.NOT_FOUND,
+        'User with that email does not exist'
+      );
     }
 
-    // 1. Generate Reset Token
     const resetToken = crypto.randomBytes(32).toString('hex');
 
-    // 2. Simpan token ke DB
     user.resetPasswordToken = resetToken;
-    user.resetPasswordExpires = new Date(Date.now() + 3600 * 1000);
+    user.resetPasswordExpires = new Date(Date.now() + 60 * 60 * 1000);
     await user.save();
 
-    // 3. Kirim Email
     try {
       await sendResetPasswordEmail(user.email, resetToken);
     } catch (error) {
@@ -116,13 +193,15 @@ class AuthService {
       user.resetPasswordExpires = null;
       await user.save();
 
-      logger.error('Failed to send reset email', error);
-      throw new HttpException(StatusCodes.INTERNAL_SERVER_ERROR, 'Error sending email');
+      logger.error('[FORGOT PASSWORD] Email failed', error);
+      throw new HttpException(
+        StatusCodes.INTERNAL_SERVER_ERROR,
+        'Error sending reset email'
+      );
     }
 
     return { message: 'Password reset link sent to your email' };
   }
 }
 
-// Ekspor sebagai singleton instance
 export default new AuthService();

@@ -2,31 +2,33 @@
 
 import { Sequelize } from "sequelize";
 import { config as envConfig } from "../../config/env.config";
+
+// === Import Model Factory ===
 import UserModel from "./user.model";
+import SellerModel from "./seller.model";
 import ProductModel from "./product.model";
 import CategoryModel from "./category.model";
 import OrderModel from "./order.model";
 import OrderItemModel from "./orderItem.model";
 import ReviewModel from "./review.model";
-import SellerModel from "./seller.model";
 import PromotionModel from "./promotion.model";
 import ShippingOptionModel from "./shippingOption.model";
 import PaymentModel from "./payment.model";
-// CartModel removed as per friend's structure
-import CartItemModel from "./cartItem.model"; // 2. Impor CartItem
-import ProductImageModel from "./productImage.model"; // Impor ProductImage
+import CartItemModel from "./cartItem.model";
+import ProductImageModel from "./productImage.model";
 import UserAddressModel from "./userAddress.model";
 import WishlistModel from "./wishlist.model";
 import NotificationModel from "./notification.model";
 import ProductVariantModel from "./productVariant.model";
 import ProductDiscussionModel from "./productDiscussion.model";
 
-// Tentukan environment (default: development)
+// ================= ENV & DB CONFIG =================
 const env = process.env.NODE_ENV || "development";
 const dbConfig = require("../../config/database.config.ts")[env];
 
-// Inisialisasi Sequelize
+// ================= SEQUELIZE INIT =================
 let sequelize: Sequelize;
+
 if (dbConfig.use_env_variable) {
   sequelize = new Sequelize(process.env[dbConfig.use_env_variable]!, dbConfig);
 } else {
@@ -38,54 +40,36 @@ if (dbConfig.use_env_variable) {
   );
 }
 
-// Inisialisasi semua model
-const User = UserModel(sequelize);
-const Product = ProductModel(sequelize);
-const Category = CategoryModel(sequelize);
-const Order = OrderModel(sequelize);
-const OrderItem = OrderItemModel(sequelize);
-const Review = ReviewModel(sequelize);
-const Seller = SellerModel(sequelize);
-const Promotion = PromotionModel(sequelize);
-const ShippingOption = ShippingOptionModel(sequelize);
-const Payment = PaymentModel(sequelize);
-// const Cart = CartModel(sequelize); // Removed
-const CartItem = CartItemModel(sequelize);
-const UserAddress = UserAddressModel(sequelize);
-const ProductImage = ProductImageModel(sequelize); // Init ProductImage
-const Wishlist = WishlistModel(sequelize);
-const Notification = NotificationModel(sequelize);
-const ProductVariant = ProductVariantModel(sequelize);
-const ProductDiscussion = ProductDiscussionModel(sequelize);
+// ================= DB OBJECT =================
+const db: any = {};
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
 
-// Kumpulan model dan instance Sequelize
-const db = {
-  sequelize,
-  Sequelize,
-  User,
-  Product,
-  Category,
-  Order,
-  OrderItem,
-  Review,
-  Seller,
-  Promotion,
-  ShippingOption,
-  Payment,
-  // Cart, // Removed
-  CartItem,
-  UserAddress,
-  ProductImage,
-  Wishlist,
-  Notification,
-  ProductVariant,
-  ProductDiscussion,
-};
+// ================= REGISTER MODELS =================
+// ⬇️ Gaya eksplisit (gabungan dari contoh ke-2)
+db.User = UserModel(sequelize);
+db.Seller = SellerModel(sequelize);
 
-// Definisikan asosiasi antar model
-Object.values(db).forEach((model: any) => {
-  if (model?.associate) {
-    model.associate(db);
+db.Product = ProductModel(sequelize);
+db.Category = CategoryModel(sequelize);
+db.Order = OrderModel(sequelize);
+db.OrderItem = OrderItemModel(sequelize);
+db.Review = ReviewModel(sequelize);
+db.Promotion = PromotionModel(sequelize);
+db.ShippingOption = ShippingOptionModel(sequelize);
+db.Payment = PaymentModel(sequelize);
+db.CartItem = CartItemModel(sequelize);
+db.ProductImage = ProductImageModel(sequelize);
+db.UserAddress = UserAddressModel(sequelize);
+db.Wishlist = WishlistModel(sequelize);
+db.Notification = NotificationModel(sequelize);
+db.ProductVariant = ProductVariantModel(sequelize);
+db.ProductDiscussion = ProductDiscussionModel(sequelize);
+
+// ================= ASSOCIATIONS =================
+Object.keys(db).forEach((modelName) => {
+  if (db[modelName]?.associate) {
+    db[modelName].associate(db);
   }
 });
 

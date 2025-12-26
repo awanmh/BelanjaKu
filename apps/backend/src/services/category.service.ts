@@ -71,7 +71,7 @@ class CategoryService {
 
     // 4. Kembalikan data dengan format paginasi baru
     return {
-      rows: rows.map((category) => category.toJSON()),
+      rows: rows.map((category: any) => category.toJSON()),
       pagination: {
         totalItems: count,
         totalPages,
