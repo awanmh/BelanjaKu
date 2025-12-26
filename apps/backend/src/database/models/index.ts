@@ -12,7 +12,7 @@ import SellerModel from "./seller.model";
 import PromotionModel from "./promotion.model";
 import ShippingOptionModel from "./shippingOption.model";
 import PaymentModel from "./payment.model";
-import CartModel from "./cart.model"; // 1. Impor Cart
+// CartModel removed as per friend's structure
 import CartItemModel from "./cartItem.model"; // 2. Impor CartItem
 import ProductImageModel from "./productImage.model"; // Impor ProductImage
 import UserAddressModel from "./userAddress.model";
@@ -49,8 +49,8 @@ const Seller = SellerModel(sequelize);
 const Promotion = PromotionModel(sequelize);
 const ShippingOption = ShippingOptionModel(sequelize);
 const Payment = PaymentModel(sequelize);
-const Cart = CartModel(sequelize); // 3. Init Cart
-const CartItem = CartItemModel(sequelize); // 4. Init CartItem
+// const Cart = CartModel(sequelize); // Removed
+const CartItem = CartItemModel(sequelize);
 const UserAddress = UserAddressModel(sequelize);
 const ProductImage = ProductImageModel(sequelize); // Init ProductImage
 const Wishlist = WishlistModel(sequelize);
@@ -72,7 +72,7 @@ const db = {
   Promotion,
   ShippingOption,
   Payment,
-  Cart,
+  // Cart, // Removed
   CartItem,
   UserAddress,
   ProductImage,
