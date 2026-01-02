@@ -1,51 +1,79 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import api from '@/lib/api';
-import { useUserStore } from '@/store/user.store';
-import { Button } from '@/components/ui/Button';
-import { Input } from '@/components/ui/Input';
-import { Loader2, Eye, EyeOff } from 'lucide-react';
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import api from "@/lib/api";
+import { useUserStore } from "@/store/user.store";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
+import { Loader2, Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
   const login = useUserStore((state) => state.login);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
+    setError("");
 
     try {
-      const res = await api.post('/auth/login', formData);
+      const res = await api.post("/auth/login", formData);
 
       if (res.data.success) {
         const { user, tokens } = res.data.data;
+        // Simpan ke zustand + localStorage
         console.log('[AUTH] Login success. User:', user);
         login(user, tokens.accessToken);
+        localStorage.setItem("accessToken", tokens.accessToken);
 
-        // Role-based redirect
-        if (user.role === 'admin') {
-          router.push('/admin');
-        } else if (user.role === 'seller') {
-          router.push('/seller/dashboard');
+        // --- LOGIKA REDIRECT PINTAR ---
+        if (user.role === "admin") {
+          router.push("/admin");
+        } else if (user.role === "seller") {
+          router.push("/seller/dashboard");
+        } else if (user.role === "user") {
+          router.push("/");
         } else {
-          router.push('/');
+           // fallback cek domain email jika role tidak ada
+           if (user.email.includes("@admin.belanjaku.com")) {
+             router.push("/admin");
+           } else if (user.email.includes("@seller.belanjaku.com")) {
+             router.push("/seller/dashboard");
+           } else {
+             router.push("/");
+           }
+        }
         }
       }
     } catch (err: any) {
       console.error(err);
-      setError(err.response?.data?.message || 'Gagal masuk. Periksa email dan password Anda.');
+      if (err.response?.status === 422 && err.response?.data?.errors) {
+        const validationErrors = err.response.data.errors
+          .map((e: any) => {
+            if (typeof e === "object" && !e.msg) {
+              return Object.values(e).join(", ");
+            }
+            return e.msg;
+          })
+          .filter(Boolean)
+          .join(", ");
+        setError(validationErrors);
+      } else {
+        setError(
+          err.response?.data?.message ||
+            "Gagal masuk. Periksa email dan password Anda."
+        );
+      }
     } finally {
       setIsLoading(false);
     }
@@ -61,7 +89,7 @@ export default function LoginPage() {
 
   return (
     <>
-      {/* Tab Navigation (Masuk / Daftar) */}
+      {/* Tab Navigation */}
       <div className="flex gap-8 mb-8 text-lg font-medium z-10 relative">
         <span className="text-white font-bold border-b-2 border-white pb-1 cursor-default tracking-wide">
           Masuk
@@ -74,18 +102,16 @@ export default function LoginPage() {
         </Link>
       </div>
 
-      {/* White Card Container */}
+      {/* Card Container */}
       <div className="w-full bg-white/95 backdrop-blur-md rounded-xl shadow-2xl p-8 md:p-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
         <form onSubmit={handleSubmit} className="space-y-6">
-
-          {/* Error Message */}
           {error && (
             <div className="bg-red-50 border border-red-100 text-red-600 px-4 py-3 rounded-lg text-xs font-medium text-center animate-pulse">
               {error}
             </div>
           )}
 
-          {/* Email Input */}
+          {/* Email */}
           <div className="space-y-1.5">
             <label className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">
               Email
@@ -100,13 +126,16 @@ export default function LoginPage() {
             />
           </div>
 
-          {/* Password Input */}
+          {/* Password */}
           <div className="space-y-1.5">
             <div className="flex justify-between items-center">
               <label className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">
                 Password
               </label>
-              <a href="#" className="text-[11px] text-gray-400 hover:text-black transition-colors">
+              <a
+                href="#"
+                className="text-[11px] text-gray-400 hover:text-black transition-colors"
+              >
                 Lupa Password?
               </a>
             </div>
@@ -129,7 +158,7 @@ export default function LoginPage() {
             </div>
           </div>
 
-          {/* Submit Button */}
+          {/* Submit */}
           <div className="pt-2">
             <Button
               type="submit"
@@ -142,23 +171,28 @@ export default function LoginPage() {
                   <span>Memproses...</span>
                 </div>
               ) : (
-                'Masuk Sekarang'
+                "Masuk Sekarang"
               )}
             </Button>
           </div>
         </form>
 
-        {/* Social Login Divider */}
+        {/* Social Login */}
         <div className="mt-8">
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t border-gray-200" />
             </div>
             <div className="relative flex justify-center text-[10px] uppercase tracking-widest font-semibold">
-              <span className="bg-white px-3 text-gray-400">Atau masuk dengan</span>
+              <span className="bg-white px-3 text-gray-400">
+                Atau masuk dengan
+              </span>
             </div>
           </div>
 
+          <div className="mt-6 flex justify-center gap-4">
+            <button className="p-3 rounded-full border border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition-all duration-300 group">
+              {/* Google Icon */}
           <div className="mt-6 flex justify-center gap-4">
             <button className="p-3 rounded-full border border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition-all duration-300 group">
               {/* Google Icon */}

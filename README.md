@@ -1,8 +1,8 @@
 # 📋 Panduan Kontribusi Tim (SOP Git)
 
-Halo Tim\! Berikut adalah cara bekerja di repositori ini. Kita memisahkan pengerjaan Backend dan Frontend di branch yang berbeda agar lebih rapi dan aman.
+Halo Tim! Berikut adalah cara bekerja di repositori ini. Kita memisahkan pengerjaan Backend dan Frontend di branch yang berbeda agar lebih rapi dan aman.
 
-#### 1\. Persiapan Awal (Lakukan Sekali Saja)
+#### 1. Persiapan Awal (Lakukan Sekali Saja)
 
 1.  **Clone Repositori:**
     Buka terminal di folder tujuan Anda, lalu jalankan:
@@ -83,6 +83,8 @@ Tugas kalian hanya fokus di dalam folder `apps/backend`. Jangan menyentuh folder
 
 **1. Core Backend Features:**
 
+**1. Core Backend Features:**
+
 - **Product Variants (SKU Management):**
   - Implemented `ProductVariant` model and `product_variants` table via migration `20251224000005-create-variants-discussions.js`.
   - Updated `ProductService` to handle variant creation and updates.
@@ -122,6 +124,8 @@ Tugas kalian hanya fokus di dalam folder `apps/backend`. Jangan menyentuh folder
 - [ ] **Consume New APIs:** Integrasi endpoint baru (Product Discussions, Variants, Wishlist) ke UI.
 - [ ] **Real-Time UI:** Implementasi `socket.io-client` di frontend untuk notifikasi real-time.
 - [ ] **Search UI:** Membuat UI pencarian yang memanfaatkan endpoint full-text search backend.
+- [ ] **Wishlist UI:** Membenahi tampilan wishlist sekaligus logika backend pada fitur.
+- [ ] **Cart UI:** Membenahi tampilan card (keranjang) sekaligus logika backend pada fitur.
 
 #### 🛒 Shopping Cart (Keranjang)
 
@@ -140,6 +144,4 @@ Tugas kalian hanya fokus di dalam folder `apps/backend`. Jangan menyentuh folder
 
 - [ ] **Shipping Calculation:** Integrasi `shipping.service.ts` dengan API Logistik (contoh: RajaOngkir) untuk menghitung biaya kirim real-time berdasarkan alamat terpilih.
 
-Selamat bekerja! 🚀
-
----
+## Selamat bekerja! 🚀

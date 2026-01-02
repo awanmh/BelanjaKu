@@ -60,7 +60,11 @@ export default function RegisterPage() {
       });
 
       if (res.data.success) {
+<<<<<<< HEAD
         // Cek domain untuk pesan sukses yang lebih personal
+=======
+        // Cek domain untuk pesan sukses yang lebih personal (Kosmetik UI)
+>>>>>>> 49b30cf
         let roleMsg = "User";
         if (formData.email.includes("@admin.belanjaku.com")) roleMsg = "Admin";
         if (formData.email.includes("@seller.belanjaku.com")) roleMsg = "Seller";
@@ -72,7 +76,11 @@ export default function RegisterPage() {
       }
     } catch (err: any) {
       console.error("Register Error:", err);
+<<<<<<< HEAD
       // Logic Error Handling
+=======
+      // Logic Error Handling (Sama seperti sebelumnya)
+>>>>>>> 49b30cf
       if (err.response) {
         const { status, data } = err.response;
         if (status === 409) {
@@ -116,7 +124,7 @@ export default function RegisterPage() {
             </div>
           )}
 
-          {/* Email Input */}
+          {/* Form Inputs (Sama persis seperti sebelumnya) */}
           <div className="space-y-1.5">
             <label className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Email</label>
             <Input 
@@ -129,7 +137,6 @@ export default function RegisterPage() {
             />
           </div>
 
-          {/* Password Input */}
           <div className="space-y-1.5">
             <label className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Password</label>
             <div className="relative">
@@ -147,7 +154,6 @@ export default function RegisterPage() {
             </div>
           </div>
 
-          {/* Retype Password Input */}
           <div className="space-y-1.5">
             <label className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Ulangi Password</label>
             <div className="relative">
@@ -165,7 +171,10 @@ export default function RegisterPage() {
             </div>
           </div>
 
+<<<<<<< HEAD
           {/* Full Name Input */}
+=======
+>>>>>>> 49b30cf
           <div className="space-y-1.5">
             <label className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Nama Lengkap</label>
             <Input
@@ -178,13 +187,13 @@ export default function RegisterPage() {
             />
           </div>
 
-          {/* Submit Button */}
           <div className="pt-2">
             <Button type="submit" className="w-full bg-black hover:bg-gray-800 text-white h-12 font-bold uppercase tracking-widest text-xs shadow-lg" disabled={isLoading}>
               {isLoading ? <div className="flex items-center gap-2"><Loader2 className="w-4 h-4 animate-spin" /><span>Memproses...</span></div> : "Daftar Sekarang"}
             </Button>
           </div>
         </form>
+<<<<<<< HEAD
 
         {/* Social Login Divider (DIPERBAIKI: SVG FIXED) */}
         <div className="mt-8">
@@ -236,6 +245,9 @@ export default function RegisterPage() {
             </button>
           </div>
         </div>
+=======
+        {/* Social Login Section (Biarkan sama) */}
+>>>>>>> 49b30cf
       </div>
     </>
   );

@@ -11,7 +11,7 @@ module.exports = {
       {
         id: uuidv4(),
         fullName: "Super Admin",
-        email: "admin@belanjaku.com",
+        email: "demo@admin.belanjaku.com",
         password: passwordHash,
         role: "admin",
         isVerified: true,
@@ -21,7 +21,7 @@ module.exports = {
       {
         id: uuidv4(),
         fullName: "Juragan Seller",
-        email: "seller@belanjaku.com",
+        email: "demo@seller.belanjaku.com",
         password: passwordHash,
         role: "seller",
         isVerified: true,
@@ -31,7 +31,7 @@ module.exports = {
       {
         id: uuidv4(),
         fullName: "Pembeli Setia",
-        email: "user@belanjaku.com",
+        email: "demo@belanjaku.com",
         password: passwordHash,
         role: "user",
         isVerified: true,
@@ -58,7 +58,11 @@ module.exports = {
     const sellerUser = await queryInterface.rawSelect(
       "users",
       {
+<<<<<<< HEAD
         where: { email: "seller@belanjaku.com" },
+=======
+        where: { email: "demo@seller.belanjaku.com" },
+>>>>>>> 49b30cf
       },
       ["id"]
     );
@@ -93,9 +97,9 @@ module.exports = {
       "users",
       {
         email: [
-          "admin@belanjaku.com",
-          "seller@belanjaku.com",
-          "user@belanjaku.com",
+          "demo@admin.belanjaku.com",
+          "demo@seller.belanjaku.com",
+          "demo@belanjaku.com",
         ],
       },
       {}
@@ -103,3 +107,5 @@ module.exports = {
     // Seller profile will be deleted via cascade or handled manually if strict
   },
 };
+
+

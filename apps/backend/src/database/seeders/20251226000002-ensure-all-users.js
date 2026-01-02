@@ -10,7 +10,11 @@ module.exports = {
         // 1. List of users to ensure
         const targetUsers = [
             {
+<<<<<<< HEAD
                 email:   "admin@belanjaku.com",
+=======
+                email: "admin@belanjaku.com",
+>>>>>>> 49b30cf
                 role: "admin",
                 fullName: "Super Admin",
             },

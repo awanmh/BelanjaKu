@@ -38,24 +38,35 @@ export default function CartPage() {
 
   const fetchCart = async () => {
     try {
+      setLoading(true);
       const res = await api.get('/cart');
-      if (res.data.success) {
-        const items = res.data.data.items || [];
-        setCartItems(items);
-        
-        // Update cart count in store
-        const totalItems = items.reduce(
+
+      if (res.data.status === 'success' || res.data.success) {
+        const rawItems = res.data.data?.items || [];
+
+        // --- DEBUGGING TAHAP 2 ---
+        console.log("Total Item dari Backend:", rawItems.length);
+        if (rawItems.length > 0) {
+          console.log("🔍 Cek Item Pertama:", rawItems[0]);
+          console.log("❓ Apakah ada object product?:", rawItems[0].product);
+        }
+        // -------------------------
+
+        // Filter: Hanya ambil item yang punya data product valid
+        const validItems = rawItems.filter((item: any) => item && item.product);
+
+        console.log("✅ Item Valid setelah filter:", validItems);
+
+        setCartItems(validItems);
+
+        const totalItems = validItems.reduce(
           (sum: number, item: CartItem) => sum + item.quantity,
           0
         );
         setCartCount(totalItems);
       }
     } catch (error: any) {
-      if (error.response?.status === 401) {
-        router.push('/auth/login');
-      } else {
-        console.error('Failed to fetch cart:', error);
-      }
+      console.error("Error:", error);
     } finally {
       setLoading(false);
     }
@@ -63,7 +74,7 @@ export default function CartPage() {
 
   const updateQuantity = async (cartId: string, newQuantity: number) => {
     if (newQuantity < 1) return;
-    
+
     setUpdating(cartId);
     try {
       await api.patch(`/cart/${cartId}`, { quantity: newQuantity });
@@ -77,7 +88,7 @@ export default function CartPage() {
 
   const removeItem = async (cartId: string) => {
     if (!confirm('Hapus produk dari keranjang?')) return;
-    
+
     setUpdating(cartId);
     try {
       await api.delete(`/cart/${cartId}`);
@@ -90,7 +101,11 @@ export default function CartPage() {
   };
 
   const calculateTotal = () => {
-    return cartItems.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+    return cartItems.reduce((sum, item) => {
+      // Safety check: jika product tidak ada, lewati
+      if (!item.product) return sum;
+      return sum + (item.product.price * item.quantity);
+    }, 0);
   };
 
   const shippingCost = 0; // Free shipping
@@ -135,9 +150,12 @@ export default function CartPage() {
           {/* Cart Items */}
           <div className="lg:col-span-2 space-y-4">
             {cartItems.map((item) => {
-              const imageUrl = item.product.imageUrl.startsWith('http')
+              // Safety Check: Jangan render jika produk null
+              if (!item.product) return null;
+
+              const imageUrl = item.product.imageUrl && item.product.imageUrl.startsWith('http')
                 ? item.product.imageUrl
-                : `${process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '')}/${item.product.imageUrl}`;
+                : `${process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '')}/${item.product.imageUrl || ''}`;
 
               return (
                 <div key={item.id} className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
@@ -170,7 +188,7 @@ export default function CartPage() {
                           </Link>
                           <p className="text-sm text-gray-600 mt-1">Ukuran: {item.size}</p>
                         </div>
-                        
+
                         {/* Remove Button */}
                         <button
                           onClick={() => removeItem(item.id)}
@@ -223,7 +241,7 @@ export default function CartPage() {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 sticky top-4">
               <h2 className="text-xl font-bold mb-6">Ringkasan Pesanan</h2>
-              
+
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-gray-600">
                   <span>Subtotal ({cartItems.length} item{cartItems.length > 1 ? 's' : ''})</span>

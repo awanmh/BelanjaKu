@@ -81,7 +81,6 @@ export default function AdminUsersPage() {
             setActionLoading(false);
         }
     };
-
     const filteredUsers = users.filter(user => {
         const matchesSearch = user.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
             user.email.toLowerCase().includes(searchTerm.toLowerCase());
@@ -107,7 +106,8 @@ export default function AdminUsersPage() {
                             placeholder="Cari berdasarkan nama atau email..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="pl-10"
+                            className="pl-10 h-11 border-gray-200 focus:border-black focus:ring-black"
+                        />
                         />
                     </div>
                     <div className="flex items-center gap-2">
@@ -115,7 +115,7 @@ export default function AdminUsersPage() {
                         <select
                             value={roleFilter}
                             onChange={(e) => setRoleFilter(e.target.value as any)}
-                            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white h-11"
                         >
                             <option value="all">Semua Role</option>
                             <option value="user">User</option>
@@ -126,6 +126,12 @@ export default function AdminUsersPage() {
                 </div>
             </div>
 
+            {/* Results Count */}
+            <div className="flex items-center justify-between">
+                <p className="text-sm text-gray-600">
+                    Menampilkan {filteredUsers.length} dari {users.length} users
+                </p>
+            </div>
             {/* Users Table */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
                 {loading ? (

@@ -26,15 +26,21 @@ export type LoginInput = Pick<UserAttributes, 'email' | 'password'>;
 
 class AuthService {
   /**
+<<<<<<< HEAD
    * ============================
    * REGISTER
    * ============================
+=======
+   * Mendaftarkan pengguna baru ke dalam sistem.
+   * Role ditentukan otomatis berdasarkan domain email.
+>>>>>>> 49b30cf
    */
   public async register(
     userData: RegisterInput
   ): Promise<Omit<UserAttributes, 'password'>> {
     const { email, password, fullName } = userData;
 
+<<<<<<< HEAD
     logger.info(`[REGISTER] Attempt: ${email}`);
 
     // 1️⃣ Cari user termasuk soft-deleted
@@ -123,6 +129,33 @@ class AuthService {
 
       throw error;
     }
+=======
+    // 1. Cek apakah user sudah ada
+    const existingUser = await User.findOne({ where: { email } });
+    if (existingUser) {
+      throw new HttpException(StatusCodes.CONFLICT, 'Email already exists');
+    }
+
+    // 2. Tentukan role berdasarkan domain email
+    let role: 'user' | 'seller' | 'admin' = 'user';
+
+    if (email.includes('@admin.belanjaku.com')) {
+      role = 'admin';
+    } else if (email.includes('@seller.belanjaku.com')) {
+      role = 'seller';
+    }
+
+    // 3. Buat user baru dengan role sesuai
+    const newUser = await User.create({
+      fullName,
+      email,
+      password,
+      role: role,
+      isVerified: true,
+    });
+
+    return newUser.toJSON();
+>>>>>>> 49b30cf
   }
 
   /**
@@ -156,6 +189,12 @@ class AuthService {
       role: user.role,
     };
 
+<<<<<<< HEAD
+=======
+    const accessToken = generateAccessToken(tokenPayload);
+    const refreshToken = generateRefreshToken(tokenPayload);
+
+>>>>>>> 49b30cf
     return {
       user: user.toJSON(),
       tokens: {
@@ -182,6 +221,10 @@ class AuthService {
 
     const resetToken = crypto.randomBytes(32).toString('hex');
 
+<<<<<<< HEAD
+=======
+    // 2. Simpan token ke DB
+>>>>>>> 49b30cf
     user.resetPasswordToken = resetToken;
     user.resetPasswordExpires = new Date(Date.now() + 60 * 60 * 1000);
     await user.save();

@@ -142,7 +142,11 @@ export default function SellerDashboardPage() {
             </div>
 
             {/* Performance Summary */}
+<<<<<<< HEAD
             <div className="bg-linear-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg p-6 text-white">
+=======
+            <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg p-6 text-white">
+>>>>>>> 49b30cf
                 <div className="flex items-center gap-3 mb-4">
                     <TrendingUp size={32} />
                     <h2 className="text-2xl font-bold">Performa Toko</h2>
@@ -314,4 +318,8 @@ export default function SellerDashboardPage() {
             </div>
         </div>
     );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 49b30cf

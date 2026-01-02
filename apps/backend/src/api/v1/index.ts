@@ -9,10 +9,11 @@ import sellerRouter from "./sellers/seller.routes";
 import paymentRouter from "./payments/payment.routes";
 import shippingRouter from "./shipping/shipping.routes";
 import promotionRouter from "./promotions/promotion.routes";
-import CartRoute from "./carts/cart.routes";
+import cartRoutes from "./cart/cart.routes";
 import wishlistRouter from "./wishlists/wishlist.routes";
 import notificationRouter from "./notifications/notification.routes";
 import productDiscussionRouter from "./product-discussions/productDiscussion.routes";
+
 
 const v1Router = Router();
 
@@ -27,8 +28,8 @@ v1Router.use("/sellers", sellerRouter);
 v1Router.use("/payments", paymentRouter);
 v1Router.use("/shipping", shippingRouter);
 v1Router.use("/promotions", promotionRouter);
-v1Router.use("/carts", CartRoute);
-v1Router.use("/wishlists", wishlistRouter);
+v1Router.use("/cart", cartRoutes);
+v1Router.use("/wishlist", wishlistRouter);
 v1Router.use("/notifications", notificationRouter);
 v1Router.use("/discussions", productDiscussionRouter);
 
