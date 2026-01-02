@@ -2094,3 +2094,10 @@
 2025-12-27 04:39:00:390 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
 2025-12-27 04:40:08:408 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
 2025-12-27 04:40:37:4037 [31merror[39m: [31m[POST] /api/v1/auth/register >> StatusCode:: 500, Message:: Validation error[39m
+2025-12-27 04:54:52:5452 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-27 04:55:02:552 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 04:55:02:552 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 04:58:48:5848 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-27 04:58:59:5859 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-27 04:59:39:5939 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-27 04:59:58:5958 [31merror[39m: [31m[POST] /api/v1/auth/register >> StatusCode:: 409, Message:: Email already registered[39m
