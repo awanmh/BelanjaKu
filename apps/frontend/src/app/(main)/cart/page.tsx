@@ -66,7 +66,7 @@ export default function CartPage() {
             >
               {/* Product Info */}
               <div className="col-span-1 md:col-span-6 flex gap-4">
-                <div className="w-20 h-24 bg-gray-100 rounded overflow-hidden flex-shrink-0">
+                <div className="w-20 h-24 bg-gray-100 rounded overflow-hidden shrink-0">
                   <img
                     src={
                       item.imageUrl ||

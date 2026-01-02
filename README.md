@@ -152,4 +152,4 @@ Status saat ini: **Stable (Main Branch)**
 
 ---
 
-_Dibuat oleh Tim BelanjaKu_
+Dibuat oleh Tim BelanjaKu

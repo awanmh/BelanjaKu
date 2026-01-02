@@ -67,7 +67,7 @@ export default function ProductDetailPage({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* IMAGE GALLERY */}
         <div className="space-y-4">
-          <div className="aspect-[3/4] bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
+          <div className="aspect-3/4 bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
             <img
               src={images[activeImage]}
               alt={product.name}
@@ -80,7 +80,7 @@ export default function ProductDetailPage({
                 <button
                   key={idx}
                   onClick={() => setActiveImage(idx)}
-                  className={`w-20 h-24 flex-shrink-0 border-2 rounded-md overflow-hidden ${
+                  className={`w-20 h-24 shrink-0 border-2 rounded-md overflow-hidden ${
                     activeImage === idx ? "border-black" : "border-transparent"
                   }`}
                 >
