@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -98,11 +97,11 @@ export default function Footer() {
         <div className="mt-16 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-gray-400">© 2025 BELANJAKU – All Rights Reserved.</p>
 
-          <div className="flex items-center gap-6 mt-4 md:mt-0 text-white">
-            <Link href="#" className="hover:text-gray-400 transition-colors"><Facebook size={20} /></Link>
-            <Link href="#" className="hover:text-gray-400 transition-colors"><Instagram size={20} /></Link>
-            <Link href="#" className="hover:text-gray-400 transition-colors"><Youtube size={20} /></Link>
-            <Link href="#" className="hover:text-gray-400 transition-colors"><Twitter size={20} /></Link>
+          <div className="flex items-center gap-5 mt-4 md:mt-0">
+            <Link href="#"><Image src="/icons/facebook.svg" alt="fb" width={22} height={22} /></Link>
+            <Link href="#"><Image src="/icons/instagram.svg" alt="ig" width={22} height={22} /></Link>
+            <Link href="#"><Image src="/icons/youtube.svg" alt="yt" width={22} height={22} /></Link>
+            <Link href="#"><Image src="/icons/twitter.svg" alt="tw" width={22} height={22} /></Link>
           </div>
         </div>
       </div>

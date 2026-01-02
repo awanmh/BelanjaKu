@@ -7,21 +7,21 @@ const brands = [
   {
     id: 'compass',
     name: 'Compass',
-    image: 'https://images.unsplash.com/photo-1607522370275-f14206abe5d3?q=80&w=800&auto=format&fit=crop',
+    image: '/image/categories/background_compass.png',
     description: 'New Move Against Counterfeits',
     link: '/products?brand=compass'
   },
   {
     id: 'ventela',
     name: 'Ventela',
-    image: 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?q=80&w=800&auto=format&fit=crop',
+    image: '/image/categories/background_ventela.png',
     description: 'Live with Pride',
     link: '/products?brand=ventela'
   },
   {
     id: 'geoffmax',
     name: 'Geoff Max',
-    image: 'https://images.unsplash.com/photo-1560769629-975e13f0c470?q=80&w=800&auto=format&fit=crop',
+    image: '/image/categories/background_geoffmax.png',
     description: 'Ready to Kick',
     link: '/products?brand=geoffmax'
   }

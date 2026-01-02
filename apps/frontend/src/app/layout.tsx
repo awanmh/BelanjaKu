@@ -1,16 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ 
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
-
-const playfair = Playfair_Display({ 
-  subsets: ["latin"],
-  variable: "--font-playfair",
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "BelanjaKu",
@@ -23,10 +15,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // FIX: Tambahkan suppressHydrationWarning di html tag juga jika perlu
-    // dan pastikan class font diaplikasikan dengan benar
-    <html lang="id" suppressHydrationWarning>
-      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`} suppressHydrationWarning>
+    // FIX: Tambahkan suppressHydrationWarning={true} di tag html
+    <html lang="id" suppressHydrationWarning={true}>
+      <body className={inter.className} suppressHydrationWarning={true}>
         {children}
       </body>
     </html>

@@ -7,7 +7,6 @@
   --color-accent: #3B82F6;
   
   --font-sans: var(--font-inter);
-  --font-serif: var(--font-playfair);
 }
 
 /* FIX: Gunakan CSS standar untuk body. 
