@@ -58,11 +58,7 @@ module.exports = {
     const sellerUser = await queryInterface.rawSelect(
       "users",
       {
-<<<<<<< HEAD
-        where: { email: "seller@belanjaku.com" },
-=======
         where: { email: "demo@seller.belanjaku.com" },
->>>>>>> 49b30cf
       },
       ["id"]
     );
@@ -107,5 +103,3 @@ module.exports = {
     // Seller profile will be deleted via cascade or handled manually if strict
   },
 };
-
-

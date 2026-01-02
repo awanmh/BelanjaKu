@@ -1,3 +1,4 @@
+"use strict";
 "use client";
 
 import { useState } from "react";
@@ -40,7 +41,9 @@ export default function RegisterPage() {
     // Regex: Huruf Besar, Huruf Kecil, Angka
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/;
     if (!passwordRegex.test(formData.password)) {
-      setError("Password harus mengandung minimal 1 Huruf Besar, 1 Huruf Kecil, dan 1 Angka.");
+      setError(
+        "Password harus mengandung minimal 1 Huruf Besar, 1 Huruf Kecil, dan 1 Angka."
+      );
       return;
     }
 
@@ -60,38 +63,37 @@ export default function RegisterPage() {
       });
 
       if (res.data.success) {
-<<<<<<< HEAD
         // Cek domain untuk pesan sukses yang lebih personal
-=======
-        // Cek domain untuk pesan sukses yang lebih personal (Kosmetik UI)
->>>>>>> 49b30cf
         let roleMsg = "User";
         if (formData.email.includes("@admin.belanjaku.com")) roleMsg = "Admin";
-        if (formData.email.includes("@seller.belanjaku.com")) roleMsg = "Seller";
+        if (formData.email.includes("@seller.belanjaku.com"))
+          roleMsg = "Seller";
 
-        alert(`Registrasi ${roleMsg} berhasil! Silakan login untuk masuk ke dashboard.`);
-        
+        alert(
+          `Registrasi ${roleMsg} berhasil! Silakan login untuk masuk ke dashboard.`
+        );
+
         // Arahkan ke Login Page
         router.push("/auth/login");
       }
     } catch (err: any) {
       console.error("Register Error:", err);
-<<<<<<< HEAD
       // Logic Error Handling
-=======
-      // Logic Error Handling (Sama seperti sebelumnya)
->>>>>>> 49b30cf
       if (err.response) {
         const { status, data } = err.response;
         if (status === 409) {
           setError("Email sudah terdaftar. Silakan login.");
         } else if (status === 422 || status === 400) {
-           if (data.errors && Array.isArray(data.errors)) {
-            const msgs = data.errors.map((e: any) => (typeof e === 'object' ? Object.values(e)[0] : e)).join(", ");
+          if (data.errors && Array.isArray(data.errors)) {
+            const msgs = data.errors
+              .map((e: any) =>
+                typeof e === "object" ? Object.values(e)[0] : e
+              )
+              .join(", ");
             setError(msgs);
-           } else {
-             setError(data.message || "Data tidak valid.");
-           }
+          } else {
+            setError(data.message || "Data tidak valid.");
+          }
         } else {
           setError(data.message || "Terjadi kesalahan server.");
         }
@@ -108,7 +110,10 @@ export default function RegisterPage() {
   return (
     <>
       <div className="flex gap-8 mb-8 text-lg font-medium z-10 relative">
-        <Link href="/auth/login" className="text-white/60 hover:text-white transition-colors pb-1 tracking-wide">
+        <Link
+          href="/auth/login"
+          className="text-white/60 hover:text-white transition-colors pb-1 tracking-wide"
+        >
           Masuk
         </Link>
         <span className="text-white font-bold border-b-2 border-white pb-1 cursor-default tracking-wide">
@@ -124,78 +129,108 @@ export default function RegisterPage() {
             </div>
           )}
 
-          {/* Form Inputs (Sama persis seperti sebelumnya) */}
+          {/* Form Inputs */}
           <div className="space-y-1.5">
-            <label className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Email</label>
-            <Input 
-              type="email" 
-              placeholder="nama@email.com / nama@admin.belanjaku.com" 
+            <label className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">
+              Email
+            </label>
+            <Input
+              type="email"
+              placeholder="nama@email.com / nama@admin.belanjaku.com"
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
               required
               className="bg-gray-50 border-gray-200 focus:bg-white focus:border-black focus:ring-black h-11"
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Password</label>
+            <label className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">
+              Password
+            </label>
             <div className="relative">
               <Input
                 type={showPassword ? "text" : "password"}
                 placeholder="Min 8 karakter (Huruf Besar, Kecil, Angka)"
                 value={formData.password}
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
                 required
                 className="bg-gray-50 border-gray-200 focus:bg-white focus:border-black focus:ring-black h-11 pr-10"
               />
-              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+              >
                 {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
             </div>
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Ulangi Password</label>
+            <label className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">
+              Ulangi Password
+            </label>
             <div className="relative">
               <Input
                 type={showRetypePassword ? "text" : "password"}
                 placeholder="Ulangi Password"
                 value={formData.retypePassword}
-                onChange={(e) => setFormData({ ...formData, retypePassword: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, retypePassword: e.target.value })
+                }
                 required
                 className="bg-gray-50 border-gray-200 focus:bg-white focus:border-black focus:ring-black h-11 pr-10"
               />
-              <button type="button" onClick={() => setShowRetypePassword(!showRetypePassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+              <button
+                type="button"
+                onClick={() => setShowRetypePassword(!showRetypePassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+              >
                 {showRetypePassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
             </div>
           </div>
 
-<<<<<<< HEAD
-          {/* Full Name Input */}
-=======
->>>>>>> 49b30cf
           <div className="space-y-1.5">
-            <label className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Nama Lengkap</label>
+            <label className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">
+              Nama Lengkap
+            </label>
             <Input
               type="text"
               placeholder="Nama Lengkap"
               value={formData.fullName}
-              onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, fullName: e.target.value })
+              }
               required
               className="bg-gray-50 border-gray-200 focus:bg-white focus:border-black focus:ring-black h-11"
             />
           </div>
 
           <div className="pt-2">
-            <Button type="submit" className="w-full bg-black hover:bg-gray-800 text-white h-12 font-bold uppercase tracking-widest text-xs shadow-lg" disabled={isLoading}>
-              {isLoading ? <div className="flex items-center gap-2"><Loader2 className="w-4 h-4 animate-spin" /><span>Memproses...</span></div> : "Daftar Sekarang"}
+            <Button
+              type="submit"
+              className="w-full bg-black hover:bg-gray-800 text-white h-12 font-bold uppercase tracking-widest text-xs shadow-lg"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>Memproses...</span>
+                </div>
+              ) : (
+                "Daftar Sekarang"
+              )}
             </Button>
           </div>
         </form>
-<<<<<<< HEAD
 
-        {/* Social Login Divider (DIPERBAIKI: SVG FIXED) */}
+        {/* Social Login Divider */}
         <div className="mt-8">
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
@@ -236,7 +271,7 @@ export default function RegisterPage() {
 
             {/* Facebook Button */}
             <button className="p-3 rounded-full border border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition-all duration-300 group">
-            <svg
+              <svg
                 className="w-5 h-5 text-[#1877F2] fill-current opacity-70 group-hover:opacity-100 transition-opacity"
                 viewBox="0 0 24 24"
               >
@@ -245,9 +280,6 @@ export default function RegisterPage() {
             </button>
           </div>
         </div>
-=======
-        {/* Social Login Section (Biarkan sama) */}
->>>>>>> 49b30cf
       </div>
     </>
   );

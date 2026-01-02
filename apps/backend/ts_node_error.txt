@@ -1,0 +1,20 @@
+E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\node_modules\ts-node\src\index.ts:859
+    return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+           ^
+TSError: ⨯ Unable to compile TypeScript:
+src/utils/http-exception.util.ts(4,17): error TS7006: Parameter 'status' implicitly has an 'any' type.
+src/utils/http-exception.util.ts(4,25): error TS7006: Parameter 'message' implicitly has an 'any' type.
+src/utils/http-exception.util.ts(6,14): error TS2339: Property 'status' does not exist on type 'HttpException'.
+
+    at createTSError (E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\node_modules\ts-node\src\index.ts:863:19)
+    at getOutput (E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\node_modules\ts-node\src\index.ts:1077:36)
+    at Object.compile (E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\node_modules\ts-node\src\index.ts:1433:41)
+    at Module.m._compile (E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module.m._compile (E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1708:10
+    at require.extensions.<computed> (E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Object.require.extensions.<computed> [as .ts] (E:\Semester 5\Implementasi dan Pengujian PL\BelanjaKu\apps\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1318:32) {
+  diagnosticCodes: [ 7006, 7006, 2339 ]
+}

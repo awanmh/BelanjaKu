@@ -1,12 +1,12 @@
-import crypto from 'crypto';
-import db from '../database/models';
-import { UserAttributes } from '../database/models/user.model';
-import HttpException from '../utils/http-exception.util';
-import { StatusCodes } from 'http-status-codes';
-import { generateAccessToken, generateRefreshToken } from '../utils/jwt.util';
-import logger from '../utils/logger.util';
-import { sendResetPasswordEmail } from '../utils/email.util';
-import { hashPassword } from '../utils/hash.util';
+import crypto from "crypto";
+import db from "../database/models";
+import { UserAttributes } from "../database/models/user.model";
+import HttpException from "../utils/http-exception.util";
+import { StatusCodes } from "http-status-codes";
+import { generateAccessToken, generateRefreshToken } from "../utils/jwt.util";
+import logger from "../utils/logger.util";
+import { sendResetPasswordEmail } from "../utils/email.util";
+import { hashPassword } from "../utils/hash.util";
 
 const User = db.User;
 const Seller = db.Seller;
@@ -16,31 +16,25 @@ const Seller = db.Seller;
  */
 export type RegisterInput = Pick<
   UserAttributes,
-  'email' | 'password' | 'fullName'
+  "email" | "password" | "fullName"
 >;
 
 /**
  * Input login
  */
-export type LoginInput = Pick<UserAttributes, 'email' | 'password'>;
+export type LoginInput = Pick<UserAttributes, "email" | "password">;
 
 class AuthService {
   /**
-<<<<<<< HEAD
    * ============================
    * REGISTER
    * ============================
-=======
-   * Mendaftarkan pengguna baru ke dalam sistem.
-   * Role ditentukan otomatis berdasarkan domain email.
->>>>>>> 49b30cf
    */
   public async register(
     userData: RegisterInput
-  ): Promise<Omit<UserAttributes, 'password'>> {
+  ): Promise<Omit<UserAttributes, "password">> {
     const { email, password, fullName } = userData;
 
-<<<<<<< HEAD
     logger.info(`[REGISTER] Attempt: ${email}`);
 
     // 1️⃣ Cari user termasuk soft-deleted
@@ -54,7 +48,7 @@ class AuthService {
       if (!existingUser.deletedAt) {
         throw new HttpException(
           StatusCodes.CONFLICT,
-          'Email already registered'
+          "Email already registered"
         );
       }
 
@@ -64,12 +58,12 @@ class AuthService {
     }
 
     // 2️⃣ Tentukan role
-    let role: 'user' | 'seller' | 'admin' = 'user';
+    let role: "user" | "seller" | "admin" = "user";
 
-    if (email.endsWith('@admin.belanjaku.com')) {
-      role = 'admin';
-    } else if (email.endsWith('@seller.belanjaku.com')) {
-      role = 'seller';
+    if (email.endsWith("@admin.belanjaku.com")) {
+      role = "admin";
+    } else if (email.endsWith("@seller.belanjaku.com")) {
+      role = "seller";
     }
 
     logger.info(`[REGISTER] Role assigned: ${role}`);
@@ -87,19 +81,19 @@ class AuthService {
           email,
           password: hashedPassword,
           role,
-          isVerified: role === 'user', // seller/admin bisa diverifikasi manual
+          isVerified: role === "user", // seller/admin bisa diverifikasi manual
         },
         { transaction }
       );
 
       // 5️⃣ Jika Seller → Buat toko
-      if (role === 'seller') {
+      if (role === "seller") {
         await Seller.create(
           {
             userId: newUser.id,
-            storeName: `Toko ${fullName}` || 'Toko Baru',
-            storeAddress: 'Alamat belum diatur oleh penjual',
-            storePhoneNumber: '081234567890',
+            storeName: `Toko ${fullName}` || "Toko Baru",
+            storeAddress: "Alamat belum diatur oleh penjual",
+            storePhoneNumber: "081234567890",
           },
           { transaction }
         );
@@ -107,55 +101,27 @@ class AuthService {
 
       await transaction.commit();
       return newUser.toJSON();
-
     } catch (error: any) {
       await transaction.rollback();
 
       // 🔎 Logging detail error Sequelize
       if (
-        error.name === 'SequelizeValidationError' ||
-        error.name === 'SequelizeUniqueConstraintError'
+        error.name === "SequelizeValidationError" ||
+        error.name === "SequelizeUniqueConstraintError"
       ) {
-        console.error('\n🔴 VALIDATION ERROR 🔴');
+        console.error("\n🔴 VALIDATION ERROR 🔴");
         error.errors.forEach((err: any) => {
           console.error(`Field : ${err.path}`);
           console.error(`Message: ${err.message}`);
           console.error(`Value  : ${err.value}`);
         });
-        console.error('------------------------\n');
+        console.error("------------------------\n");
       } else {
-        console.error('❌ REGISTER ERROR:', error);
+        console.error("❌ REGISTER ERROR:", error);
       }
 
       throw error;
     }
-=======
-    // 1. Cek apakah user sudah ada
-    const existingUser = await User.findOne({ where: { email } });
-    if (existingUser) {
-      throw new HttpException(StatusCodes.CONFLICT, 'Email already exists');
-    }
-
-    // 2. Tentukan role berdasarkan domain email
-    let role: 'user' | 'seller' | 'admin' = 'user';
-
-    if (email.includes('@admin.belanjaku.com')) {
-      role = 'admin';
-    } else if (email.includes('@seller.belanjaku.com')) {
-      role = 'seller';
-    }
-
-    // 3. Buat user baru dengan role sesuai
-    const newUser = await User.create({
-      fullName,
-      email,
-      password,
-      role: role,
-      isVerified: true,
-    });
-
-    return newUser.toJSON();
->>>>>>> 49b30cf
   }
 
   /**
@@ -171,7 +137,7 @@ class AuthService {
     if (!user) {
       throw new HttpException(
         StatusCodes.UNAUTHORIZED,
-        'Invalid email or password'
+        "Invalid email or password"
       );
     }
 
@@ -179,7 +145,7 @@ class AuthService {
     if (!isPasswordMatch) {
       throw new HttpException(
         StatusCodes.UNAUTHORIZED,
-        'Invalid email or password'
+        "Invalid email or password"
       );
     }
 
@@ -189,12 +155,6 @@ class AuthService {
       role: user.role,
     };
 
-<<<<<<< HEAD
-=======
-    const accessToken = generateAccessToken(tokenPayload);
-    const refreshToken = generateRefreshToken(tokenPayload);
-
->>>>>>> 49b30cf
     return {
       user: user.toJSON(),
       tokens: {
@@ -215,16 +175,12 @@ class AuthService {
     if (!user) {
       throw new HttpException(
         StatusCodes.NOT_FOUND,
-        'User with that email does not exist'
+        "User with that email does not exist"
       );
     }
 
-    const resetToken = crypto.randomBytes(32).toString('hex');
+    const resetToken = crypto.randomBytes(32).toString("hex");
 
-<<<<<<< HEAD
-=======
-    // 2. Simpan token ke DB
->>>>>>> 49b30cf
     user.resetPasswordToken = resetToken;
     user.resetPasswordExpires = new Date(Date.now() + 60 * 60 * 1000);
     await user.save();
@@ -236,14 +192,14 @@ class AuthService {
       user.resetPasswordExpires = null;
       await user.save();
 
-      logger.error('[FORGOT PASSWORD] Email failed', error);
+      logger.error("[FORGOT PASSWORD] Email failed", error);
       throw new HttpException(
         StatusCodes.INTERNAL_SERVER_ERROR,
-        'Error sending reset email'
+        "Error sending reset email"
       );
     }
 
-    return { message: 'Password reset link sent to your email' };
+    return { message: "Password reset link sent to your email" };
   }
 }
 
