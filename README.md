@@ -1,147 +1,155 @@
-# 📋 Panduan Kontribusi Tim (SOP Git)
+# BelanjaKu
 
-Halo Tim! Berikut adalah cara bekerja di repositori ini. Kita memisahkan pengerjaan Backend dan Frontend di branch yang berbeda agar lebih rapi dan aman.
-
-#### 1. Persiapan Awal (Lakukan Sekali Saja)
-
-1.  **Clone Repositori:**
-    Buka terminal di folder tujuan Anda, lalu jalankan:
-
-    ```bash
-    git clone (https://github.com/awanmh/BelanjaKu.git)
-    cd BelanjaKu
-    ```
-
-2.  **Ambil Semua Update Terbaru:**
-    Agar laptop Anda mengenali branch baru yang sudah dibuat (`backend-update` & `frontend-update`):
-
-    ```bash
-    git fetch origin
-    ```
+**BelanjaKu** adalah aplikasi E-Commerce berbasis web modern yang dirancang untuk memberikan pengalaman berbelanja daring yang mulus dan intuitif. Proyek ini dibangun dengan arsitektur **Monorepo**, memisahkan logika _Frontend_ dan _Backend_ untuk skalabilitas dan pemeliharaan yang lebih baik.
 
 ---
 
-#### 👨‍💻 Untuk Tim Backend (Server & Database)
+## �️ Tech Stack
 
-Tugas kalian hanya fokus di dalam folder `apps/backend`. Jangan menyentuh folder frontend.
+Proyek ini dibangun menggunakan teknologi terkini yang _production-ready_:
 
-1.  **Pindah ke Branch Backend:**
+### Frontend
 
-    ```bash
-    git checkout backend-update
-    ```
+- **Framework:** [Next.js 15 (App Router)](https://nextjs.org/)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **State Management:** Zustand
+- **HTTP Client:** Axios
 
-    _(Pastikan terminal menampilkan: "Switched to branch 'backend-update'")_
+### Backend
 
-2.  **Masuk ke Folder Kerja:**
-
-    ```bash
-    cd apps/backend
-    ```
-
-3.  **Instalasi & Running (Harian):**
-
-    ```bash
-    npm install
-    npm run db:migrate  # Jika ada perubahan database
-    npm run dev
-    ```
-
-4.  **Cara Push Codingan (Simpan Pekerjaan):**
-    Setelah selesai coding fitur tertentu:
-
-    ```bash
-    # 1. Pastikan Anda masih di branch yang benar
-    git branch
-    # (Harus ada tanda bintang * di backend-update)
-
-    # 2. Masukkan perubahan ke antrian
-    git add .
-
-    # 3. Simpan dengan pesan yang jelas
-    git commit -m "feat(backend): menambahkan fitur X"
-    # atau "fix(backend): memperbaiki bug Y"
-
-    # 4. Tarik update terbaru teman lain dulu (PENTING!)
-    git pull origin backend-update
-
-    # 5. Kirim ke GitHub
-    git push origin backend-update
-    ```
+- **Runtime:** Node.js
+- **Framework:** Express.js
+- **Database:** PostgreSQL
+- **ORM:** Sequelize
+- **Authentication:** JWT (JSON Web Token) & bcryptjs
+- **Other Tools:** Socket.io (Real-time), Multer (File Upload)
 
 ---
 
-### ⚠️ Aturan Penting (Wajib Baca)
+## ✨ Fitur Utama
 
-1.  **Jangan Coding di `main`:** Branch `main` adalah branch suci yang hanya berisi kode gabungan yang sudah final. Jangan pernah push langsung ke `main`.
-2.  **Selalu `git pull` Dulu:** Sebelum melakukan `git push`, biasakan melakukan `git pull origin <nama_branch>` untuk menghindari bentrok kode (_conflict_) dengan teman satu tim.
-3.  **Perhatikan `.gitignore`:** Folder seperti `node_modules`, `.next`, atau `dist` **TIDAK BOLEH** di-push. File `.gitignore` sudah disiapkan untuk mencegah ini otomatis, jangan dihapus.
-4.  **API URL:** Untuk tim Frontend, pastikan file `.env.local` Anda mengarah ke URL backend teman Anda (jika satu jaringan) atau localhost masing-masing.
-5.  **Saat ingin push** usahakan update file `README.md` dan perbarui update-an apa yang dikerjakan dan to-do selanjutnya.
+- **Otentikasi Pengguna:** Sistem registrasi dan login yang aman untuk Pembeli dan Penjual.
+- **Katalog Produk:** Penelusuran produk berdasarkan kategori (Pria, Wanita, Anak, Olahraga) dengan filter yang responsif.
+- **Detail Produk:** Informasi mendalam produk termasuk varian ukuran dan stok real-time.
+- **Keranjang Belanja (Shopping Cart):** Manajemen keranjang belanja yang persisten dan tersinkronisasi.
+- **Checkout & Pembayaran:** Alur checkout lengkap dengan simulasi pembayaran dan validasi alamat pengiriman.
+- **Manajemen Toko (Seller):** Dashboard khusus penjual untuk mengelola produk (CRUD).
+- **Wishlist:** Fitur simpan produk favorit untuk pembelian mendatang.
 
-### Update (Latest Session - Backend Excellence)
+---
 
-**1. Core Backend Features:**
+## 📂 Struktur Folder
 
-**1. Core Backend Features:**
+Struktur direktori utama proyek ini:
 
-- **Product Variants (SKU Management):**
-  - Implemented `ProductVariant` model and `product_variants` table via migration `20251224000005-create-variants-discussions.js`.
-  - Updated `ProductService` to handle variant creation and updates.
-  - Updated `products` table to allow robust SKU management.
-- **Product Discussions (Q&A):**
-  - Implemented `ProductDiscussion` model and `product_discussions` table via migration (same as above).
-  - Added Controller, Service, and Routes for User Q&A on products.
-- **Full-Text Search:**
-  - Added `TSVECTOR` column `search_vector` and GIN Index to `products` table via migration `20251224000006-add-search-vector.js`.
-  - Implemented high-performance search using `plainto_tsquery` in `APIFeatures`.
-- **Real-Time Notifications:**
-  - Integrated `socket.io` via `SocketGateway` for real-time updates.
-  - Implemented `NotificationService` for managing user notifications.
-- **Wishlist:**
-  - Implemented `WishlistService` and endpoints for managing user favorites.
-- **Seeding:**
-  - Added `2025100601-demo-users.js` for seeding Admin, Seller, and User accounts.
+```bash
+BelanjaKu/
+├── apps/
+│   ├── backend/         # Server-side logic, API, Database migrations
+│   │   ├── src/
+│   │   │   ├── api/     # Controllers & Routes
+│   │   │   ├── services/# Business Logic
+│   │   │   └── database/# Models & Migrations
+│   │   └── ...
+│   │
+│   └── frontend/        # Client-side interface
+│       ├── src/
+│       │   ├── app/     # App Router Pages
+│       │   ├── components/ # Reusable UI Components
+│       │   └── store/   # Global State (Zustand)
+│       └── ...
+│
+└── ...
+```
 
-**2. Quality Assurance (Unit Testing):**
+---
 
-- **ACHIEVEMENT:** Reached **100% Pass Rate** across all 23 Test Suites! 🟢
-- **Fixes:**
-  - Fixed `product.routes.test.ts`: Resolved Multipart/Form-Data validation issues (Error 422) and missing Database Associations (Error 500).
-  - Fixed `order.routes.test.ts`: Updated promotion creation types.
-  - Fixed `product.service.test.ts`: Added missing mocks for Transactions and FindByPk.
-- **Coverage:** created comprehensive tests for `Wishlist`, `Notification`, and `ProductDiscussion`.
+## 🚀 Cara Menjalankan Project
 
-**3. Previous Updates:**
+Ikuti langkah-langkah berikut untuk menjalankan aplikasi di lingkungan lokal Anda.
 
-- Progress Search Bar: `2025120400-add-fulltext-search.js`
-- Progress Notification Email: `20251204130950-add-reset-password-to-users.js`, `email.util.ts`, `email.util.test.ts`.
+### Prasyarat
 
-### To-Do (Next Steps)
+- Node.js (v18+)
+- PostgreSQL Database
+- Git
 
-#### 🖥️ Frontend Integration (Next.js)
+### 1. Backend Setup
 
-- [ ] **Consume New APIs:** Integrasi endpoint baru (Product Discussions, Variants, Wishlist) ke UI.
-- [ ] **Real-Time UI:** Implementasi `socket.io-client` di frontend untuk notifikasi real-time.
-- [ ] **Search UI:** Membuat UI pencarian yang memanfaatkan endpoint full-text search backend.
-- [ ] **Wishlist UI:** Membenahi tampilan wishlist sekaligus logika backend pada fitur.
-- [ ] **Cart UI:** Membenahi tampilan card (keranjang) sekaligus logika backend pada fitur.
+```bash
+cd apps/backend
 
-#### 🛒 Shopping Cart (Keranjang)
+# Instal dependencies
+npm install
 
-- [ ] **Database:** Membuat file migrasi untuk tabel `carts` dan `cart_items` (Relasi ke User & Products).
-- [ ] **API Endpoint:** Membuat CRUD untuk `api/v1/carts` (Add to cart, Update qty, Delete item).
-- [ ] **Logic:** Implementasi logika sinkronisasi stok produk saat dimasukkan ke keranjang (opsional: reservasi stok).
-- [ ] **CATATAN:** Sudah ada fitur cuman belum integrasi dengan frontend
+# Setup Database
+# Pastikan PostgreSQL sudah berjalan dan database 'belanjaku' sudah dibuat
+npm run db:migrate  # Menjalankan migrasi database
+npm run db:seed     # (Opsional) Mengisi data awal/dummy
 
-#### 💳 Payment Gateway Integration (Midtrans/Xendit)
+# Menjalankan Server (Default: Port 5000)
+npm run dev
+```
 
-- [ ] **Integration:** Update `payment.service.ts` untuk request token pembayaran ke Payment Gateway (Mode Sandbox).
-- [ ] **Webhook:** Membuat endpoint khusus untuk menangani Webhook/Callback dari Payment Gateway untuk update status pembayaran otomatis.
-- [ ] **Security:** Memastikan validasi signature key pada Webhook agar aman.
+### 2. Frontend Setup
 
-#### 📍 User Address & Shipping
+```bash
+cd apps/frontend
 
-- [ ] **Shipping Calculation:** Integrasi `shipping.service.ts` dengan API Logistik (contoh: RajaOngkir) untuk menghitung biaya kirim real-time berdasarkan alamat terpilih.
+# Instal dependencies
+npm install
 
-## Selamat bekerja! 🚀
+# Menjalankan Client (Default: Port 3000)
+npm run dev
+```
+
+Buka browser dan akses [http://localhost:3000](http://localhost:3000).
+
+---
+
+## � Environment Variables
+
+Pastikan Anda membuat file `.env` (Backend) dan `.env.local` (Frontend) berdasarkan contoh berikut:
+
+**Backend (`apps/backend/.env`)**
+
+```env
+PORT=5000
+DATABASE_URL=postgres://user:password@localhost:5432/belanjaku
+JWT_SECRET=rahasia_super_aman
+NODE_ENV=development
+```
+
+**Frontend (`apps/frontend/.env.local`)**
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000/api/v1
+```
+
+---
+
+## 🧪 Testing
+
+Proyek ini dilengkapi dengan Unit Test untuk memastikan keandalan fitur dasar (terutama Backend).
+
+**Menjalankan Test Backend:**
+
+```bash
+cd apps/backend
+npm test
+```
+
+---
+
+## 📌 Status Project
+
+Status saat ini: **Stable (Main Branch)**
+
+- ✅ Semua fitur inti (Auth, Produk, Cart, Checkout) berfungsi dengan baik.
+- ✅ Integrasi Frontend dan Backend telah diverifikasi.
+- ✅ Kode siap untuk pengembangan fitur lanjutan atau deployment.
+
+---
+
+_Dibuat oleh Tim BelanjaKu_

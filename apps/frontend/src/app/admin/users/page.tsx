@@ -108,7 +108,6 @@ export default function AdminUsersPage() {
                             onChange={(e) => setSearchTerm(e.target.value)}
                             className="pl-10 h-11 border-gray-200 focus:border-black focus:ring-black"
                         />
-                        />
                     </div>
                     <div className="flex items-center gap-2">
                         <Filter size={20} className="text-gray-600" />
