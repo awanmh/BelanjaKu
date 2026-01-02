@@ -2884,3 +2884,11 @@
 2026-01-02 22:34:44:3444 [35mhttp[39m: [35m::1 - - [02/Jan/2026:15:34:44 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
 2026-01-02 22:34:44:3444 [35mhttp[39m: [35m::1 - - [02/Jan/2026:15:34:44 +0000] "GET /api/v1/products?limit=8&offset=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
 2026-01-02 22:34:44:3444 [35mhttp[39m: [35m::1 - - [02/Jan/2026:15:34:44 +0000] "GET /api/v1/products?limit=4 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"[39m
+2026-01-02 23:45:59:4559 [31merror[39m: [31mUnable to connect to the database: role "Lenovo" does not exist[39m
+2026-01-02 23:46:58:4658 [31merror[39m: [31mUnable to connect to the database: role "Lenovo" does not exist[39m
+2026-01-02 23:50:47:5047 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2026-01-02 23:50:47:5047 [32minfo[39m: [32mServer is running on port 5000[39m
+2026-01-02 23:50:47:5047 [32minfo[39m: [32mSocket.io is ready[39m
+2026-01-02 23:51:34:5134 [32minfo[39m: [32mDatabase connection has been established successfully.[39m
+2026-01-02 23:51:34:5134 [32minfo[39m: [32mServer is running on port 5000[39m
+2026-01-02 23:51:34:5134 [32minfo[39m: [32mSocket.io is ready[39m

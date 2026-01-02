@@ -1624,3 +1624,5 @@
 2026-01-02 22:24:42:2442 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
 2026-01-02 22:25:30:2530 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
 2026-01-02 22:25:34:2534 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2026-01-02 23:45:59:4559 [31merror[39m: [31mUnable to connect to the database: role "Lenovo" does not exist[39m
+2026-01-02 23:46:58:4658 [31merror[39m: [31mUnable to connect to the database: role "Lenovo" does not exist[39m
