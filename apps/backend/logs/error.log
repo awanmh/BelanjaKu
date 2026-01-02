@@ -1619,3 +1619,8 @@
 2026-01-02 21:45:28:4528 [31merror[39m: [31mUnable to connect to the database: SASL: SCRAM-SERVER-FIRST-MESSAGE: client password must be a string[39m
 2026-01-02 21:48:38:4838 [31merror[39m: [31mUnable to connect to the database: SASL: SCRAM-SERVER-FIRST-MESSAGE: client password must be a string[39m
 2026-01-02 21:49:41:4941 [31merror[39m: [31mUnable to connect to the database: SASL: SCRAM-SERVER-FIRST-MESSAGE: client password must be a string[39m
+2026-01-02 22:22:52:2252 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 401, Message:: Not authorized, token failed[39m
+2026-01-02 22:24:17:2417 [31merror[39m: [31m[POST] /api/v1/cart >> StatusCode:: 401, Message:: Not authorized, token failed[39m
+2026-01-02 22:24:42:2442 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2026-01-02 22:25:30:2530 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2026-01-02 22:25:34:2534 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
