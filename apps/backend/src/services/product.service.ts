@@ -4,7 +4,7 @@ import {
   ProductAttributes,
   Product as ProductModel,
 } from "../database/models/product.model";
-import HttpException from "../utils/http-exception.util";
+import ApiError from "../utils/api-error.util";
 import APIFeatures from "../utils/apiFeatures.util";
 import { ParsedQs } from "qs";
 import { Model, Op } from "sequelize";
@@ -171,7 +171,7 @@ class ProductService {
     });
 
     if (!product) {
-      throw new HttpException(StatusCodes.NOT_FOUND, "Product not found");
+      throw new ApiError(StatusCodes.NOT_FOUND, "Product not found");
     }
     return product.toJSON();
   }
@@ -183,10 +183,10 @@ class ProductService {
   ): Promise<ProductAttributes> {
     const product = await Product.findByPk(id);
     if (!product) {
-      throw new HttpException(StatusCodes.NOT_FOUND, "Product not found");
+      throw new ApiError(StatusCodes.NOT_FOUND, "Product not found");
     }
     if (product.sellerId !== userId) {
-      throw new HttpException(
+      throw new ApiError(
         StatusCodes.FORBIDDEN,
         "You are not authorized to update this product"
       );
@@ -239,10 +239,10 @@ class ProductService {
   public async deleteProduct(id: string, userId: string): Promise<void> {
     const product = await Product.findByPk(id);
     if (!product) {
-      throw new HttpException(StatusCodes.NOT_FOUND, "Product not found");
+      throw new ApiError(StatusCodes.NOT_FOUND, "Product not found");
     }
     if (product.sellerId !== userId) {
-      throw new HttpException(
+      throw new ApiError(
         StatusCodes.FORBIDDEN,
         "You are not authorized to delete this product"
       );

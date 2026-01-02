@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import db from "../database/models";
 import { ShippingOptionAttributes } from "../database/models/shippingOption.model";
-import HttpException from "../utils/http-exception.util";
+import ApiError from "../utils/api-error.util";
 
 // Mengambil model ShippingOption dari objek db yang sudah diinisialisasi
 const ShippingOption = db.ShippingOption;
@@ -34,7 +34,7 @@ class ShippingOptionService {
     // Cek apakah nama opsi pengiriman sudah ada
     const existingOption = await ShippingOption.findOne({ where: { name } });
     if (existingOption) {
-      throw new HttpException(
+      throw new ApiError(
         StatusCodes.CONFLICT,
         "Shipping option with this name already exists"
       );
@@ -63,7 +63,7 @@ class ShippingOptionService {
   public async findById(id: string): Promise<ShippingOptionAttributes> {
     const option = await ShippingOption.findByPk(id);
     if (!option) {
-      throw new HttpException(
+      throw new ApiError(
         StatusCodes.NOT_FOUND,
         "Shipping option not found"
       );
@@ -83,7 +83,7 @@ class ShippingOptionService {
   ): Promise<ShippingOptionAttributes> {
     const option = await ShippingOption.findByPk(id);
     if (!option) {
-      throw new HttpException(
+      throw new ApiError(
         StatusCodes.NOT_FOUND,
         "Shipping option not found"
       );
@@ -100,7 +100,7 @@ class ShippingOptionService {
   public async delete(id: string): Promise<void> {
     const option = await ShippingOption.findByPk(id);
     if (!option) {
-      throw new HttpException(
+      throw new ApiError(
         StatusCodes.NOT_FOUND,
         "Shipping option not found"
       );

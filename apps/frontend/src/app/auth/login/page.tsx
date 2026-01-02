@@ -31,6 +31,7 @@ export default function LoginPage() {
 
       if (res.data.success) {
         const { user, tokens } = res.data.data;
+        console.log('[AUTH] Login success. User:', user);
         login(user, tokens.accessToken);
 
         // Role-based redirect

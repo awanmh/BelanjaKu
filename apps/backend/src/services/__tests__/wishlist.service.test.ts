@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import WishlistService from "../wishlist.service";
 import db from "../../database/models";
-import HttpException from "../../utils/http-exception.util";
+import ApiError from "../../utils/api-error.util";
 
 // Mock dependencies
 jest.mock("../../database/models", () => {
@@ -70,7 +70,7 @@ describe("WishlistService", () => {
       await expect(
         WishlistService.addToWishlist(mockUserId, mockProductId)
       ).rejects.toThrow(
-        new HttpException(StatusCodes.NOT_FOUND, "Product not found")
+        new ApiError(StatusCodes.NOT_FOUND, "Product not found")
       );
     });
 
@@ -136,7 +136,7 @@ describe("WishlistService", () => {
       await expect(
         WishlistService.removeFromWishlist(mockUserId, mockProductId)
       ).rejects.toThrow(
-        new HttpException(
+        new ApiError(
           StatusCodes.NOT_FOUND,
           "Product not found in wishlist"
         )

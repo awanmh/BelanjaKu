@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { validationResult, FieldValidationError } from 'express-validator';
 import Joi from 'joi';
 import { StatusCodes } from 'http-status-codes';
-import HttpException from '../utils/http-exception.util';
+import ApiError from '../utils/api-error.util';
 
 /**
  * ==========================================
@@ -51,7 +51,7 @@ export const validateJoi = (schema: Joi.ObjectSchema) => {
         .join(', ');
         
       // Lempar ke Error Handler
-      return next(new HttpException(StatusCodes.BAD_REQUEST, errorMessage));
+      return next(new ApiError(StatusCodes.BAD_REQUEST, errorMessage));
     }
 
     next();

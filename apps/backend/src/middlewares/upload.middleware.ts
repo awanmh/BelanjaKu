@@ -1,7 +1,7 @@
 import multer from 'multer';
 import path from 'path';
 import { Request } from 'express';
-import HttpException from '../utils/http-exception.util';
+import ApiError from '../utils/api-error.util';
 import { StatusCodes } from 'http-status-codes';
 
 // Tentukan tipe file yang diizinkan
@@ -28,7 +28,7 @@ const fileFilter = (req: Request, file: Express.Multer.File, cb: multer.FileFilt
     cb(null, true);
   } else {
     // Tolak file dan kirim error
-    cb(new HttpException(StatusCodes.BAD_REQUEST, 'Invalid file type. Only JPEG, PNG, GIF, and WEBP are allowed.'));
+    cb(new ApiError(StatusCodes.BAD_REQUEST, 'Invalid file type. Only JPEG, PNG, GIF, and WEBP are allowed.'));
   }
 };
 

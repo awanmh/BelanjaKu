@@ -1,6 +1,6 @@
 import PromotionService from "../promotion.service";
 import db from "../../database/models";
-import HttpException from "../../utils/http-exception.util";
+import ApiError from "../../utils/api-error.util";
 import { StatusCodes } from "http-status-codes";
 
 // Definisikan tipe instance model untuk type safety
@@ -73,7 +73,7 @@ describe("PromotionService", () => {
       await expect(
         PromotionService.create(promotionData, sellerId)
       ).rejects.toThrow(
-        new HttpException(
+        new ApiError(
           StatusCodes.FORBIDDEN,
           "You can only create promotions for your own products."
         )
@@ -87,7 +87,7 @@ describe("PromotionService", () => {
       await expect(
         PromotionService.create(promotionData, sellerId)
       ).rejects.toThrow(
-        new HttpException(
+        new ApiError(
           StatusCodes.CONFLICT,
           "Promotion code already exists."
         )
@@ -115,7 +115,7 @@ describe("PromotionService", () => {
     it("should throw NOT_FOUND if promotion not found", async () => {
       mockPromotion.findByPk.mockResolvedValue(null);
       await expect(PromotionService.findById("promo-uuid")).rejects.toThrow(
-        new HttpException(StatusCodes.NOT_FOUND, "Promotion not found")
+        new ApiError(StatusCodes.NOT_FOUND, "Promotion not found")
       );
     });
   });
@@ -142,7 +142,7 @@ describe("PromotionService", () => {
       await expect(
         PromotionService.update("promo-uuid", {}, "another-seller")
       ).rejects.toThrow(
-        new HttpException(
+        new ApiError(
           StatusCodes.FORBIDDEN,
           "You are not authorized to update this promotion."
         )
@@ -154,7 +154,7 @@ describe("PromotionService", () => {
       await expect(
         PromotionService.update("promo-uuid", {}, sellerId)
       ).rejects.toThrow(
-        new HttpException(StatusCodes.NOT_FOUND, "Promotion not found")
+        new ApiError(StatusCodes.NOT_FOUND, "Promotion not found")
       );
     });
   });
@@ -175,7 +175,7 @@ describe("PromotionService", () => {
       await expect(
         PromotionService.delete("promo-uuid", "another-seller")
       ).rejects.toThrow(
-        new HttpException(
+        new ApiError(
           StatusCodes.FORBIDDEN,
           "You are not authorized to delete this promotion."
         )
@@ -187,7 +187,7 @@ describe("PromotionService", () => {
       await expect(
         PromotionService.delete("promo-uuid", sellerId)
       ).rejects.toThrow(
-        new HttpException(StatusCodes.NOT_FOUND, "Promotion not found")
+        new ApiError(StatusCodes.NOT_FOUND, "Promotion not found")
       );
     });
   });

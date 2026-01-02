@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import db from "../database/models";
-import HttpException from "../utils/http-exception.util";
+import ApiError from "../utils/api-error.util";
 
 const ProductDiscussion = db.ProductDiscussion;
 const Product = db.Product;
@@ -18,13 +18,13 @@ class ProductDiscussionService {
     // Validation
     const product = await Product.findByPk(data.productId);
     if (!product)
-      throw new HttpException(StatusCodes.NOT_FOUND, "Product not found");
+      throw new ApiError(StatusCodes.NOT_FOUND, "Product not found");
 
     // Check if parent exists if provided
     if (data.parentDiscussionId) {
       const parent = await ProductDiscussion.findByPk(data.parentDiscussionId);
       if (!parent)
-        throw new HttpException(
+        throw new ApiError(
           StatusCodes.NOT_FOUND,
           "Parent discussion not found"
         );
@@ -56,11 +56,11 @@ class ProductDiscussionService {
   public async deleteDiscussion(id: string, userId: string) {
     const discussion = await ProductDiscussion.findByPk(id);
     if (!discussion)
-      throw new HttpException(StatusCodes.NOT_FOUND, "Discussion not found");
+      throw new ApiError(StatusCodes.NOT_FOUND, "Discussion not found");
 
     // Only owner can delete (or admin, implementation simplified)
     if (discussion.userId !== userId) {
-      throw new HttpException(StatusCodes.FORBIDDEN, "Not authorized");
+      throw new ApiError(StatusCodes.FORBIDDEN, "Not authorized");
     }
 
     await discussion.destroy();

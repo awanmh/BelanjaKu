@@ -1,7 +1,7 @@
 // backend/src/services/__tests__/cart.service.test.ts
-import * as cartService from '../cart.service';
+import cartService from '../cart.service';
 import db from '../../database/models';
-import HttpException from '../../utils/http-exception.util';
+import ApiError from '../../utils/api-error.util';
 
 // 1. Mock Database Models
 // Kita memberitahu Jest untuk memalsukan semua panggilan ke db.CartItem dan db.Product
@@ -67,7 +67,7 @@ describe('Cart Service', () => {
             // ACT & ASSERT
             await expect(cartService.addToCart(mockUserId, mockProductId, 1))
                 .rejects
-                .toThrow(new HttpException(404, 'Product not found'));
+                .toThrow(new ApiError(404, 'Product not found'));
         });
 
         it('should throw error if stock is insufficient', async () => {

@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import db from "../database/models";
-import HttpException from "../utils/http-exception.util";
+import ApiError from "../utils/api-error.util";
 
 const Notification = db.Notification;
 
@@ -37,10 +37,10 @@ class NotificationService {
   public async markAsRead(id: string, userId: string) {
     const notification = await Notification.findByPk(id);
     if (!notification) {
-      throw new HttpException(StatusCodes.NOT_FOUND, "Notification not found");
+      throw new ApiError(StatusCodes.NOT_FOUND, "Notification not found");
     }
     if (notification.userId !== userId) {
-      throw new HttpException(StatusCodes.FORBIDDEN, "Access denied");
+      throw new ApiError(StatusCodes.FORBIDDEN, "Access denied");
     }
 
     await notification.update({ isRead: true });

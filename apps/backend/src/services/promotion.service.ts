@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import db from "../database/models";
 import { PromotionAttributes } from "../database/models/promotion.model";
-import HttpException from "../utils/http-exception.util";
+import ApiError from "../utils/api-error.util";
 import { Order } from "sequelize";
 
 // Definisikan tipe instance model untuk type safety
@@ -43,7 +43,7 @@ class PromotionService {
     // Verifikasi bahwa produk tersebut milik penjual yang sedang login
     const product = await Product.findByPk(productId);
     if (!product || product.sellerId !== sellerId) {
-      throw new HttpException(
+      throw new ApiError(
         StatusCodes.FORBIDDEN,
         "You can only create promotions for your own products."
       );
@@ -52,7 +52,7 @@ class PromotionService {
     if (code) {
       const existingPromo = await Promotion.findOne({ where: { code } });
       if (existingPromo) {
-        throw new HttpException(
+        throw new ApiError(
           StatusCodes.CONFLICT,
           "Promotion code already exists."
         );
@@ -85,7 +85,7 @@ class PromotionService {
   public async findById(id: string): Promise<PromotionAttributes> {
     const promotion = await Promotion.findByPk(id);
     if (!promotion) {
-      throw new HttpException(StatusCodes.NOT_FOUND, "Promotion not found");
+      throw new ApiError(StatusCodes.NOT_FOUND, "Promotion not found");
     }
     return promotion.toJSON();
   }
@@ -103,11 +103,11 @@ class PromotionService {
     })) as PromotionWithProduct | null;
 
     if (!promotion) {
-      throw new HttpException(StatusCodes.NOT_FOUND, "Promotion not found");
+      throw new ApiError(StatusCodes.NOT_FOUND, "Promotion not found");
     }
     // Verifikasi kepemilikan
     if (promotion.product?.sellerId !== sellerId) {
-      throw new HttpException(
+      throw new ApiError(
         StatusCodes.FORBIDDEN,
         "You are not authorized to update this promotion."
       );
@@ -126,11 +126,11 @@ class PromotionService {
     })) as PromotionWithProduct | null;
 
     if (!promotion) {
-      throw new HttpException(StatusCodes.NOT_FOUND, "Promotion not found");
+      throw new ApiError(StatusCodes.NOT_FOUND, "Promotion not found");
     }
     // Verifikasi kepemilikan
     if (promotion.product?.sellerId !== sellerId) {
-      throw new HttpException(
+      throw new ApiError(
         StatusCodes.FORBIDDEN,
         "You are not authorized to delete this promotion."
       );
@@ -152,29 +152,29 @@ class PromotionService {
     });
 
     if (!promotion) {
-      throw new HttpException(StatusCodes.NOT_FOUND, "Invalid promotion code");
+      throw new ApiError(StatusCodes.NOT_FOUND, "Invalid promotion code");
     }
 
     const now = new Date();
     if (now < promotion.startDate) {
-      throw new HttpException(
+      throw new ApiError(
         StatusCodes.BAD_REQUEST,
         "Promotion has not started yet"
       );
     }
     if (now > promotion.endDate) {
-      throw new HttpException(StatusCodes.BAD_REQUEST, "Promotion has expired");
+      throw new ApiError(StatusCodes.BAD_REQUEST, "Promotion has expired");
     }
 
     if (promotion.quota !== null && promotion.usageCount >= promotion.quota) {
-      throw new HttpException(
+      throw new ApiError(
         StatusCodes.BAD_REQUEST,
         "Promotion quota exceeded"
       );
     }
 
     if (purchaseAmount < promotion.minPurchaseAmount) {
-      throw new HttpException(
+      throw new ApiError(
         StatusCodes.BAD_REQUEST,
         `Minimum purchase amount is ${promotion.minPurchaseAmount}`
       );

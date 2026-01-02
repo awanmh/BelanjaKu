@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import PaymentService from '../../../services/payment.service';
-import HttpException from '../../../utils/http-exception.util';
+import ApiError from '../../../utils/api-error.util';
 import { AuthenticatedRequest } from '../../../middlewares/auth.middleware';
 import logger from '../../../utils/logger.util';
 
@@ -15,7 +15,7 @@ class PaymentController {
   public async initiatePayment(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       if (!req.user) {
-        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
+        throw new ApiError(StatusCodes.UNAUTHORIZED, 'Authentication required');
       }
       const { orderId, method } = req.body;
       const userId = req.user.id;
@@ -43,7 +43,7 @@ class PaymentController {
       if (!signature) {
         logger.warn('Webhook received without signature.');
         // Di produksi, Anda mungkin ingin langsung melempar error di sini
-        // throw new HttpException(StatusCodes.BAD_REQUEST, 'Signature is missing');
+        // throw new ApiError(StatusCodes.BAD_REQUEST, 'Signature is missing');
       }
 
       // FIX: Teruskan payload dan signature ke service

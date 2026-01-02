@@ -2031,3 +2031,81 @@
 2025-12-24 23:52:52:5252 error: [POST] /api/v1/reviews >> StatusCode:: 403, Message:: You can only review products you have purchased
 2025-12-24 23:52:52:5252 error: [POST] /api/v1/reviews >> StatusCode:: 409, Message:: You have already reviewed this product
 >>>>>>> ee7c76a8b1429ebb52a4e865849ffc2d1f1e036f
+2025-12-27 00:19:39:1939 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:19:39:1939 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:19:52:1952 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:19:52:1952 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:20:27:2027 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:20:27:2027 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:20:51:2051 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:20:51:2051 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:21:27:2127 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:21:27:2127 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:21:40:2140 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:21:40:2140 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:21:48:2148 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:21:48:2148 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:21:57:2157 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:21:57:2157 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:23:55:2355 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:23:55:2355 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:43:23:4323 [31merror[39m: [31m[GET] /api/v1/sellers/profile >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:43:23:4323 [31merror[39m: [31m[GET] /api/v1/sellers/profile >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:44:27:4427 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:44:27:4427 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:44:36:4436 [31merror[39m: [31m[GET] /api/v1/sellers/profile >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:44:36:4436 [31merror[39m: [31m[GET] /api/v1/sellers/profile >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:49:25:4925 [31merror[39m: [31m[GET] /api/v1/sellers/profile >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:50:19:5019 [31merror[39m: [31m[GET] /api/v1/sellers/profile >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:50:19:5019 [31merror[39m: [31m[GET] /api/v1/sellers/profile >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:50:42:5042 [31merror[39m: [31m[GET] /api/v1/sellers/profile >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:50:42:5042 [31merror[39m: [31m[GET] /api/v1/sellers/profile >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:51:02:512 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-27 00:51:10:5110 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:51:10:5110 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:51:16:5116 [31merror[39m: [31m[GET] /api/v1/sellers/profile >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:51:16:5116 [31merror[39m: [31m[GET] /api/v1/sellers/profile >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:55:03:553 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:55:03:553 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:56:05:565 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:56:05:565 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:56:25:5625 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:56:25:5625 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:56:52:5652 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 00:56:52:5652 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 01:20:24:2024 error: [PUT] /api/v1/users/change-password >> StatusCode:: 400, Message:: Current password incorrect
+2025-12-27 01:20:40:2040 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 01:20:40:2040 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 01:21:23:2123 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 01:21:23:2123 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 02:01:38:138 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 02:01:38:138 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 02:02:43:243 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-27 02:17:10:1710 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 02:17:10:1710 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 02:30:19:3019 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 02:30:19:3019 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 02:31:03:313 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 02:31:03:313 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 02:42:57:4257 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 02:42:57:4257 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 03:32:01:321 [31merror[39m: [31m[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password[39m
+2025-12-27 03:32:08:328 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 03:32:08:328 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 03:36:03:363 [31merror[39m: [31m[GET] /api/v1/sellers/profile >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 03:36:03:363 [31merror[39m: [31m[GET] /api/v1/sellers/profile >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 03:38:51:3851 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2025-12-27 03:38:51:3851 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2026-01-02 22:13:13:1313 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2026-01-02 22:14:22:1422 [31merror[39m: [31m[GET] /api/v1/sellers/profile >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2026-01-02 22:14:23:1423 [31merror[39m: [31m[GET] /api/v1/sellers/profile >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2026-01-02 22:14:35:1435 [31merror[39m: [31m[GET] /api/v1/sellers/profile >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2026-01-02 22:14:35:1435 [31merror[39m: [31m[GET] /api/v1/sellers/profile >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2026-01-02 22:15:05:155 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2026-01-02 22:15:05:155 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2026-01-02 22:15:25:1525 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2026-01-02 22:15:25:1525 [31merror[39m: [31m[GET] /api/v1/orders >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2026-01-02 22:17:02:172 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2026-01-02 22:17:02:172 [31merror[39m: [31m[GET] /api/v1/cart >> StatusCode:: 404, Message:: Resource not found on this server[39m
+2026-01-02 22:36:36:3636 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.category does not exist[39m
+2026-01-02 22:36:36:3636 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.category does not exist[39m

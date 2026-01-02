@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'; // FIX: Tambahkan 'Request' di sini
 import { StatusCodes } from 'http-status-codes';
 import ReviewService, { CreateReviewInput } from '../../../services/review.service';
-import HttpException from '../../../utils/http-exception.util';
+import ApiError from '../../../utils/api-error.util';
 import { AuthenticatedRequest } from '../../../middlewares/auth.middleware';
 
 /**

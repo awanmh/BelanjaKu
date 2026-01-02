@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.71% </span>
+                <span class="strong">58.73% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>54/63</span>
+                <span class='fraction'>37/63</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/6</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.71% </span>
+                <span class="strong">58.73% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>54/63</span>
+                <span class='fraction'>37/63</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -145,35 +145,35 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -207,36 +207,36 @@ class NotificationService {
   /**
    * Create a new notification (usually called internally by other services)
    */
-  public async createNotification(data: CreateNotificationInput) {
-    await Notification.create(data);
-  }
+  public async <span class="fstat-no" title="function not covered" >createNotification(data: CreateNotificationInput) {</span>
+<span class="cstat-no" title="statement not covered" >    await Notification.create(data);</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 &nbsp;
   /**
    * Get all notifications for a user
    */
-  public async getUserNotifications(userId: string) {
-    const notifications = await Notification.findAll({
-      where: { userId },
-      order: [["createdAt", "DESC"]],
-    });
-    return notifications;
-  }
+  public async <span class="fstat-no" title="function not covered" >getUserNotifications(userId: string) {</span>
+<span class="cstat-no" title="statement not covered" >    const notifications = await Notification.findAll({</span>
+<span class="cstat-no" title="statement not covered" >      where: { userId },</span>
+<span class="cstat-no" title="statement not covered" >      order: [["createdAt", "DESC"]],</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >    return notifications;</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 &nbsp;
   /**
    * Mark a notification as read
    */
-  public async markAsRead(id: string, userId: string) {
-    const notification = await Notification.findByPk(id);
-    if (!notification) {
-      throw new HttpException(StatusCodes.NOT_FOUND, "Notification not found");
-    }
-    if (notification.userId !== userId) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+  public async <span class="fstat-no" title="function not covered" >markAsRead(id: string, userId: string) {</span>
+<span class="cstat-no" title="statement not covered" >    const notification = await Notification.findByPk(id);</span>
+<span class="cstat-no" title="statement not covered" >    if (!notification) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new HttpException(StatusCodes.NOT_FOUND, "Notification not found");</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >    if (notification.userId !== userId) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new HttpException(StatusCodes.FORBIDDEN, "Access denied");</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-&nbsp;
-    await notification.update({ isRead: true });
-    return notification;
-  }
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    await notification.update({ isRead: true });</span>
+<span class="cstat-no" title="statement not covered" >    return notification;</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 &nbsp;
   /**
    * Mark all notifications as read
@@ -259,11 +259,7 @@ export default new NotificationService();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-<<<<<<< HEAD
-                at 2025-12-24T16:04:30.001Z
-=======
-                at 2025-12-24T16:53:10.947Z
->>>>>>> ee7c76a8b1429ebb52a4e865849ffc2d1f1e036f
+                at 2025-12-26T18:20:24.685Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

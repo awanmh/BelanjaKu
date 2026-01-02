@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { StatusCodes } from 'http-status-codes';
-import HttpException from '../utils/http-exception.util';
+import ApiError from '../utils/api-error.util';
 import { config } from '../config/env.config';
 import db from '../database/models';
 
@@ -38,7 +38,7 @@ export const protect = async (req: AuthenticatedRequest, res: Response, next: Ne
       const currentUser = await User.findByPk(decoded.id);
 
       if (!currentUser) {
-        return next(new HttpException(StatusCodes.UNAUTHORIZED, 'User belonging to this token no longer exists.'));
+        return next(new ApiError(StatusCodes.UNAUTHORIZED, 'User belonging to this token no longer exists.'));
       }
 
       // 4. Tempelkan data pengguna (payload) ke objek request agar bisa diakses oleh controller selanjutnya
@@ -46,12 +46,12 @@ export const protect = async (req: AuthenticatedRequest, res: Response, next: Ne
 
       next(); // Lanjutkan ke middleware atau controller berikutnya
     } catch (error) {
-      next(new HttpException(StatusCodes.UNAUTHORIZED, 'Not authorized, token failed'));
+      next(new ApiError(StatusCodes.UNAUTHORIZED, 'Not authorized, token failed'));
     }
   }
 
   if (!token) {
-    return next(new HttpException(StatusCodes.UNAUTHORIZED, 'Not authorized, no token provided'));
+    return next(new ApiError(StatusCodes.UNAUTHORIZED, 'Not authorized, no token provided'));
   }
 };
 
@@ -63,7 +63,7 @@ export const authorize = (...roles: string[]) => {
   return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     if (!req.user || !roles.includes(req.user.role)) {
       return next(
-        new HttpException(
+        new ApiError(
           StatusCodes.FORBIDDEN,
           `User role '${req.user?.role}' is not authorized to access this route`
         )

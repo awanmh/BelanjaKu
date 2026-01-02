@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import db from "../database/models";
-import HttpException from "../utils/http-exception.util";
+import ApiError from "../utils/api-error.util";
 
 const Wishlist = db.Wishlist;
 const Product = db.Product;
@@ -14,7 +14,7 @@ class WishlistService {
     // Check if product exists
     const product = await Product.findByPk(productId);
     if (!product) {
-      throw new HttpException(StatusCodes.NOT_FOUND, "Product not found");
+      throw new ApiError(StatusCodes.NOT_FOUND, "Product not found");
     }
 
     // Check if already in wishlist
@@ -65,7 +65,7 @@ class WishlistService {
     });
 
     if (deletedCount === 0) {
-      throw new HttpException(
+      throw new ApiError(
         StatusCodes.NOT_FOUND,
         "Product not found in wishlist"
       );

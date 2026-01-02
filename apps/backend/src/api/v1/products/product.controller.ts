@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import ProductService, { CreateProductInput, UpdateProductInput } from '../../../services/product.service';
-import HttpException from '../../../utils/http-exception.util';
+import ApiError from '../../../utils/api-error.util';
 
 // Interface untuk memperluas objek Request Express dengan properti 'user' dan 'file'
 interface AuthenticatedRequest extends Request {
@@ -23,7 +23,7 @@ class ProductController {
     try {
       // REFACTOR: Pemeriksaan req.user tidak lagi diperlukan karena sudah ditangani oleh middleware 'protect'
       if (!req.file) {
-        throw new HttpException(StatusCodes.BAD_REQUEST, 'Product image is required');
+        throw new ApiError(StatusCodes.BAD_REQUEST, 'Product image is required');
       }
 
       // Kita bisa langsung mengakses req.user!.id dengan aman

@@ -5,7 +5,7 @@ import morgan from "morgan";
 import { StatusCodes } from "http-status-codes";
 import { config as env } from "./config/env.config";
 import db from "./database/models";
-import HttpException from "./utils/http-exception.util";
+import ApiError from "./utils/api-error.util";
 import { errorMiddleware as globalErrorHandler } from "./middlewares/error.middleware";
 import v1Router from "./api/v1";
 import logger from "./utils/logger.util";
@@ -25,17 +25,17 @@ app.use(helmet());
 // Rate Limiting: Max 100 requests per 15 minutes per IP
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
+  max: 500, // Tingkatkan untuk pengembangan
   standardHeaders: true,
   legacyHeaders: false,
-  message: "Too many requests from this IP, please try again after 15 minutes",
+  message: "Terlalu banyak permintaan dari IP ini, silakan coba lagi setelah 15 menit",
 });
 app.use(limiter);
 
 if (env.NODE_ENV !== "test") {
   app.use(
     morgan("combined", {
-      stream: { write: (message) => logger.http(message.trim()) },
+      stream: { write: (message: string) => logger.http(message.trim()) },
     })
   );
 }
@@ -43,10 +43,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Sediakan folder 'uploads' secara statis agar bisa diakses
-app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static("uploads", {}));
 
 // API Routes
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   res.status(StatusCodes.OK).json({
     message: "Welcome to BelanjaKu E-commerce API",
     version: "1.0.0",
@@ -54,9 +54,9 @@ app.get("/", (req, res) => {
 });
 app.use("/api/v1", v1Router);
 
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   next(
-    new HttpException(
+    new ApiError(
       StatusCodes.NOT_FOUND,
       "Resource not found on this server"
     )

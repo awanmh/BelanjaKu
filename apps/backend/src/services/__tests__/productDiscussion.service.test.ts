@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import ProductDiscussionService from "../productDiscussion.service";
 import db from "../../database/models";
-import HttpException from "../../utils/http-exception.util";
+import ApiError from "../../utils/api-error.util";
 
 // Mock dependencies
 jest.mock("../../database/models", () => {
@@ -64,7 +64,7 @@ describe("ProductDiscussionService", () => {
       await expect(
         ProductDiscussionService.createDiscussion(input)
       ).rejects.toThrow(
-        new HttpException(StatusCodes.NOT_FOUND, "Product not found")
+        new ApiError(StatusCodes.NOT_FOUND, "Product not found")
       );
     });
   });

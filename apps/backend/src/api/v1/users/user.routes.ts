@@ -1,14 +1,39 @@
 import { Router } from 'express';
 import UserController from './user.controller';
-import { updateUserValidator } from './user.validator';
+import { updateUserValidator, updateProfileValidator, changePasswordValidator } from './user.validator';
 import { validate } from '../../../middlewares/validator.middleware';
 import { protect, authorize } from '../../../middlewares/auth.middleware';
 
 const userRouter = Router();
 
-// 🔐 Semua rute di bawah ini memerlukan autentikasi dan peran 'admin'.
-// Kita terapkan middleware ini di awal agar berlaku untuk semua endpoint di file ini.
+// 🔐 Semua rute di bawah ini memerlukan autentikasi.
 userRouter.use(protect);
+
+/**
+ * @route   PUT /api/v1/users/profile
+ * @desc    Memperbarui profil pengguna (untuk user itu sendiri)
+ * @access  Private (Semua Role)
+ */
+userRouter.put(
+  '/profile',
+  updateProfileValidator,
+  validate,
+  UserController.updateProfile
+);
+
+/**
+ * @route   PUT /api/v1/users/change-password
+ * @desc    Mengubah password pengguna
+ * @access  Private (Semua Role)
+ */
+userRouter.put(
+  '/change-password',
+  changePasswordValidator,
+  validate,
+  UserController.changePassword
+);
+
+// 🔐 Rute di bawah ini memerlukan peran 'admin'.
 userRouter.use(authorize('admin'));
 
 /**

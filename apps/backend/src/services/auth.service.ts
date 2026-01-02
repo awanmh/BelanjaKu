@@ -2,7 +2,7 @@ import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
 import db from '../database/models';
 import { UserAttributes } from '../database/models/user.model';
-import HttpException from '../utils/http-exception.util';
+import ApiError from '../utils/api-error.util';
 import { StatusCodes } from 'http-status-codes';
 import { generateAccessToken, generateRefreshToken } from '../utils/jwt.util';
 import logger from '../utils/logger.util';
@@ -28,16 +28,31 @@ class AuthService {
 
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
-      throw new HttpException(StatusCodes.CONFLICT, 'Email already exists');
+      throw new ApiError(StatusCodes.CONFLICT, 'Email already exists');
     }
+
+    // Cek apakah domain email adalah seller.belanjaku.com
+    const isSellerEmail = email.toLowerCase().endsWith('@seller.belanjaku.com');
+    const role = isSellerEmail ? 'seller' : 'user';
+
+    console.log(`[AUTH] Registering user: ${email} | Assigned role: ${role}`);
 
     const newUser = await User.create({
       fullName,
       email,
       password,
-      role: 'user',
+      role,
       isVerified: false,
     });
+
+    // Jika user adalah seller, buat profil seller default
+    if (role === 'seller') {
+      await db.Seller.create({
+        userId: newUser.id,
+        storeName: `Toko ${fullName}`, // Nama toko default diambil dari nama lengkap
+      });
+      logger.info(`Auto-created seller profile for user: ${email}`);
+    }
 
     // REFACTOR: Kita tidak perlu lagi menghapus password secara manual.
     // Hook toJSON di model User akan menanganinya secara otomatis.
@@ -53,13 +68,13 @@ class AuthService {
     const user = await User.findOne({ where: { email } });
     if (!user) {
       logger.warn(`Login attempt failed for email: ${email}. User not found.`);
-      throw new HttpException(StatusCodes.UNAUTHORIZED, 'Invalid email or password');
+      throw new ApiError(StatusCodes.UNAUTHORIZED, 'Invalid email or password');
     }
 
     const isPasswordMatch = await user.comparePassword(password);
     if (!isPasswordMatch) {
       logger.warn(`Login attempt failed for user: ${email}. Incorrect password.`);
-      throw new HttpException(StatusCodes.UNAUTHORIZED, 'Invalid email or password');
+      throw new ApiError(StatusCodes.UNAUTHORIZED, 'Invalid email or password');
     }
 
     const tokenPayload = {
@@ -89,7 +104,7 @@ class AuthService {
     const user: any = await User.findOne({ where: { email } });
 
     if (!user) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'User with that email does not exist');
+      throw new ApiError(StatusCodes.NOT_FOUND, 'User with that email does not exist');
     }
 
     // 1. Generate Reset Token
@@ -110,7 +125,7 @@ class AuthService {
       await user.save();
 
       logger.error('Failed to send reset email', error);
-      throw new HttpException(StatusCodes.INTERNAL_SERVER_ERROR, 'Error sending email');
+      throw new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Error sending email');
     }
 
     return { message: 'Password reset link sent to your email' };

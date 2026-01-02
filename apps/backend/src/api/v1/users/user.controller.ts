@@ -15,7 +15,7 @@ class UserController {
       // FIX: Teruskan req.query ke service. 
       // Ini adalah perbaikan utama untuk mengatasi error TS2554.
       const users = await UserService.getAllUsers(req.query);
-      
+
       res.status(StatusCodes.OK).json({
         success: true,
         message: 'Users retrieved successfully',
@@ -89,6 +89,42 @@ class UserController {
         success: true,
         message: 'Archived users retrieved successfully',
         data: users,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /**
+   * [BARU] Menangani permintaan untuk memperbarui profil pengguna (untuk user itu sendiri).
+   */
+  public async updateProfile(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const userId = req.user!.id;
+      const updatedUser = await UserService.updateProfile(userId, req.body);
+
+      res.status(StatusCodes.OK).json({
+        success: true,
+        message: 'Profile updated successfully',
+        data: updatedUser,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /**
+   * [BARU] Menangani permintaan untuk mengubah password pengguna.
+   */
+  public async changePassword(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const userId = req.user!.id;
+      const { currentPassword, newPassword } = req.body;
+      await UserService.changePassword(userId, currentPassword, newPassword);
+
+      res.status(StatusCodes.OK).json({
+        success: true,
+        message: 'Password changed successfully',
       });
     } catch (error) {
       next(error);

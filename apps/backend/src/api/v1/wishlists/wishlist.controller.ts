@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "http-status-codes";
 import { AuthenticatedRequest } from "../../../middlewares/auth.middleware";
 import WishlistService from "../../../services/wishlist.service";
-import HttpException from "../../../utils/http-exception.util";
+import ApiError from "../../../utils/api-error.util";
 
 class WishlistController {
   public async getWishlist(
@@ -12,7 +12,7 @@ class WishlistController {
   ): Promise<void> {
     try {
       if (!req.user)
-        throw new HttpException(
+        throw new ApiError(
           StatusCodes.UNAUTHORIZED,
           "Authentication required"
         );
@@ -34,7 +34,7 @@ class WishlistController {
   ): Promise<void> {
     try {
       if (!req.user)
-        throw new HttpException(
+        throw new ApiError(
           StatusCodes.UNAUTHORIZED,
           "Authentication required"
         );
@@ -62,7 +62,7 @@ class WishlistController {
   ): Promise<void> {
     try {
       if (!req.user)
-        throw new HttpException(
+        throw new ApiError(
           StatusCodes.UNAUTHORIZED,
           "Authentication required"
         );

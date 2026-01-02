@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import db from "../database/models";
 import { SellerAttributes } from "../database/models/seller.model";
-import HttpException from "../utils/http-exception.util";
+import ApiError from "../utils/api-error.util";
 import { Op } from "sequelize";
 import logger from "../utils/logger.util";
 
@@ -34,7 +34,7 @@ class SellerService {
   ): Promise<SellerAttributes> {
     const user = await User.findByPk(userId);
     if (!user || user.role !== "seller") {
-      throw new HttpException(StatusCodes.FORBIDDEN, "User is not a seller");
+      throw new ApiError(StatusCodes.FORBIDDEN, "User is not a seller");
     }
 
     const [profile, created] = await Seller.findOrCreate({
@@ -55,7 +55,7 @@ class SellerService {
   public async getProfile(userId: string): Promise<SellerAttributes> {
     const profile = await Seller.findOne({ where: { userId } });
     if (!profile) {
-      throw new HttpException(
+      throw new ApiError(
         StatusCodes.NOT_FOUND,
         "Seller profile not found. Please create one."
       );
@@ -122,7 +122,7 @@ class SellerService {
       logger.error(
         `Failed to fetch dashboard stats for seller ${sellerId}: ${error.message}`
       );
-      throw new HttpException(
+      throw new ApiError(
         StatusCodes.INTERNAL_SERVER_ERROR,
         "Failed to fetch seller dashboard stats"
       );

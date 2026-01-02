@@ -1,6 +1,6 @@
 import ProductService from "../product.service";
 import db from "../../database/models";
-import HttpException from "../../utils/http-exception.util";
+import ApiError from "../../utils/api-error.util";
 import { StatusCodes } from "http-status-codes";
 import APIFeatures from "../../utils/apiFeatures.util";
 
@@ -175,7 +175,7 @@ describe("ProductService", () => {
       await expect(
         ProductService.updateProduct(productId, updateData, anotherSellerId)
       ).rejects.toThrow(
-        new HttpException(
+        new ApiError(
           StatusCodes.FORBIDDEN,
           "You are not authorized to update this product"
         )
@@ -188,7 +188,7 @@ describe("ProductService", () => {
       await expect(
         ProductService.updateProduct(productId, updateData, sellerId)
       ).rejects.toThrow(
-        new HttpException(StatusCodes.NOT_FOUND, "Product not found")
+        new ApiError(StatusCodes.NOT_FOUND, "Product not found")
       );
     });
   });
@@ -217,7 +217,7 @@ describe("ProductService", () => {
       mockProduct.findByPk.mockResolvedValue(null);
 
       await expect(ProductService.getProductById(productId)).rejects.toThrow(
-        new HttpException(StatusCodes.NOT_FOUND, "Product not found")
+        new ApiError(StatusCodes.NOT_FOUND, "Product not found")
       );
     });
   });
@@ -247,7 +247,7 @@ describe("ProductService", () => {
       await expect(
         ProductService.deleteProduct(productId, anotherSellerId)
       ).rejects.toThrow(
-        new HttpException(
+        new ApiError(
           StatusCodes.FORBIDDEN,
           "You are not authorized to delete this product"
         )
@@ -260,7 +260,7 @@ describe("ProductService", () => {
       await expect(
         ProductService.deleteProduct(productId, sellerId)
       ).rejects.toThrow(
-        new HttpException(StatusCodes.NOT_FOUND, "Product not found")
+        new ApiError(StatusCodes.NOT_FOUND, "Product not found")
       );
     });
   });

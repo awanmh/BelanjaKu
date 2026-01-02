@@ -1,6 +1,6 @@
 import { StatusCodes } from 'http-status-codes';
 import db from '../database/models';
-import HttpException from '../utils/http-exception.util';
+import ApiError from '../utils/api-error.util';
 import { Op } from 'sequelize';
 import { sendOrderConfirmationEmail } from '../utils/email.util';
 
@@ -52,10 +52,10 @@ class OrderService {
         const product = await Product.findByPk(item.productId, { transaction });
 
         if (!product) {
-          throw new HttpException(StatusCodes.NOT_FOUND, `Product with ID ${item.productId} not found`);
+          throw new ApiError(StatusCodes.NOT_FOUND, `Product with ID ${item.productId} not found`);
         }
         if (product.stock < item.quantity) {
-          throw new HttpException(StatusCodes.BAD_REQUEST, `Not enough stock for ${product.name}`);
+          throw new ApiError(StatusCodes.BAD_REQUEST, `Not enough stock for ${product.name}`);
         }
 
         totalAmount += product.price * item.quantity;
@@ -80,13 +80,13 @@ class OrderService {
         });
 
         if (!promo) {
-          throw new HttpException(StatusCodes.BAD_REQUEST, 'Invalid or expired promotion code');
+          throw new ApiError(StatusCodes.BAD_REQUEST, 'Invalid or expired promotion code');
         }
 
         // Pastikan promosi berlaku untuk salah satu produk di keranjang
         const isApplicable = items.some(item => item.productId === promo.productId);
         if (!isApplicable) {
-          throw new HttpException(StatusCodes.BAD_REQUEST, 'This promotion code is not valid for the items in your cart.');
+          throw new ApiError(StatusCodes.BAD_REQUEST, 'This promotion code is not valid for the items in your cart.');
         }
 
         // Hitung diskon (hanya pada produk yang dipromosikan)
@@ -177,7 +177,7 @@ class OrderService {
     });
 
     if (!order) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'Order not found or you do not have permission to view it');
+      throw new ApiError(StatusCodes.NOT_FOUND, 'Order not found or you do not have permission to view it');
     }
 
     return order;
@@ -228,7 +228,7 @@ class OrderService {
     });
 
     if (!order) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'Order not found');
+      throw new ApiError(StatusCodes.NOT_FOUND, 'Order not found');
     }
 
     const orderWithItems = order as OrderWithItems;
@@ -238,11 +238,11 @@ class OrderService {
     );
 
     if (!isSellerProductInOrder) {
-      throw new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to update this order');
+      throw new ApiError(StatusCodes.FORBIDDEN, 'You are not authorized to update this order');
     }
 
     if (order.status !== 'processing' && status === 'shipped') {
-      throw new HttpException(StatusCodes.BAD_REQUEST, 'Order must be processed before it can be shipped');
+      throw new ApiError(StatusCodes.BAD_REQUEST, 'Order must be processed before it can be shipped');
     }
 
     order.status = status;

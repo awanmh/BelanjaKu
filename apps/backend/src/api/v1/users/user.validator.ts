@@ -23,3 +23,35 @@ export const updateUserValidator = [
     .isBoolean()
     .withMessage('isVerified must be a boolean value (true or false)'),
 ];
+
+/**
+ * [BARU] Aturan validasi untuk memperbarui profil oleh pengguna itu sendiri.
+ */
+export const updateProfileValidator = [
+  body('fullName')
+    .optional()
+    .isString()
+    .withMessage('Full name must be a string')
+    .trim()
+    .notEmpty()
+    .withMessage('Full name cannot be empty'),
+
+  body('email')
+    .optional()
+    .isEmail()
+    .withMessage('Please provide a valid email')
+    .normalizeEmail(),
+];
+
+/**
+ * [BARU] Aturan validasi untuk mengubah password.
+ */
+export const changePasswordValidator = [
+  body('currentPassword')
+    .notEmpty()
+    .withMessage('Current password is required'),
+
+  body('newPassword')
+    .isLength({ min: 6 })
+    .withMessage('New password must be at least 6 characters long'),
+];

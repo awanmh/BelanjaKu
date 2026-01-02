@@ -1,6 +1,6 @@
 import PaymentService from '../payment.service';
 import db from '../../database/models';
-import HttpException from '../../utils/http-exception.util';
+import ApiError from '../../utils/api-error.util';
 import { StatusCodes } from 'http-status-codes';
 import logger from '../../utils/logger.util';
 
@@ -79,14 +79,14 @@ describe('PaymentService', () => {
         it('should throw NOT_FOUND if order does not exist', async () => {
             mockOrder.findOne.mockResolvedValue(null);
             await expect(PaymentService.createPayment(orderId, userId, 'cod')).rejects.toThrow(
-                new HttpException(StatusCodes.NOT_FOUND, 'Order not found')
+                new ApiError(StatusCodes.NOT_FOUND, 'Order not found')
             );
         });
 
         it('should throw BAD_REQUEST if order is not pending', async () => {
             mockOrder.findOne.mockResolvedValue({ ...mockOrderInstance, status: 'completed' } as any);
             await expect(PaymentService.createPayment(orderId, userId, 'cod')).rejects.toThrow(
-                new HttpException(StatusCodes.BAD_REQUEST, 'This order cannot be paid for')
+                new ApiError(StatusCodes.BAD_REQUEST, 'This order cannot be paid for')
             );
         });
     });

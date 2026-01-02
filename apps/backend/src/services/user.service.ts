@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 import db from '../database/models';
 import { UserAttributes } from '../database/models/user.model';
-import HttpException from '../utils/http-exception.util';
+import ApiError from '../utils/api-error.util';
 import APIFeatures from '../utils/apiFeatures.util';
 import { ParsedQs } from 'qs';
 import { Op } from 'sequelize';
@@ -68,7 +68,7 @@ class UserService {
   public async getUserById(userId: string): Promise<Omit<UserAttributes, 'password'>> {
     const user = await User.findByPk(userId);
     if (!user) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'User not found');
+      throw new ApiError(StatusCodes.NOT_FOUND, 'User not found');
     }
     return user.toJSON();
   }
@@ -79,7 +79,7 @@ class UserService {
   public async updateUser(userId: string, userData: UpdateUserInput): Promise<Omit<UserAttributes, 'password'>> {
     const user = await User.findByPk(userId);
     if (!user) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'User not found');
+      throw new ApiError(StatusCodes.NOT_FOUND, 'User not found');
     }
     await user.update(userData);
     const updatedUser = await this.getUserById(userId);
@@ -92,7 +92,7 @@ class UserService {
   public async deleteUser(userId: string): Promise<void> {
     const user = await User.findByPk(userId);
     if (!user) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'User not found');
+      throw new ApiError(StatusCodes.NOT_FOUND, 'User not found');
     }
     await user.destroy();
   }
@@ -137,15 +137,54 @@ class UserService {
   }
 
   /**
+   * [BARU] Memperbarui profil pengguna (untuk user itu sendiri).
+   */
+  public async updateProfile(userId: string, data: Partial<Pick<UserAttributes, 'fullName' | 'email'>>): Promise<Omit<UserAttributes, 'password'>> {
+    const user = await User.findByPk(userId);
+    if (!user) {
+      throw new ApiError(StatusCodes.NOT_FOUND, 'User not found');
+    }
+
+    // Jika email diubah, cek apakah sudah digunakan oleh user lain
+    if (data.email && data.email !== user.email) {
+      const existingUser = await User.findOne({ where: { email: data.email } });
+      if (existingUser) {
+        throw new ApiError(StatusCodes.CONFLICT, 'Email already in use');
+      }
+    }
+
+    await user.update(data);
+    return user.toJSON();
+  }
+
+  /**
+   * [BARU] Mengubah password pengguna.
+   */
+  public async changePassword(userId: string, currentPassword: string, newPassword: string): Promise<void> {
+    const user = await User.findByPk(userId);
+    if (!user) {
+      throw new ApiError(StatusCodes.NOT_FOUND, 'User not found');
+    }
+
+    const isMatch = await user.comparePassword(currentPassword);
+    if (!isMatch) {
+      throw new ApiError(StatusCodes.BAD_REQUEST, 'Current password incorrect');
+    }
+
+    // Update password (hook beforeUpdate akan menghash secara otomatis)
+    await user.update({ password: newPassword });
+  }
+
+  /**
    * [DIPERBARUI] Memulihkan pengguna yang diarsipkan.
    */
   public async restoreUser(userId: string): Promise<Omit<UserAttributes, 'password'>> {
     const user = await User.findByPk(userId, { paranoid: false });
     if (!user) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'Archived user not found');
+      throw new ApiError(StatusCodes.NOT_FOUND, 'Archived user not found');
     }
     if (user.deletedAt === null) {
-      throw new HttpException(StatusCodes.BAD_REQUEST, 'User is not archived');
+      throw new ApiError(StatusCodes.BAD_REQUEST, 'User is not archived');
     }
     await user.restore();
     return user.toJSON();

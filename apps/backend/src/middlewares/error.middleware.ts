@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import HttpException from '../utils/http-exception.util';
+import ApiError from '../utils/api-error.util';
 import logger from '../utils/logger.util'; // 1. Impor logger
 
 export const errorMiddleware = (
-  error: HttpException,
+  error: ApiError,
   req: Request,
   res: Response,
   next: NextFunction
@@ -14,7 +14,7 @@ export const errorMiddleware = (
 
   // 2. Gunakan logger untuk mencatat detail error
   logger.error(`[${req.method}] ${req.path} >> StatusCode:: ${status}, Message:: ${message}`);
-  
+
   res.status(status).json({
     status: 'error',
     statusCode: status,

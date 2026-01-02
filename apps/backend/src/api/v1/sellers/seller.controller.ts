@@ -2,7 +2,7 @@ import { Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import SellerService, { CreateSellerProfileInput } from '../../../services/seller.service';
 import { AuthenticatedRequest } from '../../../middlewares/auth.middleware';
-import HttpException from '../../../utils/http-exception.util';
+import ApiError from '../../../utils/api-error.util';
 
 /**
  * Controller untuk menangani semua request yang berhubungan dengan profil penjual.

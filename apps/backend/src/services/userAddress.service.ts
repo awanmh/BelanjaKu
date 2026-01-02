@@ -1,6 +1,6 @@
 import { StatusCodes } from 'http-status-codes';
 import db from '../database/models';
-import HttpException from '../utils/http-exception.util';
+import ApiError from '../utils/api-error.util';
 
 const UserAddress = db.UserAddress;
 
@@ -66,7 +66,7 @@ class UserAddressService {
     });
 
     if (!address) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'Address not found');
+      throw new ApiError(StatusCodes.NOT_FOUND, 'Address not found');
     }
 
     return address;
@@ -104,7 +104,7 @@ class UserAddressService {
     // Jika ini Primary dan user punya alamat lain, tolak penghapusan
     // User harus set Primary ke alamat lain dulu baru boleh hapus ini.
     if (address.isPrimary && count > 1) {
-      throw new HttpException(
+      throw new ApiError(
         StatusCodes.BAD_REQUEST, 
         'Cannot delete primary address. Please set another address as primary first.'
       );

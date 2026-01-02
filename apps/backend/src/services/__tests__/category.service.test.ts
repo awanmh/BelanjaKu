@@ -1,6 +1,6 @@
 import CategoryService from '../category.service';
 import db from '../../database/models';
-import HttpException from '../../utils/http-exception.util';
+import ApiError from '../../utils/api-error.util';
 import { StatusCodes } from 'http-status-codes';
 import APIFeatures from '../../utils/apiFeatures.util';
 
@@ -84,7 +84,7 @@ describe('CategoryService', () => {
     it('should throw NOT_FOUND if category is not found', async () => {
         mockCategory.findByPk.mockResolvedValue(null);
         await expect(CategoryService.getCategoryById('cat-uuid')).rejects.toThrow(
-            new HttpException(StatusCodes.NOT_FOUND, 'Category not found')
+            new ApiError(StatusCodes.NOT_FOUND, 'Category not found')
         );
     });
   });
@@ -104,7 +104,7 @@ describe('CategoryService', () => {
     it('should throw NOT_FOUND if category to update is not found', async () => {
         mockCategory.findByPk.mockResolvedValue(null);
         await expect(CategoryService.updateCategory('cat-uuid', {})).rejects.toThrow(
-            new HttpException(StatusCodes.NOT_FOUND, 'Category not found')
+            new ApiError(StatusCodes.NOT_FOUND, 'Category not found')
         );
     });
   });
@@ -121,7 +121,7 @@ describe('CategoryService', () => {
     it('should throw NOT_FOUND if category to delete is not found', async () => {
         mockCategory.findByPk.mockResolvedValue(null);
         await expect(CategoryService.deleteCategory('cat-uuid')).rejects.toThrow(
-            new HttpException(StatusCodes.NOT_FOUND, 'Category not found')
+            new ApiError(StatusCodes.NOT_FOUND, 'Category not found')
         );
     });
   });

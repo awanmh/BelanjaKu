@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "http-status-codes";
 import { AuthenticatedRequest } from "../../../middlewares/auth.middleware";
 import NotificationService from "../../../services/notification.service";
-import HttpException from "../../../utils/http-exception.util";
+import ApiError from "../../../utils/api-error.util";
 
 class NotificationController {
   public async getNotifications(
@@ -12,7 +12,7 @@ class NotificationController {
   ): Promise<void> {
     try {
       if (!req.user)
-        throw new HttpException(
+        throw new ApiError(
           StatusCodes.UNAUTHORIZED,
           "Authentication required"
         );
@@ -36,7 +36,7 @@ class NotificationController {
   ): Promise<void> {
     try {
       if (!req.user)
-        throw new HttpException(
+        throw new ApiError(
           StatusCodes.UNAUTHORIZED,
           "Authentication required"
         );
@@ -59,7 +59,7 @@ class NotificationController {
   ): Promise<void> {
     try {
       if (!req.user)
-        throw new HttpException(
+        throw new ApiError(
           StatusCodes.UNAUTHORIZED,
           "Authentication required"
         );

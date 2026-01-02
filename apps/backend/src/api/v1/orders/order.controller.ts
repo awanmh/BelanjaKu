@@ -1,7 +1,7 @@
 import { Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import OrderService, { CreateOrderInput } from '../../../services/order.service';
-import HttpException from '../../../utils/http-exception.util';
+import ApiError from '../../../utils/api-error.util';
 import { AuthenticatedRequest } from '../../../middlewares/auth.middleware';
 
 /**
@@ -102,7 +102,7 @@ class OrderController {
       const { status } = req.body; // status: 'processing' | 'shipped'
 
       if (!status || (status !== 'processing' && status !== 'shipped')) {
-        throw new HttpException(StatusCodes.BAD_REQUEST, 'Invalid status provided');
+        throw new ApiError(StatusCodes.BAD_REQUEST, 'Invalid status provided');
       }
 
       const updatedOrder = await OrderService.updateOrderStatusBySeller(orderId, sellerId, status);

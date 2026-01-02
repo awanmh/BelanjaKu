@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 import db from '../database/models';
 import { CategoryAttributes } from '../database/models/category.model';
-import HttpException from '../utils/http-exception.util';
+import ApiError from '../utils/api-error.util';
 import APIFeatures from '../utils/apiFeatures.util';
 import { ParsedQs } from 'qs';
 
@@ -37,7 +37,7 @@ class CategoryService {
 
     const existingCategory = await Category.findOne({ where: { name } });
     if (existingCategory) {
-      throw new HttpException(StatusCodes.CONFLICT, 'Category with this name already exists');
+      throw new ApiError(StatusCodes.CONFLICT, 'Category with this name already exists');
     }
 
     const newCategory = await Category.create(categoryData);
@@ -87,7 +87,7 @@ class CategoryService {
   public async getCategoryById(id: string): Promise<CategoryAttributes> {
     const category = await Category.findByPk(id);
     if (!category) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'Category not found');
+      throw new ApiError(StatusCodes.NOT_FOUND, 'Category not found');
     }
     return category.toJSON();
   }
@@ -98,7 +98,7 @@ class CategoryService {
   public async updateCategory(id: string, categoryData: UpdateCategoryInput): Promise<CategoryAttributes> {
     const category = await Category.findByPk(id);
     if (!category) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'Category not found');
+      throw new ApiError(StatusCodes.NOT_FOUND, 'Category not found');
     }
 
     await category.update(categoryData);
@@ -111,7 +111,7 @@ class CategoryService {
   public async deleteCategory(id: string): Promise<void> {
     const category = await Category.findByPk(id);
     if (!category) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'Category not found');
+      throw new ApiError(StatusCodes.NOT_FOUND, 'Category not found');
     }
 
     await category.destroy();
