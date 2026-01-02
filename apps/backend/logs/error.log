@@ -1613,3 +1613,9 @@
 2025-12-16 22:15:21:1521 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.category does not exist[39m
 2025-12-16 22:15:21:1521 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.category does not exist[39m
 2025-12-16 22:15:28:1528 [31merror[39m: [31m[GET] /api/v1/products >> StatusCode:: 500, Message:: column Product.category does not exist[39m
+2026-01-02 21:37:53:3753 [31merror[39m: [31mUnable to connect to the database: SASL: SCRAM-SERVER-FIRST-MESSAGE: client password must be a string[39m
+2026-01-02 21:40:15:4015 [31merror[39m: [31mUnable to connect to the database: SASL: SCRAM-SERVER-FIRST-MESSAGE: client password must be a string[39m
+2026-01-02 21:43:04:434 [31merror[39m: [31mUnable to connect to the database: SASL: SCRAM-SERVER-FIRST-MESSAGE: client password must be a string[39m
+2026-01-02 21:45:28:4528 [31merror[39m: [31mUnable to connect to the database: SASL: SCRAM-SERVER-FIRST-MESSAGE: client password must be a string[39m
+2026-01-02 21:48:38:4838 [31merror[39m: [31mUnable to connect to the database: SASL: SCRAM-SERVER-FIRST-MESSAGE: client password must be a string[39m
+2026-01-02 21:49:41:4941 [31merror[39m: [31mUnable to connect to the database: SASL: SCRAM-SERVER-FIRST-MESSAGE: client password must be a string[39m
