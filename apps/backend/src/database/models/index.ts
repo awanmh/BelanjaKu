@@ -1,5 +1,6 @@
-'use strict';
+"use strict";
 
+<<<<<<< HEAD
 import { Sequelize } from 'sequelize';
 import { config as envConfig } from '../../config/env.config';
 import UserModel from './user.model';
@@ -14,10 +15,32 @@ import ShippingOptionModel from './shippingOption.model';
 import PaymentModel from './payment.model';
 import CartModel from './cart.model';
 import WishlistModel from './wishlist.model';
+=======
+import { Sequelize } from "sequelize";
+import { config as envConfig } from "../../config/env.config";
+import UserModel from "./user.model";
+import ProductModel from "./product.model";
+import CategoryModel from "./category.model";
+import OrderModel from "./order.model";
+import OrderItemModel from "./orderItem.model";
+import ReviewModel from "./review.model";
+import SellerModel from "./seller.model";
+import PromotionModel from "./promotion.model";
+import ShippingOptionModel from "./shippingOption.model";
+import PaymentModel from "./payment.model";
+import CartModel from "./cart.model";
+import CartItemModel from "./cartItem.model";
+import ProductImageModel from "./productImage.model";
+import UserAddressModel from "./userAddress.model";
+import WishlistModel from "./wishlist.model";
+import NotificationModel from "./notification.model";
+import ProductVariantModel from "./productVariant.model";
+import ProductDiscussionModel from "./productDiscussion.model";
+>>>>>>> frontend-role
 
 // Tentukan environment (default: development)
-const env = process.env.NODE_ENV || 'development';
-const dbConfig = require('../../config/database.config.ts')[env];
+const env = process.env.NODE_ENV || "development";
+const dbConfig = require("../../config/database.config")[env];
 
 // Inisialisasi Sequelize
 let sequelize: Sequelize;
@@ -44,7 +67,17 @@ const Promotion = PromotionModel(sequelize);
 const ShippingOption = ShippingOptionModel(sequelize);
 const Payment = PaymentModel(sequelize);
 const Cart = CartModel(sequelize);
+<<<<<<< HEAD
 const Wishlist = WishlistModel(sequelize);
+=======
+const CartItem = CartItemModel(sequelize);
+const UserAddress = UserAddressModel(sequelize);
+const ProductImage = ProductImageModel(sequelize);
+const Wishlist = WishlistModel(sequelize);
+const Notification = NotificationModel(sequelize);
+const ProductVariant = ProductVariantModel(sequelize);
+const ProductDiscussion = ProductDiscussionModel(sequelize);
+>>>>>>> frontend-role
 
 // Kumpulan model dan instance Sequelize
 const db = {
@@ -61,7 +94,17 @@ const db = {
   ShippingOption,
   Payment,
   Cart,
+<<<<<<< HEAD
   Wishlist,
+=======
+  CartItem,
+  UserAddress,
+  ProductImage,
+  Wishlist,
+  Notification,
+  ProductVariant,
+  ProductDiscussion,
+>>>>>>> frontend-role
 };
 
 // Definisikan asosiasi antar model

@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import PromotionService, { CreatePromotionInput, UpdatePromotionInput } from '../../../services/promotion.service';
 import { AuthenticatedRequest } from '../../../middlewares/auth.middleware';
-import HttpException from '../../../utils/http-exception.util';
+import ApiError from '../../../utils/api-error.util';
 
 /**
  * Controller untuk menangani semua request yang berhubungan dengan promosi.
@@ -14,7 +14,7 @@ class PromotionController {
   public async create(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       if (!req.user) {
-        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
+        throw new ApiError(StatusCodes.UNAUTHORIZED, 'Authentication required');
       }
       const sellerId = req.user.id;
       const data: CreatePromotionInput = req.body;
@@ -72,7 +72,7 @@ class PromotionController {
   public async update(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       if (!req.user) {
-        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
+        throw new ApiError(StatusCodes.UNAUTHORIZED, 'Authentication required');
       }
       const sellerId = req.user.id;
       const { id } = req.params;
@@ -96,7 +96,7 @@ class PromotionController {
   public async delete(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       if (!req.user) {
-        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Authentication required');
+        throw new ApiError(StatusCodes.UNAUTHORIZED, 'Authentication required');
       }
       const sellerId = req.user.id;
       const { id } = req.params;

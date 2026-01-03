@@ -79,4 +79,8 @@ describe('Email Utility', () => {
             }));
         });
     });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> frontend-role

@@ -1,6 +1,6 @@
 import { StatusCodes } from 'http-status-codes';
 import db from '../database/models';
-import HttpException from '../utils/http-exception.util';
+import ApiError from '../utils/api-error.util';
 import { PaymentMethod } from '../database/models/payment.model';
 import crypto from 'crypto';
 import logger from '../utils/logger.util';
@@ -19,10 +19,10 @@ class PaymentService {
   public async createPayment(orderId: string, userId: string, method: PaymentMethod) {
     const order = await Order.findOne({ where: { id: orderId, userId } });
     if (!order) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'Order not found');
+      throw new ApiError(StatusCodes.NOT_FOUND, 'Order not found');
     }
     if (order.status !== 'pending') {
-      throw new HttpException(StatusCodes.BAD_REQUEST, 'This order cannot be paid for');
+      throw new ApiError(StatusCodes.BAD_REQUEST, 'This order cannot be paid for');
     }
 
     const transactionId = `TRX-${Date.now()}-${crypto.randomBytes(4).toString('hex')}`;
@@ -79,7 +79,7 @@ class PaymentService {
   public async handleWebhook(payload: any, signature: string) {
     const isSignatureValid = this.verifyWebhookSignature(JSON.stringify(payload), signature);
     if (!isSignatureValid) {
-        throw new HttpException(StatusCodes.UNAUTHORIZED, 'Invalid webhook signature');
+        throw new ApiError(StatusCodes.UNAUTHORIZED, 'Invalid webhook signature');
     }
 
     const { transaction_id, transaction_status } = payload;

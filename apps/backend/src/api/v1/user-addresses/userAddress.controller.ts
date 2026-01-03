@@ -70,4 +70,8 @@ class UserAddressController {
   }
 }
 
+<<<<<<< HEAD
 export default new UserAddressController();
+=======
+export default new UserAddressController();
+>>>>>>> frontend-role

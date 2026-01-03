@@ -47,4 +47,8 @@ export const sendResetPasswordEmail = async (userEmail: string, resetToken: stri
     <p>Klik link ini: <a href="${resetLink}">Reset Password</a></p>
   `;
     return sendEmail(userEmail, subject, html);
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> frontend-role

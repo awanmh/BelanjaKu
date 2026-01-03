@@ -1,6 +1,6 @@
 import OrderService from '../order.service';
 import db from '../../database/models';
-import HttpException from '../../utils/http-exception.util';
+import ApiError from '../../utils/api-error.util';
 import { StatusCodes } from 'http-status-codes';
 
 // Mock dependensi eksternal
@@ -102,7 +102,7 @@ describe('OrderService', () => {
         it('should throw NOT_FOUND if order not found or user mismatch', async () => {
             mockOrder.findOne.mockResolvedValue(null);
             await expect(OrderService.getOrderById('order-2', userId)).rejects.toThrow(
-                new HttpException(StatusCodes.NOT_FOUND, 'Order not found or you do not have permission to view it')
+                new ApiError(StatusCodes.NOT_FOUND, 'Order not found or you do not have permission to view it')
             );
         });
     });
@@ -149,7 +149,7 @@ describe('OrderService', () => {
             };
             mockOrder.findByPk.mockResolvedValue(otherSellerOrder as any);
             await expect(OrderService.updateOrderStatusBySeller('order-1', sellerId, 'shipped')).rejects.toThrow(
-                new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to update this order')
+                new ApiError(StatusCodes.FORBIDDEN, 'You are not authorized to update this order')
             );
         });
 
@@ -157,7 +157,7 @@ describe('OrderService', () => {
             const pendingOrder = { ...mockOrderWithItems, status: 'pending' };
             mockOrder.findByPk.mockResolvedValue(pendingOrder as any);
             await expect(OrderService.updateOrderStatusBySeller('order-1', sellerId, 'shipped')).rejects.toThrow(
-                new HttpException(StatusCodes.BAD_REQUEST, 'Order must be processed before it can be shipped')
+                new ApiError(StatusCodes.BAD_REQUEST, 'Order must be processed before it can be shipped')
             );
         });
     });

@@ -1,6 +1,6 @@
 import ReviewService from '../review.service';
 import db from '../../database/models';
-import HttpException from '../../utils/http-exception.util';
+import ApiError from '../../utils/api-error.util';
 import { StatusCodes } from 'http-status-codes';
 
 // Mock dependensi eksternal
@@ -55,7 +55,7 @@ describe('ReviewService', () => {
       mockOrder.findOne.mockResolvedValue(null);
 
       await expect(ReviewService.createReview(reviewData, userId)).rejects.toThrow(
-        new HttpException(StatusCodes.FORBIDDEN, 'You can only review products you have purchased')
+        new ApiError(StatusCodes.FORBIDDEN, 'You can only review products you have purchased')
       );
     });
 
@@ -65,7 +65,7 @@ describe('ReviewService', () => {
       mockReview.findOne.mockResolvedValue({ id: 'review-uuid' } as any);
 
       await expect(ReviewService.createReview(reviewData, userId)).rejects.toThrow(
-        new HttpException(StatusCodes.CONFLICT, 'You have already reviewed this product')
+        new ApiError(StatusCodes.CONFLICT, 'You have already reviewed this product')
       );
     });
   });

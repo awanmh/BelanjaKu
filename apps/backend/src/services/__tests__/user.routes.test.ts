@@ -7,7 +7,14 @@ describe('User Management API Endpoints (Admin)', () => {
   let regularUserId: string;
 
   beforeAll(async () => {
-    await db.sequelize.sync({ force: true });
+    console.log('Starting beforeAll...');
+    try {
+      await db.sequelize.sync({ force: true });
+      console.log('Database synced');
+    } catch (err) {
+      console.error('Database sync failed:', err);
+      throw err;
+    }
 
     // 1. Buat user admin
     await request(app).post('/api/v1/auth/register').send({
@@ -111,6 +118,45 @@ describe('User Management API Endpoints (Admin)', () => {
         .get('/api/v1/users/archived')
         .set('Authorization', `Bearer ${adminToken}`);
       expect(archiveResponse.body.data.rows.length).toBe(0);
+    });
+  });
+
+  describe('PUT /api/v1/users/profile', () => {
+    it('should allow a user to update their own profile', async () => {
+      const response = await request(app)
+        .put('/api/v1/users/profile')
+        .set('Authorization', `Bearer ${adminToken}`)
+        .send({ fullName: 'Updated Admin Name' });
+
+      expect(response.statusCode).toBe(200);
+      expect(response.body.data.fullName).toBe('Updated Admin Name');
+    });
+  });
+
+  describe('PUT /api/v1/users/change-password', () => {
+    it('should allow a user to change their password', async () => {
+      const response = await request(app)
+        .put('/api/v1/users/change-password')
+        .set('Authorization', `Bearer ${adminToken}`)
+        .send({
+          currentPassword: 'Password123',
+          newPassword: 'NewPassword123',
+        });
+
+      expect(response.statusCode).toBe(200);
+      expect(response.body.message).toContain('Password changed successfully');
+    });
+
+    it('should fail if current password is incorrect', async () => {
+      const response = await request(app)
+        .put('/api/v1/users/change-password')
+        .set('Authorization', `Bearer ${adminToken}`)
+        .send({
+          currentPassword: 'WrongPassword',
+          newPassword: 'NewPassword123',
+        });
+
+      expect(response.statusCode).toBe(400);
     });
   });
 });

@@ -19,4 +19,8 @@ export const updateCartItemSchema = Joi.object({
     'number.min': 'Quantity cannot be negative',
     'any.required': 'Quantity is required',
   }),
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> frontend-role

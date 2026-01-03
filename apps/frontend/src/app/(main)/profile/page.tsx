@@ -1,9 +1,19 @@
 'use client';
 
+<<<<<<< HEAD
 import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { User, Package, MapPin, LogOut, ChevronRight } from 'lucide-react';
 import { formatRupiah } from '@/lib/utils';
+=======
+import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/Button';
+import { User as UserIcon, Package, MapPin, LogOut } from 'lucide-react';
+import { formatRupiah } from '@/lib/utils';
+import api from '@/lib/api';
+import { useUserStore } from '@/store/user.store';
+import { Order } from '@/types/order';
+>>>>>>> frontend-role
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState('orders');
@@ -46,27 +56,45 @@ export default function ProfilePage() {
                 <h3 className="font-bold text-lg">John Doe</h3>
                 <p className="text-xs text-gray-500">john.doe@example.com</p>
               </div>
+<<<<<<< HEAD
               
               <nav className="flex flex-col">
                 <button 
+=======
+
+              <nav className="flex flex-col">
+                <button
+>>>>>>> frontend-role
                   onClick={() => setActiveTab('orders')}
                   className={`flex items-center gap-3 px-6 py-4 text-sm font-medium transition-colors ${activeTab === 'orders' ? 'bg-black text-white' : 'hover:bg-gray-50 text-gray-700'}`}
                 >
                   <Package className="w-4 h-4" />
                   Pesanan Saya
                 </button>
+<<<<<<< HEAD
                 <button 
+=======
+                <button
+>>>>>>> frontend-role
                   onClick={() => setActiveTab('address')}
                   className={`flex items-center gap-3 px-6 py-4 text-sm font-medium transition-colors ${activeTab === 'address' ? 'bg-black text-white' : 'hover:bg-gray-50 text-gray-700'}`}
                 >
                   <MapPin className="w-4 h-4" />
                   Alamat Tersimpan
                 </button>
+<<<<<<< HEAD
                 <button 
                   onClick={() => setActiveTab('profile')}
                   className={`flex items-center gap-3 px-6 py-4 text-sm font-medium transition-colors ${activeTab === 'profile' ? 'bg-black text-white' : 'hover:bg-gray-50 text-gray-700'}`}
                 >
                   <User className="w-4 h-4" />
+=======
+                <button
+                  onClick={() => setActiveTab('profile')}
+                  className={`flex items-center gap-3 px-6 py-4 text-sm font-medium transition-colors ${activeTab === 'profile' ? 'bg-black text-white' : 'hover:bg-gray-50 text-gray-700'}`}
+                >
+                  <UserIcon className="w-4 h-4" />
+>>>>>>> frontend-role
                   Edit Profil
                 </button>
                 <button className="flex items-center gap-3 px-6 py-4 text-sm font-medium text-red-600 hover:bg-red-50 transition-colors border-t border-gray-100">
@@ -82,7 +110,11 @@ export default function ProfilePage() {
             {activeTab === 'orders' && (
               <div className="space-y-4">
                 <h2 className="text-lg font-bold uppercase tracking-wide mb-4">Riwayat Pesanan</h2>
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> frontend-role
                 {orders.map((order) => (
                   <div key={order.id} className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                     <div className="flex flex-col md:flex-row justify-between md:items-center mb-4 pb-4 border-b border-gray-100 gap-4">
@@ -137,7 +169,11 @@ export default function ProfilePage() {
                   <p className="font-bold text-sm mb-2">John Doe</p>
                   <p className="text-sm text-gray-600 mb-1">08123456789</p>
                   <p className="text-sm text-gray-600 max-w-md">Jl. Jendral Sudirman No. 1, Senayan, Kebayoran Baru, Jakarta Selatan, DKI Jakarta, 12190</p>
+<<<<<<< HEAD
                   
+=======
+
+>>>>>>> frontend-role
                   <div className="mt-4 flex gap-3">
                     <button className="text-xs font-bold text-black underline">Ubah</button>
                     <button className="text-xs font-bold text-red-600 underline">Hapus</button>

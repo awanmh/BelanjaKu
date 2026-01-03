@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 import db from '../database/models';
 import { ReviewAttributes } from '../database/models/review.model';
-import HttpException from '../utils/http-exception.util';
+import ApiError from '../utils/api-error.util';
 
 // Mengambil model dari objek db
 const Review = db.Review;
@@ -42,7 +42,7 @@ class ReviewService {
     });
 
     if (!hasPurchased) {
-      throw new HttpException(
+      throw new ApiError(
         StatusCodes.FORBIDDEN,
         'You can only review products you have purchased'
       );
@@ -51,7 +51,7 @@ class ReviewService {
     // 2. Cek apakah pengguna sudah pernah mereview produk ini sebelumnya
     const existingReview = await Review.findOne({ where: { userId, productId } });
     if (existingReview) {
-      throw new HttpException(StatusCodes.CONFLICT, 'You have already reviewed this product');
+      throw new ApiError(StatusCodes.CONFLICT, 'You have already reviewed this product');
     }
 
     // 3. Buat ulasan baru

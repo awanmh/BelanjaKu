@@ -1,7 +1,8 @@
 import { StatusCodes } from 'http-status-codes';
 import db from '../database/models';
-import HttpException from '../utils/http-exception.util';
+import ApiError from '../utils/api-error.util';
 import { Op } from 'sequelize';
+import { sendOrderConfirmationEmail } from '../utils/email.util';
 
 // Definisikan tipe instance model
 type OrderInstance = InstanceType<typeof db.Order>;
@@ -13,6 +14,7 @@ const Order = db.Order;
 const OrderItem = db.OrderItem;
 const Product = db.Product;
 const Promotion = db.Promotion;
+const User = db.User;
 const sequelize = db.sequelize;
 
 // Tipe data untuk item dalam keranjang belanja
@@ -50,10 +52,10 @@ class OrderService {
         const product = await Product.findByPk(item.productId, { transaction });
 
         if (!product) {
-          throw new HttpException(StatusCodes.NOT_FOUND, `Product with ID ${item.productId} not found`);
+          throw new ApiError(StatusCodes.NOT_FOUND, `Product with ID ${item.productId} not found`);
         }
         if (product.stock < item.quantity) {
-          throw new HttpException(StatusCodes.BAD_REQUEST, `Not enough stock for ${product.name}`);
+          throw new ApiError(StatusCodes.BAD_REQUEST, `Not enough stock for ${product.name}`);
         }
 
         totalAmount += product.price * item.quantity;
@@ -78,24 +80,24 @@ class OrderService {
         });
 
         if (!promo) {
-          throw new HttpException(StatusCodes.BAD_REQUEST, 'Invalid or expired promotion code');
+          throw new ApiError(StatusCodes.BAD_REQUEST, 'Invalid or expired promotion code');
         }
 
         // Pastikan promosi berlaku untuk salah satu produk di keranjang
         const isApplicable = items.some(item => item.productId === promo.productId);
         if (!isApplicable) {
-            throw new HttpException(StatusCodes.BAD_REQUEST, 'This promotion code is not valid for the items in your cart.');
+          throw new ApiError(StatusCodes.BAD_REQUEST, 'This promotion code is not valid for the items in your cart.');
         }
 
         // Hitung diskon (hanya pada produk yang dipromosikan)
         const promoProductInCart = items.find(item => item.productId === promo.productId);
         const productForPromo = await Product.findByPk(promo.productId, { transaction });
-        
+
         if (promoProductInCart && productForPromo) {
-            const priceOfPromoProduct = productForPromo.price * promoProductInCart.quantity;
-            discountAmount = priceOfPromoProduct * (promo.discountPercentage / 100);
-            totalAmount -= discountAmount;
-            promotionId = promo.id;
+          const priceOfPromoProduct = productForPromo.price * promoProductInCart.quantity;
+          discountAmount = priceOfPromoProduct * (promo.discountPercentage / 100);
+          totalAmount -= discountAmount;
+          promotionId = promo.id;
         }
       }
 
@@ -125,6 +127,20 @@ class OrderService {
       );
 
       await transaction.commit();
+
+      try {
+        const user = await User.findByPk(userId);
+        if (user && user.email) {
+          // Kita tidak menggunakan 'await' agar user tidak perlu menunggu email terkirim
+          sendOrderConfirmationEmail(user.email, {
+            id: newOrder.id,
+            totalAmount: newOrder.totalAmount,
+          }).catch((err) => console.error("Gagal mengirim email background:", err));
+        }
+      } catch (emailError) {
+        // Kita log error saja, jangan sampai error email menggagalkan response order
+        console.error("Error saat menyiapkan data email:", emailError);
+      }
 
       const fullOrder = await Order.findByPk(newOrder.id, {
         include: [{ model: OrderItem, as: 'items' }],
@@ -161,7 +177,7 @@ class OrderService {
     });
 
     if (!order) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'Order not found or you do not have permission to view it');
+      throw new ApiError(StatusCodes.NOT_FOUND, 'Order not found or you do not have permission to view it');
     }
 
     return order;
@@ -206,13 +222,13 @@ class OrderService {
         product?: ProductInstance;
       })[];
     }
-    
+
     const order = await Order.findByPk(orderId, {
       include: [{ model: OrderItem, as: 'items', include: [{ model: Product, as: 'product' }] }],
     });
 
     if (!order) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'Order not found');
+      throw new ApiError(StatusCodes.NOT_FOUND, 'Order not found');
     }
 
     const orderWithItems = order as OrderWithItems;
@@ -222,13 +238,13 @@ class OrderService {
     );
 
     if (!isSellerProductInOrder) {
-      throw new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to update this order');
+      throw new ApiError(StatusCodes.FORBIDDEN, 'You are not authorized to update this order');
     }
 
     if (order.status !== 'processing' && status === 'shipped') {
-        throw new HttpException(StatusCodes.BAD_REQUEST, 'Order must be processed before it can be shipped');
+      throw new ApiError(StatusCodes.BAD_REQUEST, 'Order must be processed before it can be shipped');
     }
-    
+
     order.status = status;
     await order.save();
     return order;

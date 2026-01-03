@@ -1,23 +1,43 @@
-import { StatusCodes } from 'http-status-codes';
-import db from '../database/models';
-import { ProductAttributes, Product as ProductModel } from '../database/models/product.model';
-import HttpException from '../utils/http-exception.util';
-import APIFeatures from '../utils/apiFeatures.util'; // 1. Impor APIFeatures
-import { ParsedQs } from 'qs'; // Tipe untuk query string
-import { Model, Op } from 'sequelize'; // 2. Impor Model untuk casting
+import { StatusCodes } from "http-status-codes";
+import db from "../database/models";
+import {
+  ProductAttributes,
+  Product as ProductModel,
+} from "../database/models/product.model";
+import ApiError from "../utils/api-error.util";
+import APIFeatures from "../utils/apiFeatures.util";
+import { ParsedQs } from "qs";
+import { Model, Op } from "sequelize";
 
-// 3. FIX: Lakukan type casting eksplisit pada model
 const Product = db.Product;
 const User = db.User;
 
-// Tipe data untuk input
 export type CreateProductInput = Pick<
   ProductAttributes,
-  'name' | 'description' | 'price' | 'stock' | 'imageUrl' | 'categoryId'
->;
+  | "name"
+  | "description"
+  | "price"
+  | "stock"
+  | "imageUrl"
+  | "categoryId"
+  | "weight"
+  | "length"
+  | "width"
+  | "height"
+  | "attributes"
+> & {
+  images?: string[];
+  variants?: {
+    sku: string;
+    price: number;
+    stock: number;
+    attributes: any;
+    imageUrl?: string;
+  }[];
+};
+
 export type UpdateProductInput = Partial<CreateProductInput>;
 
-// Tipe data baru untuk respons paginasi
 export interface PaginatedProductResult {
   rows: ProductAttributes[];
   pagination: {
@@ -28,27 +48,54 @@ export interface PaginatedProductResult {
   };
 }
 
-/**
- * Service untuk menangani semua logika bisnis yang terkait dengan produk.
- */
 class ProductService {
-  public async createProduct(productData: CreateProductInput, sellerId: string): Promise<ProductAttributes> {
-    const newProduct = await Product.create({ ...productData, sellerId });
-    return newProduct.toJSON();
+  public async createProduct(
+    productData: CreateProductInput,
+    sellerId: string
+  ): Promise<ProductAttributes> {
+    const transaction = await db.sequelize.transaction();
+    try {
+      const newProduct = await Product.create(
+        { ...productData, sellerId },
+        { transaction }
+      );
+
+      if (productData.images && productData.images.length > 0) {
+        const imageRecords = productData.images.map((url, index) => ({
+          productId: newProduct.id,
+          imageUrl: url,
+          isPrimary: index === 0,
+          type: "image" as "image",
+        }));
+        await db.ProductImage.bulkCreate(imageRecords, { transaction });
+      }
+
+      if (productData.variants && productData.variants.length > 0) {
+        const variantRecords = productData.variants.map((variant) => ({
+          ...variant,
+          productId: newProduct.id,
+        }));
+        await db.ProductVariant.bulkCreate(variantRecords, { transaction });
+      }
+
+      await transaction.commit();
+      return this.getProductById(newProduct.id);
+    } catch (error) {
+      await transaction.rollback();
+      throw error;
+    }
   }
 
-  /**
-   * [DIPERBARUI] Mengambil semua produk dengan fitur query lanjutan.
-   * @param queryString Query string dari URL request.
-   * @returns Objek dengan daftar produk dan metadata paginasi.
-   */
-  public async getAllProducts(queryString: ParsedQs): Promise<PaginatedProductResult> {
-    // 1. Buat query dasar
+  public async getAllProducts(
+    queryString: ParsedQs
+  ): Promise<PaginatedProductResult> {
     const features = new APIFeatures(queryString)
+      .search()
       .filter()
       .sort()
       .limitFields();
 
+<<<<<<< HEAD
     // CUSTOM LOGIC: Handle filtering by Category Name (e.g. ?category=Wanita)
     // APIFeatures maps query params to WHERE directly. If 'category' is passed but not a column, 
     // we need to resolve it to categoryId.
@@ -92,17 +139,20 @@ class ProductService {
     features.queryOptions.include = [
       { model: User, as: 'seller', attributes: ['id', 'fullName'] },
       { model: db.Category, as: 'category' }
+=======
+    features.queryOptions.include = [
+      { model: User, as: "seller", attributes: ["id", "fullName"] },
+>>>>>>> frontend-role
     ];
 
-    // 3. Dapatkan nilai limit dan offset secara terpisah
     const { limit, offset } = features.paginate();
     const page = Math.floor(offset / limit) + 1;
 
-    // 4. Gunakan findAndCountAll
     const { rows, count } = await Product.findAndCountAll({
       ...features.queryOptions,
       limit,
       offset,
+      distinct: true,
     });
 
     const totalPages = Math.ceil(count / limit);
@@ -118,16 +168,16 @@ class ProductService {
     };
   }
 
-  /**
-   * [DIPERBARUI] Mengambil produk milik penjual tertentu dengan fitur query.
-   */
-  public async getProductsBySeller(sellerId: string, queryString: ParsedQs): Promise<PaginatedProductResult> {
+  public async getProductsBySeller(
+    sellerId: string,
+    queryString: ParsedQs
+  ): Promise<PaginatedProductResult> {
     const features = new APIFeatures(queryString)
+      .search()
       .filter()
       .sort()
       .limitFields();
 
-    // Tambahkan filter wajib untuk sellerId
     if (features.queryOptions.where) {
       (features.queryOptions.where as any).sellerId = sellerId;
     } else {
@@ -141,6 +191,7 @@ class ProductService {
       ...features.queryOptions,
       limit,
       offset,
+      distinct: true,
     });
 
     const totalPages = Math.ceil(count / limit);
@@ -159,48 +210,97 @@ class ProductService {
   public async getProductById(id: string): Promise<ProductAttributes> {
     const product = await Product.findByPk(id, {
       include: [
+<<<<<<< HEAD
         { model: User, as: 'seller', attributes: ['id', 'fullName'] },
         { model: db.Category, as: 'category' }
+=======
+        { model: User, as: "seller", attributes: ["id", "fullName"] },
+        { model: db.ProductImage, as: "images" },
+        { model: db.ProductVariant, as: "variants" },
+>>>>>>> frontend-role
       ],
     });
 
     if (!product) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'Product not found');
+      throw new ApiError(StatusCodes.NOT_FOUND, "Product not found");
     }
     return product.toJSON();
   }
 
-  /**
-   * Memperbarui produk.
-   */
-  public async updateProduct(id: string, productData: UpdateProductInput, userId: string): Promise<ProductAttributes> {
+  public async updateProduct(
+    id: string,
+    productData: UpdateProductInput,
+    userId: string
+  ): Promise<ProductAttributes> {
     const product = await Product.findByPk(id);
     if (!product) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'Product not found');
+      throw new ApiError(StatusCodes.NOT_FOUND, "Product not found");
     }
     if (product.sellerId !== userId) {
-      throw new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to update this product');
+      throw new ApiError(
+        StatusCodes.FORBIDDEN,
+        "You are not authorized to update this product"
+      );
     }
 
-    await product.update(productData);
-    return product.toJSON();
+    const transaction = await db.sequelize.transaction();
+    try {
+      await product.update(productData, { transaction });
+
+      if (productData.images) {
+        await db.ProductImage.destroy({
+          where: { productId: id },
+          transaction,
+        });
+
+        if (productData.images.length > 0) {
+          const imageRecords = productData.images.map((url, index) => ({
+            productId: id,
+            imageUrl: url,
+            isPrimary: index === 0,
+            type: "image" as "image",
+          }));
+          await db.ProductImage.bulkCreate(imageRecords, { transaction });
+        }
+      }
+
+      if (productData.variants) {
+        await db.ProductVariant.destroy({
+          where: { productId: id },
+          transaction,
+        });
+
+        if (productData.variants.length > 0) {
+          const variantRecords = productData.variants.map((variant) => ({
+            ...variant,
+            productId: id,
+          }));
+          await db.ProductVariant.bulkCreate(variantRecords, { transaction });
+        }
+      }
+
+      await transaction.commit();
+      return this.getProductById(id);
+    } catch (err) {
+      await transaction.rollback();
+      throw err;
+    }
   }
 
-  /**
-   * Menghapus (soft delete) produk.
-   */
   public async deleteProduct(id: string, userId: string): Promise<void> {
     const product = await Product.findByPk(id);
     if (!product) {
-      throw new HttpException(StatusCodes.NOT_FOUND, 'Product not found');
+      throw new ApiError(StatusCodes.NOT_FOUND, "Product not found");
     }
     if (product.sellerId !== userId) {
-      throw new HttpException(StatusCodes.FORBIDDEN, 'You are not authorized to delete this product');
+      throw new ApiError(
+        StatusCodes.FORBIDDEN,
+        "You are not authorized to delete this product"
+      );
     }
 
     await product.destroy();
   }
 }
 
-// Ekspor sebagai singleton instance
 export default new ProductService();

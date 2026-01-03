@@ -27,4 +27,8 @@ router.patch(
 router.delete('/items/:itemId', CartController.removeItem);
 router.delete('/', CartController.clearCart);
 
+<<<<<<< HEAD
 export default router;
+=======
+export default router;
+>>>>>>> frontend-role

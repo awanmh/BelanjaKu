@@ -1,7 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import CartService from '../../../services/cart.service';
+<<<<<<< HEAD
 import HttpException from '../../../utils/http-exception.util';
+=======
+import ApiError from '../../../utils/api-error.util';
+>>>>>>> frontend-role
 
 // Interface untuk memperluas objek Request Express dengan properti 'user'
 // Ini sama dengan yang ada di product.controller.ts
@@ -50,7 +54,11 @@ class CartController {
 
       // Validasi sederhana jika tidak ter-cover oleh validator middleware
       if (!productId || !quantity) {
+<<<<<<< HEAD
         throw new HttpException(StatusCodes.BAD_REQUEST, 'Product ID and quantity are required');
+=======
+        throw new ApiError(StatusCodes.BAD_REQUEST, 'Product ID and quantity are required');
+>>>>>>> frontend-role
       }
 
       const cart = await CartService.addToCart(userId, productId, quantity);
@@ -77,7 +85,11 @@ class CartController {
       const { quantity } = req.body;
 
       if (quantity === undefined) {
+<<<<<<< HEAD
          throw new HttpException(StatusCodes.BAD_REQUEST, 'Quantity is required');
+=======
+         throw new ApiError(StatusCodes.BAD_REQUEST, 'Quantity is required');
+>>>>>>> frontend-role
       }
 
       const cart = await CartService.updateItemQuantity(userId, itemId, quantity);
@@ -133,4 +145,8 @@ class CartController {
   }
 }
 
+<<<<<<< HEAD
 export default new CartController();
+=======
+export default new CartController();
+>>>>>>> frontend-role

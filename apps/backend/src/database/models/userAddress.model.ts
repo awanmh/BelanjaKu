@@ -70,4 +70,8 @@ export default function (sequelize: Sequelize): typeof UserAddress {
   );
 
   return UserAddress;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> frontend-role

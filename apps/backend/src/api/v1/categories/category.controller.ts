@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import CategoryService, { CreateCategoryInput, UpdateCategoryInput } from '../../../services/category.service';
 import { AuthenticatedRequest } from '../../../middlewares/auth.middleware';
-import HttpException from '../../../utils/http-exception.util';
+import ApiError from '../../../utils/api-error.util';
 
 /**
  * Controller untuk menangani semua request yang berhubungan dengan kategori produk.

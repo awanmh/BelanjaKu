@@ -1,6 +1,9 @@
 'use client';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> frontend-role
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -119,6 +122,7 @@ export default function CartPage() {
             Mulai Belanja
           </Button>
         </div>
+<<<<<<< HEAD
 =======
 import { useCartStore } from '@/store/cart.store';
 import { Button } from '@/components/ui/Button';
@@ -148,12 +152,17 @@ export default function CartPage() {
           </Button>
         </Link>
 >>>>>>> frontend-update
+=======
+>>>>>>> frontend-role
       </div>
     );
   }
 
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> frontend-role
     <div className="bg-gray-50 min-h-screen py-8">
       <div className="container mx-auto px-4">
         {/* Header */}
@@ -296,6 +305,7 @@ export default function CartPage() {
               </div>
             </div>
           </div>
+<<<<<<< HEAD
 =======
     <div className="container mx-auto px-4 py-8 bg-white min-h-screen">
       <h1 className="text-3xl font-serif font-bold text-slate-900 mb-8">Keranjang Belanja</h1>
@@ -404,12 +414,18 @@ export default function CartPage() {
                 </p>
             </div>
 >>>>>>> frontend-update
+=======
+>>>>>>> frontend-role
         </div>
       </div>
     </div>
   );
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
 }
 >>>>>>> frontend-update
+=======
+}
+>>>>>>> frontend-role

@@ -1,6 +1,6 @@
 // Mengimpor service yang akan diuji
 import AuthService from '../auth.service';
-import HttpException from '../../utils/http-exception.util';
+import ApiError from '../../utils/api-error.util';
 import { StatusCodes } from 'http-status-codes';
 import db from '../../database/models';
 import bcrypt from 'bcryptjs';
@@ -9,6 +9,9 @@ import bcrypt from 'bcryptjs';
 jest.mock('../../database/models', () => ({
   User: {
     findOne: jest.fn(),
+    create: jest.fn(),
+  },
+  Seller: {
     create: jest.fn(),
   },
 }));
@@ -21,6 +24,7 @@ jest.mock('../../utils/jwt.util', () => ({
 
 // Cast mock untuk tipe yang benar
 const mockUser = db.User as jest.Mocked<typeof db.User>;
+const mockSeller = db.Seller as jest.Mocked<typeof db.Seller>;
 
 describe('AuthService', () => {
   // Bersihkan semua mock setelah setiap tes
@@ -30,7 +34,7 @@ describe('AuthService', () => {
 
   // --- Pengujian untuk Metode `register` ---
   describe('register', () => {
-    it('should register a new user successfully and not return the password', async () => {
+    it('should register a new user successfully as regular user and not return the password', async () => {
       const userData = {
         fullName: 'Test User',
         email: 'test@example.com',
@@ -47,10 +51,41 @@ describe('AuthService', () => {
       const result = await AuthService.register(userData);
 
       expect(mockUser.findOne).toHaveBeenCalledWith({ where: { email: userData.email } });
-      expect(mockUser.create).toHaveBeenCalledWith(expect.any(Object));
-      
+      expect(mockUser.create).toHaveBeenCalledWith(expect.objectContaining({
+        role: 'user'
+      }));
+
       expect(result).toEqual(userWithoutPassword);
       expect(result).not.toHaveProperty('password');
+      expect(mockSeller.create).not.toHaveBeenCalled();
+    });
+
+    it('should register a new user as seller if email domain is @seller.belanjaku.com', async () => {
+      const userData = {
+        fullName: 'Seller User',
+        email: 'toko@seller.belanjaku.com',
+        password: 'Password123',
+      };
+
+      mockUser.findOne.mockResolvedValue(null);
+
+      const { password, ...userWithoutPassword } = userData;
+      // Simulasi hook toJSON (pastikan role adalah seller)
+      const userWithSellerRole = { ...userWithoutPassword, role: 'seller' };
+      const createdUser = { ...userData, id: 'seller-uuid', toJSON: () => userWithSellerRole };
+      mockUser.create.mockResolvedValue(createdUser as any);
+      mockSeller.create.mockResolvedValue({} as any);
+
+      const result = (await AuthService.register(userData)) as any;
+
+      expect(mockUser.create).toHaveBeenCalledWith(expect.objectContaining({
+        role: 'seller'
+      }));
+      expect(mockSeller.create).toHaveBeenCalledWith(expect.objectContaining({
+        userId: 'seller-uuid',
+        storeName: 'Toko Seller User'
+      }));
+      expect(result.role).toBe('seller');
     });
 
     it('should throw a CONFLICT error if email already exists', async () => {
@@ -62,7 +97,7 @@ describe('AuthService', () => {
       mockUser.findOne.mockResolvedValue({} as any);
 
       await expect(AuthService.register(userData)).rejects.toThrow(
-        new HttpException(StatusCodes.CONFLICT, 'Email already exists')
+        new ApiError(StatusCodes.CONFLICT, 'Email already exists')
       );
     });
   });
@@ -100,7 +135,7 @@ describe('AuthService', () => {
       mockUser.findOne.mockResolvedValue(null);
 
       await expect(AuthService.login(loginCredentials)).rejects.toThrow(
-        new HttpException(StatusCodes.UNAUTHORIZED, 'Invalid email or password')
+        new ApiError(StatusCodes.UNAUTHORIZED, 'Invalid email or password')
       );
     });
 
@@ -110,7 +145,7 @@ describe('AuthService', () => {
       mockDbUser.comparePassword.mockResolvedValue(false); // Set return value untuk mock metode
 
       await expect(AuthService.login(loginCredentials)).rejects.toThrow(
-        new HttpException(StatusCodes.UNAUTHORIZED, 'Invalid email or password')
+        new ApiError(StatusCodes.UNAUTHORIZED, 'Invalid email or password')
       );
     });
   });

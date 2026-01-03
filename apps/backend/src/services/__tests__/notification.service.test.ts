@@ -1,7 +1,11 @@
 import { StatusCodes } from "http-status-codes";
 import NotificationService from "../notification.service";
 import db from "../../database/models";
+<<<<<<< HEAD
 import HttpException from "../../utils/http-exception.util";
+=======
+import ApiError from "../../utils/api-error.util";
+>>>>>>> frontend-role
 
 // Mock dependencies
 jest.mock("../../database/models", () => {
@@ -81,7 +85,11 @@ describe("NotificationService", () => {
       await expect(
         NotificationService.markAsRead("1", mockUserId)
       ).rejects.toThrow(
+<<<<<<< HEAD
         new HttpException(StatusCodes.NOT_FOUND, "Notification not found")
+=======
+        new ApiError(StatusCodes.NOT_FOUND, "Notification not found")
+>>>>>>> frontend-role
       );
     });
   });

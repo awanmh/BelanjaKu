@@ -1,6 +1,6 @@
 import SellerService from '../seller.service';
 import db from '../../database/models';
-import HttpException from '../../utils/http-exception.util';
+import ApiError from '../../utils/api-error.util';
 import { StatusCodes } from 'http-status-codes';
 
 // Mock dependensi eksternal
@@ -49,7 +49,7 @@ describe('SellerService', () => {
             mockUser.findByPk.mockResolvedValue({ id: sellerId, role: 'user' } as any);
 
             await expect(SellerService.upsertProfile(sellerId, {} as any)).rejects.toThrow(
-                new HttpException(StatusCodes.FORBIDDEN, 'User is not a seller')
+                new ApiError(StatusCodes.FORBIDDEN, 'User is not a seller')
             );
         });
     });
@@ -66,7 +66,7 @@ describe('SellerService', () => {
         it('should throw NOT_FOUND if profile does not exist', async () => {
             mockSeller.findOne.mockResolvedValue(null);
             await expect(SellerService.getProfile(sellerId)).rejects.toThrow(
-                new HttpException(StatusCodes.NOT_FOUND, 'Seller profile not found. Please create one.')
+                new ApiError(StatusCodes.NOT_FOUND, 'Seller profile not found. Please create one.')
             );
         });
     });

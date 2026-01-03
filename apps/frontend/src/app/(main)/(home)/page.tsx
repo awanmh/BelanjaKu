@@ -1,13 +1,21 @@
 'use client';
 
+<<<<<<< HEAD
 import { Button } from '@/components/ui/Button';
 <<<<<<< HEAD
+=======
+import { useEffect, useState } from 'react';
+import api from '@/lib/api';
+import { formatRupiah } from '@/lib/utils';
+import { Button } from '@/components/ui/Button';
+>>>>>>> frontend-role
 import HeroBanner from '@/components/home/HeroBanner';
 import FlashSale from '@/components/home/FlashSale';
 import TopBrands from '@/components/home/TopBrands';
 import CategorySection from '@/components/home/CategorySection';
 import Link from 'next/link';
 import { ShoppingBag } from 'lucide-react';
+<<<<<<< HEAD
 =======
 import { formatRupiah } from '@/lib/utils';
 import { Star } from 'lucide-react';
@@ -82,6 +90,42 @@ export default function AccessoriesShowcase() {
 
   return (
 <<<<<<< HEAD
+=======
+
+interface Product {
+  id: string;
+  name: string;
+  price: string;
+  imageUrl: string;
+  seller: {
+    fullName: string;
+  };
+}
+
+export default function HomePage() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await api.get('/products?limit=8&offset=4');
+        if (res.data.success) {
+            const productData = Array.isArray(res.data.data) ? res.data.data : res.data.data.rows;
+            setProducts(productData);
+        }
+      } catch (error) {
+        console.error("Gagal mengambil produk:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  return (
+>>>>>>> frontend-role
     <div className="bg-white min-h-screen pb-20 text-black selection:bg-black selection:text-white">
       {/* Hero Banner */}
       <HeroBanner />
@@ -184,6 +228,7 @@ export default function AccessoriesShowcase() {
               View All Products
             </Button>
           </Link>
+<<<<<<< HEAD
 =======
     <section className="container mx-auto px-4 py-16 border-t border-gray-100">
       {/* Header Section */}
@@ -294,5 +339,10 @@ export default function AccessoriesShowcase() {
         </Button>
       </div>
     </section>
+=======
+        </div>
+      </div>
+    </div>
+>>>>>>> frontend-role
   );
 }

@@ -1,6 +1,6 @@
 import ShippingOptionService from '../shipping.service';
 import db from '../../database/models';
-import HttpException from '../../utils/http-exception.util';
+import ApiError from '../../utils/api-error.util';
 import { StatusCodes } from 'http-status-codes';
 
 // Mock dependensi eksternal
@@ -51,7 +51,7 @@ describe('ShippingOptionService', () => {
       mockShippingOption.findOne.mockResolvedValue(mockShippingInstance as any);
 
       await expect(ShippingOptionService.create(shippingData)).rejects.toThrow(
-        new HttpException(StatusCodes.CONFLICT, 'Shipping option with this name already exists')
+        new ApiError(StatusCodes.CONFLICT, 'Shipping option with this name already exists')
       );
     });
   });
@@ -78,7 +78,7 @@ describe('ShippingOptionService', () => {
     it('should throw NOT_FOUND if option is not found', async () => {
         mockShippingOption.findByPk.mockResolvedValue(null);
         await expect(ShippingOptionService.findById('ship-uuid')).rejects.toThrow(
-            new HttpException(StatusCodes.NOT_FOUND, 'Shipping option not found')
+            new ApiError(StatusCodes.NOT_FOUND, 'Shipping option not found')
         );
     });
   });
@@ -97,7 +97,7 @@ describe('ShippingOptionService', () => {
     it('should throw NOT_FOUND if option to update is not found', async () => {
         mockShippingOption.findByPk.mockResolvedValue(null);
         await expect(ShippingOptionService.update('ship-uuid', {})).rejects.toThrow(
-            new HttpException(StatusCodes.NOT_FOUND, 'Shipping option not found')
+            new ApiError(StatusCodes.NOT_FOUND, 'Shipping option not found')
         );
     });
   });
@@ -115,7 +115,7 @@ describe('ShippingOptionService', () => {
     it('should throw NOT_FOUND if option to delete is not found', async () => {
         mockShippingOption.findByPk.mockResolvedValue(null);
         await expect(ShippingOptionService.delete('ship-uuid')).rejects.toThrow(
-            new HttpException(StatusCodes.NOT_FOUND, 'Shipping option not found')
+            new ApiError(StatusCodes.NOT_FOUND, 'Shipping option not found')
         );
     });
   });
