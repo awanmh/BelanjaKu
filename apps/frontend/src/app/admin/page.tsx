@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import api from "@/lib/api";
 import { User } from "@/types/auth";
+import { Product } from "@/types/product";
 import { Order } from "@/types/order";
 import { formatRupiah } from "@/lib/utils";
 import { getStatusColor, formatDate } from "@/lib/dashboard";
@@ -14,10 +15,7 @@ import {
   DollarSign,
   TrendingUp,
   AlertCircle,
-  ArrowUpRight,
 } from "lucide-react";
-import Link from "next/link";
-import { Button } from "@/components/ui/Button";
 
 interface DashboardStats {
   totalUsers: number;
@@ -40,58 +38,64 @@ export default function AdminDashboardPage() {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
+        // Fetch all data in parallel
         const [usersRes, productsRes, ordersRes] = await Promise.all([
           api.get("/users"),
           api.get("/products"),
           api.get("/orders"),
         ]);
 
+        // Process users data
         const users = usersRes.data.data?.rows || usersRes.data.data || [];
+        const totalUsers = Array.isArray(users) ? users.length : 0;
+
+        // Get recent users (last 5)
+        const sortedUsers = Array.isArray(users)
+          ? [...users]
+              .sort(
+                (a, b) =>
+                  new Date(b.createdAt).getTime() -
+                  new Date(a.createdAt).getTime()
+              )
+              .slice(0, 5)
+          : [];
+        setRecentUsers(sortedUsers);
+
+        // Process products data
         const products =
           productsRes.data.data?.rows || productsRes.data.data || [];
-        const orders = ordersRes.data.data || [];
+        const totalProducts = Array.isArray(products) ? products.length : 0;
 
-        // Hitung Revenue (Total Amount dari semua order)
-        const revenue = Array.isArray(orders)
+        // Process orders data
+        const orders = ordersRes.data.data || [];
+        const totalOrders = Array.isArray(orders) ? orders.length : 0;
+
+        // Calculate total revenue
+        const totalRevenue = Array.isArray(orders)
           ? orders.reduce(
-              (sum: number, order: Order) =>
-                sum + (Number(order.totalAmount) || 0),
+              (sum: number, order: Order) => sum + (order.totalAmount || 0),
               0
             )
           : 0;
 
+        // Get recent orders (last 10)
+        const sortedOrders = Array.isArray(orders)
+          ? [...orders]
+              .sort(
+                (a, b) =>
+                  new Date(b.createdAt).getTime() -
+                  new Date(a.createdAt).getTime()
+              )
+              .slice(0, 10)
+          : [];
+        setRecentOrders(sortedOrders);
+
         setStats({
-          totalUsers: Array.isArray(users) ? users.length : 0,
-          totalProducts: Array.isArray(products) ? products.length : 0,
-          totalOrders: Array.isArray(orders) ? orders.length : 0,
-          totalRevenue: revenue,
+          totalUsers,
+          totalProducts,
+          totalOrders,
+          totalRevenue,
         });
-
-        // Sort Recent Users
-        if (Array.isArray(users)) {
-          setRecentUsers(
-            [...users]
-              .sort(
-                (a, b) =>
-                  new Date(b.createdAt).getTime() -
-                  new Date(a.createdAt).getTime()
-              )
-              .slice(0, 5)
-          );
-        }
-
-        // Sort Recent Orders
-        if (Array.isArray(orders)) {
-          setRecentOrders(
-            [...orders]
-              .sort(
-                (a, b) =>
-                  new Date(b.createdAt).getTime() -
-                  new Date(a.createdAt).getTime()
-              )
-              .slice(0, 5)
-          );
-        }
       } catch (error) {
         console.error("Failed to fetch dashboard data:", error);
       } finally {
@@ -103,21 +107,14 @@ export default function AdminDashboardPage() {
   }, []);
 
   return (
-    <div className="space-y-8 p-8 bg-gray-50 min-h-screen">
-      {/* Header */}
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard Admin</h1>
-          <p className="text-gray-500 mt-1">
-            Monitoring seluruh aktivitas platform BelanjaKu
-          </p>
-        </div>
-        <div className="flex gap-3">
-          {/* Tombol aksi cepat jika diperlukan */}
-        </div>
+    <div className="space-y-6">
+      {/* Page Header */}
+      <div>
+        <h1 className="text-3xl font-bold text-gray-900">Dashboard Admin</h1>
+        <p className="text-gray-600 mt-1">Overview sistem BelanjaKu</p>
       </div>
 
-      {/* Stats Cards */}
+      {/* Statistics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           title="Total Users"
@@ -154,110 +151,124 @@ export default function AdminDashboardPage() {
         />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Recent Orders (Lebar 2 Kolom) */}
-        <div className="lg:col-span-2 bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-          <div className="p-6 border-b border-gray-100 flex justify-between items-center">
-            <h2 className="text-lg font-bold text-gray-900">Pesanan Terbaru</h2>
-            <Link href="/admin/orders">
-              <Button variant="ghost" size="sm" className="text-blue-600">
-                Lihat Semua
-              </Button>
-            </Link>
+      {/* Content Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Recent Orders */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-100">
+          <div className="p-6 border-b border-gray-100">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-bold text-gray-900">Recent Orders</h2>
+              <ShoppingBag className="text-gray-400" size={20} />
+            </div>
           </div>
-          <div className="p-0">
+          <div className="p-6">
             {loading ? (
-              <div className="p-6 text-center text-gray-500">
-                Memuat data...
+              <div className="space-y-3">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="animate-pulse flex gap-3">
+                    <div className="h-16 bg-gray-200 rounded flex-1"></div>
+                  </div>
+                ))}
               </div>
             ) : recentOrders.length === 0 ? (
-              <div className="p-12 text-center text-gray-400">
-                Belum ada pesanan masuk.
+              <div className="text-center py-8">
+                <AlertCircle className="mx-auto text-gray-400 mb-2" size={48} />
+                <p className="text-gray-500">Belum ada pesanan</p>
               </div>
             ) : (
-              <table className="w-full text-sm text-left">
-                <thead className="bg-gray-50 text-gray-500 font-medium">
-                  <tr>
-                    <th className="px-6 py-3">Order ID</th>
-                    <th className="px-6 py-3">Total</th>
-                    <th className="px-6 py-3">Status</th>
-                    <th className="px-6 py-3">Tanggal</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100">
-                  {recentOrders.map((order) => (
-                    <tr
-                      key={order.id}
-                      className="hover:bg-gray-50 transition-colors"
-                    >
-                      <td className="px-6 py-4 font-mono text-gray-600">
+              <div className="space-y-3">
+                {recentOrders.map((order) => (
+                  <div
+                    key={order.id}
+                    className="p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
+                  >
+                    <div className="flex justify-between items-start mb-2">
+                      <span className="text-sm font-mono text-gray-600">
                         #{order.id.slice(0, 8)}
-                      </td>
-                      <td className="px-6 py-4 font-medium text-gray-900">
-                        {formatRupiah(order.totalAmount)}
-                      </td>
-                      <td className="px-6 py-4">
-                        <span
-                          className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
-                            order.status
-                          )}`}
-                        >
-                          {order.status}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-gray-500">
-                        {formatDate(order.createdAt)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                      </span>
+                      <span
+                        className={`text-xs px-2 py-1 rounded-full font-medium ${getStatusColor(
+                          order.status
+                        )}`}
+                      >
+                        {order.status}
+                      </span>
+                    </div>
+                    <p className="font-bold text-gray-900">
+                      {formatRupiah(order.totalAmount)}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      {formatDate(order.createdAt)}
+                    </p>
+                  </div>
+                ))}
+              </div>
             )}
           </div>
         </div>
 
-        {/* Recent Users (Lebar 1 Kolom) */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        {/* Recent Users */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-100">
           <div className="p-6 border-b border-gray-100">
-            <h2 className="text-lg font-bold text-gray-900">User Baru</h2>
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-bold text-gray-900">Recent Users</h2>
+              <Users className="text-gray-400" size={20} />
+            </div>
           </div>
-          <div className="p-4 space-y-4">
+          <div className="p-6">
             {loading ? (
-              <div className="text-center py-4">Loading...</div>
+              <div className="space-y-3">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="animate-pulse flex gap-3">
+                    <div className="h-16 bg-gray-200 rounded flex-1"></div>
+                  </div>
+                ))}
+              </div>
+            ) : recentUsers.length === 0 ? (
+              <div className="text-center py-8">
+                <AlertCircle className="mx-auto text-gray-400 mb-2" size={48} />
+                <p className="text-gray-500">Belum ada user</p>
+              </div>
             ) : (
-              recentUsers.map((user) => (
-                <div
-                  key={user.id}
-                  className="flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg transition-colors"
-                >
-                  <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-bold">
-                    {user.fullName.charAt(0).toUpperCase()}
-                  </div>
-                  <div className="flex-1">
-                    <p className="font-medium text-gray-900 text-sm">
-                      {user.fullName}
-                    </p>
-                    <p className="text-xs text-gray-500">{user.email}</p>
-                  </div>
-                  <span
-                    className={`text-[10px] px-2 py-1 rounded-full uppercase font-bold ${
-                      user.role === "admin"
-                        ? "bg-red-100 text-red-700"
-                        : user.role === "seller"
-                        ? "bg-purple-100 text-purple-700"
-                        : "bg-blue-100 text-blue-700"
-                    }`}
+              <div className="space-y-3">
+                {recentUsers.map((user) => (
+                  <div
+                    key={user.id}
+                    className="p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
                   >
-                    {user.role}
-                  </span>
-                </div>
-              ))
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <p className="font-bold text-gray-900">
+                          {user.fullName}
+                        </p>
+                        <p className="text-sm text-gray-600">{user.email}</p>
+                      </div>
+                      <span
+                        className={`text-xs px-2 py-1 rounded-full font-medium
+                                                ${
+                                                  user.role === "admin"
+                                                    ? "bg-red-100 text-red-800"
+                                                    : user.role === "seller"
+                                                    ? "bg-purple-100 text-purple-800"
+                                                    : "bg-blue-100 text-blue-800"
+                                                }
+                                            `}
+                      >
+                        {user.role}
+                      </span>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2">
+                      Joined {formatDate(user.createdAt)}
+                    </p>
+                  </div>
+                ))}
+              </div>
             )}
           </div>
         </div>
       </div>
 
-      {/* System Performance (Merged from Incoming) */}
+      {/* Quick Stats */}
       <div className="bg-linear-to-r from-blue-600 to-purple-600 rounded-lg shadow-lg p-6 text-white">
         <div className="flex items-center gap-3 mb-4">
           <TrendingUp size={32} />

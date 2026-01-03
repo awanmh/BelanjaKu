@@ -9,27 +9,22 @@ const categories = [
   {
     id: 'wanita',
     name: 'Wanita',
-    image: '/image/categories/wanita.png',
+    image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800&auto=format&fit=crop',
   },
   {
     id: 'pria',
     name: 'Pria',
-    image: '/image/categories/pria.png',
+    image: 'https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?q=80&w=800&auto=format&fit=crop',
   },
   {
     id: 'anak',
     name: 'Anak',
-    image: '/image/categories/anak.png',
+    image: 'https://images.unsplash.com/photo-1503919545889-aef636e10ad4?q=80&w=800&auto=format&fit=crop',
   },
   {
     id: 'sport',
     name: 'Sport',
-    image: '/image/categories/sport.png',
-  },
-  {
-    id: 'lifestyle',
-    name: 'Lifestyle',
-    image: '/image/categories/lifestyle.jpg',
+    image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop',
   },
 ];
 
@@ -48,7 +43,7 @@ export default function CategorySection() {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
         {categories.map((cat) => (
           <Link
             key={cat.id}

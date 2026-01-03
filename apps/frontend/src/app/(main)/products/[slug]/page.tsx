@@ -1,24 +1,15 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
-import Link from "next/link";
-import {
-  Star,
-  ShoppingCart,
-  Heart,
-  Truck,
-  Shield,
-  RotateCcw,
-  ChevronDown,
-  ChevronUp,
-} from "lucide-react";
-import api from "@/lib/api";
-import { formatRupiah } from "@/lib/utils";
-import { Button } from "@/components/ui/Button";
-import { useCartStore } from "@/store/cart.store";
+import { useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { Star, ShoppingCart, Heart, Truck, Shield, RotateCcw, ChevronDown, ChevronUp } from 'lucide-react';
+import api from '@/lib/api';
+import { formatRupiah } from '@/lib/utils';
+import { Button } from '@/components/ui/Button';
+import { useCartStore } from '@/store/cart.store';
 
-interface ProductDetail {
+interface Product {
   id: string;
   name: string;
   description: string;
@@ -34,23 +25,23 @@ interface ProductDetail {
   };
 }
 
-const SHOE_SIZES = ["38", "39", "40", "41", "42", "43", "44"];
+const SHOE_SIZES = ['38', '39', '40', '41', '42', '43', '44'];
 
 export default function ProductDetailPage() {
   const params = useParams();
   const router = useRouter();
   const productId = params.slug as string;
 
-  const [product, setProduct] = useState<ProductDetail | null>(null);
-  const [relatedProducts, setRelatedProducts] = useState<ProductDetail[]>([]);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedSize, setSelectedSize] = useState<string>("");
+  const [selectedSize, setSelectedSize] = useState<string>('');
   const [quantity, setQuantity] = useState(1);
   const [addingToCart, setAddingToCart] = useState(false);
   const [addingToWishlist, setAddingToWishlist] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const addToCart = useCartStore((state) => state.addToCart);
-
+  const incrementCartCount = useCartStore((state) => state.incrementCartCount);
+  
   // Accordion states
   const [accordions, setAccordions] = useState({
     description: true,
@@ -65,32 +56,30 @@ export default function ProductDetailPage() {
         if (res.data.success) {
           const productData = res.data.data;
           setProduct(productData);
-
+          
           // Fetch related products from same category
           if (productData.categoryId) {
             try {
-              const relatedRes = await api.get(
-                `/products?limit=4&categoryId=${productData.categoryId}`
-              );
+              const relatedRes = await api.get(`/products?limit=4&categoryId=${productData.categoryId}`);
               if (relatedRes.data.success) {
-                const allProducts = Array.isArray(relatedRes.data.data)
-                  ? relatedRes.data.data
+                const allProducts = Array.isArray(relatedRes.data.data) 
+                  ? relatedRes.data.data 
                   : relatedRes.data.data.rows || [];
-
+                
                 // Filter out current product and take first 4
                 const filtered = allProducts
-                  .filter((p: ProductDetail) => p.id !== productId)
+                  .filter((p: Product) => p.id !== productId)
                   .slice(0, 4);
                 setRelatedProducts(filtered);
               }
             } catch (error) {
-              console.error("Failed to fetch related products:", error);
+              console.error('Failed to fetch related products:', error);
               // Continue without related products
             }
           }
         }
       } catch (error) {
-        console.error("Failed to fetch product:", error);
+        console.error('Failed to fetch product:', error);
       } finally {
         setLoading(false);
       }
@@ -103,32 +92,30 @@ export default function ProductDetailPage() {
 
   const handleAddToCart = async () => {
     if (!selectedSize) {
-      alert("Silakan pilih ukuran terlebih dahulu");
+      alert('Silakan pilih ukuran terlebih dahulu');
       return;
     }
 
     setAddingToCart(true);
     try {
-      await api.post("/cart", {
+      await api.post('/cart', {
         productId: product!.id,
         size: selectedSize,
         quantity,
       });
-
+      
       // Increment cart count by the quantity added
-      if (product) {
-        addToCart(product as any, quantity);
+      for (let i = 0; i < quantity; i++) {
+        incrementCartCount();
       }
-
-      alert("Produk berhasil ditambahkan ke keranjang!");
+      
+      alert('Produk berhasil ditambahkan ke keranjang!');
     } catch (error: any) {
       if (error.response?.status === 401) {
-        alert("Silakan login terlebih dahulu");
-        router.push("/auth/login");
+        alert('Silakan login terlebih dahulu');
+        router.push('/auth/login');
       } else {
-        alert(
-          error.response?.data?.message || "Gagal menambahkan ke keranjang"
-        );
+        alert(error.response?.data?.message || 'Gagal menambahkan ke keranjang');
       }
     } finally {
       setAddingToCart(false);
@@ -138,20 +125,20 @@ export default function ProductDetailPage() {
   const handleAddToWishlist = async () => {
     setAddingToWishlist(true);
     try {
-      await api.post("/wishlist", {
+      await api.post('/wishlist', {
         productId: product!.id,
       });
-
-      alert("Produk berhasil ditambahkan ke wishlist!");
-      router.push("/wishlist");
+      
+      alert('Produk berhasil ditambahkan ke wishlist!');
+      router.push('/wishlist');
     } catch (error: any) {
       if (error.response?.status === 401) {
-        alert("Silakan login terlebih dahulu");
-        router.push("/auth/login");
+        alert('Silakan login terlebih dahulu');
+        router.push('/auth/login');
       } else if (error.response?.status === 400) {
-        alert("Produk sudah ada di wishlist");
+        alert('Produk sudah ada di wishlist');
       } else {
-        alert(error.response?.data?.message || "Gagal menambahkan ke wishlist");
+        alert(error.response?.data?.message || 'Gagal menambahkan ke wishlist');
       }
     } finally {
       setAddingToWishlist(false);
@@ -159,7 +146,7 @@ export default function ProductDetailPage() {
   };
 
   const toggleAccordion = (key: keyof typeof accordions) => {
-    setAccordions((prev) => ({ ...prev, [key]: !prev[key] }));
+    setAccordions(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
   if (loading) {
@@ -178,39 +165,32 @@ export default function ProductDetailPage() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-2">Product Not Found</h2>
-          <p className="text-gray-500 mb-4">
-            The product you're looking for doesn't exist.
-          </p>
-          <Button onClick={() => router.push("/")}>Back to Home</Button>
+          <p className="text-gray-500 mb-4">The product you're looking for doesn't exist.</p>
+          <Button onClick={() => router.push('/')}>Back to Home</Button>
         </div>
       </div>
     );
   }
 
-  const imageUrl = product.imageUrl.startsWith("http")
+  const imageUrl = product.imageUrl.startsWith('http')
     ? product.imageUrl
-    : `${process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "")}/${
-        product.imageUrl
-      }`;
+    : `${process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '')}/${product.imageUrl}`;
 
   // Generate multiple thumbnails (for demo, we'll use same image with different filters)
-  const thumbnails = [imageUrl, imageUrl, imageUrl];
+  const thumbnails = [
+    imageUrl,
+    imageUrl,
+    imageUrl,
+  ];
 
   return (
     <div className="bg-white min-h-screen">
       <div className="container mx-auto px-4 py-8">
         {/* Breadcrumb */}
         <div className="text-sm text-gray-500 mb-6">
-          <span
-            className="hover:text-black cursor-pointer"
-            onClick={() => router.push("/")}
-          >
-            Home
-          </span>
+          <span className="hover:text-black cursor-pointer" onClick={() => router.push('/')}>Home</span>
           <span className="mx-2">/</span>
-          <span className="hover:text-black cursor-pointer">
-            {product.category?.name || "Products"}
-          </span>
+          <span className="hover:text-black cursor-pointer">{product.category?.name || 'Products'}</span>
           <span className="mx-2">/</span>
           <span className="text-black">{product.name}</span>
         </div>
@@ -225,8 +205,7 @@ export default function ProductDetailPage() {
                 alt={product.name}
                 className="w-full h-full object-cover"
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src =
-                    "https://placehold.co/600x600/png?text=Product";
+                  (e.target as HTMLImageElement).src = 'https://placehold.co/600x600/png?text=Product';
                 }}
               />
             </div>
@@ -238,9 +217,9 @@ export default function ProductDetailPage() {
                   key={index}
                   onClick={() => setSelectedImageIndex(index)}
                   className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
-                    selectedImageIndex === index
-                      ? "border-black"
-                      : "border-gray-200 hover:border-gray-400"
+                    selectedImageIndex === index 
+                      ? 'border-black' 
+                      : 'border-gray-200 hover:border-gray-400'
                   }`}
                 >
                   <img
@@ -248,8 +227,7 @@ export default function ProductDetailPage() {
                     alt={`${product.name} view ${index + 1}`}
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src =
-                        "https://placehold.co/200x200/png?text=View";
+                      (e.target as HTMLImageElement).src = 'https://placehold.co/200x200/png?text=View';
                     }}
                   />
                 </button>
@@ -262,25 +240,18 @@ export default function ProductDetailPage() {
             {/* Brand */}
             <div>
               <p className="text-xs uppercase tracking-widest text-gray-500 mb-2">
-                {product.seller?.fullName || "Official Store"}
+                {product.seller?.fullName || 'Official Store'}
               </p>
-              <h1 className="text-3xl font-bold text-black mb-2">
-                {product.name}
-              </h1>
-
+              <h1 className="text-3xl font-bold text-black mb-2">{product.name}</h1>
+              
               {/* Rating */}
               <div className="flex items-center gap-2">
                 <div className="flex items-center">
                   {[1, 2, 3, 4, 5].map((star) => (
-                    <Star
-                      key={star}
-                      className="w-4 h-4 fill-yellow-400 text-yellow-400"
-                    />
+                    <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                <span className="text-sm text-gray-600">
-                  (4.8) • 120 Reviews
-                </span>
+                <span className="text-sm text-gray-600">(4.8) • 120 Reviews</span>
               </div>
             </div>
 
@@ -289,9 +260,7 @@ export default function ProductDetailPage() {
               <div className="text-3xl font-bold text-black">
                 {formatRupiah(product.price)}
               </div>
-              <p className="text-sm text-gray-500 mt-1">
-                Harga sudah termasuk PPN
-              </p>
+              <p className="text-sm text-gray-500 mt-1">Harga sudah termasuk PPN</p>
             </div>
 
             {/* Size Selector */}
@@ -300,14 +269,14 @@ export default function ProductDetailPage() {
                 <label className="text-sm font-semibold uppercase tracking-wide">
                   Pilih Ukuran
                 </label>
-                <button
-                  onClick={() => toggleAccordion("sizeGuide")}
+                <button 
+                  onClick={() => toggleAccordion('sizeGuide')}
                   className="text-xs text-gray-500 underline hover:text-black"
                 >
                   Panduan Ukuran
                 </button>
               </div>
-
+              
               <div className="grid grid-cols-7 gap-2">
                 {SHOE_SIZES.map((size) => (
                   <button
@@ -318,8 +287,8 @@ export default function ProductDetailPage() {
                       text-sm font-medium transition-all
                       ${
                         selectedSize === size
-                          ? "border-black bg-black text-white"
-                          : "border-gray-300 hover:border-black"
+                          ? 'border-black bg-black text-white'
+                          : 'border-gray-300 hover:border-black'
                       }
                     `}
                   >
@@ -327,11 +296,9 @@ export default function ProductDetailPage() {
                   </button>
                 ))}
               </div>
-
+              
               {selectedSize && (
-                <p className="text-xs text-green-600 mt-2">
-                  ✓ Ukuran {selectedSize} tersedia
-                </p>
+                <p className="text-xs text-green-600 mt-2">✓ Ukuran {selectedSize} tersedia</p>
               )}
             </div>
 
@@ -349,9 +316,7 @@ export default function ProductDetailPage() {
                 </button>
                 <span className="w-12 text-center font-medium">{quantity}</span>
                 <button
-                  onClick={() =>
-                    setQuantity(Math.min(product.stock, quantity + 1))
-                  }
+                  onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
                   className="w-10 h-10 border border-gray-300 rounded-lg hover:border-black transition"
                 >
                   +
@@ -425,7 +390,7 @@ export default function ProductDetailPage() {
           {/* Description Accordion */}
           <div className="border-b border-gray-200">
             <button
-              onClick={() => toggleAccordion("description")}
+              onClick={() => toggleAccordion('description')}
               className="w-full py-6 flex items-center justify-between text-left hover:bg-gray-50 transition"
             >
               <h2 className="text-lg font-bold">Detail Produk</h2>
@@ -437,9 +402,7 @@ export default function ProductDetailPage() {
             </button>
             {accordions.description && (
               <div className="pb-6 prose max-w-none">
-                <p className="text-gray-700 whitespace-pre-line">
-                  {product.description}
-                </p>
+                <p className="text-gray-700 whitespace-pre-line">{product.description}</p>
               </div>
             )}
           </div>
@@ -447,7 +410,7 @@ export default function ProductDetailPage() {
           {/* Size Guide Accordion */}
           <div className="border-b border-gray-200">
             <button
-              onClick={() => toggleAccordion("sizeGuide")}
+              onClick={() => toggleAccordion('sizeGuide')}
               className="w-full py-6 flex items-center justify-between text-left hover:bg-gray-50 transition"
             >
               <h2 className="text-lg font-bold">Panduan Ukuran</h2>
@@ -468,41 +431,13 @@ export default function ProductDetailPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="border-b">
-                      <td className="px-4 py-2">38</td>
-                      <td className="px-4 py-2">24.0</td>
-                      <td className="px-4 py-2">38</td>
-                    </tr>
-                    <tr className="border-b">
-                      <td className="px-4 py-2">39</td>
-                      <td className="px-4 py-2">25.0</td>
-                      <td className="px-4 py-2">39</td>
-                    </tr>
-                    <tr className="border-b">
-                      <td className="px-4 py-2">40</td>
-                      <td className="px-4 py-2">25.5</td>
-                      <td className="px-4 py-2">40</td>
-                    </tr>
-                    <tr className="border-b">
-                      <td className="px-4 py-2">41</td>
-                      <td className="px-4 py-2">26.5</td>
-                      <td className="px-4 py-2">41</td>
-                    </tr>
-                    <tr className="border-b">
-                      <td className="px-4 py-2">42</td>
-                      <td className="px-4 py-2">27.0</td>
-                      <td className="px-4 py-2">42</td>
-                    </tr>
-                    <tr className="border-b">
-                      <td className="px-4 py-2">43</td>
-                      <td className="px-4 py-2">28.0</td>
-                      <td className="px-4 py-2">43</td>
-                    </tr>
-                    <tr className="border-b">
-                      <td className="px-4 py-2">44</td>
-                      <td className="px-4 py-2">28.5</td>
-                      <td className="px-4 py-2">44</td>
-                    </tr>
+                    <tr className="border-b"><td className="px-4 py-2">38</td><td className="px-4 py-2">24.0</td><td className="px-4 py-2">38</td></tr>
+                    <tr className="border-b"><td className="px-4 py-2">39</td><td className="px-4 py-2">25.0</td><td className="px-4 py-2">39</td></tr>
+                    <tr className="border-b"><td className="px-4 py-2">40</td><td className="px-4 py-2">25.5</td><td className="px-4 py-2">40</td></tr>
+                    <tr className="border-b"><td className="px-4 py-2">41</td><td className="px-4 py-2">26.5</td><td className="px-4 py-2">41</td></tr>
+                    <tr className="border-b"><td className="px-4 py-2">42</td><td className="px-4 py-2">27.0</td><td className="px-4 py-2">42</td></tr>
+                    <tr className="border-b"><td className="px-4 py-2">43</td><td className="px-4 py-2">28.0</td><td className="px-4 py-2">43</td></tr>
+                    <tr className="border-b"><td className="px-4 py-2">44</td><td className="px-4 py-2">28.5</td><td className="px-4 py-2">44</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -512,7 +447,7 @@ export default function ProductDetailPage() {
           {/* Shipping Accordion */}
           <div className="border-b border-gray-200">
             <button
-              onClick={() => toggleAccordion("shipping")}
+              onClick={() => toggleAccordion('shipping')}
               className="w-full py-6 flex items-center justify-between text-left hover:bg-gray-50 transition"
             >
               <h2 className="text-lg font-bold">Pengiriman & Pengembalian</h2>
@@ -548,38 +483,28 @@ export default function ProductDetailPage() {
         {/* Related Products - "Kamu Mungkin Suka" */}
         {relatedProducts.length > 0 && (
           <div className="mt-20">
-            <h2 className="text-2xl font-bold mb-8 text-center">
-              Kamu Mungkin Suka
-            </h2>
+            <h2 className="text-2xl font-bold mb-8 text-center">Kamu Mungkin Suka</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {relatedProducts.map((item) => {
-                const itemImageUrl = item.imageUrl.startsWith("http")
+                const itemImageUrl = item.imageUrl.startsWith('http')
                   ? item.imageUrl
-                  : `${process.env.NEXT_PUBLIC_API_URL?.replace(
-                      "/api/v1",
-                      ""
-                    )}/${item.imageUrl}`;
+                  : `${process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '')}/${item.imageUrl}`;
 
                 return (
-                  <Link
-                    key={item.id}
-                    href={`/products/${item.id}`}
-                    className="group"
-                  >
+                  <Link key={item.id} href={`/products/${item.id}`} className="group">
                     <div className="relative aspect-3/4 bg-gray-50 rounded-lg overflow-hidden border border-gray-200 mb-3">
                       <img
                         src={itemImageUrl}
                         alt={item.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         onError={(e) => {
-                          (e.target as HTMLImageElement).src =
-                            "https://placehold.co/400x600/png?text=Product";
+                          (e.target as HTMLImageElement).src = 'https://placehold.co/400x600/png?text=Product';
                         }}
                       />
                     </div>
                     <div className="text-center">
                       <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">
-                        {item.seller?.fullName || "Official Store"}
+                        {item.seller?.fullName || 'Official Store'}
                       </p>
                       <h3 className="text-sm font-medium text-black mb-2 line-clamp-1">
                         {item.name}

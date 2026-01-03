@@ -1,0 +1,18 @@
+FAIL src/services/__tests__/user.routes.test.ts
+  ● Test suite failed to run
+
+    [96msrc/api/v1/carts/cart.controller.ts[0m:[93m3[0m:[93m8[0m - [91merror[0m[90m TS1192: [0mModule '"C:/felix/BelanjaKu/apps/backend/src/services/cart.service"' has no default export.
+
+    [7m3[0m import CartService from '../../../services/cart.service';
+    [7m [0m [91m       ~~~~~~~~~~~[0m
+
+----------|---------|----------|---------|---------|-------------------
+File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+----------|---------|----------|---------|---------|-------------------
+All files |       0 |        0 |       0 |       0 |                   
+----------|---------|----------|---------|---------|-------------------
+Test Suites: 1 failed, 1 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        12.524 s
+Ran all test suites matching /src\\services\\__tests__\\user.routes.test.ts/i.
