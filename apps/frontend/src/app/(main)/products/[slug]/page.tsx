@@ -492,7 +492,7 @@ export default function ProductDetailPage() {
 
                 return (
                   <Link key={item.id} href={`/products/${item.id}`} className="group">
-                    <div className="relative aspect-[3/4] bg-gray-50 rounded-lg overflow-hidden border border-gray-200 mb-3">
+                    <div className="relative aspect-3/4 bg-gray-50 rounded-lg overflow-hidden border border-gray-200 mb-3">
                       <img
                         src={itemImageUrl}
                         alt={item.name}

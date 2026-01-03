@@ -110,7 +110,7 @@ function ProductList() {
                 {products.map((product) => (
                     <div key={product.id} className="group cursor-pointer flex flex-col">
                         <Link href={`/products/${product.id}`}>
-                            <div className="relative w-full overflow-hidden bg-gray-50 border border-gray-100 aspect-[3/4]">
+                            <div className="relative w-full overflow-hidden bg-gray-50 border border-gray-100 aspect-3/4">
                                 <img
                                 src={product.imageUrl.startsWith('http') ? product.imageUrl : `${process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '')}/${product.imageUrl}`}
                                 alt={product.name}

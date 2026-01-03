@@ -1,9 +1,8 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { Button } from '@/components/ui/Button';
-<<<<<<< HEAD
-import { CheckCircle2, ShoppingBag, ArrowRight } from 'lucide-react';
+import Link from "next/link";
+import { Button } from "@/components/ui/Button";
+import { CheckCircle2 } from "lucide-react";
 
 export default function OrderSuccessPage() {
   return (
@@ -14,17 +13,23 @@ export default function OrderSuccessPage() {
             <CheckCircle2 className="w-10 h-10 text-white" />
           </div>
         </div>
-        
-        <h1 className="text-3xl font-serif font-bold mb-4 text-black">Terima Kasih!</h1>
+
+        <h1 className="text-3xl font-serif font-bold mb-4 text-black">
+          Terima Kasih!
+        </h1>
         <p className="text-gray-500 mb-2">Pesanan Anda berhasil dibuat.</p>
         <p className="text-sm text-gray-400 mb-8">Order ID: #BLK-2025-882910</p>
 
         <div className="bg-gray-50 p-6 rounded-lg mb-8 text-left">
-          <h3 className="font-bold text-sm uppercase tracking-wide mb-4 border-b border-gray-200 pb-2">Detail Pengiriman</h3>
+          <h3 className="font-bold text-sm uppercase tracking-wide mb-4 border-b border-gray-200 pb-2">
+            Detail Pengiriman
+          </h3>
           <p className="font-bold text-sm">John Doe</p>
-          <p className="text-sm text-gray-600 mt-1">Jl. Jendral Sudirman No. 1, Jakarta Selatan, 12190</p>
+          <p className="text-sm text-gray-600 mt-1">
+            Jl. Jendral Sudirman No. 1, Jakarta Selatan, 12190
+          </p>
           <p className="text-sm text-gray-600 mt-1">08123456789</p>
-          
+
           <div className="mt-4 pt-4 border-t border-gray-200">
             <p className="text-xs text-gray-500">Estimasi Pengiriman</p>
             <p className="font-bold text-sm text-black">3 - 5 Hari Kerja</p>
@@ -32,38 +37,17 @@ export default function OrderSuccessPage() {
         </div>
 
         <div className="flex flex-col gap-3">
-          <Link href="/profile">
-            <Button variant="outline" className="w-full border-black text-black h-12 uppercase tracking-widest font-bold hover:bg-black hover:text-white">
+          <Link href="/profile/orders">
+            <Button
+              variant="outline"
+              className="w-full border-black text-black h-12 uppercase tracking-widest font-bold hover:bg-black hover:text-white"
+            >
               Lihat Pesanan Saya
             </Button>
           </Link>
           <Link href="/">
             <Button className="w-full bg-black text-white h-12 uppercase tracking-widest font-bold hover:bg-gray-800">
               Lanjut Belanja
-=======
-import { CheckCircle2 } from 'lucide-react';
-
-export default function CheckoutSuccessPage() {
-  return (
-    <div className="min-h-screen bg-white flex items-center justify-center">
-      <div className="text-center p-8 max-w-md">
-        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <CheckCircle2 className="w-10 h-10 text-green-600" />
-        </div>
-        <h1 className="text-2xl font-bold mb-4">Pesanan Berhasil!</h1>
-        <p className="text-gray-600 mb-8">
-          Terima kasih telah berbelanja. Pesanan Anda akan segera kami proses.
-        </p>
-        <div className="space-y-3">
-          <Link href="/profile/orders" className="block w-full">
-            <Button className="w-full bg-black text-white hover:bg-gray-800">
-              Lihat Pesanan Saya
-            </Button>
-          </Link>
-          <Link href="/" className="block w-full">
-            <Button variant="outline" className="w-full">
-              Kembali ke Beranda
->>>>>>> frontend-role
             </Button>
           </Link>
         </div>

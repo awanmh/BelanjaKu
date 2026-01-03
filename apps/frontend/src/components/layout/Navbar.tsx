@@ -73,7 +73,7 @@ export default function Navbar() {
             {user?.role === "seller" && (
               <button
                 onClick={() => router.push("/seller/dashboard")}
-                className="flex flex-col items-center group bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+                className="flex flex-col items-center group bg-linear-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105"
               >
                 <Store className="w-5 h-5 text-white" />
                 <span className="text-[10px] font-bold text-white mt-0.5 tracking-wide">

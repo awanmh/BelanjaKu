@@ -118,7 +118,7 @@ export default function WishlistPage() {
 
                 {/* Product Image */}
                 <Link href={`/products/${item.product.id}`}>
-                  <div className="relative aspect-[3/4] bg-gray-100 overflow-hidden">
+                  <div className="relative aspect-3/4 bg-gray-100 overflow-hidden">
                     <img
                       src={imageUrl}
                       alt={item.product.name}
@@ -136,7 +136,7 @@ export default function WishlistPage() {
                     {item.product.seller?.fullName || 'Official Store'}
                   </p>
                   <Link href={`/products/${item.product.id}`}>
-                    <h3 className="font-semibold text-black hover:underline line-clamp-2 mb-2 min-h-[2.5rem]">
+                    <h3 className="font-semibold text-black hover:underline line-clamp-2 mb-2 min-h-2.5rem">
                       {item.product.name}
                     </h3>
                   </Link>
