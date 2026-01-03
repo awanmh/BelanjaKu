@@ -23,10 +23,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+<<<<<<< HEAD
     // FIX: Tambahkan suppressHydrationWarning di html tag juga jika perlu
     // dan pastikan class font diaplikasikan dengan benar
     <html lang="id" suppressHydrationWarning>
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`} suppressHydrationWarning>
+=======
+    // FIX: Tambahkan suppressHydrationWarning={true} di tag html
+    <html lang="id" suppressHydrationWarning={true}>
+      <body className={inter.className} suppressHydrationWarning={true}>
+>>>>>>> frontend-update
         {children}
       </body>
     </html>

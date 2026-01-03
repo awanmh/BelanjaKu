@@ -6,14 +6,13 @@
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)]()
 [![License](https://img.shields.io/badge/license-ISC-blue.svg)]()
 
----
-
 ## 📊 Project Status
 
 **Last Updated**: 2025-12-16 22:48  
 **Status**: ✅ **PRODUCTION READY**
 
 ### Recent Fixes & Features (2025-12-16):
+
 - ✅ **Fixed product detail page error** (line 60 - related products)
 - ✅ **Fixed register page** (API endpoints, validation, error handling)
 - ✅ **Added cart counter badge** (real-time, persistent, auto-sync)
@@ -25,22 +24,23 @@
 - ✅ Added automated testing scripts (3 scripts)
 - ✅ Created setup automation
 
----
-
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js (v18 or higher)
 - PostgreSQL (v14 or higher)
 - npm or yarn
 
 ### Automated Setup (Recommended)
+
 ```bash
 # Run setup script
 setup.bat
 ```
 
 ### Manual Setup
+
 ```bash
 # 1. Install dependencies
 cd apps/backend && npm install
@@ -65,6 +65,7 @@ npm run dev
 ```
 
 ### Access
+
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:5000
 - **API Docs**: http://localhost:5000/api/v1
@@ -73,18 +74,19 @@ npm run dev
 
 ## 📚 Documentation
 
-| Document | Description |
-|----------|-------------|
-| [SUMMARY.md](./SUMMARY.md) | **START HERE** - Executive summary & quick guide |
-| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Detailed troubleshooting guide |
-| [CHECKLIST.md](./CHECKLIST.md) | System verification checklist |
-| [ARCHITECTURE.md](./ARCHITECTURE.md) | System architecture & diagrams |
+| Document                                   | Description                                      |
+| ------------------------------------------ | ------------------------------------------------ |
+| [SUMMARY.md](./SUMMARY.md)                 | **START HERE** - Executive summary & quick guide |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Detailed troubleshooting guide                   |
+| [CHECKLIST.md](./CHECKLIST.md)             | System verification checklist                    |
+| [ARCHITECTURE.md](./ARCHITECTURE.md)       | System architecture & diagrams                   |
 
 ---
 
 ## 🏗️ Tech Stack
 
 ### Frontend
+
 - **Framework**: Next.js 15 (React 19)
 - **Styling**: TailwindCSS 4
 - **State Management**: Zustand
@@ -92,6 +94,7 @@ npm run dev
 - **Icons**: Lucide React
 
 ### Backend
+
 - **Runtime**: Node.js
 - **Framework**: Express.js
 - **Database**: PostgreSQL
@@ -137,6 +140,7 @@ BelanjaKu/
 ## 🔧 Available Scripts
 
 ### Backend
+
 ```bash
 npm run dev          # Start development server
 npm run build        # Build for production
@@ -147,6 +151,7 @@ npm test            # Run tests
 ```
 
 ### Frontend
+
 ```bash
 npm run dev         # Start development server
 npm run build       # Build for production
@@ -159,12 +164,14 @@ npm run lint        # Run ESLint
 ## 🧪 Testing
 
 ### Test Database Connection
+
 ```bash
 cd apps/backend
 node test-db-connection.js
 ```
 
 ### Test API Endpoints
+
 ```bash
 cd apps/backend
 node test-api.js
@@ -175,6 +182,7 @@ node test-api.js
 ## 🌟 Features
 
 ### User Features
+
 - ✅ User registration & authentication
 - ✅ Product browsing & search
 - ✅ Product detail with related products
@@ -184,6 +192,7 @@ node test-api.js
 - ✅ Order history
 
 ### Admin/Seller Features
+
 - ✅ Product management (CRUD)
 - ✅ Order management
 - ✅ Category management
@@ -194,6 +203,7 @@ node test-api.js
 ## 🔐 Environment Variables
 
 ### Backend (.env)
+
 ```env
 NODE_ENV=development
 PORT=5000
@@ -209,6 +219,7 @@ JWT_REFRESH_EXPIRES_IN=7d
 ```
 
 ### Frontend (.env.local)
+
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000/api/v1
 ```
@@ -218,6 +229,7 @@ NEXT_PUBLIC_API_URL=http://localhost:5000/api/v1
 ## 📋 Git Workflow (Team)
 
 ### For Frontend Team
+
 ```bash
 # Switch to frontend branch
 git checkout frontend-update
@@ -234,6 +246,7 @@ git push origin frontend-update
 ```
 
 ### For Backend Team
+
 ```bash
 # Switch to backend branch
 git checkout backend-update
@@ -250,6 +263,7 @@ git push origin backend-update
 ```
 
 ### Important Rules
+
 1. ❌ Never push directly to `main`
 2. ✅ Always `git pull` before `git push`
 3. ✅ Write clear commit messages
@@ -262,14 +276,17 @@ git push origin backend-update
 ### Common Issues
 
 **Error: "ECONNREFUSED localhost:5000"**
+
 - Backend is not running
 - Solution: `cd apps/backend && npm run dev`
 
 **Error: "Cannot connect to database"**
+
 - PostgreSQL not running or wrong credentials
 - Solution: Check `.env` file and PostgreSQL service
 
 **Error: "Module not found"**
+
 - Dependencies not installed
 - Solution: `npm install`
 
