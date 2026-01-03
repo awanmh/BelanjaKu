@@ -1,129 +1,130 @@
-import { Request, Response, NextFunction } from 'express';
-import { StatusCodes } from 'http-status-codes';
-import CartService, { AddToCartInput, UpdateCartInput } from '../../../services/cart.service';
+import { Request, Response, NextFunction } from "express";
+import { StatusCodes } from "http-status-codes";
+import CartService from "../../../services/cart.service";
 
 interface AuthenticatedRequest extends Request {
   user?: {
     id: string;
-    role: 'user' | 'seller' | 'admin';
+    role: "user" | "seller" | "admin";
   };
 }
 
-/**
- * Controller untuk menangani semua request yang berhubungan dengan cart.
- */
 class CartController {
-  /**
-   * Menambahkan produk ke cart
-   * POST /api/v1/cart
-   */
-  public async addToCart(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+  public async addToCart(
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const userId = req.user!.id;
-      const cartData: AddToCartInput = req.body;
+      const { productId, quantity } = req.body;
 
-      // Validasi input
-      if (!cartData.productId || !cartData.size) {
+      if (!productId || !quantity) {
         res.status(StatusCodes.BAD_REQUEST).json({
           success: false,
-          message: 'Product ID and size are required',
+          message: "Product ID and quantity are required",
         });
         return;
       }
 
-      const cartItem = await CartService.addToCart(userId, cartData);
+      const cart = await CartService.addToCart(userId, productId, quantity);
 
       res.status(StatusCodes.CREATED).json({
         success: true,
-        message: 'Product added to cart successfully',
-        data: cartItem,
+        message: "Product added to cart successfully",
+        data: cart,
       });
     } catch (error) {
       next(error);
     }
   }
 
-  /**
-   * Mendapatkan semua item di cart
-   * GET /api/v1/cart
-   */
-  public async getCart(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+  public async getCart(
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const userId = req.user!.id;
-      const summary = await CartService.getCartSummary(userId);
+      const cart = await CartService.getUserCart(userId);
 
       res.status(StatusCodes.OK).json({
         success: true,
-        message: 'Cart retrieved successfully',
-        data: summary,
+        message: "Cart retrieved successfully",
+        data: cart,
       });
     } catch (error) {
       next(error);
     }
   }
 
-  /**
-   * Update quantity item di cart
-   * PATCH /api/v1/cart/:id
-   */
-  public async updateCartItem(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+  public async updateCartItem(
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const userId = req.user!.id;
       const { id: cartId } = req.params;
-      const updateData: UpdateCartInput = req.body;
+      const { quantity } = req.body;
 
-      if (!updateData.quantity || updateData.quantity < 1) {
+      if (!quantity || quantity < 1) {
         res.status(StatusCodes.BAD_REQUEST).json({
           success: false,
-          message: 'Quantity must be at least 1',
+          message: "Quantity must be at least 1",
         });
         return;
       }
 
-      const updatedItem = await CartService.updateCartItem(cartId, userId, updateData);
+      const cart = await CartService.updateItemQuantity(
+        userId,
+        cartId,
+        quantity
+      );
 
       res.status(StatusCodes.OK).json({
         success: true,
-        message: 'Cart item updated successfully',
-        data: updatedItem,
+        message: "Cart item updated successfully",
+        data: cart,
       });
     } catch (error) {
       next(error);
     }
   }
 
-  /**
-   * Hapus item dari cart
-   * DELETE /api/v1/cart/:id
-   */
-  public async removeCartItem(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+  public async removeCartItem(
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const userId = req.user!.id;
       const { id: cartId } = req.params;
 
-      await CartService.removeCartItem(cartId, userId);
+      const cart = await CartService.removeItem(userId, cartId);
 
       res.status(StatusCodes.OK).json({
         success: true,
-        message: 'Cart item removed successfully',
+        message: "Cart item removed successfully",
+        data: cart,
       });
     } catch (error) {
       next(error);
     }
   }
 
-  /**
-   * Clear semua item di cart
-   * DELETE /api/v1/cart
-   */
-  public async clearCart(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+  public async clearCart(
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const userId = req.user!.id;
       await CartService.clearCart(userId);
 
       res.status(StatusCodes.OK).json({
         success: true,
-        message: 'Cart cleared successfully',
+        message: "Cart cleared successfully",
       });
     } catch (error) {
       next(error);
