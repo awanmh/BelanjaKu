@@ -42,20 +42,27 @@ setup.bat
 ### Manual Setup
 
 ```bash
-# 1. Install dependencies
+# 1. Hapus folder node_modules dan file package-lock.json
+Remove-Item -Recurse -Force node_modules
+Remove-Item -Force package-lock.json
+
+# 2. Bersihkan Cache NPM (Opsional tapi disarankan)
+npm cache clean --force
+
+# 3. Install dependencies
 cd apps/backend && npm install
 cd ../frontend && npm install
 
-# 2. Setup environment
+# 4. Setup environment
 # Create apps/frontend/.env.local with:
 # NEXT_PUBLIC_API_URL=http://localhost:5000/api/v1
 
-# 3. Setup database
+# 5. Setup database
 cd apps/backend
 npm run db:migrate
 npm run db:seed:all  # Optional
 
-# 4. Run applications
+# 6. Run applications
 # Terminal 1 - Backend
 npm run dev
 
